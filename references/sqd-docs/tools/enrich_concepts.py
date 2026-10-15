@@ -51,7 +51,15 @@ def reset(node):
             if c.tag=='script' and 'const triggers=Array.from' in plain(c):continue
             reset(c)
         updated.append(c)
-    node.children=updated
+    # Resetting a tooltip can split a compound term across adjacent text nodes.
+    # Rejoin them so longest-term matching still sees e.g. 무차원 or 공간오비탈.
+    merged=[]
+    for item in updated:
+        if isinstance(item,str) and merged and isinstance(merged[-1],str):merged[-1]+=item
+        else:merged.append(item)
+    if node.tag not in {'script','style'}:
+        merged=[re.sub(r'\(([^()]+)\)\(\1, ([A-Z]+)\)',r'(\1, \2)',item).replace('무차원(Dimension)','무차원') if isinstance(item,str) else item for item in merged]
+    node.children=merged
 
 def render_worked_example(entry):
     parts=[]
@@ -69,10 +77,13 @@ def render_worked_example(entry):
 entries=json.loads((ROOT/'docs/assets/concept-glossary.json').read_text())
 aliases={'크릴로프 공간':'크릴로프 부분공간','랑초스':'랑초스 알고리즘','직교성':'직교',
          '순수 상태':'순수상태','혼합 상태':'혼합상태','복소 켤레':'켤레','복소켤레':'켤레',
-         '복소켤레 전치':'켤레전치','들뜬 고유상태':'들뜬상태'}
+         '복소켤레 전치':'켤레전치', '공간오비탈':'공간 오비탈', '스핀오비탈':'스핀 오비탈', '원자오비탈':'원자 오비탈', '분자오비탈':'분자 오비탈', '전자배치':'전자 배치', '슬레이터행렬식':'슬레이터 행렬식','들뜬 고유상태':'들뜬상태'}
 lookup={e['term']:e for e in entries}
 lookup.update({a:lookup[k] for a,k in aliases.items()})
-pattern=re.compile('|'.join(re.escape(term)+(r'\('+re.escape(entry['english'])+r'\)' if len(term)==1 else r'(?:\('+re.escape(entry['english'])+r'\))?') for term,entry in sorted(lookup.items(),key=lambda x:len(x[0]),reverse=True)))
+def term_pattern(term, entry):
+    english=r'\('+re.escape(entry['english'])+r'(?:,\s*[A-Z][A-Z0-9-]*)?\)'
+    return re.escape(term)+(english if len(term)==1 else '(?:'+english+')?')
+pattern=re.compile('|'.join(term_pattern(term,entry) for term,entry in sorted(lookup.items(),key=lambda x:len(x[0]),reverse=True)))
 runtime=(ROOT/'docs/assets/concept-glossary.js').read_text()
 summary={}
 for path in sorted((ROOT/'docs').glob('concept-*.html')):
@@ -87,7 +98,7 @@ for path in sorted((ROOT/'docs').glob('concept-*.html')):
             def annotate(m):
                 matched=m.group();term=next(k for k in sorted(lookup,key=len,reverse=True) if matched==k or matched.startswith(k+'('));entry=lookup[term]
                 if entry['id'] in seen:return matched
-                seen.add(entry['id']);ident='glossary-'+slug+'-'+entry['id'];label=term+'('+entry['english']+')'
+                seen.add(entry['id']);ident='glossary-'+slug+'-'+entry['id'];label=matched if '(' in matched else term+'('+entry['english']+')'
                 target=entry['page']
                 more=f'<a href="concept-{target}.html">関連概念を読む →</a>' if target and target!=slug else ''
                 more=more.replace('関連概念を読む','관련 개념 읽기')

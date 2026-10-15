@@ -64,7 +64,7 @@ IBM 공식 노트북 두 개(Quickstart, SQD 튜토리얼). 00-quickstart.html�
 모든 용어 설명창에는 정의 외에 간단한 구체적 예시를 제공한다. concept-glossary.json의 worked_example과 worked_parts에서 관리하며, 벡터는 열벡터·행렬은 행과 열이 보이는 형태로 표시한다. 일반 성질을 반복하는 문장만으로 예시를 대체하지 않는다.
 
 ## 양자화학 개념 지도
-`docs/concept-quantum-chemistry.html`은 지도 소스다. 첫 학습 묶음은 `quantum-state` → `born-rule` → `superposition` → `observable` → 기존 `hamiltonian` → `schrodinger` 순서다. 아직 작성하지 않은 후속 주제는 접이식 학습 지도에만 표시하고 빈 링크를 만들지 않는다.
+`docs/concept-quantum-chemistry.html`은 지도 소스다. 첫 학습 묶음은 `quantum-state` → `born-rule` → `superposition` → `observable` → 기존 `hamiltonian` → `schrodinger` 순서다. 후속 16개 노트는 `born-oppenheimer`부터 `potential-energy`까지 핵·전자 분리, 다전자 상태, 적분과 행렬원소, 근사 계산과 화학적 해석의 네 묶음으로 연결한다. 지도에서는 접이식 목록으로 제공하여 첫 화면을 짧게 유지한다. 새 주제를 추가할 때 실제 페이지가 준비된 링크만 제공한다.
 
 `python3 tools/build_concepts.py`는 동일한 전체 개념 노트를 포함하는 독립 HTML 두 개를 생성한다. `docs/concepts.html`은 수학 지도로, `docs/quantum-chemistry.html`은 양자화학 지도로 시작한다. 둘 다 CSS·스크립트·관련 개념을 포함하므로 단일 파일 미리보기에서 링크가 동작한다. 공유할 때는 소스 페이지 대신 이 생성 파일을 사용한다. 지도 선택 버튼이 동적으로 만드는 링크도 단일 파일에서는 해시 경로를 사용해야 한다.
 
@@ -73,3 +73,5 @@ IBM 공식 노트북 두 개(Quickstart, SQD 튜토리얼). 00-quickstart.html�
 양자화학 실험이나 리더 탐색을 변경하면 `node tools/check_quantum_concepts.cjs`로 브라우저 검증한다. Playwright와 Chromium이 필요하며, 기존 설치를 사용할 때는 `PLAYWRIGHT_MODULE`에 모듈 경로, `CHROMIUM_PATH`에 실행 파일 경로를 지정할 수 있다. 이 검사는 상태·확률·위상·기댓값·잔차 수치, 단일 파일의 내부 링크, 뒤로 가기·새로고침, 설명창, 모바일 터치를 확인한다.
 
 양자 상태의 브라–켓, 기저 전개, 정규화, 분수·첨자는 KaTeX 0.19.0으로 HTML 수식과 접근성용 MathML을 함께 표시한다. 새 수식은 `<span class="math-tex" data-tex="LaTeX 수식">읽을 수 있는 대체 텍스트</span>`로 작성한다. `tools/concept_math.py`의 명시적 카탈로그는 본문·설명창의 기존 표현을 같은 마크업으로 변환하며, 임의의 한국어 문장을 TeX로 해석하지 않는다. `assets/concept-math.js`는 이 마크업과 `.math-array`의 원본 셀을 렌더링하고 실험의 DOM 갱신도 반영한다. 원본 셀은 계산·검증용으로 보존한다. KaTeX 배포본과 MIT 라이선스는 `assets/vendor/katex/`에서 버전을 고정한다. `build_concepts.py`가 라이브러리·스타일·글꼴·라이선스를 리더에 내장하므로 빌드에 npm 설치가 필요 없다. 변경 후 브라우저 검사로 외부 요청 없이 글꼴과 수식이 표시되는지, 모바일 수식 폭과 슬라이더 수치가 맞는지 확인한다. 같은 상태와 기저별 좌표를 구별하고, 반올림한 계수로 표시하는 상태 전개에는 근사 기호를 사용한다.
+
+후속 전자 구조 노트의 실험을 변경하면 `node tools/check_followup_concepts.cjs`도 실행한다. `tools/followup_checks/a.cjs`부터 `d.cjs`까지는 각 묶음의 독립 수치 검증이며, 공통 하네스가 360px 다크/1280px 라이트에서 지도·수식·관련 링크·터치 설명창을 함께 확인한다. 설명용 이산 모형·Hubbard 모형·Morse 모형을 실제 분자의 계산 결과나 일반적인 근사법의 보장으로 읽게 만들지 않는다.

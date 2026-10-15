@@ -153,5 +153,85 @@
     "title": "슈뢰딩거 방정식(Schrödinger Equation)",
     "published_artifact": null,
     "origin_file": "concept-schrodinger.html"
+  },
+  "concept-born-oppenheimer.html": {
+    "title": "보른–오펜하이머 근사(Born–Oppenheimer Approximation)",
+    "published_artifact": null,
+    "origin_file": "concept-born-oppenheimer.html"
+  },
+  "concept-orbital.html": {
+    "title": "오비탈(Orbital)",
+    "published_artifact": null,
+    "origin_file": "concept-orbital.html"
+  },
+  "concept-electron-spin.html": {
+    "title": "전자 스핀(Electron Spin)",
+    "published_artifact": null,
+    "origin_file": "concept-electron-spin.html"
+  },
+  "concept-pauli.html": {
+    "title": "파울리 배타 원리(Pauli Exclusion Principle)",
+    "published_artifact": null,
+    "origin_file": "concept-pauli.html"
+  },
+  "concept-electronic-configuration.html": {
+    "title": "전자 배치(Electronic Configuration)",
+    "published_artifact": null,
+    "origin_file": "concept-electronic-configuration.html"
+  },
+  "concept-slater-determinant.html": {
+    "title": "슬레이터 행렬식(Slater Determinant)",
+    "published_artifact": null,
+    "origin_file": "concept-slater-determinant.html"
+  },
+  "concept-basis-set.html": {
+    "title": "기저 집합(Basis Set)",
+    "published_artifact": null,
+    "origin_file": "concept-basis-set.html"
+  },
+  "concept-molecular-orbital.html": {
+    "title": "분자 궤도(Molecular Orbital)",
+    "published_artifact": null,
+    "origin_file": "concept-molecular-orbital.html"
+  },
+  "concept-electron-integrals.html": {
+    "title": "전자 적분(Electron Integrals)",
+    "published_artifact": null,
+    "origin_file": "concept-electron-integrals.html"
+  },
+  "concept-hamiltonian-elements.html": {
+    "title": "해밀토니안 행렬원소(Hamiltonian Matrix Elements)",
+    "published_artifact": null,
+    "origin_file": "concept-hamiltonian-elements.html"
+  },
+  "concept-variational-principle.html": {
+    "title": "변분 원리(Variational Principle)",
+    "published_artifact": null,
+    "origin_file": "concept-variational-principle.html"
+  },
+  "concept-hartree-fock.html": {
+    "title": "하트리–폭(Hartree–Fock)와 SCF",
+    "published_artifact": null,
+    "origin_file": "concept-hartree-fock.html"
+  },
+  "concept-electron-correlation.html": {
+    "title": "전자 상관(Electron Correlation)",
+    "published_artifact": null,
+    "origin_file": "concept-electron-correlation.html"
+  },
+  "concept-configuration-interaction.html": {
+    "title": "구성 상호작용(Configuration Interaction)",
+    "published_artifact": null,
+    "origin_file": "concept-configuration-interaction.html"
+  },
+  "concept-active-space.html": {
+    "title": "활성 공간(Active Space)",
+    "published_artifact": null,
+    "origin_file": "concept-active-space.html"
+  },
+  "concept-potential-energy.html": {
+    "title": "퍼텐셜 에너지 곡선(Potential Energy Curve)",
+    "published_artifact": null,
+    "origin_file": "concept-potential-energy.html"
   }
 }
