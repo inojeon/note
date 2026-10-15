@@ -59,11 +59,11 @@
 .qc-status{border-left:3px solid var(--beta);padding-left:12px;font-size:.9rem}.qc-note{color:var(--ink2);font-size:.85rem}.qc-lab details{padding:14px}.qc-lab details p{font-size:.9rem}
 @media(max-width:600px){.qc-route-panel{padding:16px 12px}.qc-presets button{flex:1 1 42%}.qc-route-panel .qc-presets button{flex-basis:100%}.qc-lab figure{padding:14px 10px}.qc-readouts{grid-template-columns:1fr}.qc-lab .math-array{font-size:.9rem}.qc-lab .math-row>span{padding:1px 4px}}
 
-/* Native MathML keeps ket/bra, sums, fractions and scripts readable offline. */
-math{font-family:"STIX Two Math","Cambria Math","Noto Sans Math",math;font-size:1.08em;line-height:normal;color:inherit}
-.formula math,.term-formula math{font-size:1.1em}.math-array math{font-size:1em}
-.qc-equation math,.state-equation math,.state-expansion math,.term-example-math math{math-style:normal}
+/* KaTeX supplies the visual HTML and accessible MathML. */
+.math-tex{display:inline-block;max-width:100%;vertical-align:middle}.katex{font-size:1.08em}
+.formula .katex,.term-formula .katex{font-size:1.1em}.math-array .katex{font-size:1em}
+.katex-array{padding:0}.katex-array:before,.katex-array:after{display:none}.katex-array>.math-cells{display:none}.math-tex .katex{white-space:nowrap}
 .state-notation{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;margin:22px 0}.state-notation h2{margin-top:0}
-.state-equation{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:18px;margin:22px 0;min-width:0}.state-equation math{font-size:1.3em;max-width:100%}
-.state-expansion{display:grid;gap:12px;margin:20px 0}.state-expansion>div{padding:12px;background:var(--code);border-radius:8px;min-width:0}.state-expansion small{display:block;margin-bottom:10px}.state-expansion math{font-size:1.15em}
-@media(max-width:600px){.state-notation{padding:14px 12px}.state-equation math{font-size:1.12em}.state-expansion math{font-size:1.02em}}
+.state-equation{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:18px;margin:22px 0;min-width:0}.state-equation .katex{font-size:1.3em;max-width:100%}
+.state-expansion{display:grid;gap:12px;margin:20px 0}.state-expansion>div{padding:12px;background:var(--code);border-radius:8px;min-width:0}.state-expansion small{display:block;margin-bottom:10px}.state-expansion .katex{font-size:1.15em}
+@media(max-width:600px){.state-notation{padding:14px 12px}.state-equation .katex{font-size:1.12em}.state-expansion .katex{font-size:1.02em}}

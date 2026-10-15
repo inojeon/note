@@ -36,7 +36,13 @@ const pages = ['quantum-chemistry', 'quantum-state', 'born-rule', 'superposition
       await page.evaluate(slug => { location.hash = slug; }, slug);
       await page.locator(`#page-${slug}`).waitFor({ state: 'visible' });
     };
-    const column = async selector => (await page.locator(`${selector} .math-row`).allTextContents()).map(real);
+    const column = async selector => {
+      const values=(await page.locator(`${selector} .math-row`).allTextContents()).map(real);
+      const rendered=await page.locator(`${selector} .array-render annotation`).textContent();
+      const numbers=[...rendered.matchAll(/-?\d+(?:\.\d+)?/g)].map(m=>Number(m[0]));
+      assert.deepEqual(numbers,values, 'KaTeX matrix must follow the slider values');
+      return values;
+    };
     const slider = async (id, value) => page.locator(id).fill(String(value));
     await page.goto(base);
     assert.equal(await active().getAttribute('data-page'), 'quantum-chemistry');
@@ -48,6 +54,12 @@ const pages = ['quantum-chemistry', 'quantum-state', 'born-rule', 'superposition
     assert.deepEqual(broken, [], 'All bundled links must resolve internally');
     const ids = await page.locator('[id]').evaluateAll(es => es.map(e => e.id));
     assert.equal(new Set(ids).size, ids.length, 'Unique ids including dynamically rendered SVG');
+    assert.equal(await page.evaluate(()=>katex.version),'0.19.0');
+    assert.equal(await page.locator('.katex-error').count(),0);
+    assert.equal(await page.locator('.math-tex:not(.math-cells .math-tex):not(:has(.katex-html))').count(),0);
+    assert.equal(await page.locator('.math-array:not(:has(.array-render .katex-html))').count(),0);
+    await page.evaluate(()=>document.fonts.load('16px KaTeX_Main'));
+    assert(await page.evaluate(()=>[...document.fonts].filter(f=>f.status==='loaded').some(f=>f.family.startsWith('KaTeX_'))));
 
     for (const [width, colorScheme] of [[360, 'dark'], [1280, 'light']]) {
       await page.setViewportSize({ width, height: 900 });
@@ -74,7 +86,8 @@ const pages = ['quantum-chemistry', 'quantum-state', 'born-rule', 'superposition
       assert.equal(await active().getAttribute('data-page'), 'quantum-state');
       await page.reload();
       assert.equal(await active().getAttribute('data-page'), 'quantum-state');
-      assert(await page.locator('#qstate-general-state math munderover').count());
+      assert(await page.locator('#qstate-general-state .katex-html').count());
+      assert((await page.locator('#qstate-general-state annotation').textContent()).includes('\\sum'));
       assert.equal(await page.locator('#qstate-general-state math').evaluate(e=>e.namespaceURI), 'http://www.w3.org/1998/Math/MathML');
       assert.equal(await page.locator('#qstate-coordinate-map math mtr').count(), 3);
 
@@ -82,8 +95,9 @@ const pages = ['quantum-chemistry', 'quantum-state', 'born-rule', 'superposition
         await slider('#qstate-angle', deg);
         const values = await column('#qstate-rotated'), theta = (35-deg)*Math.PI/180;
         near(values[0], Math.cos(theta)); near(values[1], Math.sin(theta));
-        const dirac = (await page.locator('#qstate-expansion > div').nth(1).locator('math > mrow > mn').allTextContents()).map(Number);
-        near(dirac[0], Math.abs(values[0])); near(dirac[1], Math.abs(values[1]));
+        const expression = await page.locator('#qstate-expansion > div').nth(1).locator('annotation').textContent();
+        const dirac = [...expression.matchAll(/(-?\d+\.\d{3})\\lvert/g)].map(m=>Number(m[1]));
+        near(dirac[0], values[0]); near(dirac[1], values[1]);
         near(values[0]**2+values[1]**2, 1, .0015); states++;
       }
       await page.locator('#qstate-aligned').click();
@@ -155,9 +169,9 @@ const pages = ['quantum-chemistry', 'quantum-state', 'born-rule', 'superposition
         const figures=await active().locator('svg').evaluateAll(es=>es.map(e=>e.innerHTML));
         assert(figures.every(s=>s.length>50&&!/NaN|Infinity/.test(s)));
         await active().locator('details').evaluateAll(es=>es.forEach(e=>e.open=true));
-        const overflow = await active().locator('math').evaluateAll(es=>es.filter(e=>!e.closest('.term-popover')).filter(e=>{
+        const overflow = await active().locator('.katex-html').evaluateAll(es=>es.filter(e=>!e.closest('.term-popover')).filter(e=>{
           const r=e.getBoundingClientRect();return r.width>0&&(r.left<0||r.right>innerWidth+1);
-        }).map(e=>e.getAttribute('aria-label')));
+        }).map(e=>e.closest('[data-tex]')?.dataset.tex||e.textContent));
         assert.deepEqual(overflow,[], `Math must fit the viewport on ${slug}`);
         for (const trigger of await active().locator('.term-trigger').all()) {
           await trigger.click();

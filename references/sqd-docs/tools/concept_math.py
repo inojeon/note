@@ -1,35 +1,55 @@
-"""Typeset the notes' explicit quantum notation with native, offline MathML.
+"""Mark the notes' authored expressions as TeX for the shared KaTeX renderer.
 
 This is a small catalog of authored expressions, not a general TeX parser.
-Existing MathML, scripts, SVG labels and HTML attributes are left untouched.
+Existing TeX markers, scripts, SVG labels and HTML attributes are left untouched.
 """
 from html import escape
 from html.parser import HTMLParser
 import re
 
 
+SYMBOLS = {'ψ': r'\psi ', 'Ψ': r'\Psi ', 'φ': r'\phi ', 'χ': r'\chi ',
+           'ρ': r'\rho ', 'ℏ': r'\hbar ', '∂': r'\partial ', '∑': r'\sum ',
+           '⟨': r'\langle ', '⟩': r'\rangle ', '−': '-', '⋮': r'\vdots ',
+           '…': r'\ldots ', 'ℬ': r'\mathcal{B}', '↔': r'\leftrightarrow '}
+
+def tex_atom(value):
+    return ''.join(SYMBOLS.get(c,c) for c in str(value))
+
 def tag(name, *children, **attrs):
-    attributes = ''.join(f' {key}="{escape(str(value), quote=True)}"' for key, value in attrs.items())
-    return f'<{name}{attributes}>' + ''.join(children) + f'</{name}>'
+    if name in {'mi','mn','mo'}:
+        value=tex_atom(''.join(children))
+        if attrs.get('mathvariant')=='bold': return r'\mathbf{'+value+'}'
+        if value=='cos': return r'\cos '
+        return value
+    if name in {'math','mrow','mtd'}: return ''.join(children)
+    if name in {'msub','munder'}: return children[0]+'_{'+children[1]+'}'
+    if name=='msup': return '{'+children[0]+'}^{'+children[1]+'}'
+    if name=='munderover': return children[0]+'_{'+children[1]+'}^{'+children[2]+'}'
+    if name=='mover': return r'\overset{'+children[1]+'}{'+children[0]+'}'
+    if name=='mfrac': return r'\frac{'+children[0]+'}{'+children[1]+'}'
+    if name=='msqrt': return r'\sqrt{'+''.join(children)+'}'
+    if name=='mtr': return ' & '.join(children)
+    if name=='mtable': return r'\begin{matrix}'+r' \\ '.join(children)+r'\end{matrix}'
+    raise ValueError('Unsupported authored math node: '+name)
 
-
-def mi(value): return tag('mi', escape(str(value)))
-def mn(value): return tag('mn', escape(str(value)))
-def mo(value): return tag('mo', escape(str(value)))
-def row(*values): return tag('mrow', *values)
+def mi(value): return tag('mi', str(value))
+def mn(value): return tag('mn', str(value))
+def mo(value): return tag('mo', str(value))
+def row(*values): return ''.join(values)
 def sub(base, index): return tag('msub', base, index)
 def sup(base, index): return tag('msup', base, index)
 def frac(top, bottom): return tag('mfrac', top, bottom)
 def root(value): return tag('msqrt', value)
-def ket(value): return row(mo('|'), value, mo('⟩'))
-def bra(value): return row(mo('⟨'), value, mo('|'))
-def inner(left, right): return row(mo('⟨'), left, mo('|'), right, mo('⟩'))
-def sandwich(left, operator, right): return row(mo('⟨'), left, mo('|'), operator, mo('|'), right, mo('⟩'))
-def parens(value): return row(mo('('), value, mo(')'))
-def absolute(value): return row(mo('|'), value, mo('|'))
-def matrix(rows): return row(mo('['), tag('mtable', *(tag('mtr', *(tag('mtd', cell) for cell in cells)) for cells in rows)), mo(']'))
+def ket(value): return r'\lvert '+value+r'\rangle '
+def bra(value): return r'\langle '+value+r'\rvert '
+def inner(left, right): return r'\langle '+left+r'\mid '+right+r'\rangle '
+def sandwich(left, operator, right): return r'\langle '+left+r'\lvert '+operator+r'\rvert '+right+r'\rangle '
+def parens(value): return '('+value+')'
+def absolute(value): return r'\lvert '+value+r'\rvert '
+def matrix(rows): return r'\begin{bmatrix}'+r' \\ '.join(' & '.join(cells) for cells in rows)+r'\end{bmatrix}'
 def math(label, content, display='inline'):
-    return '<math xmlns="http://www.w3.org/1998/Math/MathML" display="'+display+'" aria-label="'+escape(label, quote=True)+'">'+row(content)+'</math>'
+    return '<span class="math-tex" data-tex="'+escape(content,quote=True)+'">'+escape(label)+'</span>'
 
 
 psi, bigpsi, phi, i, c = map(mi, ['ψ', 'Ψ', 'φ', 'i', 'c'])
@@ -83,6 +103,19 @@ for symbol in ['ψ','Ψ','φ','i','r','0','1','2','+','−','E₁','E₂']:
     add(f'⟨{symbol}|',bra(atom))
 for label, left, right in [('⟨i|ψ⟩',i,psi),('⟨φᵢ|ψ⟩',phii,psi),('⟨ψ|ψ⟩',psi,psi),('⟨r|ψ⟩',mi('r'),psi),('⟨0|ψ⟩',mn(0),psi)]:
     add(label,inner(left,right))
+add('⟨φ|ψ⟩',inner(phi,psi))
+# Additional textbook formulas used in the quantum notes.
+add('p₀ = cos²θ', 'p_0=\\cos^2\\theta')
+add('p₁ = sin²θ', 'p_1=\\sin^2\\theta')
+add('|c|² = c* c = a² + b²', '|c|^2=c^*c=a^2+b^2')
+add('iℏ f′(t)ψ = f(t)Hψ', 'i\\hbar f^{\\prime}(t)\\psi=f(t)H\\psi')
+add('iℏf′(t) = Ef(t)', 'i\\hbar f^{\\prime}(t)=Ef(t)')
+add('Ψ(t) = f(t)ψ', '\\Psi(t)=f(t)\\psi')
+add('H† = H', 'H^{\\dagger}=H')
+add('Hc = Ec', 'Hc=Ec')
+add('c†c = 1', 'c^{\\dagger}c=1')
+add('⟨H⟩ = c†Hc', '\\langle H\\rangle=c^{\\dagger}Hc')
+add('⟨φ|ψ⟩', '\\langle\\phi\\mid\\psi\\rangle')
 pattern=re.compile('|'.join(re.escape(key) for key in sorted(expressions,key=len,reverse=True)))
 
 
@@ -98,15 +131,18 @@ def typeset_text(text):
 class Typesetter(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=False)
-        self.parts=[];self.blocked=[]
+        self.parts=[];self.blocked=[];self.stack=[]
 
     def handle_starttag(self,tag,attrs):
         self.parts.append(self.get_starttag_text())
-        if tag in {'script','style','svg','math','head'}: self.blocked.append(tag)
+        blocked = tag in {'script','style','svg','math','head'} or 'data-tex' in dict(attrs)
+        if tag not in {'br','hr','img','input','meta','link','wbr'}:
+            self.stack.append(blocked)
+            if blocked:self.blocked.append(tag)
 
     def handle_endtag(self,tag):
         self.parts.append('</'+tag+'>')
-        if self.blocked and self.blocked[-1]==tag:self.blocked.pop()
+        if self.stack and self.stack.pop():self.blocked.pop()
 
     def handle_startendtag(self,tag,attrs):self.parts.append(self.get_starttag_text())
     def handle_data(self,data):self.parts.append(data if self.blocked else typeset_text(data))
