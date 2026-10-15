@@ -58,5 +58,100 @@
     "title": "6. SQD 이해하기",
     "published_artifact": "https://claude.ai/artifact/3DKnaoL6iKWvBSJMK5KzGH",
     "origin_file": "sqd-guide.html"
+  },
+  "concepts.html": {
+    "title": "행렬과 벡터 · 개념 지도",
+    "published_artifact": null,
+    "origin_file": "concepts.html"
+  },
+  "concept-vector.html": {
+    "title": "벡터",
+    "published_artifact": null,
+    "origin_file": "concept-vector.html"
+  },
+  "concept-basis.html": {
+    "title": "기저와 좌표",
+    "published_artifact": null,
+    "origin_file": "concept-basis.html"
+  },
+  "concept-inner-product.html": {
+    "title": "내적과 길이",
+    "published_artifact": null,
+    "origin_file": "concept-inner-product.html"
+  },
+  "concept-matrix.html": {
+    "title": "행렬과 선형변환",
+    "published_artifact": null,
+    "origin_file": "concept-matrix.html"
+  },
+  "concept-symmetric.html": {
+    "title": "대칭 행렬",
+    "published_artifact": null,
+    "origin_file": "concept-symmetric.html"
+  },
+  "concept-eigen.html": {
+    "title": "고유벡터와 고유값",
+    "published_artifact": null,
+    "origin_file": "concept-eigen.html"
+  },
+  "concept-diagonalization.html": {
+    "title": "대각화",
+    "published_artifact": null,
+    "origin_file": "concept-diagonalization.html"
+  },
+  "concept-power.html": {
+    "title": "멱법과 반복",
+    "published_artifact": null,
+    "origin_file": "concept-power.html"
+  },
+  "concept-subspace.html": {
+    "title": "부분공간과 투영",
+    "published_artifact": null,
+    "origin_file": "concept-subspace.html"
+  },
+  "concept-krylov.html": {
+    "title": "크릴로프 공간과 랑초스",
+    "published_artifact": null,
+    "origin_file": "concept-krylov.html"
+  },
+  "concept-hamiltonian.html": {
+    "title": "해밀토니안과 에너지",
+    "published_artifact": null,
+    "origin_file": "concept-hamiltonian.html"
+  },
+  "quantum-chemistry.html": {
+    "title": "양자화학 · 개념 지도",
+    "published_artifact": null,
+    "origin_file": "quantum-chemistry.html"
+  },
+  "concept-quantum-chemistry.html": {
+    "title": "양자화학(Quantum Chemistry)",
+    "published_artifact": null,
+    "origin_file": "concept-quantum-chemistry.html"
+  },
+  "concept-quantum-state.html": {
+    "title": "양자 상태(Quantum State)와 파동함수(Wavefunction)",
+    "published_artifact": null,
+    "origin_file": "concept-quantum-state.html"
+  },
+  "concept-born-rule.html": {
+    "title": "확률 진폭(Probability Amplitude)과 보른 규칙(Born Rule)",
+    "published_artifact": null,
+    "origin_file": "concept-born-rule.html"
+  },
+  "concept-superposition.html": {
+    "title": "중첩(Superposition)과 상대 위상(Relative Phase)",
+    "published_artifact": null,
+    "origin_file": "concept-superposition.html"
+  },
+  "concept-observable.html": {
+    "title": "관측량(Observable)과 기댓값(Expectation Value)",
+    "published_artifact": null,
+    "origin_file": "concept-observable.html"
+  },
+  "concept-schrodinger.html": {
+    "title": "슈뢰딩거 방정식(Schrödinger Equation)",
+    "published_artifact": null,
+    "origin_file": "concept-schrodinger.html"
   }
 }

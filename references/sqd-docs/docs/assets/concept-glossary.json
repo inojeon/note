@@ -1,0 +1,3328 @@
+[
+  {
+    "id": "vector",
+    "term": "벡터",
+    "english": "Vector",
+    "description": "덧셈과 스칼라배가 정의된 벡터 공간의 원소입니다. 기저를 정하면 좌표로 나타낼 수 있습니다.",
+    "example": "같은 벡터도 기저에 따라 좌표가 달라집니다.",
+    "page": "vector",
+    "worked_example": "평면의 표준 기저에서 오른쪽 3, 위로 4인 벡터입니다. 두 배하면 두 성분이 모두 두 배가 됩니다.",
+    "worked_parts": [
+      "v = ",
+      {
+        "matrix": [
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ]
+      },
+      " → 2v = ",
+      {
+        "matrix": [
+          [
+            6
+          ],
+          [
+            8
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "vector-space",
+    "term": "벡터 공간",
+    "english": "Vector Space",
+    "description": "벡터의 덧셈과 스칼라배가 정의되고 벡터 공간의 공리를 만족하는 집합입니다.",
+    "example": "실수 좌표쌍 전체는 성분별 덧셈과 실수배에 대해 벡터 공간을 이룹니다.",
+    "page": "vector",
+    "worked_example": "실수 좌표쌍 전체에서는 두 벡터를 더해도, 2배 해도 다시 실수 좌표쌍입니다. 덧셈·스칼라배와 벡터 공간의 공리를 만족합니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      " + ",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      " = ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            1
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "scalar",
+    "term": "스칼라",
+    "english": "Scalar",
+    "description": "벡터에 곱하는 수입니다. 여기서는 실수 또는 복소수를 사용합니다.",
+    "example": "예: 3v에서 3이 스칼라입니다.",
+    "page": "vector",
+    "worked_example": "아래 식에서 벡터에 곱하는 수 3이 스칼라입니다.",
+    "worked_parts": [
+      "3 × ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ]
+      },
+      " = ",
+      {
+        "matrix": [
+          [
+            3
+          ],
+          [
+            6
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "scalar-multiplication",
+    "term": "스칼라배",
+    "english": "Scalar Multiplication",
+    "description": "벡터에 수를 곱하는 연산입니다. 좌표에서는 모든 성분에 같은 수를 곱합니다.",
+    "example": "음수를 곱하면 실수 공간에서 방향이 반대가 됩니다.",
+    "page": "vector",
+    "worked_example": "벡터에 −2를 곱하면 길이는 2배가 되고 방향은 반대가 됩니다.",
+    "worked_parts": [
+      "−2 × ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ]
+      },
+      " = ",
+      {
+        "matrix": [
+          [
+            -2
+          ],
+          [
+            -4
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "associative",
+    "term": "결합 법칙",
+    "english": "Associativity",
+    "description": "계산의 묶는 위치를 바꾸어도 결과가 같다는 법칙입니다.",
+    "example": "(u+v)+w = u+(v+w)\na(bv) = (ab)v",
+    "page": null,
+    "worked_example": "u, v, w가 모두 같은 단위 벡터일 때, 어느 쪽 덧셈을 먼저 해도 세 배인 벡터가 됩니다.",
+    "worked_parts": [
+      "u = v = w = ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      " → (u+v)+w = u+(v+w) = ",
+      {
+        "matrix": [
+          [
+            3
+          ],
+          [
+            0
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "commutative",
+    "term": "교환",
+    "english": "Commutativity",
+    "description": "덧셈에서 두 벡터의 순서를 바꾸어도 결과가 같습니다.",
+    "example": "u+v = v+u\n행렬 곱셈은 일반적으로 이 법칙을 만족하지 않습니다.",
+    "page": null,
+    "worked_example": "두 벡터를 더하는 순서를 바꾸어도 결과가 같습니다. 하나는 오른쪽 1, 다른 하나는 위로 2인 경우입니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      " + ",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            2
+          ]
+        ]
+      },
+      " = ",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            2
+          ]
+        ]
+      },
+      " + ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      " = ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "distributive",
+    "term": "분배 법칙",
+    "english": "Distributivity",
+    "description": "합에 대한 수 배를 각각의 수 배의 합으로 풀어 쓸 수 있다는 법칙입니다.",
+    "example": "a(u+v) = au+av\n(a+b)v = av+bv",
+    "page": null,
+    "worked_example": "두 벡터를 더한 뒤 2배해도, 각각 2배한 뒤 더해도 같습니다.",
+    "worked_parts": [
+      "2(",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      " + ",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      ") = ",
+      {
+        "matrix": [
+          [
+            2
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      " + ",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            2
+          ]
+        ]
+      },
+      " = ",
+      {
+        "matrix": [
+          [
+            2
+          ],
+          [
+            2
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "axiom",
+    "term": "공리",
+    "english": "Axiom",
+    "description": "이론에서 기본 전제로 받아들이는 규칙입니다. 벡터 공간 공리는 어떤 집합과 연산을 벡터 공간이라고 부를지 정합니다.",
+    "example": "예: 벡터를 더했을 때 같은 공간 안에 남아야 합니다.",
+    "page": "vector",
+    "worked_example": "벡터 공간 공리 중 하나는 영벡터가 있다는 조건입니다. 평면의 표준 연산에서는 아래처럼 0을 더해도 원래 벡터가 됩니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ]
+      },
+      " + ",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      " = ",
+      {
+        "matrix": [
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "zero",
+    "term": "영벡터",
+    "english": "Zero Vector",
+    "description": "어떤 벡터에 더해도 그 벡터를 바꾸지 않는 덧셈의 항등원입니다.",
+    "example": "v+0 = v\n어떤 기저에서나 모든 좌표가 0입니다.",
+    "page": "vector",
+    "worked_example": "평면의 영벡터는 모든 성분이 0입니다. 어떤 벡터에 더해도 그 벡터를 그대로 둡니다.",
+    "worked_parts": [
+      "0 = ",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      ", ",
+      {
+        "matrix": [
+          [
+            2
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      " + 0 = ",
+      {
+        "matrix": [
+          [
+            2
+          ],
+          [
+            1
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "additive-inverse",
+    "term": "덧셈의 역원",
+    "english": "Additive Inverse",
+    "description": "벡터에 더했을 때 영벡터가 되는 벡터입니다.",
+    "example": "v+(−v) = 0",
+    "page": null,
+    "worked_example": "성분의 부호를 모두 바꾼 벡터를 더하면 영벡터가 됩니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            2
+          ],
+          [
+            -1
+          ]
+        ]
+      },
+      " + ",
+      {
+        "matrix": [
+          [
+            -2
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      " = ",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            0
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "basis",
+    "term": "기저",
+    "english": "Basis",
+    "description": "공간을 생성하면서 선형 독립인 벡터들의 모음입니다. 모든 벡터를 기저의 유일한 선형결합으로 나타낼 수 있습니다.",
+    "example": "v = c₁b₁ + … + cₙbₙ",
+    "page": "basis",
+    "worked_example": "오른쪽 1과 위로 1을 기준으로 고르면, 평면의 모든 벡터를 유일한 조합으로 표현할 수 있습니다.",
+    "worked_parts": [
+      "3",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      " + 4",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      " = ",
+      {
+        "matrix": [
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "standard-basis",
+    "term": "표준 기저",
+    "english": "Standard Basis",
+    "description": "좌표 하나만 1이고 나머지가 모두 0인 좌표 벡터들입니다.",
+    "example": "평면에서는 오른쪽 한 칸과 위로 한 칸을 기준으로 삼습니다.",
+    "page": "basis",
+    "worked_example": "평면의 표준 기저는 각 좌표 방향으로 한 칸인 두 벡터입니다.",
+    "worked_parts": [
+      "e₁ = ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      ", e₂ = ",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "coordinates",
+    "term": "좌표",
+    "english": "Coordinates",
+    "description": "선택한 기저에 대해 벡터를 표현하는 계수들입니다.",
+    "example": "v = c₁b₁ + c₂b₂이면 좌표 성분은 c₁, c₂입니다.",
+    "page": "basis",
+    "worked_example": "b₁, b₂를 아래처럼 고르면, 같은 벡터의 이 기저에 대한 좌표는 3과 1입니다.",
+    "worked_parts": [
+      "b₁ = ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      ", b₂ = ",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      "; v = ",
+      {
+        "matrix": [
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ]
+      },
+      " = 3b₁+b₂ → 새 좌표 ",
+      {
+        "matrix": [
+          [
+            3
+          ],
+          [
+            1
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "component",
+    "term": "성분",
+    "english": "Component",
+    "description": "좌표 벡터나 행렬의 개별 수입니다. 벡터 성분의 의미는 기저와 성분의 순서에 따라 달라집니다.",
+    "example": "성분이 3, 4인 평면 벡터에서 첫째 성분은 3입니다.",
+    "page": "vector",
+    "worked_example": "아래 열벡터의 첫째 성분은 3, 둘째 성분은 4입니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "span",
+    "term": "생성",
+    "english": "Span",
+    "description": "주어진 벡터들의 모든 유한한 선형결합을 모은 공간입니다. 그 결과가 전체 공간이면 그 벡터들이 공간을 생성한다고 합니다.",
+    "example": "span{u,v} = {au+bv : a,b는 스칼라}",
+    "page": "basis",
+    "worked_example": "벡터 하나의 모든 실수배를 모으면 원점을 지나는 x축 전체를 만듭니다.",
+    "worked_parts": [
+      "span{",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      "} = {",
+      {
+        "matrix": [
+          [
+            "a"
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      " : a는 실수}"
+    ]
+  },
+  {
+    "id": "independence",
+    "term": "선형 독립",
+    "english": "Linear Independence",
+    "description": "벡터들의 선형결합이 영벡터가 되는 경우가 모든 계수가 0인 경우뿐이라는 조건입니다.",
+    "example": "a₁v₁+…+aₙvₙ = 0 ⇒ 모든 aᵢ = 0",
+    "page": "basis",
+    "worked_example": "첫째 좌표와 둘째 좌표가 각각 0이어야 하므로, 아래 두 벡터는 선형 독립입니다.",
+    "worked_parts": [
+      "a",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      " + b",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      " = ",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      " ⇒ a = b = 0"
+    ]
+  },
+  {
+    "id": "combination",
+    "term": "선형결합",
+    "english": "Linear Combination",
+    "description": "여러 벡터를 각각 수 배한 뒤 더한 벡터입니다.",
+    "example": "2u−3v도 선형결합입니다.",
+    "page": "basis",
+    "worked_example": "첫 벡터를 2배하고 둘째 벡터를 3배해서 빼는 것도 선형결합입니다.",
+    "worked_parts": [
+      "2",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      " − 3",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      " = ",
+      {
+        "matrix": [
+          [
+            2
+          ],
+          [
+            -3
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dimension",
+    "term": "차원",
+    "english": "Dimension",
+    "description": "유한차원 벡터 공간에서 기저를 이루는 벡터의 개수입니다.",
+    "example": "평면 전체의 차원은 2, 원점을 지나는 직선의 차원은 1입니다.",
+    "page": "basis",
+    "worked_example": "평면 전체에는 두 기준 방향이 필요하지만, x축 위의 벡터들은 한 기준 방향만 있으면 됩니다.",
+    "worked_parts": [
+      "평면의 기저: ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      ", ",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      " → 2차원; x축의 기저: ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      " → 1차원"
+    ]
+  },
+  {
+    "id": "column-vector",
+    "term": "열벡터",
+    "english": "Column Vector",
+    "description": "성분들을 세로로 나열한 n×1 행렬 형태의 벡터 표현입니다.",
+    "example": "행렬 A가 m×n이면 n×1 열벡터를 곱해 m×1 열벡터를 얻습니다.",
+    "page": "vector",
+    "worked_example": "성분 3과 4를 세로로 적으면 2행 1열인 열벡터입니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ]
+      },
+      " ← 2×1"
+    ]
+  },
+  {
+    "id": "row-vector",
+    "term": "행벡터",
+    "english": "Row Vector",
+    "description": "성분들을 가로로 나열한 1×n 행렬 형태의 벡터 표현입니다.",
+    "example": "실수 열벡터를 전치하면 대응하는 행벡터가 됩니다.",
+    "page": "vector",
+    "worked_example": "성분 3과 4를 가로로 적으면 1행 2열인 행벡터입니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            3,
+            4
+          ]
+        ]
+      },
+      " ← 1×2"
+    ]
+  },
+  {
+    "id": "transpose",
+    "term": "전치",
+    "english": "Transpose",
+    "description": "행렬의 행과 열을 맞바꾸는 연산입니다.",
+    "example": "(Aᵀ)ᵢⱼ = Aⱼᵢ\n복소수 행렬의 켤레전치는 이 연산에 복소켤레를 더한 것입니다.",
+    "page": "symmetric",
+    "worked_example": "첫째 행의 1, 2가 첫째 열로, 둘째 행의 3, 4가 둘째 열로 옮겨집니다.",
+    "worked_parts": [
+      "A = ",
+      {
+        "matrix": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ]
+        ]
+      },
+      " → Aᵀ = ",
+      {
+        "matrix": [
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "unit-vector",
+    "term": "단위 벡터",
+    "english": "Unit Vector",
+    "description": "선택한 노름에 대해 길이가 1인 벡터입니다.",
+    "example": "0이 아닌 v를 v/‖v‖로 바꾸면 단위 벡터가 됩니다.",
+    "page": "inner-product",
+    "worked_example": "성분이 3/5, 4/5인 벡터의 표준 유클리드 길이는 1입니다.",
+    "worked_parts": [
+      "q = ",
+      {
+        "matrix": [
+          [
+            "3/5"
+          ],
+          [
+            "4/5"
+          ]
+        ]
+      },
+      ", ‖q‖ = √(9/25+16/25) = 1"
+    ]
+  },
+  {
+    "id": "bilinearity",
+    "term": "쌍선형성",
+    "english": "Bilinearity",
+    "description": "두 입력 각각에 대해 덧셈과 실수배를 보존하는 성질입니다. 다른 입력을 고정해 두고 확인합니다.",
+    "example": "⟨au+bv,w⟩ = a⟨u,w⟩+b⟨v,w⟩\n⟨u,av+bw⟩ = a⟨u,v⟩+b⟨u,w⟩\n복소수 내적에는 한쪽 입력에 켤레가 들어가는 반쌍선형성을 씁니다.",
+    "page": "inner-product",
+    "worked_example": "실수 표준 내적에서 u를 두 배하면 내적도 두 배입니다. 두 입력 각각에 대해 이런 선형성이 성립합니다.",
+    "worked_parts": [
+      "u = ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      ", w = ",
+      {
+        "matrix": [
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ]
+      },
+      "; ⟨2u,w⟩ = 6 = 2⟨u,w⟩"
+    ]
+  },
+  {
+    "id": "symmetry",
+    "term": "대칭성",
+    "english": "Symmetry",
+    "description": "실수 내적에서 두 입력의 순서를 바꾸어도 값이 같은 성질입니다.",
+    "example": "⟨u,v⟩ = ⟨v,u⟩\n복소수 내적에서는 순서를 바꾸면 켤레가 되는 켤레 대칭성을 씁니다.",
+    "page": "inner-product",
+    "worked_example": "실수 표준 내적에서 같은 성분끼리 곱해 더하면, 순서를 바꾸어도 같은 수가 나옵니다.",
+    "worked_parts": [
+      "u = ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ]
+      },
+      ", v = ",
+      {
+        "matrix": [
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ]
+      },
+      "; ⟨u,v⟩ = 1×3+2×4 = 11 = ⟨v,u⟩"
+    ]
+  },
+  {
+    "id": "positive-definiteness",
+    "term": "양의 정부호성",
+    "english": "Positive Definiteness",
+    "description": "자기 자신과의 내적이 음수가 아니며 영벡터일 때만 0인 성질입니다.",
+    "example": "⟨v,v⟩ ≥ 0; ⟨v,v⟩ = 0 ⇔ v = 0\n표준 내적에서 성분이 3, 4인 벡터는 3²+4² = 25입니다.",
+    "page": "inner-product",
+    "worked_example": "표준 내적에서 0이 아닌 벡터의 자기 내적은 양수입니다. 영벡터의 자기 내적만 0입니다.",
+    "worked_parts": [
+      "v = ",
+      {
+        "matrix": [
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ]
+      },
+      "; ⟨v,v⟩ = 3²+4² = 25 > 0"
+    ]
+  },
+  {
+    "id": "norm",
+    "term": "노름",
+    "english": "Norm",
+    "description": "벡터의 크기를 재는 함수입니다. 양의 정부호성, 절대 동차성, 삼각부등식을 만족합니다.",
+    "example": "‖av‖ = |a|‖v‖\n‖u+v‖ ≤ ‖u‖+‖v‖\n내적이 유도하는 노름은 ‖v‖ = √⟨v,v⟩입니다. 모든 노름이 내적에서 나오는 것은 아닙니다.",
+    "page": "inner-product",
+    "worked_example": "표준 유클리드 노름에서는 피타고라스로 벡터의 길이를 구합니다.",
+    "worked_parts": [
+      "v = ",
+      {
+        "matrix": [
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ]
+      },
+      ", ‖v‖ = √(3²+4²) = 5"
+    ]
+  },
+  {
+    "id": "inner-product",
+    "term": "내적",
+    "english": "Inner Product",
+    "description": "두 벡터에서 하나의 수를 만드는 연산입니다. 길이와 직교성을 정의하는 데 사용합니다.",
+    "example": "실수 좌표의 표준 내적은 같은 위치 성분들의 곱을 더합니다.",
+    "page": "inner-product",
+    "worked_example": "실수 표준 내적은 대응하는 성분의 곱을 더합니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ]
+      },
+      " · ",
+      {
+        "matrix": [
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ]
+      },
+      " = 1×3+2×4 = 11"
+    ]
+  },
+  {
+    "id": "orthogonality",
+    "term": "직교",
+    "english": "Orthogonality",
+    "description": "두 벡터의 내적이 0인 관계입니다. 유클리드 공간의 0이 아닌 벡터에서는 서로 수직이라는 뜻입니다.",
+    "example": "⟨u,v⟩ = 0",
+    "page": "inner-product",
+    "worked_example": "x축 방향과 y축 방향의 내적이 0이므로 두 방향은 직교합니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      " · ",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      " = 0"
+    ]
+  },
+  {
+    "id": "orthonormal",
+    "term": "정규직교",
+    "english": "Orthonormality",
+    "description": "서로 다른 벡터끼리는 직교하고 각 벡터의 노름은 1인 조건입니다.",
+    "example": "⟨qᵢ,qⱼ⟩ = 0 (i≠j), ‖qᵢ‖ = 1",
+    "page": "inner-product",
+    "worked_example": "아래 두 벡터는 서로 내적이 0이고, 각각 길이가 1입니다.",
+    "worked_parts": [
+      "q₁ = ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      ", q₂ = ",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      "; q₁·q₂ = 0, ‖q₁‖ = ‖q₂‖ = 1"
+    ]
+  },
+  {
+    "id": "orthonormal-basis",
+    "term": "정규직교 기저",
+    "english": "Orthonormal Basis",
+    "description": "기저 벡터들이 서로 직교하고 각각 길이 1인 기저입니다.",
+    "example": "열이 정규직교 기저인 행렬 Q는 Q†Q = I를 만족합니다.",
+    "page": "basis",
+    "worked_example": "아래 두 벡터는 서로 수직이고 길이가 1이며, 평면 전체를 생성합니다. 따라서 평면의 정규직교 기저입니다.",
+    "worked_parts": [
+      "q₁ = ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      ", q₂ = ",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      "; Q = ",
+      {
+        "matrix": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "orthonormal-eigenbasis",
+    "term": "정규직교 고유벡터 기저",
+    "english": "Orthonormal Eigenbasis",
+    "description": "서로 직교하고 길이가 1인 고유벡터들로 구성한 기저입니다.",
+    "example": "실수 대칭 행렬과 복소수 에르미트 행렬에는 이런 기저를 선택할 수 있습니다.",
+    "page": "symmetric",
+    "worked_example": "이 대각행렬의 두 표준 기저 벡터는 각각 고유값 3, 1의 단위 고유벡터입니다. 서로 직교하며 평면의 기저를 이룹니다.",
+    "worked_parts": [
+      "A = ",
+      {
+        "matrix": [
+          [
+            3,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      ", q₁ = ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      ", q₂ = ",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "normalization",
+    "term": "정규화",
+    "english": "Normalization",
+    "description": "0이 아닌 벡터를 그 노름으로 나누어 길이 1로 만드는 연산입니다.",
+    "example": "v → v/‖v‖\n영벡터는 이 방식으로 정규화할 수 없습니다.",
+    "page": "inner-product",
+    "worked_example": "길이 5인 벡터를 5로 나누면 방향이 같은 단위 벡터가 됩니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ]
+      },
+      " ÷ 5 = ",
+      {
+        "matrix": [
+          [
+            "3/5"
+          ],
+          [
+            "4/5"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "matrix",
+    "term": "행렬",
+    "english": "Matrix",
+    "description": "수를 행과 열로 배열한 것입니다. 입력·출력의 기저를 정하면 선형변환을 행렬로 표현할 수 있습니다.",
+    "example": "m×n 행렬은 m개의 행과 n개의 열을 가집니다.",
+    "page": "matrix",
+    "worked_example": "아래는 수를 2행 3열로 배열한 행렬입니다. 3개 성분의 열벡터를 받아 2개 성분의 열벡터로 보낼 수 있습니다.",
+    "worked_parts": [
+      "A = ",
+      {
+        "matrix": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            4,
+            5,
+            6
+          ]
+        ]
+      },
+      " ← 2×3"
+    ]
+  },
+  {
+    "id": "row",
+    "term": "행",
+    "english": "Row",
+    "description": "행렬에서 수를 가로로 나열한 줄입니다.",
+    "example": "행렬의 크기 m×n에서 m은 행의 수입니다.",
+    "page": "matrix",
+    "worked_example": "아래 행렬의 첫째 행은 1, 2이고 둘째 행은 3, 4입니다. 행은 가로줄입니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "column",
+    "term": "열",
+    "english": "Column",
+    "description": "행렬에서 수를 세로로 나열한 줄입니다.",
+    "example": "선형변환 행렬의 각 열은 입력 기저 벡터의 변환 결과입니다.",
+    "page": "matrix",
+    "worked_example": "아래 행렬의 첫째 열은 1, 3이고 둘째 열은 2, 4입니다. 열은 세로줄입니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "linear-map",
+    "term": "선형변환",
+    "english": "Linear Transformation",
+    "description": "벡터의 덧셈과 스칼라배를 보존하는 함수입니다.",
+    "example": "T(au+bv) = aT(u)+bT(v)",
+    "page": "matrix",
+    "worked_example": "T가 가로 성분을 2배, 세로 성분을 3배로 만드는 변환이라면 덧셈과 수 배를 보존합니다.",
+    "worked_parts": [
+      "T",
+      {
+        "matrix": [
+          [
+            "x"
+          ],
+          [
+            "y"
+          ]
+        ]
+      },
+      " = ",
+      {
+        "matrix": [
+          [
+            "2x"
+          ],
+          [
+            "3y"
+          ]
+        ]
+      },
+      "; T",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      " = ",
+      {
+        "matrix": [
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "finite-dimensional",
+    "term": "유한차원",
+    "english": "Finite-dimensional",
+    "description": "유한 개의 기저 벡터로 공간 전체를 표현할 수 있다는 뜻입니다.",
+    "example": "평면은 2차원, 3차원 공간은 기저 벡터 3개로 표현합니다.",
+    "page": "basis",
+    "worked_example": "실수 3차원 좌표 공간은 아래 세 벡터로 생성할 수 있고, 이들이 기저이므로 차원은 유한한 수 3입니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      ", ",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      ", ",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "square",
+    "term": "정사각행렬",
+    "english": "Square Matrix",
+    "description": "행의 수와 열의 수가 같은 행렬입니다.",
+    "example": "크기가 n×n입니다. 고유값과 대각화를 다루는 기본 대상입니다.",
+    "page": "matrix",
+    "worked_example": "행이 2개이고 열도 2개이므로 정사각행렬입니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            2,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      " ← 2×2"
+    ]
+  },
+  {
+    "id": "diagonal-entry",
+    "term": "대각 성분",
+    "english": "Diagonal Entry",
+    "description": "행 번호와 열 번호가 같은 위치의 성분입니다. 주대각선은 이 위치들을 이은 선입니다.",
+    "example": "a₁₁, a₂₂, …, aₙₙ",
+    "page": "matrix",
+    "worked_example": "행 번호와 열 번호가 같은 위치인 왼쪽 위 2와 오른쪽 아래 5가 대각 성분입니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            2,
+            7
+          ],
+          [
+            8,
+            5
+          ]
+        ]
+      },
+      "; a₁₁ = 2, a₂₂ = 5"
+    ]
+  },
+  {
+    "id": "main-diagonal",
+    "term": "주대각선",
+    "english": "Main Diagonal",
+    "description": "행렬의 왼쪽 위에서 오른쪽 아래로 이어지는, 행·열 번호가 같은 위치들입니다.",
+    "example": "대칭 행렬은 이 선을 기준으로 마주 보는 성분이 같습니다.",
+    "page": "symmetric",
+    "worked_example": "왼쪽 위 2에서 오른쪽 아래 5로 이어지는 방향이 주대각선입니다. 다른 두 수 7, 8은 그 밖에 있습니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            2,
+            7
+          ],
+          [
+            8,
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "symmetric-matrix",
+    "term": "대칭 행렬",
+    "english": "Symmetric Matrix",
+    "description": "전치해도 원래와 같은 실수 정사각행렬입니다.",
+    "example": "Aᵀ = A",
+    "page": "symmetric",
+    "worked_example": "대각선 양옆의 두 성분이 모두 1입니다. 행과 열을 바꿔도 같은 행렬입니다.",
+    "worked_parts": [
+      "A = ",
+      {
+        "matrix": [
+          [
+            2,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      ", Aᵀ = ",
+      {
+        "matrix": [
+          [
+            2,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "spectral-theorem",
+    "term": "스펙트럼 정리",
+    "english": "Spectral Theorem",
+    "description": "실수 대칭 행렬은 정규직교 고유벡터 기저를 가지며, 그 기저에서 실수 대각행렬로 표현된다는 정리입니다.",
+    "example": "A = QDQᵀ, QᵀQ = I\n복소수 에르미트 행렬에서는 A = QDQ†입니다.",
+    "page": "symmetric",
+    "worked_example": "아래 대칭 행렬은 서로 수직인 단위 고유벡터 q₁, q₂를 가지며, 그 기저에서 대각 성분 3, 1로 표현됩니다.",
+    "worked_parts": [
+      "A = ",
+      {
+        "matrix": [
+          [
+            2,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      "; q₁ = (1/√2)",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      ", q₂ = (1/√2)",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            -1
+          ]
+        ]
+      },
+      "; D = ",
+      {
+        "matrix": [
+          [
+            3,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "eigenvector",
+    "term": "고유벡터",
+    "english": "Eigenvector",
+    "description": "행렬로 변환한 결과가 원래 벡터의 수 배가 되는 0이 아닌 벡터입니다.",
+    "example": "Av = λv, v ≠ 0",
+    "page": "eigen",
+    "worked_example": "이 벡터에 A를 곱하면 방향은 같고 크기만 3배가 됩니다.",
+    "worked_parts": [
+      "A = ",
+      {
+        "matrix": [
+          [
+            2,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      ", A",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      " = ",
+      {
+        "matrix": [
+          [
+            3
+          ],
+          [
+            3
+          ]
+        ]
+      },
+      " = 3",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            1
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "eigenvalue",
+    "term": "고유값",
+    "english": "Eigenvalue",
+    "description": "고유벡터를 변환할 때 곱해지는 스칼라입니다.",
+    "example": "Av = λv에서 λ가 고유값입니다.",
+    "page": "eigen",
+    "worked_example": "아래 고유벡터를 변환할 때 곱해지는 수 3이 그 벡터의 고유값입니다.",
+    "worked_parts": [
+      "A = ",
+      {
+        "matrix": [
+          [
+            2,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      ", A",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      " = 3",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      " → λ = 3"
+    ]
+  },
+  {
+    "id": "invertible",
+    "term": "가역행렬",
+    "english": "Invertible Matrix",
+    "description": "역행렬이 존재하는 정사각행렬입니다. 이 행렬이 나타내는 변환을 되돌릴 수 있습니다.",
+    "example": "AA⁻¹ = A⁻¹A = I",
+    "page": "diagonalization",
+    "worked_example": "가로·세로 성분을 각각 2배·3배하는 변환은 각각 1/2배·1/3배해서 되돌릴 수 있습니다.",
+    "worked_parts": [
+      "A = ",
+      {
+        "matrix": [
+          [
+            2,
+            0
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      ", A⁻¹ = ",
+      {
+        "matrix": [
+          [
+            "1/2",
+            0
+          ],
+          [
+            0,
+            "1/3"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "inverse",
+    "term": "역행렬",
+    "english": "Inverse Matrix",
+    "description": "행렬 A와 어느 쪽 순서로 곱해도 항등행렬 I가 되는 행렬입니다.",
+    "example": "AA⁻¹ = A⁻¹A = I\n항등행렬은 모든 벡터를 그대로 둡니다.",
+    "page": "diagonalization",
+    "worked_example": "아래 두 행렬은 곱하면 항등행렬이 되므로 서로 역행렬입니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            2,
+            0
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      " × ",
+      {
+        "matrix": [
+          [
+            "1/2",
+            0
+          ],
+          [
+            0,
+            "1/3"
+          ]
+        ]
+      },
+      " = ",
+      {
+        "matrix": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "diagonal",
+    "term": "대각행렬",
+    "english": "Diagonal Matrix",
+    "description": "대각선 밖의 모든 성분이 0인 행렬입니다.",
+    "example": "벡터를 곱하면 각 성분에 해당 대각 성분을 곱합니다.",
+    "page": "diagonalization",
+    "worked_example": "대각선 밖의 수는 모두 0입니다. 이 행렬은 첫 성분을 3배, 둘째 성분을 1배로 만듭니다.",
+    "worked_parts": [
+      "D = ",
+      {
+        "matrix": [
+          [
+            3,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      ", D",
+      {
+        "matrix": [
+          [
+            2
+          ],
+          [
+            4
+          ]
+        ]
+      },
+      " = ",
+      {
+        "matrix": [
+          [
+            6
+          ],
+          [
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "diagonalization",
+    "term": "대각화",
+    "english": "Diagonalization",
+    "description": "고유벡터 기저로 바꾸어 행렬을 대각행렬로 표현하는 것입니다.",
+    "example": "A = PDP⁻¹\n모든 정사각행렬이 대각화되는 것은 아닙니다.",
+    "page": "diagonalization",
+    "worked_example": "P의 두 열은 A의 고유벡터입니다. 이 기저로 바꾸면 각 성분을 3배·1배하는 D로 계산할 수 있습니다.",
+    "worked_parts": [
+      "A = ",
+      {
+        "matrix": [
+          [
+            2,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      ", P = ",
+      {
+        "matrix": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            -1
+          ]
+        ]
+      },
+      ", D = ",
+      {
+        "matrix": [
+          [
+            3,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "; A = PDP⁻¹"
+    ]
+  },
+  {
+    "id": "dominant",
+    "term": "지배 고유값",
+    "english": "Dominant Eigenvalue",
+    "description": "절댓값이 가장 큰 고유값입니다. 멱법의 전형적인 수렴에는 그 절댓값이 다른 고유값보다 엄격히 커야 합니다.",
+    "example": "수직선에서 가장 큰 값과는 다릅니다. 예: −5와 3 중 절댓값이 큰 것은 −5입니다.",
+    "page": "power",
+    "worked_example": "고유값이 −5와 3인 행렬에서는 −5가 지배 고유값입니다. 크기를 비교할 때 부호를 떼고 봅니다.",
+    "worked_parts": [
+      "A = ",
+      {
+        "matrix": [
+          [
+            -5,
+            0
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      "; |−5| = 5 > |3| = 3"
+    ]
+  },
+  {
+    "id": "power",
+    "term": "멱법",
+    "english": "Power Method",
+    "description": "행렬 곱셈과 정규화를 반복해 지배적인 고유방향을 근사하는 방법입니다.",
+    "example": "vₖ₊₁ = Avₖ/‖Avₖ‖\n지배 방향의 성분이 시작 벡터에 있어야 합니다.",
+    "page": "power",
+    "worked_example": "행렬을 곱해 얻은 벡터를 그 길이로 나누는 것이 첫 반복입니다.",
+    "worked_parts": [
+      "A = ",
+      {
+        "matrix": [
+          [
+            2,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      ", v₀ = ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      " → Av₀ = ",
+      {
+        "matrix": [
+          [
+            2
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      " → v₁ = (1/√5)",
+      {
+        "matrix": [
+          [
+            2
+          ],
+          [
+            1
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "convergence",
+    "term": "수렴",
+    "english": "Convergence",
+    "description": "반복을 계속할수록 값이나 방향이 특정 목표에 가까워지는 성질입니다.",
+    "example": "멱법에서는 보통 지배 고유벡터가 놓인 방향으로의 수렴을 살펴봅니다.",
+    "page": "power",
+    "worked_example": "수열 1/2, 1/4, 1/8, …은 계속 절반이 되므로 0에 가까워집니다. 이것이 수렴의 간단한 예입니다.",
+    "worked_parts": [
+      "aₖ = (1/2)ᵏ → 0 (k → ∞)"
+    ]
+  },
+  {
+    "id": "subspace",
+    "term": "부분공간",
+    "english": "Subspace",
+    "description": "영벡터를 포함하고 덧셈과 스칼라배에 대해 닫힌 벡터 공간의 부분집합입니다.",
+    "example": "원점을 지나는 직선은 부분공간이지만 원점을 지나지 않는 직선은 아닙니다.",
+    "page": "subspace",
+    "worked_example": "x축 위의 벡터들은 더하거나 실수배해도 x축 위에 남고 영벡터를 포함합니다. 따라서 평면의 부분공간입니다.",
+    "worked_parts": [
+      "W = {",
+      {
+        "matrix": [
+          [
+            "a"
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      " : a는 실수}; ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      " + ",
+      {
+        "matrix": [
+          [
+            2
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      " = ",
+      {
+        "matrix": [
+          [
+            3
+          ],
+          [
+            0
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "closed",
+    "term": "닫혀",
+    "english": "Closure",
+    "description": "주어진 연산을 해도 결과가 그 집합 안에 남는다는 뜻입니다. 여기서는 위상적인 닫힌 집합과 구별합니다.",
+    "example": "u,v가 W에 있으면 u+v도 W에, 실수 a에 대해 au도 W에 있습니다.",
+    "page": "subspace",
+    "worked_example": "x축 위의 두 벡터를 더하거나 그중 하나를 3배해도 x축 밖으로 나가지 않습니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      " + ",
+      {
+        "matrix": [
+          [
+            2
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      " = ",
+      {
+        "matrix": [
+          [
+            3
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      "; 3",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      " = ",
+      {
+        "matrix": [
+          [
+            3
+          ],
+          [
+            0
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "projection",
+    "term": "직교투영",
+    "english": "Orthogonal Projection",
+    "description": "벡터를 부분공간 안의 가장 가까운 벡터로 옮기는 연산입니다. 원래 벡터와 투영된 벡터의 차이는 부분공간과 직교합니다.",
+    "example": "정규직교 열을 갖는 Q에 대해 투영은 QQ†v입니다.",
+    "page": "subspace",
+    "worked_example": "벡터를 xy 평면에 직교투영하면 z 성분만 0이 됩니다. 제거된 차이는 평면에 수직입니다.",
+    "worked_parts": [
+      "v = ",
+      {
+        "matrix": [
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ]
+      },
+      " → p = ",
+      {
+        "matrix": [
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      ", v−p = ",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            0
+          ],
+          [
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rayleigh",
+    "term": "레일리 몫",
+    "english": "Rayleigh Quotient",
+    "description": "0이 아닌 벡터 v에 대해 v†Av/(v†v)로 정의하는 값입니다. 에르미트 행렬의 고유값을 근사할 때 사용합니다.",
+    "example": "R(v) = v†Av/(v†v)\n전체 공간의 최솟값은 최소 고유값입니다.",
+    "page": "subspace",
+    "worked_example": "고유값이 1과 3인 아래 행렬에서 두 방향을 똑같이 섞은 벡터의 레일리 몫은 2입니다.",
+    "worked_parts": [
+      "A = ",
+      {
+        "matrix": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      ", v = ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      "; R(v) = (1+3)/(1+1) = 2"
+    ]
+  },
+  {
+    "id": "krylov",
+    "term": "크릴로프 부분공간",
+    "english": "Krylov Subspace",
+    "description": "시작 벡터에 행렬을 반복해서 곱한 벡터들이 생성하는 부분공간입니다.",
+    "example": "Kₘ(A,v) = span{v, Av, …, Aᵐ⁻¹v}",
+    "page": "krylov",
+    "worked_example": "아래 시작 벡터 v와 Av는 서로 독립이므로, 두 벡터로 만든 두 번째 크릴로프 공간은 평면 전체입니다.",
+    "worked_parts": [
+      "A = ",
+      {
+        "matrix": [
+          [
+            2,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      ", v = ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      ", Av = ",
+      {
+        "matrix": [
+          [
+            2
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      "; K₂(A,v) = span{v, Av}"
+    ]
+  },
+  {
+    "id": "lanczos",
+    "term": "랑초스 알고리즘",
+    "english": "Lanczos Algorithm",
+    "description": "대칭·에르미트 행렬의 크릴로프 공간에서 정규직교 기저를 구성해 작은 삼중대각행렬을 만드는 방법입니다.",
+    "example": "큰 행렬의 고유값을 더 작은 문제로 근사하는 데 사용합니다.",
+    "page": "krylov",
+    "worked_example": "q₁에서 시작해 Aq₁의 q₁ 성분을 빼면 다음 기저 q₂를 얻습니다. 이 작은 예는 두 벡터만으로 전체 공간을 다룹니다.",
+    "worked_parts": [
+      "A = ",
+      {
+        "matrix": [
+          [
+            2,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      ", q₁ = ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      "; Aq₁−2q₁ = ",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      " = q₂"
+    ]
+  },
+  {
+    "id": "tridiagonal",
+    "term": "삼중대각",
+    "english": "Tridiagonal",
+    "description": "주대각선과 그 바로 위·아래 대각선 밖의 성분이 모두 0인 행렬 구조입니다.",
+    "example": "연속된 세 대각선에만 0이 아닌 성분이 있을 수 있습니다.",
+    "page": "krylov",
+    "worked_example": "왼쪽 아래와 오른쪽 위 성분이 0입니다. 주대각선과 바로 양옆 대각선만 남은 삼중대각행렬입니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            2,
+            1,
+            0
+          ],
+          [
+            1,
+            3,
+            1
+          ],
+          [
+            0,
+            1,
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "reorthogonalization",
+    "term": "재직교화",
+    "english": "Reorthogonalization",
+    "description": "수치 오차로 무너진 직교성을 회복하기 위해, 이미 만든 기저 방향의 성분을 다시 제거하는 과정입니다.",
+    "example": "랑초스 계산에서 반올림 오차로 기저 벡터들이 서로 직교하지 않게 될 때 사용합니다.",
+    "page": "krylov",
+    "worked_example": "q₁ 방향으로 조금 섞인 성분 0.1을 제거하면 q₁과 다시 직교하게 됩니다.",
+    "worked_parts": [
+      "q₁ = ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      ", w = ",
+      {
+        "matrix": [
+          [
+            "0.1"
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      "; w−(q₁·w)q₁ = ",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "complex",
+    "term": "복소수",
+    "english": "Complex Number",
+    "description": "실수 a, b와 i² = −1인 i를 사용해 a+bi로 나타내는 수입니다.",
+    "example": "양자 상태의 계수는 일반적으로 복소수입니다.",
+    "page": null,
+    "worked_example": "2+3i는 실수부가 2, 허수부가 3인 복소수입니다. i를 두 번 곱하면 −1입니다.",
+    "worked_parts": [
+      "(2+3i)+(1−i) = 3+2i; i² = −1"
+    ]
+  },
+  {
+    "id": "conjugate",
+    "term": "켤레",
+    "english": "Complex Conjugate",
+    "description": "복소수 a+bi에서 허수부의 부호를 바꾼 a−bi입니다.",
+    "example": "z = 2+3i이면 z̄ = 2−3i입니다.\n복소수 내적은 첫 벡터 성분을 켤레로 바꾸는 관례를 이 노트에서 사용합니다.",
+    "page": "inner-product",
+    "worked_example": "허수부의 부호만 바꾸면 켤레가 됩니다. 실수부는 그대로입니다.",
+    "worked_parts": [
+      "z = 2+3i → z̄ = 2−3i"
+    ]
+  },
+  {
+    "id": "hermitian",
+    "term": "에르미트 행렬",
+    "english": "Hermitian Matrix",
+    "description": "전치한 뒤 각 성분을 복소켤레로 바꿔도 원래와 같은 행렬입니다. 고유값이 모두 실수입니다.",
+    "example": "A† = A\n실수 행렬에서는 대칭 행렬과 같은 조건입니다.",
+    "page": "symmetric",
+    "worked_example": "대각 성분은 실수이고, 마주 보는 i와 −i는 서로 켤레입니다. 전치하고 켤레를 취하면 원래 행렬로 돌아옵니다.",
+    "worked_parts": [
+      "H = ",
+      {
+        "matrix": [
+          [
+            2,
+            "i"
+          ],
+          [
+            "−i",
+            3
+          ]
+        ]
+      },
+      ", Hᵀ = ",
+      {
+        "matrix": [
+          [
+            2,
+            "−i"
+          ],
+          [
+            "i",
+            3
+          ]
+        ]
+      },
+      ", H† = ",
+      {
+        "matrix": [
+          [
+            2,
+            "i"
+          ],
+          [
+            "−i",
+            3
+          ]
+        ]
+      },
+      " = H"
+    ]
+  },
+  {
+    "id": "hamiltonian",
+    "term": "해밀토니안",
+    "english": "Hamiltonian",
+    "description": "양자계의 에너지를 나타내는 연산자입니다. 이 노트의 유한차원 정규직교 기저에서는 에르미트 행렬로 표현합니다.",
+    "example": "Hc = Ec에서 E는 에너지 고유값입니다.",
+    "page": "hamiltonian",
+    "worked_example": "두 에너지 준위만 갖는 단순한 모형입니다. 둘째 기저 상태의 에너지 고유값은 2입니다. 여기서 숫자는 선택한 에너지 단위로 읽습니다.",
+    "worked_parts": [
+      "H = ",
+      {
+        "matrix": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            2
+          ]
+        ]
+      },
+      ", H",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      " = 2",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ground-state",
+    "term": "바닥상태",
+    "english": "Ground State",
+    "description": "가능한 에너지 가운데 가장 낮은 에너지를 갖는 양자 상태입니다.",
+    "example": "이 노트의 유한 행렬에서는 최소 고유값에 대응하는 고유벡터로 표현합니다.",
+    "page": "hamiltonian",
+    "worked_example": "고유값이 0과 2인 단순한 에너지 모형에서는 고유값 0의 상태가 바닥상태입니다.",
+    "worked_parts": [
+      "H = ",
+      {
+        "matrix": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            2
+          ]
+        ]
+      },
+      ", c₀ = ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      ", Hc₀ = 0"
+    ]
+  },
+  {
+    "id": "configuration",
+    "term": "전자 배치",
+    "english": "Electronic Configuration",
+    "description": "전자들이 어떤 스핀 궤도를 점유하는지 나타내는 배치입니다. 여기서는 선택한 직교 궤도로 만든 점유 기저를 사용합니다.",
+    "example": "각 배치를 기저 벡터로 삼고, 그 계수들의 벡터로 상태를 표현합니다.",
+    "page": "hamiltonian",
+    "worked_example": "스핀 궤도 두 개에 전자가 하나 있으면, 첫 궤도만 점유한 배치와 둘째 궤도만 점유한 배치를 구분할 수 있습니다.",
+    "worked_parts": [
+      "점유 비트열: 10, 01 (1은 점유, 0은 비점유)"
+    ]
+  },
+  {
+    "id": "active-space",
+    "term": "활성 공간",
+    "english": "Active Space",
+    "description": "전체 궤도·전자 중 상관 효과를 명시적으로 다룰 궤도와 전자를 선택한 공간입니다.",
+    "example": "그 밖의 궤도는 고정하거나 제외하므로 전체 분자 문제에 대한 근사가 들어갑니다.",
+    "page": "hamiltonian",
+    "worked_example": "공간 궤도 4개가 있는 모형에서 궤도 2개와 전자 2개를 활성 공간으로 골랐다고 합시다. 선택한 두 궤도 사이의 전자 재배치를 명시적으로 다룹니다.",
+    "worked_parts": [
+      "전체 궤도 4개 → 활성 궤도 2개·활성 전자 2개"
+    ]
+  },
+  {
+    "id": "expectation",
+    "term": "기댓값",
+    "english": "Expectation Value",
+    "description": "동일하게 준비한 상태를 여러 번 측정할 때 결과의 평균에 해당하는 값입니다. 한 번 측정한 결과 자체와 구별합니다.",
+    "example": "정규화된 상태 c의 에너지 기댓값은 c†Hc입니다.",
+    "page": "observable",
+    "worked_example": "에너지 0과 2가 각각 확률 1/2로 관측되는 상태라면 평균 에너지는 1입니다.",
+    "worked_parts": [
+      "0×1/2 + 2×1/2 = 1"
+    ]
+  },
+  {
+    "id": "coupling",
+    "term": "결합 세기",
+    "english": "Coupling Strength",
+    "description": "이 모형에서는 두 기저 상태 사이를 연결하는 해밀토니안의 비대각 성분 g를 뜻합니다. 기저 선택에 따라 값이 달라질 수 있습니다.",
+    "example": "H = [[a,g],[g,b]]에서 실수 g를 사용합니다.",
+    "page": "hamiltonian",
+    "worked_example": "기저 에너지가 둘 다 1일 때 결합을 0.5로 두면 에너지 고유값은 0.5와 1.5로 나뉩니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            1,
+            "0.5"
+          ],
+          [
+            "0.5",
+            1
+          ]
+        ]
+      },
+      " → E₋ = 0.5, E₊ = 1.5"
+    ]
+  },
+  {
+    "id": "degeneracy",
+    "term": "축퇴",
+    "english": "Degeneracy",
+    "description": "서로 독립인 여러 고유상태가 같은 고유값을 갖는 경우입니다. 바닥상태가 축퇴하면 하나의 고유벡터만이 유일한 바닥상태인 것은 아닙니다.",
+    "example": "H = I이면 모든 정규화된 상태가 에너지 1의 고유상태입니다.",
+    "page": "hamiltonian",
+    "worked_example": "아래 행렬에서는 두 표준 기저 상태가 모두 에너지 1을 가지며, 이들의 정규화된 조합도 같은 에너지입니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      " → E₋ = E₊ = 1"
+    ]
+  },
+  {
+    "id": "matrix-element",
+    "term": "행렬원소",
+    "english": "Matrix Element",
+    "description": "선택한 기저에서 연산자를 나타내는 행렬의 각 성분입니다. 정규직교 기저에서는 Hᵢⱼ = ⟨Φᵢ|H|Φⱼ⟩로 표현합니다.",
+    "example": "정규직교 기저에서 대각 성분은 그 기저 상태에서의 기댓값입니다.",
+    "page": "hamiltonian",
+    "worked_example": "아래 행렬에서 첫째 상태의 에너지 기댓값은 0.8이고, 두 상태를 연결하는 행렬원소는 −0.5입니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            "0.8",
+            "−0.5"
+          ],
+          [
+            "−0.5",
+            "1.2"
+          ]
+        ]
+      },
+      " → H₁₁ = 0.8, H₁₂ = −0.5"
+    ]
+  },
+  {
+    "id": "hartree",
+    "term": "하트리",
+    "english": "Hartree",
+    "description": "원자 단위계의 에너지 단위로, 전자 구조 계산에서 자주 사용합니다. 보통 Eₕ 또는 Ha로 표시합니다.",
+    "example": "에너지 단위와 에너지 영점은 다른 개념입니다. 숫자를 비교할 때 둘 다 확인해야 합니다.",
+    "page": "hamiltonian",
+    "worked_example": "두 상태의 계산 에너지가 같은 기준에서 −1.0 Ha와 −0.8 Ha라면, 첫 상태가 0.2 Ha 낮습니다.",
+    "worked_parts": [
+      "(−0.8 Ha) − (−1.0 Ha) = 0.2 Ha"
+    ]
+  },
+  {
+    "id": "quantum-state",
+    "term": "양자 상태",
+    "english": "Quantum State",
+    "description": "계에서 가능한 측정 결과의 확률을 정하는 수학적 대상입니다. 순수상태는 정규화된 벡터로, 일반적인 상태는 밀도 연산자로 나타냅니다.",
+    "example": "같은 순수상태도 기저를 바꾸면 좌표가 달라집니다.",
+    "page": "quantum-state",
+    "worked_example": "두 결과를 구별하는 측정에서 아래 순수상태는 결과 0을 확률 1로 줍니다.",
+    "worked_parts": [
+      "|ψ⟩ = ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      " → p₀ = 1, p₁ = 0"
+    ]
+  },
+  {
+    "id": "pure-state",
+    "term": "순수상태",
+    "english": "Pure State",
+    "description": "하나의 정규화된 상태 벡터로 표현할 수 있는 양자 상태입니다. 전역 위상만 다른 벡터들은 같은 순수상태를 나타냅니다.",
+    "example": "순수상태의 밀도 연산자는 ρ = |ψ⟩⟨ψ|입니다.",
+    "page": "quantum-state",
+    "worked_example": "아래 두 벡터는 전체 부호만 달라 같은 순수상태를 나타냅니다. ",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      " 와 ",
+      {
+        "matrix": [
+          [
+            -1
+          ],
+          [
+            0
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "wavefunction",
+    "term": "파동함수",
+    "english": "Wavefunction",
+    "description": "양자 상태를 위치 등의 좌표로 나타내는 일반적으로 복소수인 함수입니다. 전자 하나의 공간 파동함수는 ψ(r) = ⟨r|ψ⟩로, 여러 전자에서는 스핀을 포함한 모든 전자 좌표를 받는 Ψ(x₁,…,xN)으로 표현합니다.",
+    "example": "파동함수는 전자의 이동 궤적이 아닙니다.",
+    "page": "quantum-state",
+    "worked_example": "정규화된 1차원 모형에서 0부터 L까지 ψ(x)=1/√L이고 밖에서 0이면, 구간 앞 절반에서 찾을 확률은 1/2입니다.",
+    "worked_parts": [
+      "∫₀^(L/2) |ψ(x)|² dx = (L/2)/L = 1/2"
+    ]
+  },
+  {
+    "id": "hilbert-space",
+    "term": "힐베르트 공간",
+    "english": "Hilbert Space",
+    "description": "내적으로 길이와 직교를 정의할 수 있고, 그 길이에서 완비인 벡터 공간입니다. 양자역학의 상태 벡터는 복소 힐베르트 공간에서 다룹니다.",
+    "example": "유한차원 복소 좌표공간 ℂⁿ은 표준 내적에 대해 힐베르트 공간입니다.",
+    "page": "quantum-state",
+    "worked_example": "두 상태 모형의 좌표공간 ℂ²에서는 아래 두 벡터가 서로 직교하고 각각 길이가 1입니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      " , ",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "global-phase",
+    "term": "전역 위상",
+    "english": "Global Phase",
+    "description": "상태 벡터의 모든 성분에 공통으로 곱하는 크기 1인 복소수 eⁱχ의 위상입니다. 전체 상태에 이 인자를 곱해도 물리적 상태는 같습니다.",
+    "example": "성분 사이의 상대 위상과 구별합니다.",
+    "page": "quantum-state",
+    "worked_example": "모든 성분에 −1을 곱한 아래 두 벡터는 같은 순수상태를 나타냅니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            "1/√2"
+          ],
+          [
+            "1/√2"
+          ]
+        ]
+      },
+      " → ",
+      {
+        "matrix": [
+          [
+            "−1/√2"
+          ],
+          [
+            "−1/√2"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mixed-state",
+    "term": "혼합상태",
+    "english": "Mixed State",
+    "description": "하나의 상태 벡터만으로 표현되지 않는 양자 상태입니다. 양의 준정부호이고 대각합이 1인 밀도 연산자로 나타내며, 순수상태의 확률적 혼합으로 표현할 수 있습니다.",
+    "example": "순수상태의 중첩과 확률적 혼합은 서로 다릅니다.",
+    "page": "quantum-state",
+    "worked_example": "두 직교 상태를 각각 확률 1/2로 준비한 혼합의 밀도 행렬은 아래와 같습니다.",
+    "worked_parts": [
+      "ρ = ",
+      {
+        "matrix": [
+          [
+            "1/2",
+            0
+          ],
+          [
+            0,
+            "1/2"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "density-operator",
+    "term": "밀도 연산자",
+    "english": "Density Operator",
+    "description": "양자 상태를 나타내는 양의 준정부호 연산자 ρ로, 대각합이 1입니다. 순수상태에서는 ρ = |ψ⟩⟨ψ|입니다.",
+    "example": "순수상태와 혼합상태를 함께 다룰 수 있습니다.",
+    "page": "quantum-state",
+    "worked_example": "첫 기저 상태만 있는 순수상태의 밀도 행렬입니다.",
+    "worked_parts": [
+      "ρ = ",
+      {
+        "matrix": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "born-rule",
+    "term": "보른 규칙",
+    "english": "Born Rule",
+    "description": "양자 상태로부터 측정 결과의 확률을 정하는 규칙입니다. 정규화된 순수상태를 정규직교 기저에서 측정하면 pᵢ = |⟨i|ψ⟩|²입니다.",
+    "example": "진폭 자체가 아니라 절댓값의 제곱이 확률입니다.",
+    "page": "born-rule",
+    "worked_example": "이 측정 기저의 진폭이 3/5와 −4/5이면 결과 확률은 각각 9/25와 16/25입니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            "3/5"
+          ],
+          [
+            "−4/5"
+          ]
+        ]
+      },
+      " → ",
+      {
+        "matrix": [
+          [
+            "9/25"
+          ],
+          [
+            "16/25"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "probability-amplitude",
+    "term": "확률 진폭",
+    "english": "Probability Amplitude",
+    "description": "정규직교 측정 기저에서 상태를 전개한 복소 계수입니다. 정규화된 상태에서 계수의 절댓값 제곱이 해당 측정 결과의 확률입니다.",
+    "example": "실수 진폭은 음수일 수 있지만 확률은 음수가 아닙니다.",
+    "page": "born-rule",
+    "worked_example": "두 정규화된 상태에서 첫 진폭의 부호만 바꾸면 이 기저의 측정 확률은 같습니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            "1/√2"
+          ],
+          [
+            "1/√2"
+          ]
+        ]
+      },
+      " 와 ",
+      {
+        "matrix": [
+          [
+            "−1/√2"
+          ],
+          [
+            "1/√2"
+          ]
+        ]
+      },
+      " → 이 기저에서 각각 확률 1/2"
+    ]
+  },
+  {
+    "id": "probability-density",
+    "term": "확률 밀도",
+    "english": "Probability Density",
+    "description": "연속 변수의 영역 확률을 적분으로 계산할 때 사용하는 밀도입니다. 위치 표현에서는 정규화된 공간 파동함수의 |ψ(r)|²가 위치 확률 밀도입니다.",
+    "example": "밀도 자체는 한 점에서의 확률이 아닙니다.",
+    "page": "born-rule",
+    "worked_example": "1차원 구간 0부터 L까지 밀도가 1/L로 일정하면, 길이 L/2인 부분 구간의 확률은 1/2입니다.",
+    "worked_parts": [
+      "∫₀^(L/2) (1/L) dx = 1/2"
+    ]
+  },
+  {
+    "id": "superposition",
+    "term": "중첩",
+    "english": "Superposition",
+    "description": "양자 상태를 다른 상태들의 선형결합으로 나타내는 것입니다. 중첩이라는 표현은 기저에 의존합니다. 정규직교 기저에서 정규화된 순수상태를 전개한 계수는 확률 진폭입니다.",
+    "example": "(|1⟩+|2⟩)/√2는 원래 기저에서 두 성분의 중첩입니다.",
+    "page": "superposition",
+    "worked_example": "원래 기저에서 두 결과의 확률은 각각 1/2이지만, + 기저 상태와 같으므로 +/− 기저에서는 +만 나옵니다.",
+    "worked_parts": [
+      "c = ",
+      {
+        "matrix": [
+          [
+            "1/√2"
+          ],
+          [
+            "1/√2"
+          ]
+        ]
+      },
+      "; P(1)=P(2)=1/2, P(+)=1, P(−)=0"
+    ]
+  },
+  {
+    "id": "relative-phase",
+    "term": "상대 위상",
+    "english": "Relative Phase",
+    "description": "고정된 기저에서 두 0이 아닌 확률 진폭의 위상 차이입니다. 다른 기저의 측정 확률에 간섭으로 나타날 수 있습니다.",
+    "example": "( |1⟩+e^{iφ}|2⟩ )/√2에서 φ는 두 진폭의 상대 위상입니다.",
+    "page": "superposition",
+    "worked_example": "첫째 진폭을 고정하고 둘째 진폭의 부호를 바꾸면, 원래 기저 확률은 같아도 +/− 측정 결과는 뒤집힙니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            "1/√2"
+          ],
+          [
+            "1/√2"
+          ]
+        ]
+      },
+      " → P(+)=1; ",
+      {
+        "matrix": [
+          [
+            "1/√2"
+          ],
+          [
+            "−1/√2"
+          ]
+        ]
+      },
+      " → P(−)=1"
+    ]
+  },
+  {
+    "id": "interference",
+    "term": "간섭",
+    "english": "Interference",
+    "description": "확률 진폭들을 더한 뒤 절댓값을 제곱할 때 상대 위상에 따라 결과가 달라지는 현상입니다.",
+    "example": "|a+b|²에는 |a|²+|b|² 외에 교차 항이 있습니다.",
+    "page": "superposition",
+    "worked_example": "같은 크기의 두 진폭은 같은 부호이면 더해지고 반대 부호이면 상쇄됩니다.",
+    "worked_parts": [
+      "φ=0°: |(1+1)/2|²=1; φ=180°: |(1−1)/2|²=0"
+    ]
+  },
+  {
+    "id": "observable",
+    "term": "관측량",
+    "english": "Observable",
+    "description": "측정 가능한 물리량을 나타내는 자기수반 연산자입니다. 유한차원의 정규직교 기저에서는 에르미트 행렬로 표현합니다.",
+    "example": "이상적인 투영 측정의 결과는 관측량의 고유값입니다.",
+    "page": "observable",
+    "worked_example": "대각 행렬의 에너지 고유값은 1u와 3u입니다. 이 관측량을 한 번 측정해서 2u가 나오는 경우는 없습니다.",
+    "worked_parts": [
+      "A = ",
+      {
+        "matrix": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      "u → 가능한 결과 1u, 3u"
+    ]
+  },
+  {
+    "id": "self-adjoint",
+    "term": "자기수반 연산자",
+    "english": "Self-adjoint Operator",
+    "description": "수반과 자기 자신이 일치하는 연산자입니다. 유한차원의 정규직교 기저에서 A†=A이며, 고유값은 실수입니다.",
+    "example": "실수 대각 행렬은 에르미트 행렬입니다.",
+    "page": "observable",
+    "worked_example": "전치한 뒤 복소켤레를 취해도 이 행렬은 바뀌지 않습니다.",
+    "worked_parts": [
+      "A = ",
+      {
+        "matrix": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      " = A†"
+    ]
+  },
+  {
+    "id": "projective-measurement",
+    "term": "투영 측정",
+    "english": "Projective Measurement",
+    "description": "관측량의 고유공간으로의 직교 투영으로 기술하는 이상적인 측정입니다. 결과는 고유값이며 확률은 해당 투영의 노름 제곱입니다.",
+    "example": "에너지 고유기저에서 계수 절댓값 제곱이 각 에너지의 확률입니다.",
+    "page": "observable",
+    "worked_example": "두 에너지 고유상태의 진폭이 1/√2이면 각 에너지가 확률 1/2로 관측됩니다.",
+    "worked_parts": [
+      "c = ",
+      {
+        "matrix": [
+          [
+            "1/√2"
+          ],
+          [
+            "1/√2"
+          ]
+        ]
+      },
+      "; P(1u)=P(3u)=1/2"
+    ]
+  },
+  {
+    "id": "energy-eigenbasis",
+    "term": "에너지 고유기저",
+    "english": "Energy Eigenbasis",
+    "description": "해밀토니안의 정규직교 고유벡터들로 이루어진 기저입니다. 이 기저에서 해밀토니안은 대각 행렬입니다.",
+    "example": "각 기저 상태가 확정된 에너지를 가집니다.",
+    "page": "observable",
+    "worked_example": "에너지 1u인 상태의 좌표는 첫 성분만 1이고 에너지 3u인 상태는 둘째 성분만 1입니다.",
+    "worked_parts": [
+      "|E₁⟩: ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      ", |E₂⟩: ",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "variance",
+    "term": "분산",
+    "english": "Variance",
+    "description": "측정 결과와 기댓값의 차이를 제곱한 값의 평균입니다. Var(A)=⟨A²⟩−⟨A⟩²이며 단위는 관측량 단위의 제곱입니다.",
+    "example": "에너지가 1u와 3u로 절반씩 나오면 평균은 2u이고 분산은 1u²입니다.",
+    "page": "observable",
+    "worked_example": "두 결과는 평균 2u에서 각각 1u만큼 떨어져 있으므로 제곱 차이의 평균은 1u²입니다.",
+    "worked_parts": [
+      "Var(A)=[(1−2)²/2+(3−2)²/2]u²=1u²"
+    ]
+  },
+  {
+    "id": "schrodinger-equation",
+    "term": "슈뢰딩거 방정식",
+    "english": "Schrödinger Equation",
+    "description": "양자 상태의 시간 변화를 해밀토니안으로 정하는 방정식 iℏ∂Ψ/∂t = HΨ입니다. 시간에 무관한 H의 에너지 고유상태는 Hψ = Eψ를 만족합니다.",
+    "example": "H가 대각 행렬이면 첫째 기저 상태는 첫째 대각 성분을 에너지로 갖는 고유상태입니다.",
+    "page": "schrodinger",
+    "worked_example": "아래 상태에 H를 작용시키면 상태의 방향은 유지되고 1배가 됩니다. 에너지 E = 1인 정상상태이며 시간에 따라 전체 위상 e^(−it/ℏ)만 변합니다. 에너지는 임의 단위입니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            2
+          ]
+        ]
+      },
+      " ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      " = 1 × ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "stationary-state",
+    "term": "정상상태",
+    "english": "Stationary State",
+    "description": "시간에 무관한 해밀토니안의 에너지 고유상태입니다. 전체 위상은 시간에 따라 변하지만, 시간에 직접 의존하지 않는 관측량의 측정 확률은 일정합니다.",
+    "example": "에너지 E가 정해진 ψ의 시간 변화는 Ψ(t) = e^(−iEt/ℏ)ψ입니다.",
+    "page": "schrodinger",
+    "worked_example": "H = diag(1, 2)에서 아래 상태는 에너지 2의 고유상태입니다. 두 좌표에 같은 위상이 곱해져도 기저 측정 확률은 0과 1로 유지됩니다.",
+    "worked_parts": [
+      "Ψ(t) = e^(−2it/ℏ) ",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "residual",
+    "term": "잔차",
+    "english": "Residual",
+    "description": "고유값 방정식의 양변이 얼마나 다른지 나타내는 벡터입니다. 정규화된 상태 c에서 E(c) = c†Hc로 놓으면 잔차는 r = Hc − E(c)c이고, r = 0이면 고유상태입니다.",
+    "example": "평균 에너지를 구할 수 있어도 잔차가 0이 아니면 에너지 고유상태는 아닙니다.",
+    "page": "schrodinger",
+    "worked_example": "페이지의 설명용 행렬에서 첫 성분이 1, 둘째 성분이 0인 상태는 평균 에너지 0.8을 갖습니다. 하지만 아래 잔차가 0이 아니므로 에너지 고유상태가 아닙니다. 잔차의 크기는 0.5입니다.",
+    "worked_parts": [
+      "r = ",
+      {
+        "matrix": [
+          [
+            0.8
+          ],
+          [
+            -0.5
+          ]
+        ]
+      },
+      " − 0.8 × ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      " = ",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            -0.5
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "phase",
+    "term": "위상",
+    "english": "Phase",
+    "description": "0이 아닌 복소수 z = r eⁱφ에서 φ를 위상이라고 합니다. 복소평면에서의 각도이며 2π 차이는 같은 복소수를 나타냅니다.",
+    "example": "진폭이 0일 때 그 진폭의 위상은 정의되지 않습니다.",
+    "page": "superposition",
+    "worked_example": "크기는 모두 1이지만 1, i, −1의 위상은 각각 0°, 90°, 180°입니다.",
+    "worked_parts": [
+      "eⁱ⁰ = 1; eⁱ⁽π/²⁾ = i; eⁱπ = −1"
+    ]
+  },
+  {
+    "id": "dirac-notation",
+    "term": "디랙 표기법",
+    "english": "Dirac Notation",
+    "description": "상태 벡터를 켓 |ψ⟩, 그 수반을 브라 ⟨ψ|로 쓰는 표기법입니다. ⟨φ|ψ⟩는 두 상태의 내적입니다.",
+    "example": "브라는 켓의 켤레전치에 해당합니다.",
+    "page": "quantum-state",
+    "worked_example": "정규직교 기저에서 첫째 기저 상태 |0⟩와 c의 내적은 c의 첫째 성분입니다.",
+    "worked_parts": [
+      "|0⟩ = ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      ", c = ",
+      {
+        "matrix": [
+          [
+            "3/5"
+          ],
+          [
+            "4/5"
+          ]
+        ]
+      },
+      " → ⟨0|ψ⟩ = 3/5"
+    ]
+  },
+  {
+    "id": "conjugate-transpose",
+    "term": "켤레전치",
+    "english": "Conjugate Transpose",
+    "description": "행렬을 전치하고 각 성분의 복소켤레를 취한 것으로 A†로 씁니다. 실수 행렬에서는 전치와 같습니다.",
+    "example": "복소 내적은 c†d로 계산합니다.",
+    "page": "inner-product",
+    "worked_example": "열벡터를 켤레전치하면 행벡터가 되고 허수부의 부호가 바뀝니다.",
+    "worked_parts": [
+      "c = ",
+      {
+        "matrix": [
+          [
+            1
+          ],
+          [
+            "i"
+          ]
+        ]
+      },
+      " → c† = ",
+      {
+        "matrix": [
+          [
+            1,
+            "−i"
+          ]
+        ]
+      },
+      "; c†c = 2"
+    ]
+  },
+  {
+    "id": "projection-operator",
+    "term": "사영 연산자",
+    "english": "Projection Operator",
+    "description": "이 노트에서는 선택한 부분공간으로 직교투영하는 연산자를 뜻합니다. P² = P이고 P† = P입니다.",
+    "example": "정규화된 상태에서 ⟨ψ|P|ψ⟩는 해당 부분공간의 측정 확률입니다.",
+    "page": "subspace",
+    "worked_example": "첫째 기저 상태의 부분공간으로 투영하면 둘째 성분이 0이 됩니다.",
+    "worked_parts": [
+      "P = ",
+      {
+        "matrix": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      ", c = ",
+      {
+        "matrix": [
+          [
+            "3/5"
+          ],
+          [
+            "4/5"
+          ]
+        ]
+      },
+      " → Pc = ",
+      {
+        "matrix": [
+          [
+            "3/5"
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      "; 확률 = 9/25"
+    ]
+  },
+  {
+    "id": "energy-eigenstate",
+    "term": "에너지 고유상태",
+    "english": "Energy Eigenstate",
+    "description": "해밀토니안 H에 대해 Hψ = Eψ를 만족하는 0이 아닌 상태입니다. 정규화하면 에너지를 측정할 때 E가 확률 1로 나옵니다.",
+    "example": "에너지 고유상태가 항상 바닥상태인 것은 아닙니다.",
+    "page": "schrodinger",
+    "worked_example": "이 대각 행렬에서 둘째 기저 상태는 에너지 3인 고유상태입니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      " ",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      " = 3 ",
+      {
+        "matrix": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "excited-state",
+    "term": "들뜬상태",
+    "english": "Excited State",
+    "description": "바닥상태보다 높은 에너지의 고유상태입니다. 이 노트에서는 정해진 해밀토니안의 고유상태를 가리킵니다.",
+    "example": "임의의 중첩 상태를 모두 들뜬 고유상태라고 부르지는 않습니다.",
+    "page": "schrodinger",
+    "worked_example": "에너지가 1과 3인 두 상태 모형에서는 에너지 1이 바닥, 에너지 3이 들뜬 고유상태입니다.",
+    "worked_parts": [
+      "E₀ = 1u, E₁ = 3u → 에너지 차이 2u"
+    ]
+  },
+  {
+    "id": "basis-set",
+    "term": "기저 집합",
+    "english": "Basis Set",
+    "description": "양자화학에서 오비탈을 전개하는 데 쓰는 함수들의 모음입니다. 일반적으로 함수들끼리 직교하지 않을 수 있습니다.",
+    "example": "오비탈을 나타내는 기저 집합과 다전자 상태를 나타내는 배치 기저를 구별합니다.",
+    "page": null,
+    "worked_example": "두 함수 χ₁, χ₂로 오비탈을 전개하면 φ = c₁χ₁ + c₂χ₂입니다. 함수가 서로 겹치면 정규화에도 그 겹침이 들어갑니다.",
+    "worked_parts": [
+      "φ = c₁χ₁ + c₂χ₂; Sᵢⱼ = ⟨χᵢ|χⱼ⟩; ⟨φ|φ⟩ = c†Sc"
+    ]
+  }
+]

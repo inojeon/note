@@ -6,7 +6,7 @@
 import json, os, sys
 D = os.path.join(os.path.dirname(__file__), "..", "docs")
 links = json.load(open(os.path.join(D, "links.json")))
-pairs = [(name, v["published_artifact"]) for name, v in links.items()]
+pairs = [(name, v["published_artifact"]) for name, v in links.items() if v.get("published_artifact")]
 def convert(text, to_rel):
     for name, url in pairs:
         text = text.replace(url, name) if to_rel else text.replace(f'href="{name}"', f'href="{url}"')
