@@ -25,6 +25,19 @@ python3 tools/package_concept_site.py --output /tmp/note-concept-site
 
 이 방법은 개념 노트를 웹에 공개한다. 실제 게시를 승인한 뒤 다음 순서로 진행한다.
 
+### 이미 준비된 `gh-pages` 브랜치 사용
+
+현재 개념 리더는 `gh-pages` 브랜치에도 게시용 파일 네 개만 담아 올려 두었다. GitHub API에 접근할 수 없는 환경에서는 저장소의 **Settings → Pages**에서 다음 항목을 선택한다.
+
+- **Source:** Deploy from a branch
+- **Branch:** gh-pages
+- **Folder:** / (root)
+- **Save**를 누르고 Pages 화면의 배포 결과를 확인한다.
+
+이 방식은 `gh-pages` 브랜치의 파일을 게시한다. 원본을 수정하거나 `main`을 갱신하는 것만으로 이 브랜치가 갱신되지는 않는다. 이후 자동 빌드로 전환하려면 아래 GitHub Actions 방식을 사용한다.
+
+### GitHub Actions로 원본에서 빌드
+
 1. 개념 페이지·자산·생성 도구와 `.github/workflows/concept-pages.yml`을 저장소에 반영한다.
 2. 저장소의 **Settings → Pages → Build and deployment → Source**를 **GitHub Actions**로 설정한다. 계정·저장소 요금제에 따라 Pages 사용 가능 여부가 다를 수 있다.
 3. **Actions → Publish concept notes → Run workflow**에서 반영된 브랜치를 선택한다.
