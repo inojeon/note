@@ -22,6 +22,7 @@ jobs:
       - name: Build and validate self-contained readers
         working-directory: references/sqd-docs
         run: |
+          python3 tools/build_bo_molecule.py
           python3 tools/enrich_concepts.py
           python3 tools/build_concepts.py
           node tools/check_html.js docs/concepts.html docs/quantum-chemistry.html

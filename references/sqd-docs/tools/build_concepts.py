@@ -44,6 +44,9 @@ css = katex_css + '\n' + (DOCS / 'assets/concepts.css').read_text()
 # mock-DOM checker only executes our code. Real browser tests cover KaTeX.
 katex_license = '<!-- KaTeX 0.19.0\n' + (vendor/'LICENSE').read_text() + '-->'
 katex_script = katex_license + '<script data-vendor="katex-0.19.0">' + (vendor/'katex.min.js').read_text().replace('</script', '<\\/script') + '</script>'
+mol_vendor = DOCS/'assets/vendor/3dmol'
+mol_license = '<!-- 3Dmol.js 2.5.5\n' + (mol_vendor/'LICENSE').read_text() + '\n' + (mol_vendor/'3Dmol-min.js.LICENSE.txt').read_text() + '-->'
+mol_script = mol_license + '<script data-vendor="3dmol-2.5.5">' + (mol_vendor/'3Dmol-min.js').read_text().replace('</script', '<\\/script') + '</script>'
 math_runtime = (DOCS/'assets/concept-math.js').read_text()
 css += '\n[hidden]{display:none!important}h1:focus{outline:none}\n'
 router = '''
@@ -72,6 +75,6 @@ for filename, default_page, title in [
 ]:
     views = ''.join(f'<section id="page-{slug}" data-page="{slug}" aria-label="{heading}"'+('' if slug==default_page else ' hidden')+'>'+body+'</section>' for slug, heading, body in sections)
     page_router = router.replace('DEFAULT_PAGE', repr(default_page))
-    html = '<!doctype html>\n<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+title+'</title><style>'+css+'</style></head><body><a class="skip" href="#reader-content">본문으로 건너뛰기</a><main id="reader-content" tabindex="-1">'+views+'</main>'+katex_script+'<script>'+  '\n'.join(scripts) + '\n'+page_router+'\n'+math_runtime+'</script></body></html>\n'
+    html = '<!doctype html>\n<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+title+'</title><style>'+css+'</style></head><body><a class="skip" href="#reader-content">본문으로 건너뛰기</a><main id="reader-content" tabindex="-1">'+views+'</main>'+katex_script+mol_script+'<script>'+  '\n'.join(scripts) + '\n'+page_router+'\n'+math_runtime+'</script></body></html>\n'
     (DOCS/filename).write_text(html)
     print(f'Built {filename}: {len(inputs)} views, embedded CSS and scripts')

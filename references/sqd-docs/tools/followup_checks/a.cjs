@@ -3,6 +3,7 @@ module.exports=async({page,go,near})=>{
  const slider=async(id,value)=>{await page.locator(id).fill(String(value));await page.locator(id).dispatchEvent('input');};
  const numeric=async id=>Number((await page.locator(id).innerText()).replace('%',''));
  await go('born-oppenheimer');
+ await page.locator('#bo-advanced-model').evaluate(e=>e.open=true);
  for(const [q,g] of [[0,.05],[0,.4],[-1,.25],[2,.8]]){
   await slider('#bo-q',q);await slider('#bo-g',g);
   near(await numeric('#bo-gap'),2*Math.hypot(q,g),.000051);
