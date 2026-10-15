@@ -35,7 +35,6 @@ const near=(actual,expected,tolerance=1e-5)=>{assert(String(actual).trim()!=='')
   assert.deepEqual(broken,[],'All related concept links must resolve');
   assert.equal(await page.locator('#glossary-born-oppenheimer-dimensionless strong').textContent(),'무차원(Dimensionless)');
   assert((await page.locator('#page-hartree-fock .term-trigger').allTextContents()).includes('하트리–폭(Hartree–Fock, HF)'),'Keep an introduced acronym with its term');
-  await page.locator('#qc-followup-map').evaluate(e=>e.open=true);
   const roadmap=await page.locator('#qc-followup-map a').evaluateAll(es=>es.map(e=>e.hash.slice(1)));
   assert.deepEqual(new Set(roadmap),new Set(slugs),'Every planned topic has a page');
 

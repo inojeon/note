@@ -64,7 +64,7 @@ IBM 공식 노트북 두 개(Quickstart, SQD 튜토리얼). 00-quickstart.html�
 모든 용어 설명창에는 정의 외에 간단한 구체적 예시를 제공한다. concept-glossary.json의 worked_example과 worked_parts에서 관리하며, 벡터는 열벡터·행렬은 행과 열이 보이는 형태로 표시한다. 일반 성질을 반복하는 문장만으로 예시를 대체하지 않는다.
 
 ## 양자화학 개념 지도
-`docs/concept-quantum-chemistry.html`은 지도 소스다. 첫 학습 묶음은 `quantum-state` → `born-rule` → `superposition` → `observable` → 기존 `hamiltonian` → `schrodinger` 순서다. 후속 16개 노트는 `born-oppenheimer`부터 `potential-energy`까지 핵·전자 분리, 다전자 상태, 적분과 행렬원소, 근사 계산과 화학적 해석의 네 묶음으로 연결한다. 지도에서는 접이식 목록으로 제공하여 첫 화면을 짧게 유지한다. 새 주제를 추가할 때 실제 페이지가 준비된 링크만 제공한다.
+`docs/concept-quantum-chemistry.html`은 지도 소스다. 첫 학습 묶음은 `quantum-state` → `born-rule` → `superposition` → `observable` → 기존 `hamiltonian` → `schrodinger` 순서다. 후속 16개 노트는 `born-oppenheimer`부터 `potential-energy`까지 핵·전자 분리, 다전자 상태, 적분과 행렬원소, 근사 계산과 화학적 해석의 네 묶음으로 연결한다. 지도에서는 기존 노트와 같은 제목·핵심 질문 카드로 표시하고, 네 주제 묶음을 유지한다. 새 주제를 추가할 때 실제 페이지가 준비된 링크만 제공한다.
 
 `python3 tools/build_concepts.py`는 동일한 전체 개념 노트를 포함하는 독립 HTML 두 개를 생성한다. `docs/concepts.html`은 수학 지도로, `docs/quantum-chemistry.html`은 양자화학 지도로 시작한다. 둘 다 CSS·스크립트·관련 개념을 포함하므로 단일 파일 미리보기에서 링크가 동작한다. 공유할 때는 소스 페이지 대신 이 생성 파일을 사용한다. 지도 선택 버튼이 동적으로 만드는 링크도 단일 파일에서는 해시 경로를 사용해야 한다.
 
