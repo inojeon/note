@@ -15,7 +15,7 @@ for (const file of targets) {
   const els = {}, errors = [];
   const mk = id => els[id] || (els[id] = { id, innerHTML: '', textContent: '', value: vals[id] || '0', style: {}, dataset: {}, children: [], attrs: {},
     clientWidth: narrow ? 360 : 700, clientHeight: 360, firstChild: null, setAttribute(k, v) { this.attrs[k] = v }, getAttribute(k) { return this.attrs[k] },
-    appendChild(c) { this.children.push(c) }, insertBefore(c) { this.children.push(c) }, addEventListener() {}, classList: { toggle() {}, add() {} } });
+    appendChild(c) { this.children.push(c) }, replaceChildren(...children) { this.children = children; this.firstChild = children[0] || null; this.innerHTML = ''; }, insertBefore(c) { this.children.push(c) }, addEventListener() {}, classList: { toggle() {}, add() {} } });
   global.window = { matchMedia: () => ({ matches: narrow, addEventListener() {} }), addEventListener() {}, scrollY: 0, devicePixelRatio: 1,
     console: { error: (n, e) => errors.push(n + ': ' + (e && e.message)) } };
   global.matchMedia = global.window.matchMedia; global.requestAnimationFrame = () => {};

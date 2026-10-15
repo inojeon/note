@@ -1,0 +1,24 @@
+module.exports=async({page,go,near})=>{
+const num=async id=>parseFloat(await page.locator('#'+id).textContent());
+const set=async(id,v)=>page.locator('#'+id).evaluate((e,v)=>{e.value=String(v);e.dispatchEvent(new Event('input',{bubbles:true}))},v);
+const energy=t=>1-.5*Math.sin(t)-.2*Math.cos(t);
+await go('classical-optimization');
+await set('vo-initial',0);await set('vo-rate',1);
+await page.locator('#vo-step').click();
+near(await num('vo-angle'),.5*180/Math.PI,.001,'optimizer radian update');
+near(await num('vo-energy'),energy(.5),1e-6,'optimizer first energy');
+await page.locator('#vo-run').click();near(await num('vo-count'),21,0,'bounded optimizer run');
+if(await num('vo-gap')>1e-5)throw Error('optimizer did not approach minimum');
+await page.locator('#vo-reset').click();near(await num('vo-energy'),.8,1e-6,'optimizer reset');
+await set('vo-rate',6);await page.locator('#vo-step').click();near(await num('vo-energy'),energy(3),1e-6,'large step energy increase');
+if(!((await page.locator('#vo-status').textContent()).includes('올랐')))throw Error('overshoot explanation missing');
+await go('vqe-algorithm');await set('vl-initial',0);
+const next=()=>page.locator('#vl-next').click();
+await next();if(await page.locator('#vl-lab').getAttribute('data-stage')!=='0')throw Error('prepare stage');
+await next();near(await num('vl-x'),0,1e-6,'X mean');near(await num('vl-z'),1,1e-6,'Z mean');
+await next();near(await num('vl-energy'),.8,1e-6,'loop energy');
+await next();near(await num('vl-angle'),.5*180/Math.PI,.001,'loop update');near(await num('vl-count'),1,0,'loop count');near(await num('vl-energy'),.8,1e-6,'old evaluation retained');
+await next();if(await page.locator('#vl-energy').textContent()!=='—')throw Error('stale energy after new preparation');
+await next();await next();near(await num('vl-energy'),energy(.5),1e-6,'new loop energy');
+await page.locator('#vl-reset').click();near(await num('vl-count'),0,0,'loop reset');if(await page.locator('#vl-history tr').count()!==0)throw Error('history reset');
+};

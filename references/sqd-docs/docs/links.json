@@ -233,5 +233,55 @@
     "title": "퍼텐셜 에너지 곡선(Potential Energy Curve)",
     "published_artifact": null,
     "origin_file": "concept-potential-energy.html"
+  },
+  "concept-vqe.html": {
+    "title": "VQE 학습 지도",
+    "published_artifact": null,
+    "origin_file": "concept-vqe.html"
+  },
+  "concept-energy-expectation.html": {
+    "title": "평균 에너지와 기댓값(Expectation Value)",
+    "published_artifact": null,
+    "origin_file": "concept-energy-expectation.html"
+  },
+  "concept-ansatz.html": {
+    "title": "안사츠(Ansatz)",
+    "published_artifact": null,
+    "origin_file": "concept-ansatz.html"
+  },
+  "concept-parameterized-circuit.html": {
+    "title": "매개변수화 양자회로(Parameterized Quantum Circuit)",
+    "published_artifact": null,
+    "origin_file": "concept-parameterized-circuit.html"
+  },
+  "concept-pauli-decomposition.html": {
+    "title": "파울리 분해(Pauli Decomposition)",
+    "published_artifact": null,
+    "origin_file": "concept-pauli-decomposition.html"
+  },
+  "concept-measurement-shots.html": {
+    "title": "반복 측정(Shots)과 표본 오차(Sampling Error)",
+    "published_artifact": null,
+    "origin_file": "concept-measurement-shots.html"
+  },
+  "concept-classical-optimization.html": {
+    "title": "고전 최적화(Classical Optimization)",
+    "published_artifact": null,
+    "origin_file": "concept-classical-optimization.html"
+  },
+  "concept-vqe-algorithm.html": {
+    "title": "VQE 전체 알고리즘",
+    "published_artifact": null,
+    "origin_file": "concept-vqe-algorithm.html"
+  },
+  "concept-fermion-qubit.html": {
+    "title": "전자 상태를 큐빗으로 옮기기(Fermion-to-Qubit Mapping)",
+    "published_artifact": null,
+    "origin_file": "concept-fermion-qubit.html"
+  },
+  "concept-vqe-hydrogen.html": {
+    "title": "VQE로 수소 분자 계산하기",
+    "published_artifact": null,
+    "origin_file": "concept-vqe-hydrogen.html"
   }
 }
