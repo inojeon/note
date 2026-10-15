@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>양자 회로: 근사 바닥상태 만들기 — hcore·eri에서 양자 상태까지</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#F3F5F7;--panel:#FFFFFF;--ink:#1E2A38;--ink2:#5B6878;--line:#D5DBE3;
+  --alpha:#C8731F;--alpha-soft:#F6E3CF;--beta:#1F7A8C;--beta-soft:#D4EAEE;
+  --accent:#2F4F8A;--code:#EEF1F5;--warn:#B23A48;--n:#3B5BA5;--nsoft:#D7E0F5;--active:#BFE6D6;--frozen:#E2E5EA}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161B22;--panel:#1F2630;--ink:#E6EAF0;--ink2:#9AA6B5;--line:#344050;
+  --alpha:#E4954A;--alpha-soft:#4A3420;--beta:#5FB8C9;--beta-soft:#183A42;--accent:#8FB0F0;--code:#111620;--warn:#E07A86;--n:#7F9BE0;--nsoft:#243352;--active:#1F4A3C;--frozen:#2A313B}}
+:root[data-theme="dark"]{--bg:#161B22;--panel:#1F2630;--ink:#E6EAF0;--ink2:#9AA6B5;--line:#344050;
+  --alpha:#E4954A;--alpha-soft:#4A3420;--beta:#5FB8C9;--beta-soft:#183A42;--accent:#8FB0F0;--code:#111620;--warn:#E07A86;--n:#7F9BE0;--nsoft:#243352;--active:#1F4A3C;--frozen:#2A313B}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;font-size:16px;line-height:1.75;word-break:keep-all}
+code,pre,.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+a{color:var(--accent)}
+.wrap{display:grid;grid-template-columns:220px minmax(0,1fr);gap:48px;max-width:1100px;margin:0 auto;padding:32px 24px 96px}
+nav{position:sticky;top:calc(24px + env(safe-area-inset-top,0px));align-self:start;font-size:14px;line-height:1.6}
+nav ol{list-style:none;padding:0;margin:0;border-left:2px solid var(--line)}
+nav li a{display:block;padding:5px 0 5px 14px;color:var(--ink2);text-decoration:none;margin-left:-2px;border-left:2px solid transparent}
+nav li a:hover,nav li a.on{color:var(--ink);border-left-color:var(--accent)}
+nav .tag{margin:0 0 14px;font-size:13px;color:var(--ink2)}
+main{max-width:720px}
+h1{font-size:2.1rem;line-height:1.25;font-weight:600;margin:0 0 10px;letter-spacing:-.01em}
+h2{font-size:1.45rem;font-weight:600;margin:64px 0 14px;padding-top:16px;border-top:1px solid var(--line)}
+h3{font-size:1.08rem;font-weight:600;margin:32px 0 8px}
+p{margin:0 0 14px}
+.lead{font-size:1.1rem;color:var(--ink2);margin-bottom:24px}
+.meta{font-size:13.5px;color:var(--ink2);margin-bottom:28px}
+figure{margin:22px 0;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px}
+figure svg{display:block;width:100%;height:auto;max-width:100%}
+figcaption{font-size:13.5px;color:var(--ink2);margin-top:10px;line-height:1.55}
+.scroll{overflow-x:auto}
+pre{background:var(--code);border:1px solid var(--line);border-radius:6px;padding:14px 16px;overflow-x:auto;font-size:13.5px;line-height:1.6;margin:14px 0}
+code{font-size:.92em}
+p code,li code,td code{background:var(--code);padding:1px 5px;border-radius:3px}
+.c{color:var(--ink2)}.k{color:var(--accent)}.s{color:var(--beta)}.n{color:var(--alpha)}.o{color:var(--ink2)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:14px 0}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--ink2)}
+td.num{text-align:right;font-family:"IBM Plex Mono",monospace}
+.callout{border-left:3px solid var(--accent);padding:4px 14px;margin:18px 0;color:var(--ink2);font-size:15px}
+.ctrl{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;font-size:14px;margin-bottom:10px}
+.ctrl label{display:flex;align-items:center;gap:8px}
+.ctrl input[type=range]{width:160px;accent-color:var(--accent)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:5px;overflow:hidden}
+.seg button{border:0;background:var(--panel);color:var(--ink);padding:6px 12px;font-size:13.5px;cursor:pointer;font-family:"IBM Plex Mono",monospace}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button.on{background:var(--accent);color:#fff}
+button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.readout{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:12px}
+.readout div{background:var(--code);border-radius:5px;padding:8px 12px;font-size:13.5px;color:var(--ink2)}
+.readout b{display:block;font-size:20px;font-weight:500;color:var(--ink);font-family:"IBM Plex Mono",monospace}
+.legend{display:flex;gap:18px;font-size:13.5px;color:var(--ink2);flex-wrap:wrap;margin-top:8px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:-1px;margin-right:6px}
+.sp-a{color:var(--alpha);font-weight:600}.sp-b{color:var(--beta);font-weight:600}
+@media (max-width:860px){.wrap{grid-template-columns:1fr;gap:16px;padding:20px 16px 80px}nav{position:static}nav ol{display:flex;flex-wrap:wrap;gap:2px 10px;border:0}nav li a{padding:2px 0;border:0}h1{font-size:1.7rem}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+@media (max-width:860px){
+  body{font-size:15px}
+  figure{padding:12px 10px;margin:18px 0;overflow:visible}
+  figure svg{width:100%}
+  .readout{grid-template-columns:1fr 1fr}
+  .readout b{font-size:17px}
+  pre{font-size:12.5px;padding:12px}
+  table{font-size:13.5px}
+  th,td{padding:6px 6px}
+  .ctrl input[type=range]{width:120px}
+  .two{grid-template-columns:1fr}
+  #prodgrid{min-width:0}
+  .bits button.bit{width:28px}
+}
+
+/* layout safety: nothing may widen the page */
+html,body{max-width:100%;overflow-x:hidden}
+.wrap{grid-template-columns:220px minmax(0,1fr);width:100%}
+main{min-width:0;max-width:720px;width:100%}
+nav{min-width:0}
+figure,pre,table,.readout,.ctrl{min-width:0;max-width:100%}
+figure svg{max-width:100%}
+p,li,figcaption,td,th{overflow-wrap:anywhere}
+@media (max-width:860px){
+  .wrap{grid-template-columns:minmax(0,1fr)}
+  main{max-width:100%}
+  table{display:block;overflow-x:auto}
+}
+
+.docnav{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;font-size:13.5px;padding:10px 0;border-bottom:1px solid var(--line);margin-bottom:20px}
+.docnav .pn{display:flex;gap:16px;flex-wrap:wrap}.docnav a{text-decoration:none}.docnav .dim{color:var(--ink2)}
+.docnav.bottom{border-bottom:0;border-top:1px solid var(--line);margin:48px 0 0;padding-top:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav aria-label="목차">
+  <p class="tag">ffsim · Qiskit 2.x · 실제 계산값</p>
+  <ol>
+    <li><a href="#overview">한눈에 보기</a></li>
+    <li><a href="#jw">1. 궤도를 큐비트로</a></li>
+    <li><a href="#goal">2. 회로가 할 일</a></li>
+    <li><a href="#ucj">3. UCJ 회로의 구조</a></li>
+    <li><a href="#lucj">4. LUCJ: 하드웨어 맞추기</a></li>
+    <li><a href="#state">5. 만든 상태 vs 정답</a></li>
+    <li><a href="#e2e">6. 끝까지 돌려 보기</a></li>
+    <li><a href="#full">전체 코드</a></li>
+    <li><a href="#scope">마무리</a></li>
+  </ol>
+</nav>
+
+<main>
+<div class="docnav"><a class="idx" href="index.html">📚 문서 모음</a><span class="pn"><a href="03-ucj-inside.html">← 3. UCJ 회로 안쪽</a><a href="05-sampling.html">5. 샘플링: 비트열 얻기 →</a></span></div>
+<p class="meta" style="margin:0 0 4px">문서 4 / 6</p><h1>양자 회로: 근사 바닥상태 만들기<br><span style="font-weight:400;color:var(--ink2)">hcore·eri에서 양자 상태까지</span></h1>
+<p class="meta">문서 1~3에서 만든 적분과 부품으로 실제 회로를 조립해 돌립니다. 실제로 어떤 회로를 쓰고, 그 각도는 어디서 오며, 만들어진 상태가 정답과 얼마나 다른지를 N₂(cc-pVDZ, 활성 8궤도·10전자)로 따라갑니다. 회로는 SQD 논문과 같은 LUCJ이고, Qiskit의 <code>ffsim</code> 패키지로 만들어 시뮬레이터에서 돌렸습니다. 숫자는 전부 실제 계산값입니다.</p>
+
+<p class="lead">회로의 목표는 HF 기준 배치 하나에서 출발해 다른 배치들을 "적당한 비율로" 섞은 상태를 만드는 것입니다. 완벽할 필요는 없습니다. 중요한 배치가 측정에 걸릴 만큼만 들어 있으면 나머지는 SQD의 고전 대각화가 바로잡습니다.</p>
+
+<h2 id="overview">한눈에 보기</h2>
+<figure>
+<svg id="overview-fig" viewBox="0 0 720 150" role="img" aria-label="적분에서 CCSD, 회로 각도, 회로, 양자 상태까지"></svg>
+<figcaption>회로 각도도 고전 계산에서 옵니다. hcore·eri로 CCSD라는 고전 근사법을 돌려 얻은 진폭을 회로 각도로 변환하고, 그 회로를 양자컴퓨터에서 실행해 상태를 만듭니다. 양자컴퓨터가 하는 일은 마지막 두 단계뿐입니다.</figcaption>
+</figure>
+
+<h2 id="jw">1. 궤도를 큐비트로</h2>
+<p>궤도 하나에 전자가 있을 수 있는 방식은 α 있음/없음, β 있음/없음의 조합이므로, 궤도 하나를 큐비트 둘로 나타냅니다. 큐비트가 |1⟩이면 그 스핀의 전자가 있는 것입니다. 이 대응을 Jordan–Wigner 변환이라 부르는데, 핵심은 "비트열 = 배치"라는 앞 문서의 규약이 바로 이 대응이라는 점입니다.</p>
+<figure>
+<svg id="jw-fig" viewBox="0 0 720 260" role="img" aria-label="궤도 8개가 큐비트 16개에 대응되는 그림. HF 배치는 큐비트 0~4와 8~12가 1"></svg>
+<figcaption>ffsim 규약: 큐비트 0~7이 α 궤도 0~7, 큐비트 8~15가 β 궤도 0~7. Qiskit은 비트열을 큐비트 15부터 거꾸로 출력하므로 측정 결과가 <code>[β 8비트 | α 8비트]</code>, 즉 SQD 패키지의 규약과 정확히 일치합니다. HF 배치 준비는 큐비트 10개에 X 게이트를 거는 것으로 끝납니다.</figcaption>
+</figure>
+<p>hcore와 eri도 같은 변환으로 큐비트 연산이 됩니다. "전자가 i에서 k로 뛴다"는 큐비트 i를 내리고 k를 올리는 연산이 되고, 그 사이 큐비트들에 부호를 맞추는 Z 게이트 사슬이 붙습니다. 이 변환의 수학은 몰라도 됩니다. ffsim이 전부 처리하며, 사용자는 PySCF 객체를 넘기기만 합니다.</p>
+
+<h2 id="goal">2. 회로가 할 일</h2>
+<p>HF 배치 하나만으로는 정답과의 겹침이 |⟨HF|Ψ⟩|² = 0.942입니다. 나머지 5.8%가 수백 개의 들뜬 배치에 흩어져 있고, 그것이 결합 에너지의 대부분을 차지합니다. 회로는 HF 상태에 이 배치들을 섞어 넣어야 합니다.</p>
+<p>어떤 배치를 얼마나 섞을지를 회로가 스스로 알 수는 없으므로, 고전 근사법의 답을 빌립니다. CCSD는 "전자 한 쌍이 함께 들뜨는 진폭(t₂)"을 계산하는 표준 방법이고, HF보다 훨씬 정확하면서 궤도 수의 6제곱 정도로 빠릅니다. 이 t₂를 회로 각도로 바꾸는 것이 UCJ 회로입니다.</p>
+<table>
+<tr><th>방법</th><th>에너지 (Ha)</th><th>CASCI와 차이</th><th>비고</th></tr>
+<tr><td>HF</td><td class="num">−108.954</td><td class="num">+80 mHa</td><td>배치 하나</td></tr>
+<tr><td>CCSD (고전)</td><td class="num">−109.033</td><td class="num">+1.6 mHa</td><td>t₂ 진폭의 출처</td></tr>
+<tr><td>UCJ 회로, 1회 반복</td><td class="num">−108.985</td><td class="num">+50 mHa</td><td>t₂를 각도로 변환만 함</td></tr>
+<tr><td>CASCI (정답)</td><td class="num">−109.034</td><td class="num">0</td><td>활성 공간 정확 대각화</td></tr>
+</table>
+<p class="callout">UCJ 회로가 CCSD보다 나쁜 것이 이상해 보일 수 있습니다. t₂를 각도로 "변환"하는 것은 근사이고, 논문에서는 이 각도를 출발점으로 삼아 추가로 최적화합니다. 이 문서는 변환만 한 초기 회로를 그대로 쓰므로 수치가 거칩니다. 그래도 겹침이 0.942 → 0.958로 늘고, 그 차이만큼 측정에서 들뜬 배치가 더 자주 나옵니다.</p>
+
+<h2 id="ucj">3. UCJ 회로의 구조</h2>
+<p>UCJ(unitary coupled Jastrow)는 세 종류의 층을 반복하는 회로입니다. 복잡해 보이지만 각 층이 하는 일은 하나씩입니다.</p>
+<figure>
+<svg id="ucj-fig" viewBox="0 0 720 300" role="img" aria-label="UCJ 회로의 층 구조: HF 준비, 궤도 회전, 대각 쿨롱, 궤도 회전 역, 반복"></svg>
+<figcaption>한 반복(rep)은 "궤도 회전 → 대각 쿨롱 → 궤도 회전 되돌리기"입니다. 궤도 회전은 전자가 자리를 옮기는 효과, 대각 쿨롱은 큐비트 쌍마다 걸리는 위상(ZZ 상호작용)이라 전자 쌍의 상관을 표현합니다. 둘을 합쳐야 "전자 둘이 함께 들뜨는" t₂ 효과가 나옵니다. N₂ 8궤도에서 1회 반복의 각도 수는 136개입니다.</figcaption>
+</figure>
+<pre><code><span class="k">import</span> ffsim
+mol_data = ffsim.MolecularData.from_scf(mf, active_space=range(<span class="n">2</span>, <span class="n">10</span>))  <span class="c"># 내각 2개 제외, 8개 활성</span>
+mol_data.run_ccsd(store_t2=<span class="n">True</span>)                 <span class="c"># 고전 CCSD → t2 진폭 (8,8,8,8 중 점유×가상)</span>
+
+op = ffsim.UCJOpSpinBalanced.from_t_amplitudes(
+    mol_data.ccsd_t2, n_reps=<span class="n">1</span>,                   <span class="c"># t2 → 궤도 회전 + 대각 쿨롱 각도</span>
+)
+print(ffsim.UCJOpSpinBalanced.n_params(<span class="n">8</span>, n_reps=<span class="n">1</span>))   <span class="c"># 136</span></code></pre>
+
+<h2 id="lucj">4. LUCJ: 하드웨어에 맞추기</h2>
+<p>대각 쿨롱 층은 원칙적으로 모든 큐비트 쌍에 게이트를 겁니다. 그런데 실제 기기는 이웃한 큐비트끼리만 직접 연결되어 있어서, 멀리 떨어진 쌍에 게이트를 걸려면 스왑이 수십 개 붙습니다. LUCJ(local UCJ)는 기기 연결 그래프에 있는 쌍에만 게이트를 걸어 회로를 얕게 만듭니다. 정확도를 조금 내주고 잡음을 크게 줄이는 거래입니다.</p>
+<table>
+<tr><th></th><th>각도 수</th><th>2큐비트 게이트</th><th>회로 깊이</th><th>에너지 (Ha)</th><th>겹침 |⟨Ψ|CASCI⟩|²</th></tr>
+<tr><td>UCJ (모든 쌍)</td><td class="num">136</td><td class="num">312</td><td class="num">307</td><td class="num">−108.985</td><td class="num">0.958</td></tr>
+<tr><td>LUCJ (이웃 쌍만)</td><td class="num">73</td><td class="num">198</td><td class="num">166</td><td class="num">−108.964</td><td class="num">0.947</td></tr>
+<tr><td>HF만</td><td class="num">0</td><td class="num">0</td><td class="num">1</td><td class="num">−108.954</td><td class="num">0.942</td></tr>
+</table>
+<p>깊이가 절반이 되었습니다. 잡음은 깊이에 지수적으로 쌓이므로 실제 기기에서는 이 차이가 "결과가 나오느냐 안 나오느냐"를 가릅니다. 어떤 쌍을 남길지는 기기의 큐비트 배치도(IBM 기기는 육각 격자)를 보고 정하며, 코드에서는 <code>interaction_pairs</code> 인자 하나로 지정합니다.</p>
+<pre><code><span class="c"># 같은 스핀끼리는 이웃 궤도 쌍, 다른 스핀은 같은 궤도 쌍 일부만</span>
+pairs_aa = [(p, p + <span class="n">1</span>) <span class="k">for</span> p <span class="k">in</span> range(<span class="n">7</span>)]
+pairs_ab = [(p, p) <span class="k">for</span> p <span class="k">in</span> range(<span class="n">0</span>, <span class="n">8</span>, <span class="n">4</span>)]
+op = ffsim.UCJOpSpinBalanced.from_t_amplitudes(
+    mol_data.ccsd_t2, n_reps=<span class="n">1</span>, interaction_pairs=(pairs_aa, pairs_ab),
+)</code></pre>
+
+<h2 id="state">5. 만든 상태 vs 정답</h2>
+<p>회로가 만든 상태에서 각 배치의 확률 |c_x|²를 정답(CASCI)과 나란히 놓으면, 회로가 무엇을 잘 잡고 무엇을 놓치는지 보입니다.</p>
+<figure>
+<svg id="state-fig" viewBox="0 0 720 420" role="img" aria-label="상위 배치 8개의 확률을 CASCI와 LUCJ 회로에서 비교한 막대"></svg>
+<figcaption>CASCI 상위 8개 배치의 확률(로그 눈금). LUCJ 초기 회로는 HF 배치에 99.8%를 몰아 두고, 2~5위인 π→π* 이중 들뜸 배치에는 거의 무게를 주지 않습니다. 이 배치들이 N₂ 삼중결합의 상관을 담당하므로 에너지 오차 70 mHa의 대부분이 여기서 옵니다. 측정 10,000번에서 나온 고유 배치는 6종류뿐이었습니다.</figcaption>
+</figure>
+<p>그래서 SQD 논문에서는 회로 각도를 최적화하고, 샷을 수십만 번 쓰며, 결정적으로 구성 복구 루프로 "회로가 놓친 배치"를 되살립니다. 회로는 후보의 씨앗을 주는 역할이고, 씨앗이 부실해도 루프가 상당 부분 보완합니다.</p>
+
+<h2 id="e2e">6. 끝까지 돌려 보기</h2>
+<p>이제 네 문서의 내용이 전부 이어집니다. PySCF 입력 + 회로 샘플 → SQD 함수. 회로 두 종류와 샷 수 두 가지로 실제로 돌린 결과입니다.</p>
+<figure>
+<svg id="e2e-fig" viewBox="0 0 720 300" role="img" aria-label="회로 종류와 샷 수에 따른 SQD 에너지 오차"></svg>
+<figcaption>SQD 에너지의 CASCI 대비 오차(mHa). 시뮬레이터이므로 잡음은 없고, 오차는 "회로가 어떤 배치를 얼마나 자주 내놓는가"에서만 옵니다. 샷을 10배 늘리면 희귀한 배치가 더 잡혀 오차가 크게 줄고(UCJ: 47 → 13 mHa), 회로가 좋을수록 같은 샷에서 더 많은 배치가 나옵니다(10만 샷에서 UCJ 22종류, LUCJ 12종류).</figcaption>
+</figure>
+<pre><code><span class="k">from</span> qiskit <span class="k">import</span> QuantumCircuit, QuantumRegister
+<span class="k">from</span> qiskit.primitives <span class="k">import</span> StatevectorSampler
+<span class="k">from</span> qiskit_addon_sqd.fermion <span class="k">import</span> diagonalize_fermionic_hamiltonian
+
+qubits = QuantumRegister(<span class="n">16</span>)
+circuit = QuantumCircuit(qubits)
+circuit.append(ffsim.qiskit.PrepareHartreeFockJW(<span class="n">8</span>, (<span class="n">5</span>, <span class="n">5</span>)), qubits)   <span class="c"># X 게이트 10개</span>
+circuit.append(ffsim.qiskit.UCJOpSpinBalancedJW(op), qubits)          <span class="c"># UCJ/LUCJ 층</span>
+circuit.measure_all()
+
+bit_array = StatevectorSampler(seed=<span class="n">1</span>).run([circuit], shots=<span class="n">100_000</span>).result()[<span class="n">0</span>].data.meas
+
+result = diagonalize_fermionic_hamiltonian(
+    hcore, eri, bit_array, samples_per_batch=<span class="n">200</span>,
+    norb=<span class="n">8</span>, nelec=(<span class="n">5</span>, <span class="n">5</span>), num_batches=<span class="n">3</span>, max_iterations=<span class="n">5</span>, seed=<span class="n">1</span>,
+)
+print(result.energy + ecore)     <span class="c"># UCJ, 10만 샷: -109.0213 (CASCI -109.0344)</span></code></pre>
+<p class="callout">실제 기기에서는 여기에 두 가지가 더 붙습니다. 회로를 기기의 게이트 집합과 연결 그래프에 맞춰 변환하는 transpile, 그리고 <code>StatevectorSampler</code> 대신 <code>qiskit_ibm_runtime</code>의 <code>SamplerV2</code>. 코드 구조는 같고 샘플러 객체만 바뀝니다.</p>
+
+<h2 id="full">전체 코드</h2>
+<pre><code><span class="k">import</span> numpy <span class="k">as</span> np, ffsim
+<span class="k">from</span> pyscf <span class="k">import</span> gto, scf, mcscf, ao2mo
+<span class="k">from</span> qiskit <span class="k">import</span> QuantumCircuit, QuantumRegister
+<span class="k">from</span> qiskit.primitives <span class="k">import</span> StatevectorSampler
+<span class="k">from</span> qiskit_addon_sqd.fermion <span class="k">import</span> diagonalize_fermionic_hamiltonian
+
+<span class="c"># 문서 1: 분자 → 적분</span>
+mol = gto.M(atom=<span class="s">"N 0 0 0; N 0 0 1.098"</span>, basis=<span class="s">"cc-pvdz"</span>)
+mf = scf.RHF(mol).run()
+cas = mcscf.CASCI(mf, <span class="n">8</span>, (<span class="n">5</span>, <span class="n">5</span>))
+hcore, ecore = cas.get_h1eff()
+eri = ao2mo.restore(<span class="n">1</span>, cas.get_h2eff(), <span class="n">8</span>)
+e_exact = cas.kernel()[<span class="n">0</span>]                          <span class="c"># 검증용 정답</span>
+
+<span class="c"># 문서 4: 회로 각도 (고전 CCSD) → 회로</span>
+mol_data = ffsim.MolecularData.from_scf(mf, active_space=range(<span class="n">2</span>, <span class="n">10</span>))
+mol_data.run_ccsd(store_t2=<span class="n">True</span>)
+pairs_aa = [(p, p + <span class="n">1</span>) <span class="k">for</span> p <span class="k">in</span> range(<span class="n">7</span>)]
+pairs_ab = [(p, p) <span class="k">for</span> p <span class="k">in</span> range(<span class="n">0</span>, <span class="n">8</span>, <span class="n">4</span>)]
+op = ffsim.UCJOpSpinBalanced.from_t_amplitudes(mol_data.ccsd_t2, n_reps=<span class="n">1</span>,
+                                               interaction_pairs=(pairs_aa, pairs_ab))
+qubits = QuantumRegister(<span class="n">16</span>); circuit = QuantumCircuit(qubits)
+circuit.append(ffsim.qiskit.PrepareHartreeFockJW(<span class="n">8</span>, (<span class="n">5</span>, <span class="n">5</span>)), qubits)
+circuit.append(ffsim.qiskit.UCJOpSpinBalancedJW(op), qubits)
+circuit.measure_all()
+
+<span class="c"># 문서 5: 샘플링</span>
+bit_array = StatevectorSampler(seed=<span class="n">1</span>).run([circuit], shots=<span class="n">100_000</span>).result()[<span class="n">0</span>].data.meas
+
+<span class="c"># 문서 6: SQD</span>
+result = diagonalize_fermionic_hamiltonian(hcore, eri, bit_array, samples_per_batch=<span class="n">200</span>,
+    norb=<span class="n">8</span>, nelec=(<span class="n">5</span>, <span class="n">5</span>), num_batches=<span class="n">3</span>, max_iterations=<span class="n">5</span>, seed=<span class="n">1</span>)
+print(<span class="s">f"SQD {result.energy + ecore:.5f}  CASCI {e_exact:.5f}"</span>)</code></pre>
+
+<h2 id="scope">마무리: 이 문서에서 가져갈 것</h2>
+<ul>
+<li>궤도 1개 = 큐비트 2개(α, β). HF 준비는 X 게이트 몇 개. 비트열 규약은 이 대응에서 나온다.</li>
+<li>회로 각도는 고전 CCSD의 t₂ 진폭에서 변환한다. 양자컴퓨터는 상태를 만들고 측정할 뿐, 각도를 스스로 찾지 않는다.</li>
+<li>UCJ = (궤도 회전 → 대각 쿨롱 → 되돌리기) 반복. LUCJ는 기기 연결에 있는 쌍만 남겨 깊이를 절반으로 줄인다.</li>
+<li>초기 회로는 거칠다. N₂에서 π→π* 이중 들뜸을 거의 놓치고 오차 50~70 mHa. 각도 최적화, 샷 증가, 구성 복구가 이를 메운다.</li>
+<li>네 문서를 합치면 코드 30줄. 분자 → 적분 → 회로 → 샘플 → SQD.</li>
+</ul>
+<p class="meta">ffsim: github.com/qiskit-community/ffsim · SQD 논문: Robledo-Moreno et al., Sci. Adv. (2025) · 수치는 PySCF 2.x, ffsim, Qiskit 2.x, 난수 시드 1. 회로 각도는 최적화 없이 t₂ 변환만 했습니다.</p>
+<div class="docnav bottom"><a class="idx" href="index.html">📚 문서 모음</a><span class="pn"><a href="03-ucj-inside.html">← 3. UCJ 회로 안쪽</a><a href="05-sampling.html">5. 샘플링: 비트열 얻기 →</a></span></div>
+</main>
+</div>
+<script>
+(function(){
+  var mq=window.matchMedia('(max-width:600px)'); function narrow(){return mq.matches}
+  var ST='<style>.lb{font:13.5px "IBM Plex Sans KR",sans-serif;fill:var(--ink)}.sm{font:11.5px "IBM Plex Sans KR",sans-serif;fill:var(--ink2)}.mo{font:11.5px "IBM Plex Mono",monospace;fill:var(--accent)}.mi{font:11.5px "IBM Plex Mono",monospace;fill:var(--ink)}.ax{font:11.5px "IBM Plex Sans KR",sans-serif;fill:var(--ink2)}</style>';
+  var STN='<style>.lb{font:14px "IBM Plex Sans KR",sans-serif;fill:var(--ink)}.sm{font:12px "IBM Plex Sans KR",sans-serif;fill:var(--ink2)}.mo{font:12px "IBM Plex Mono",monospace;fill:var(--accent)}.mi{font:12px "IBM Plex Mono",monospace;fill:var(--ink)}.ax{font:12px "IBM Plex Sans KR",sans-serif;fill:var(--ink2)}</style>';
+  var AR='<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--ink2)"/></marker></defs>';
+  function setVB(svg,w,h){svg.setAttribute('viewBox','0 0 '+w+' '+h)}
+
+  function drawOverview(){
+    var svg=document.getElementById('overview-fig');
+    var steps=[['hcore, eri','PySCF','문서 1'],['CCSD → t₂','고전 근사법','전자 쌍 들뜸 진폭'],['회로 각도','from_t_amplitudes','136개 (UCJ)'],['회로 실행','HF 준비 + UCJ 층','양자컴퓨터'],['양자 상태','Σ c_x |x⟩','→ 측정 (문서 5)']];
+    var s; var q=[3,4];
+    if(narrow()){ setVB(svg,360,5*86+10); s=STN+AR;
+      steps.forEach(function(st,i){var y=10+i*86,qq=q.indexOf(i)>=0; s+='<rect x="30" y="'+y+'" width="300" height="60" rx="6" fill="'+(qq?'var(--beta-soft)':'var(--panel)')+'" stroke="'+(qq?'var(--beta)':'var(--line)')+'"/><text x="48" y="'+(y+25)+'" class="lb">'+st[0]+'</text><text x="48" y="'+(y+46)+'" class="mo">'+st[1]+'</text><text x="312" y="'+(y+36)+'" text-anchor="end" class="sm">'+st[2]+'</text>'; if(i<4) s+='<line x1="180" y1="'+(y+62)+'" x2="180" y2="'+(y+82)+'" stroke="var(--ink2)" marker-end="url(#ar)"/>';});
+    } else { setVB(svg,720,150); s=ST+AR;
+      steps.forEach(function(st,i){var x=10+i*142,qq=q.indexOf(i)>=0,w=128,cx=x+w/2; s+='<rect x="'+x+'" y="30" width="'+w+'" height="64" rx="6" fill="'+(qq?'var(--beta-soft)':'var(--panel)')+'" stroke="'+(qq?'var(--beta)':'var(--line)')+'"/><text x="'+cx+'" y="54" text-anchor="middle" class="lb">'+st[0]+'</text><text x="'+cx+'" y="74" text-anchor="middle" class="mo" style="font-size:10.5px">'+st[1]+'</text><text x="'+cx+'" y="120" text-anchor="middle" class="sm">'+st[2]+'</text>'; if(i<4) s+='<line x1="'+(x+w+1)+'" y1="62" x2="'+(x+w+13)+'" y2="62" stroke="var(--ink2)" marker-end="url(#ar)"/>';});
+    }
+    svg.innerHTML=s;
+  }
+
+  function drawJW(){
+    var svg=document.getElementById('jw-fig'), n=narrow(), W=n?360:720; setVB(svg,W,n?330:260);
+    var s=n?STN:ST, cell=n?36:38, gap=n?3:4, x0=n?(W-8*(cell+gap))/2:60;
+    function row(y,label,col,occ,qoff){ s+='<text x="'+x0+'" y="'+(y-8)+'" class="sm" fill="'+col+'">'+label+'</text>';
+      for(var i=0;i<8;i++){var orb=7-i, on=orb<5, x=x0+i*(cell+gap); s+='<rect x="'+x+'" y="'+y+'" width="'+cell+'" height="'+cell+'" rx="4" fill="'+(on?col:'var(--code)')+'" stroke="var(--line)"/><text x="'+(x+cell/2)+'" y="'+(y+cell/2+5)+'" text-anchor="middle" class="mi" style="font-size:14px;fill:'+(on?'#fff':'var(--ink2)')+'">'+(on?1:0)+'</text><text x="'+(x+cell/2)+'" y="'+(y+cell+13)+'" text-anchor="middle" class="sm">q'+(qoff+orb)+'</text><text x="'+(x+cell/2)+'" y="'+(y-22)+'" text-anchor="middle" class="sm" style="opacity:.0">x</text>';}
+    }
+    var y1=n?60:60, y2=n?170:150;
+    for(var i=0;i<8;i++){ s+='<text x="'+(x0+i*(cell+gap)+cell/2)+'" y="'+(y1-26)+'" text-anchor="middle" class="sm">궤도 '+(7-i)+'</text>'; }
+    row(y1,'β 큐비트 8~15',  'var(--beta)',0,8);
+    row(y2,'α 큐비트 0~7',   'var(--alpha)',0,0);
+    var yb=n?y2+cell+40:y2+cell+40;
+    s+='<text x="'+(W/2)+'" y="'+yb+'" text-anchor="middle" class="mi">측정 출력: '+'<tspan fill="var(--beta)">00011111</tspan><tspan fill="var(--ink2)">|</tspan><tspan fill="var(--alpha)">00011111</tspan>  (큐비트 15 → 0 순서)</text>';
+    s+='<text x="'+(W/2)+'" y="'+(yb+22)+'" text-anchor="middle" class="sm">HF 준비 = 색칠된 큐비트 10개에 X 게이트</text>';
+    svg.innerHTML=s;
+  }
+
+  function drawUCJ(){
+    var svg=document.getElementById('ucj-fig'), n=narrow(), W=n?360:720; setVB(svg,W,n?420:300);
+    var s=(n?STN:ST)+AR;
+    var blocks=[['HF 준비','X × 10','var(--panel)','var(--line)'],['궤도 회전','전자 자리 옮김','var(--nsoft)','var(--n)'],['대각 쿨롱','큐비트 쌍 ZZ 위상','var(--alpha-soft)','var(--alpha)'],['궤도 회전⁻¹','되돌리기','var(--nsoft)','var(--n)'],['측정','16비트','var(--panel)','var(--line)']];
+    if(n){ blocks.forEach(function(b,i){var y=20+i*74; s+='<rect x="40" y="'+y+'" width="280" height="56" rx="6" fill="'+b[2]+'" stroke="'+b[3]+'"/><text x="180" y="'+(y+23)+'" text-anchor="middle" class="lb">'+b[0]+'</text><text x="180" y="'+(y+43)+'" text-anchor="middle" class="sm">'+b[1]+'</text>'; if(i<4) s+='<line x1="180" y1="'+(y+58)+'" x2="180" y2="'+(y+72)+'" stroke="var(--ink2)" marker-end="url(#ar)"/>';});
+      s+='<path d="M322 118 H342 V258 H322" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="5 4"/><text x="346" y="192" class="sm" fill="var(--accent)" transform="rotate(90 346 192)">n_reps 회 반복</text>';
+      s+='<text x="180" y="405" text-anchor="middle" class="sm">1회 반복 각도: 궤도 회전 + 쿨롱 = 136개 (UCJ)</text>';
+    } else { blocks.forEach(function(b,i){var x=20+i*140; s+='<rect x="'+x+'" y="80" width="124" height="64" rx="6" fill="'+b[2]+'" stroke="'+b[3]+'"/><text x="'+(x+62)+'" y="106" text-anchor="middle" class="lb">'+b[0]+'</text><text x="'+(x+62)+'" y="128" text-anchor="middle" class="sm">'+b[1]+'</text>'; if(i<4) s+='<line x1="'+(x+126)+'" y1="112" x2="'+(x+138)+'" y2="112" stroke="var(--ink2)" marker-end="url(#ar)"/>';});
+      s+='<path d="M160 150 V176 H564 V150" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#ar)"/><text x="362" y="198" text-anchor="middle" class="sm" fill="var(--accent)">세 층이 한 반복(rep). n_reps 회 쌓음</text>';
+      s+='<text x="362" y="40" text-anchor="middle" class="lb">UCJ 회로 = HF 배치에 상관을 입히는 층 쌓기</text>';
+      s+='<text x="362" y="250" text-anchor="middle" class="sm">1회 반복 각도: 궤도 회전 + 쿨롱 = 136개 (UCJ), 73개 (LUCJ, 이웃 쌍만)</text>';
+    }
+    svg.innerHTML=s;
+  }
+
+  var ROWS=[["00011111|00011111",0.9421,0.9983],["00110111|00110111",0.0044,0.00001],["01001111|01001111",0.0044,0.00001],["00101111|00101111",0.0034,0.0001],["01010111|01010111",0.0034,0.00001],["00011111|01100111",0.003,0.0006],["01100111|00011111",0.003,0.0006],["00101111|01001111",0.0027,0.00001]];
+  function drawState(){
+    var svg=document.getElementById('state-fig'), n=narrow(), W=n?360:720, rowH=n?40:42, L=n?16:40, labW=n?150:170, T=36, H=T+ROWS.length*rowH+44; setVB(svg,W,H);
+    var s=n?STN:ST, R=W-(n?12:40), w=R-L-labW, lo=Math.log10(0.00001), hi=0;
+    function X(p){return L+labW+w*(Math.log10(Math.max(p,0.00001))-lo)/(hi-lo)}
+    [0.0001,0.001,0.01,0.1,1].forEach(function(t){var x=X(t); s+='<line x1="'+x+'" y1="'+T+'" x2="'+x+'" y2="'+(T+ROWS.length*rowH)+'" stroke="var(--line)"/><text x="'+x+'" y="'+(T-12)+'" text-anchor="middle" class="ax">'+(t>=0.01?(t*100)+'%':t*100+'%')+'</text>';});
+    ROWS.forEach(function(r,i){var y=T+i*rowH, parts=r[0].split('|');
+      s+='<text x="'+L+'" y="'+(y+rowH/2+4)+'" class="mi" style="font-size:'+(n?10.5:11.5)+'px"><tspan fill="var(--beta)">'+parts[0]+'</tspan><tspan fill="var(--ink2)">|</tspan><tspan fill="var(--alpha)">'+parts[1]+'</tspan></text>';
+      s+='<rect x="'+(L+labW)+'" y="'+(y+6)+'" width="'+Math.max(2,X(r[1])-L-labW)+'" height="'+((rowH-14)/2)+'" rx="2" fill="var(--n)"/>';
+      s+='<rect x="'+(L+labW)+'" y="'+(y+6+(rowH-14)/2+2)+'" width="'+Math.max(2,X(r[2])-L-labW)+'" height="'+((rowH-14)/2)+'" rx="2" fill="var(--alpha)"/>';});
+    var ly=T+ROWS.length*rowH+18;
+    s+='<rect x="'+(L+labW)+'" y="'+(ly-9)+'" width="12" height="10" fill="var(--n)"/><text x="'+(L+labW+18)+'" y="'+ly+'" class="ax">CASCI (정답)</text><rect x="'+(L+labW+120)+'" y="'+(ly-9)+'" width="12" height="10" fill="var(--alpha)"/><text x="'+(L+labW+138)+'" y="'+ly+'" class="ax">LUCJ 초기 회로</text>';
+    svg.innerHTML=s;
+  }
+
+  var E2E=[['UCJ',46.6,13.1,10,22],['LUCJ',54.1,39.6,6,12]];
+  function drawE2E(){
+    var svg=document.getElementById('e2e-fig'), n=narrow(), W=n?360:720, H=n?280:300; setVB(svg,W,H);
+    var s=n?STN:ST, L=n?44:70, R=W-(n?16:40), T=30, B=H-50, w=R-L, h=B-T, bw=n?44:70, groups=[[1,'10,000샷'],[2,'100,000샷']];
+    for(var k=0;k<=3;k++){var y=B-h*k/3; s+='<line x1="'+L+'" y1="'+y+'" x2="'+R+'" y2="'+y+'" stroke="var(--line)"/><text x="'+(L-6)+'" y="'+(y+4)+'" text-anchor="end" class="ax">'+(k*20)+'</text>';}
+    groups.forEach(function(g,gi){var cx=L+w*(gi+0.5)/2; E2E.forEach(function(r,ri){var v=r[g[0]], x=cx+(ri-0.5)*(bw+8)-bw/2, y=B-h*v/60; s+='<rect x="'+x+'" y="'+y+'" width="'+bw+'" height="'+(B-y)+'" rx="3" fill="'+(ri?'var(--alpha)':'var(--n)')+'"/><text x="'+(x+bw/2)+'" y="'+(y-6)+'" text-anchor="middle" class="ax">'+v+'</text><text x="'+(x+bw/2)+'" y="'+(B+16)+'" text-anchor="middle" class="ax">'+r[0]+'</text><text x="'+(x+bw/2)+'" y="'+(B+30)+'" text-anchor="middle" class="ax" style="font-size:10.5px">'+r[g[0]+2]+'종류</text>';}); s+='<text x="'+cx+'" y="'+(B+46)+'" text-anchor="middle" class="lb">'+g[1]+'</text>';});
+    s+='<text x="'+L+'" y="'+(T-12)+'" class="ax">SQD 에너지 오차 (mHa, CASCI 대비) · 막대 아래는 고유 배치 수</text>';
+    svg.innerHTML=s;
+  }
+
+  function drawAll(){drawOverview();drawJW();drawUCJ();drawState();drawE2E();}
+  drawAll(); if(mq.addEventListener) mq.addEventListener('change',drawAll); else mq.addListener(drawAll);
+  var links=[].slice.call(document.querySelectorAll('nav a')), heads=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  function hl(){var y=window.scrollY+120, cur=0; heads.forEach(function(hh,i){if(hh&&hh.offsetTop<=y)cur=i;}); links.forEach(function(a,i){a.classList.toggle('on',i===cur);});}
+  window.addEventListener('scroll',hl,{passive:true}); hl();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>샘플링: 비트열 얻기 — 양자 상태에서 bit_array까지</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#F3F5F7;--panel:#FFFFFF;--ink:#1E2A38;--ink2:#5B6878;--line:#D5DBE3;
+  --alpha:#C8731F;--alpha-soft:#F6E3CF;--beta:#1F7A8C;--beta-soft:#D4EAEE;
+  --accent:#2F4F8A;--code:#EEF1F5;--warn:#B23A48;--n:#3B5BA5;--nsoft:#D7E0F5;--active:#BFE6D6;--frozen:#E2E5EA}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161B22;--panel:#1F2630;--ink:#E6EAF0;--ink2:#9AA6B5;--line:#344050;
+  --alpha:#E4954A;--alpha-soft:#4A3420;--beta:#5FB8C9;--beta-soft:#183A42;--accent:#8FB0F0;--code:#111620;--warn:#E07A86;--n:#7F9BE0;--nsoft:#243352;--active:#1F4A3C;--frozen:#2A313B}}
+:root[data-theme="dark"]{--bg:#161B22;--panel:#1F2630;--ink:#E6EAF0;--ink2:#9AA6B5;--line:#344050;
+  --alpha:#E4954A;--alpha-soft:#4A3420;--beta:#5FB8C9;--beta-soft:#183A42;--accent:#8FB0F0;--code:#111620;--warn:#E07A86;--n:#7F9BE0;--nsoft:#243352;--active:#1F4A3C;--frozen:#2A313B}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;font-size:16px;line-height:1.75;word-break:keep-all}
+code,pre,.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+a{color:var(--accent)}
+.wrap{display:grid;grid-template-columns:220px minmax(0,1fr);gap:48px;max-width:1100px;margin:0 auto;padding:32px 24px 96px}
+nav{position:sticky;top:calc(24px + env(safe-area-inset-top,0px));align-self:start;font-size:14px;line-height:1.6}
+nav ol{list-style:none;padding:0;margin:0;border-left:2px solid var(--line)}
+nav li a{display:block;padding:5px 0 5px 14px;color:var(--ink2);text-decoration:none;margin-left:-2px;border-left:2px solid transparent}
+nav li a:hover,nav li a.on{color:var(--ink);border-left-color:var(--accent)}
+nav .tag{margin:0 0 14px;font-size:13px;color:var(--ink2)}
+main{max-width:720px}
+h1{font-size:2.1rem;line-height:1.25;font-weight:600;margin:0 0 10px;letter-spacing:-.01em}
+h2{font-size:1.45rem;font-weight:600;margin:64px 0 14px;padding-top:16px;border-top:1px solid var(--line)}
+h3{font-size:1.08rem;font-weight:600;margin:32px 0 8px}
+p{margin:0 0 14px}
+.lead{font-size:1.1rem;color:var(--ink2);margin-bottom:24px}
+.meta{font-size:13.5px;color:var(--ink2);margin-bottom:28px}
+figure{margin:22px 0;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px}
+figure svg{display:block;width:100%;height:auto;max-width:100%}
+figcaption{font-size:13.5px;color:var(--ink2);margin-top:10px;line-height:1.55}
+.scroll{overflow-x:auto}
+pre{background:var(--code);border:1px solid var(--line);border-radius:6px;padding:14px 16px;overflow-x:auto;font-size:13.5px;line-height:1.6;margin:14px 0}
+code{font-size:.92em}
+p code,li code,td code{background:var(--code);padding:1px 5px;border-radius:3px}
+.c{color:var(--ink2)}.k{color:var(--accent)}.s{color:var(--beta)}.n{color:var(--alpha)}.o{color:var(--ink2)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:14px 0}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--ink2)}
+td.num{text-align:right;font-family:"IBM Plex Mono",monospace}
+.callout{border-left:3px solid var(--accent);padding:4px 14px;margin:18px 0;color:var(--ink2);font-size:15px}
+.ctrl{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;font-size:14px;margin-bottom:10px}
+.ctrl label{display:flex;align-items:center;gap:8px}
+.ctrl input[type=range]{width:160px;accent-color:var(--accent)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:5px;overflow:hidden}
+.seg button{border:0;background:var(--panel);color:var(--ink);padding:6px 12px;font-size:13.5px;cursor:pointer;font-family:"IBM Plex Mono",monospace}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button.on{background:var(--accent);color:#fff}
+button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.readout{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:12px}
+.readout div{background:var(--code);border-radius:5px;padding:8px 12px;font-size:13.5px;color:var(--ink2)}
+.readout b{display:block;font-size:20px;font-weight:500;color:var(--ink);font-family:"IBM Plex Mono",monospace}
+.legend{display:flex;gap:18px;font-size:13.5px;color:var(--ink2);flex-wrap:wrap;margin-top:8px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:-1px;margin-right:6px}
+.sp-a{color:var(--alpha);font-weight:600}.sp-b{color:var(--beta);font-weight:600}
+@media (max-width:860px){.wrap{grid-template-columns:1fr;gap:16px;padding:20px 16px 80px}nav{position:static}nav ol{display:flex;flex-wrap:wrap;gap:2px 10px;border:0}nav li a{padding:2px 0;border:0}h1{font-size:1.7rem}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+@media (max-width:860px){
+  body{font-size:15px}
+  figure{padding:12px 10px;margin:18px 0;overflow:visible}
+  figure svg{width:100%}
+  .readout{grid-template-columns:1fr 1fr}
+  .readout b{font-size:17px}
+  pre{font-size:12.5px;padding:12px}
+  table{font-size:13.5px}
+  th,td{padding:6px 6px}
+  .ctrl input[type=range]{width:120px}
+  .two{grid-template-columns:1fr}
+  #prodgrid{min-width:0}
+  .bits button.bit{width:28px}
+}
+
+/* layout safety: nothing may widen the page */
+html,body{max-width:100%;overflow-x:hidden}
+.wrap{grid-template-columns:220px minmax(0,1fr);width:100%}
+main{min-width:0;max-width:720px;width:100%}
+nav{min-width:0}
+figure,pre,table,.readout,.ctrl{min-width:0;max-width:100%}
+figure svg{max-width:100%}
+p,li,figcaption,td,th{overflow-wrap:anywhere}
+@media (max-width:860px){
+  .wrap{grid-template-columns:minmax(0,1fr)}
+  main{max-width:100%}
+  table{display:block;overflow-x:auto}
+}
+
+.cfgpick{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.cfgpick button{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:4px;padding:4px 8px;font-size:12.5px;cursor:pointer;font-family:"IBM Plex Mono",monospace}
+.cfgpick button.sel{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.ok{color:var(--beta)}.bad{color:var(--warn)}.status{margin-top:10px;font-size:14px}
+.docnav{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;font-size:13.5px;padding:10px 0;border-bottom:1px solid var(--line);margin-bottom:20px}
+.docnav .pn{display:flex;gap:16px;flex-wrap:wrap}.docnav a{text-decoration:none}.docnav .dim{color:var(--ink2)}
+.docnav.bottom{border-bottom:0;border-top:1px solid var(--line);margin:48px 0 0;padding-top:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav aria-label="목차">
+  <p class="tag">Qiskit 2.x · qiskit-addon-sqd 0.14 · 실제 계산값</p>
+  <ol>
+    <li><a href="#overview">한눈에 보기</a></li>
+    <li><a href="#born">1. 측정 한 번 = 배치 하나</a></li>
+    <li><a href="#shots">2. 측정을 반복하면</a></li>
+    <li><a href="#read">3. 비트열 읽는 법</a></li>
+    <li><a href="#format">4. BitArray 형식</a></li>
+    <li><a href="#noise">5. 잡음이 하는 일</a></li>
+    <li><a href="#post">6. 후선별</a></li>
+    <li><a href="#handoff">7. SQD로 넘기기</a></li>
+    <li><a href="#full">전체 코드</a></li>
+    <li><a href="#scope">마무리</a></li>
+  </ol>
+</nav>
+
+<main>
+<div class="docnav"><a class="idx" href="index.html">📚 문서 모음</a><span class="pn"><a href="04-circuit.html">← 4. 양자 회로: 근사 바닥상태 만들기</a><a href="06-sqd-guide.html">6. SQD 이해하기 →</a></span></div>
+<p class="meta" style="margin:0 0 4px">문서 5 / 6</p><h1>샘플링: 비트열 얻기<br><span style="font-weight:400;color:var(--ink2)">양자 상태에서 <code>bit_array</code>까지</span></h1>
+<p class="meta">SQD 함수의 마지막 인자 <code>bit_array</code>가 무엇이고 어떻게 만들어지는지 따라갑니다. 문서 1과 같은 N₂(cc-pVDZ, 활성 8궤도·10전자)를 쓰며, 숫자는 전부 실제 계산값입니다. 양자 회로는 문서 4에서 다뤘는데, 회로 자체의 근사 오차와 분리해서 보기 위해 여기서는 회로가 완벽했다고 가정하고 정확한 바닥상태(CASCI)에서 직접 샘플링합니다. 실제 기기에서는 상태가 근사이고 잡음이 섞이는데, 그 효과는 5절에서 따로 다룹니다.</p>
+
+<p class="lead">양자컴퓨터를 한 번 측정하면 비트열 하나가 나오고, 그 비트열은 전자 배치 하나입니다. 수만 번 측정해 모은 비트열 목록이 SQD에 넘기는 "중요한 배치 후보"입니다.</p>
+
+<h2 id="overview">한눈에 보기</h2>
+<figure>
+<svg id="overview-fig" viewBox="0 0 720 150" role="img" aria-label="양자 상태에서 측정, counts, BitArray, 배열까지"></svg>
+<figcaption>양자 파트의 출력은 비트열 목록 하나입니다. Qiskit은 이것을 <code>BitArray</code>로 돌려주고, SQD 패키지는 불리언 행렬과 확률 배열로 바꿔 씁니다.</figcaption>
+</figure>
+
+<h2 id="born">1. 측정 한 번 = 배치 하나</h2>
+<p>회로가 준비한 상태는 여러 배치가 섞인 것입니다. |Ψ⟩ = Σ c_x |x⟩ 에서 x가 배치(비트열), c_x가 진폭. 측정하면 그중 하나가 확률 |c_x|²로 튀어나옵니다(Born 규칙). 측정은 "어떤 배치인가"만 알려 주고 c_x의 값이나 부호는 알려 주지 않습니다.</p>
+<p>N₂의 정확한 바닥상태에서 |c_x|²가 큰 배치들을 보면, HF 기준 배치 하나가 94%를 차지하고 나머지는 모두 1% 미만입니다.</p>
+<figure>
+<svg id="born-fig" viewBox="0 0 720 420" role="img" aria-label="N₂ 바닥상태에서 확률이 큰 배치 열 개의 막대"></svg>
+<figcaption>N₂ CASCI 바닥상태의 |c_x|² 상위 10개 (로그 눈금). 맨 위가 HF 배치 <code>00011111|00011111</code>(궤도 0~4에 α·β 모두). 2~5위는 α·β 전자 한 쌍이 궤도 3 또는 4에서 5 또는 6으로 함께 올라간 "이중 들뜸"(π → π*). 전체 3,136개 배치 중 상위 50개가 확률의 99.8%를 차지합니다.</figcaption>
+</figure>
+<table>
+<tr><th>상위 k개</th><th class="num">1</th><th class="num">10</th><th class="num">50</th><th class="num">100</th><th class="num">500</th></tr>
+<tr><td>누적 확률</td><td class="num">0.942</td><td class="num">0.972</td><td class="num">0.998</td><td class="num">0.9997</td><td class="num">1.000</td></tr>
+</table>
+<p class="callout">이것이 SQD가 성립하는 이유입니다. 3,136개 중 50개면 상태를 거의 다 표현할 수 있고, 그 50개는 측정하면 저절로 자주 나옵니다. 궤도 36개·전자 36개로 가면 전체는 10¹⁸개지만 "중요한 몇 백만 개"가 같은 역할을 합니다.</p>
+
+<h2 id="shots">2. 측정을 반복하면</h2>
+<p>측정 횟수를 "샷(shot)"이라 부릅니다. 샷을 늘릴수록 더 많은 종류의 배치가 나오지만, 새로 나오는 배치는 점점 덜 중요한 것들입니다.</p>
+<figure>
+<svg id="shots-fig" viewBox="0 0 720 300" role="img" aria-label="샷 수에 따른 고유 배치 수와 확률 커버율"></svg>
+<figcaption>같은 상태를 100, 1,000, 10,000, 100,000번 측정한 실제 결과(난수 시드 고정). 100샷이면 7종류, 10만 샷이면 122종류의 배치가 나오지만, 커버된 확률 질량은 95.9%에서 99.97%로 느리게 늘어납니다. 1,000샷 이후로 새로 발견되는 배치는 각각 0.1% 미만짜리입니다.</figcaption>
+</figure>
+<p>SQD 논문에서 샷을 수만~수십만 번 쓰는 것은 이 꼬리 부분의 작은 배치들까지 모으기 위해서입니다. 작지만 많은 배치들이 합쳐져 마지막 수 mHa의 정확도를 만듭니다.</p>
+
+<h2 id="read">3. 비트열 읽는 법</h2>
+<p>궤도 8개면 큐비트 16개이고, 비트열은 16자리입니다. 규약은 문서 2·6과 같습니다. 왼쪽 8비트가 β, 오른쪽 8비트가 α, 각 절반 안에서는 궤도 번호가 큰 쪽이 왼쪽.</p>
+<figure>
+<div class="cfgpick" id="cfgpick" role="group" aria-label="예시 배치 선택"></div>
+<svg id="read-fig" viewBox="0 0 720 230" role="img" aria-label="선택한 비트열을 궤도 점유로 해석한 그림"></svg>
+<div class="status" id="read-status"></div>
+<figcaption>위 버튼으로 1절의 상위 배치들을 골라 보세요. 비트열 한 칸이 궤도 하나이고, 1이면 그 스핀의 전자가 있는 것입니다. 각 절반의 1 개수가 <code>nelec</code> = (5, 5)와 맞아야 유효한 배치입니다.</figcaption>
+</figure>
+
+<h2 id="format">4. BitArray 형식</h2>
+<p>Qiskit의 <code>Sampler</code>는 측정 결과를 <code>BitArray</code>로 돌려줍니다. 샷 하나당 비트열 하나를 담은 2차원 비트 배열이며, 같은 비트열이 몇 번 나왔는지 세면 <code>counts</code> 사전이 됩니다. 두 형식은 서로 변환되고, SQD 함수는 어느 쪽이든 받습니다.</p>
+<pre><code><span class="c"># 실제 기기/시뮬레이터에서</span>
+<span class="k">from</span> qiskit.primitives <span class="k">import</span> StatevectorSampler
+sampler = StatevectorSampler()
+job = sampler.run([circuit], shots=<span class="n">10_000</span>)
+bit_array = job.result()[<span class="n">0</span>].data.meas        <span class="c"># BitArray, num_bits=16, num_shots=10000</span>
+
+<span class="c"># counts 사전에서 만들 때 (이 문서의 예처럼 직접 샘플링했을 때)</span>
+<span class="k">from</span> qiskit.primitives <span class="k">import</span> BitArray
+counts = {<span class="s">"0001111100011111"</span>: <span class="n">9400</span>, <span class="s">"0011011100110111"</span>: <span class="n">45</span>, ...}
+bit_array = BitArray.from_counts(counts, num_bits=<span class="n">16</span>)   <span class="c"># num_bits 꼭 지정</span>
+
+bit_array.get_counts()      <span class="c"># 다시 사전으로</span>
+bit_array.num_shots, bit_array.num_bits</code></pre>
+<p class="callout"><code>from_counts</code>에 <code>num_bits</code>를 빼면 Qiskit이 문자열을 정수로 읽어 앞의 0을 버리고 비트 수를 잘못 추정합니다(위 예에서 16이 아니라 14가 됨). 그러면 β 절반의 길이가 어긋나 후선별이 전부 실패합니다. 조용히 틀리는 실수라 반드시 지정하세요.</p>
+
+<h2 id="noise">5. 잡음이 하는 일</h2>
+<p>실제 기기에서는 측정 직전이나 측정 중에 비트가 뒤집힙니다. 가장 단순한 모형은 "각 비트가 독립적으로 확률 p로 뒤집힌다"입니다. 비트가 하나만 뒤집혀도 그 절반의 1 개수가 5에서 4나 6으로 바뀌어, 전자 수가 틀린 불가능한 배치가 됩니다.</p>
+<figure>
+<div class="ctrl"><label>비트당 뒤집힘 확률 p <input type="range" id="pflip" min="0" max="0.1" step="0.005" value="0.02"><output id="pflipv" class="mono">0.020</output></label></div>
+<svg id="noise-fig" viewBox="0 0 720 300" role="img" aria-label="뒤집힘 확률에 따른 후선별 통과율과 올바른 비트열 비율"></svg>
+<div class="readout">
+  <div>후선별 통과<b id="n-pass">73.5%</b></div>
+  <div>통과 중 원래 그대로<b id="n-ok">98.6%</b></div>
+  <div>통과한 고유 배치<b id="n-uniq">79</b></div>
+  <div>16비트 모두 무사할 확률<b id="n-clean">72.4%</b></div>
+</div>
+<figcaption>10,000샷에 비트 뒤집힘 잡음을 넣은 실제 시뮬레이션. p = 2%면 샷의 27%가 전자 수 불일치로 버려집니다. 통과한 것 중에도 1.4%는 "뒤집혔는데 우연히 개수가 맞는" 가짜 배치이고, 이들이 고유 배치 수를 52에서 79로 부풀립니다. 16비트가 모두 무사할 확률 (1−p)¹⁶이 후선별 통과율과 거의 같다는 점이 보입니다.</figcaption>
+</figure>
+<p>두 가지가 보입니다. 첫째, 잡음은 샷을 "버리게" 만듭니다. p가 5%면 절반 이상을 잃습니다. 둘째, 잡음은 가짜 배치를 "만듭니다". 비트 두 개가 반대 방향으로 뒤집히면 전자 수는 맞지만 실제 상태에는 없는 배치가 됩니다. 첫 번째는 샷을 더 쏘면 되지만, 두 번째는 걸러낼 수 없어서 SQD의 구성 복구 루프가 필요합니다.</p>
+
+<h2 id="post">6. 후선별</h2>
+<p>SQD 패키지가 비트열을 받아 가장 먼저 하는 일이 전자 수 검사입니다. 오른쪽 절반(α)의 1 개수가 5, 왼쪽 절반(β)의 1 개수가 5인 비트열만 남기고, 남은 것들의 확률을 합이 1이 되도록 다시 정규화합니다.</p>
+<pre><code><span class="k">from</span> qiskit_addon_sqd.counts <span class="k">import</span> bit_array_to_arrays
+<span class="k">from</span> qiskit_addon_sqd.subsampling <span class="k">import</span> postselect_by_hamming_right_and_left
+
+bitstrings, probs = bit_array_to_arrays(bit_array)
+<span class="c"># bitstrings: bool[고유 비트열 수, 16], probs: 빈도 / 총 샷</span>
+
+kept, kept_probs = postselect_by_hamming_right_and_left(
+    bitstrings, probs, hamming_right=<span class="n">5</span>, hamming_left=<span class="n">5</span>,   <span class="c"># = nelec</span>
+)</code></pre>
+<p>이 단계에서 걸러지는 것은 "확실히 틀린" 비트열뿐입니다. 전자 수가 맞는 가짜 배치는 통과하며, 그것을 다루는 것이 다음 단계(구성 복구)입니다. <code>diagonalize_fermionic_hamiltonian</code>은 첫 반복에서 이 후선별을 내부적으로 호출하므로 직접 부를 필요는 없지만, 몇 %가 살아남는지는 기기 상태를 가늠하는 좋은 지표라 따로 찍어 보는 것이 좋습니다.</p>
+
+<h2 id="handoff">7. SQD로 넘기기</h2>
+<pre><code><span class="k">from</span> qiskit_addon_sqd.fermion <span class="k">import</span> diagonalize_fermionic_hamiltonian
+
+result = diagonalize_fermionic_hamiltonian(
+    hcore, eri,                 <span class="c"># 앞 문서: PySCF에서</span>
+    bit_array,                  <span class="c"># 이 문서: 측정 결과 그대로. 후선별은 함수 안에서</span>
+    samples_per_batch=<span class="n">300</span>,
+    norb=<span class="n">8</span>, nelec=(<span class="n">5</span>, <span class="n">5</span>),
+    num_batches=<span class="n">5</span>, max_iterations=<span class="n">10</span>,
+)
+print(result.energy + ecore)    <span class="c"># CASCI 값 -109.034407 에 접근해야 함</span></code></pre>
+<p>입력 다섯 개가 모두 모였습니다. <code>hcore, eri, norb, nelec</code>은 분자를 숫자로 바꾼 것이고, <code>bit_array</code>는 그 분자의 바닥상태를 양자컴퓨터가 "어떤 배치들로 이루어졌는지" 알려 준 것입니다.</p>
+
+<h2 id="full">전체 코드</h2>
+<p>이 문서의 숫자를 재현하는 코드입니다. 양자 회로 대신 CASCI 벡터에서 샘플링하므로 Qiskit 시뮬레이터 없이 돌아갑니다.</p>
+<pre><code><span class="k">import</span> numpy <span class="k">as</span> np
+<span class="k">from</span> pyscf <span class="k">import</span> gto, scf, mcscf, fci
+<span class="k">from</span> qiskit.primitives <span class="k">import</span> BitArray
+
+<span class="c"># 앞 문서와 같은 준비</span>
+mol = gto.M(atom=<span class="s">"N 0 0 0; N 0 0 1.098"</span>, basis=<span class="s">"cc-pvdz"</span>)
+mf = scf.RHF(mol).run()
+cas = mcscf.CASCI(mf, <span class="n">8</span>, (<span class="n">5</span>, <span class="n">5</span>)); cas.kernel()
+norb, (na, nb) = <span class="n">8</span>, (<span class="n">5</span>, <span class="n">5</span>)
+
+<span class="c"># 1. 정확한 바닥상태의 |c_x|² (56×56 = 3,136개 배치)</span>
+P = cas.ci ** <span class="n">2</span>
+str_a = fci.cistring.make_strings(range(norb), na)   <span class="c"># α 문자열 56개 (정수)</span>
+str_b = fci.cistring.make_strings(range(norb), nb)
+
+<span class="k">def</span> to_bitstring(ia, ib):                         <span class="c"># [β 8비트 | α 8비트]</span>
+    <span class="k">return</span> format(str_b[ib], <span class="s">"08b"</span>) + format(str_a[ia], <span class="s">"08b"</span>)
+
+<span class="c"># 2. Born 규칙대로 샘플링 (이상적인 양자컴퓨터)</span>
+rng = np.random.default_rng(<span class="n">1</span>)
+flat = P.ravel()
+idx = rng.choice(flat.size, size=<span class="n">10_000</span>, p=flat)
+shots = [to_bitstring(*np.unravel_index(i, P.shape)) <span class="k">for</span> i <span class="k">in</span> idx]
+
+<span class="c"># 5. 비트 뒤집힘 잡음 (선택)</span>
+p_flip = <span class="n">0.02</span>
+bits = np.array([[int(c) <span class="k">for</span> c <span class="k">in</span> s] <span class="k">for</span> s <span class="k">in</span> shots], dtype=bool)
+bits ^= rng.random(bits.shape) &lt; p_flip
+shots = [<span class="s">""</span>.join(map(str, row.astype(int))) <span class="k">for</span> row <span class="k">in</span> bits]
+
+<span class="c"># 4. BitArray로</span>
+counts = {}
+<span class="k">for</span> s <span class="k">in</span> shots: counts[s] = counts.get(s, <span class="n">0</span>) + <span class="n">1</span>
+bit_array = BitArray.from_counts(counts, num_bits=<span class="n">2</span> * norb)
+
+<span class="c"># 6. 몇 %가 살아남는지</span>
+<span class="k">from</span> qiskit_addon_sqd.counts <span class="k">import</span> bit_array_to_arrays
+<span class="k">from</span> qiskit_addon_sqd.subsampling <span class="k">import</span> postselect_by_hamming_right_and_left
+bs, pr = bit_array_to_arrays(bit_array)
+kept, _ = postselect_by_hamming_right_and_left(bs, pr, hamming_right=na, hamming_left=nb)
+print(<span class="s">f"고유 비트열 {len(bs)}개 중 {len(kept)}개 통과"</span>)</code></pre>
+
+<h2 id="scope">마무리: 이 문서에서 가져갈 것</h2>
+<ul>
+<li>측정 한 번 = 비트열 하나 = 배치 하나. 빈도 ≈ |c_x|².</li>
+<li>중요한 배치는 적고(N₂는 50개면 99.8%), 측정하면 저절로 자주 나온다. 그래서 SQD가 된다.</li>
+<li>샷을 늘리면 꼬리의 작은 배치들이 모인다. 수만~수십만 샷이 보통.</li>
+<li><code>BitArray</code>는 샷×비트의 2차원 배열. <code>from_counts</code>에는 <code>num_bits</code>를 꼭 지정.</li>
+<li>잡음은 샷을 버리게도 하고(전자 수 불일치), 가짜 배치를 만들기도 한다(개수는 맞음). 전자는 후선별이, 후자는 구성 복구가 맡는다.</li>
+<li>이 문서는 회로가 완벽하다고 가정했다. 실제 회로가 만드는 상태는 근사라서 |c_x|² 분포가 조금 다르며, 그 차이는 문서 4의 5절에 있다.</li>
+</ul>
+<p class="meta">Qiskit 문서: docs.quantum.ibm.com · qiskit-addon-sqd: qiskit.github.io/qiskit-addon-sqd · 수치는 PySCF 2.x, Qiskit 2.x, 난수 시드 1에서 계산했습니다.</p>
+<div class="docnav bottom"><a class="idx" href="index.html">📚 문서 모음</a><span class="pn"><a href="04-circuit.html">← 4. 양자 회로: 근사 바닥상태 만들기</a><a href="06-sqd-guide.html">6. SQD 이해하기 →</a></span></div>
+</main>
+</div>
+<script>
+(function(){
+  var mq=window.matchMedia('(max-width:600px)'); function narrow(){return mq.matches}
+  var ST='<style>.lb{font:13.5px "IBM Plex Sans KR",sans-serif;fill:var(--ink)}.sm{font:11.5px "IBM Plex Sans KR",sans-serif;fill:var(--ink2)}.mo{font:11.5px "IBM Plex Mono",monospace;fill:var(--accent)}.mi{font:11.5px "IBM Plex Mono",monospace;fill:var(--ink)}.ax{font:11.5px "IBM Plex Sans KR",sans-serif;fill:var(--ink2)}</style>';
+  var STN='<style>.lb{font:14px "IBM Plex Sans KR",sans-serif;fill:var(--ink)}.sm{font:12px "IBM Plex Sans KR",sans-serif;fill:var(--ink2)}.mo{font:12px "IBM Plex Mono",monospace;fill:var(--accent)}.mi{font:12px "IBM Plex Mono",monospace;fill:var(--ink)}.ax{font:12px "IBM Plex Sans KR",sans-serif;fill:var(--ink2)}</style>';
+  var AR='<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--ink2)"/></marker></defs>';
+  function setVB(svg,w,h){svg.setAttribute('viewBox','0 0 '+w+' '+h)}
+
+  var TOP=[["00011111|00011111",0.9421],["00110111|00110111",0.00442],["01001111|01001111",0.00442],["00101111|00101111",0.00338],["01010111|01010111",0.00338],["00011111|01100111",0.00301],["01100111|00011111",0.00301],["00101111|01001111",0.00270],["01001111|00101111",0.00270],["00110111|01010111",0.00270]];
+  var SHOTS=[[100,7,0.9585],[1000,30,0.9958],[10000,45,0.9973],[100000,122,0.9997]];
+  var NOISE=[[0,1.0,1.0,52],[0.005,0.923,0.922,59],[0.01,0.8529,0.8502,67],[0.02,0.7351,0.7251,79],[0.03,0.6282,0.6104,82],[0.05,0.4621,0.424,91],[0.08,0.3253,0.2599,116],[0.1,0.2522,0.1777,164]];
+  function interp(rows,col,x){ var xs=rows.map(function(r){return r[0]}); if(x<=xs[0])return rows[0][col]; for(var i=1;i<xs.length;i++){ if(x<=xs[i]){var t=(x-xs[i-1])/(xs[i]-xs[i-1]);return rows[i-1][col]+t*(rows[i][col]-rows[i-1][col]);}} return rows[rows.length-1][col]; }
+
+  function drawOverview(){
+    var svg=document.getElementById('overview-fig');
+    var steps=[['양자 상태','Σ c_x |x⟩','회로가 준비'],['측정 × 샷','Sampler.run','비트열 하나씩'],['BitArray','shots × 16 bits','Qiskit 결과'],['불리언 행렬 + 확률','bit_array_to_arrays','SQD 내부 형식'],['SQD','후선별 → 복구 → 대각화','다음 문서']];
+    var s;
+    if(narrow()){ setVB(svg,360,5*86+10); s=STN+AR;
+      steps.forEach(function(st,i){var y=10+i*86,last=i===4; s+='<rect x="30" y="'+y+'" width="300" height="60" rx="6" fill="'+(last?'var(--beta-soft)':'var(--panel)')+'" stroke="'+(last?'var(--beta)':'var(--line)')+'"/><text x="48" y="'+(y+25)+'" class="lb">'+st[0]+'</text><text x="48" y="'+(y+46)+'" class="mo">'+st[1]+'</text><text x="312" y="'+(y+36)+'" text-anchor="end" class="sm">'+st[2]+'</text>'; if(!last) s+='<line x1="180" y1="'+(y+62)+'" x2="180" y2="'+(y+82)+'" stroke="var(--ink2)" marker-end="url(#ar)"/>';});
+    } else { setVB(svg,720,150); s=ST+AR;
+      steps.forEach(function(st,i){var x=10+i*142,last=i===4,w=last?130:125,cx=x+w/2; s+='<rect x="'+x+'" y="30" width="'+w+'" height="64" rx="6" fill="'+(last?'var(--beta-soft)':'var(--panel)')+'" stroke="'+(last?'var(--beta)':'var(--line)')+'"/><text x="'+cx+'" y="54" text-anchor="middle" class="lb">'+st[0]+'</text><text x="'+cx+'" y="74" text-anchor="middle" class="mo" style="font-size:10.5px">'+st[1]+'</text><text x="'+cx+'" y="120" text-anchor="middle" class="sm">'+st[2]+'</text>'; if(!last) s+='<line x1="'+(x+w+1)+'" y1="62" x2="'+(x+w+15)+'" y2="62" stroke="var(--ink2)" marker-end="url(#ar)"/>';});
+    }
+    svg.innerHTML=s;
+  }
+
+  function drawBorn(){
+    var svg=document.getElementById('born-fig'), n=narrow(), W=n?360:720, rowH=n?34:36, L=n?20:40, labW=n?150:170, T=30, H=T+TOP.length*rowH+40; setVB(svg,W,H);
+    var s=n?STN:ST, R=W-(n?16:40), w=R-L-labW, lo=Math.log10(0.002), hi=0;
+    function X(p){return L+labW+w*(Math.log10(p)-lo)/(hi-lo)}
+    [0.01,0.1,1].forEach(function(t){var x=X(t); s+='<line x1="'+x+'" y1="'+T+'" x2="'+x+'" y2="'+(T+TOP.length*rowH)+'" stroke="var(--line)"/><text x="'+x+'" y="'+(T-10)+'" text-anchor="middle" class="ax">'+(t*100)+'%</text>';});
+    TOP.forEach(function(r,i){var y=T+i*rowH; var parts=r[0].split('|');
+      s+='<text x="'+L+'" y="'+(y+rowH/2+4)+'" class="mi" style="font-size:'+(n?10.5:11.5)+'px"><tspan fill="var(--beta)">'+parts[0]+'</tspan><tspan fill="var(--ink2)">|</tspan><tspan fill="var(--alpha)">'+parts[1]+'</tspan></text>';
+      s+='<rect x="'+(L+labW)+'" y="'+(y+8)+'" width="'+(X(r[1])-L-labW)+'" height="'+(rowH-16)+'" rx="3" fill="'+(i===0?'var(--accent)':'var(--n)')+'" fill-opacity="'+(i===0?1:0.75)+'"/>';
+      s+='<text x="'+(X(r[1])+6)+'" y="'+(y+rowH/2+4)+'" class="ax">'+(r[1]*100).toFixed(2)+'%</text>';});
+    s+='<text x="'+(L+labW+w/2)+'" y="'+(H-10)+'" text-anchor="middle" class="ax">|c_x|² (로그 눈금)</text>';
+    svg.innerHTML=s;
+  }
+
+  function drawShots(){
+    var svg=document.getElementById('shots-fig'), n=narrow(), W=n?360:720, H=n?280:300; setVB(svg,W,H);
+    var s=n?STN:ST, L=n?48:70, R=W-(n?48:70), T=30, B=H-50, w=R-L, h=B-T;
+    function X(i){return L+w*i/3}
+    for(var k=0;k<=4;k++){var y=B-h*k/4; s+='<line x1="'+L+'" y1="'+y+'" x2="'+R+'" y2="'+y+'" stroke="var(--line)"/><text x="'+(L-6)+'" y="'+(y+4)+'" text-anchor="end" class="ax">'+(k*40)+'</text><text x="'+(R+6)+'" y="'+(y+4)+'" class="ax">'+(95+k*1.25).toFixed(2)+'%</text>';}
+    SHOTS.forEach(function(r,i){s+='<text x="'+X(i)+'" y="'+(B+18)+'" text-anchor="middle" class="ax">'+r[0].toLocaleString()+'</text>';});
+    s+='<text x="'+(L+w/2)+'" y="'+(B+38)+'" text-anchor="middle" class="ax">샷 수</text>';
+    var pu='',pc='';
+    SHOTS.forEach(function(r,i){var yu=B-h*Math.min(r[1],160)/160, yc=B-h*((r[2]*100-95)/5); pu+=(i?'L':'M')+X(i)+' '+yu; pc+=(i?'L':'M')+X(i)+' '+yc;});
+    s+='<path d="'+pu+'" fill="none" stroke="var(--n)" stroke-width="2.5"/><path d="'+pc+'" fill="none" stroke="var(--alpha)" stroke-width="2.5" stroke-dasharray="6 4"/>';
+    SHOTS.forEach(function(r,i){var yu=B-h*Math.min(r[1],160)/160, yc=B-h*((r[2]*100-95)/5); s+='<circle cx="'+X(i)+'" cy="'+yu+'" r="4" fill="var(--n)"/><circle cx="'+X(i)+'" cy="'+yc+'" r="4" fill="var(--alpha)"/><text x="'+X(i)+'" y="'+(yu-10)+'" text-anchor="middle" class="ax" fill="var(--n)">'+r[1]+'종류</text>';});
+    s+='<text x="'+L+'" y="'+(T-12)+'" class="ax" fill="var(--n)">고유 배치 수 (왼쪽 축)</text><text x="'+R+'" y="'+(T-12)+'" text-anchor="end" class="ax" fill="var(--alpha)">커버된 확률 (오른쪽 축)</text>';
+    svg.innerHTML=s;
+  }
+
+  var pick=document.getElementById('cfgpick'), cur=0;
+  var NAMES=['HF 기준 배치 (궤도 0~4)','이중 들뜸: α·β 모두 3→5','이중 들뜸: α·β 모두 4→6','이중 들뜸: α·β 모두 4→5','이중 들뜸: α·β 모두 3→6','α 둘만 들뜸 (3→5, 4→6)','β 둘만 들뜸 (3→5, 4→6)'];
+  function renderPick(){ pick.innerHTML=''; TOP.slice(0,7).forEach(function(r,i){var b=document.createElement('button');b.type='button';b.textContent=r[0];b.setAttribute('aria-pressed',i===cur);if(i===cur)b.classList.add('sel');b.onclick=function(){cur=i;renderPick();drawRead();};pick.appendChild(b);}); }
+  function drawRead(){
+    var svg=document.getElementById('read-fig'), n=narrow(), W=n?360:720, H=n?300:230; setVB(svg,W,H);
+    var s=n?STN:ST, bsr=TOP[cur][0].replace('|',''), beta=bsr.slice(0,8), alpha=bsr.slice(8);
+    var cell=n?36:40, gap=n?2:3, x0=n?(W-8*(cell+gap))/2:60;
+    function row(y,str,col,label){ s+='<text x="'+x0+'" y="'+(y-8)+'" class="sm" fill="'+col+'">'+label+'</text>';
+      for(var i=0;i<8;i++){var ch=str[i], x=x0+i*(cell+gap); s+='<rect x="'+x+'" y="'+y+'" width="'+cell+'" height="'+cell+'" rx="4" fill="'+(ch==='1'?col:'var(--code)')+'" stroke="var(--line)"/><text x="'+(x+cell/2)+'" y="'+(y+cell/2+5)+'" text-anchor="middle" class="mi" style="font-size:15px;fill:'+(ch==='1'?'#fff':'var(--ink2)')+'">'+ch+'</text><text x="'+(x+cell/2)+'" y="'+(y+cell+14)+'" text-anchor="middle" class="sm">'+(7-i)+'</text>';} }
+    if(n){ row(40,beta,'var(--beta)','β (왼쪽 8비트)'); row(150,alpha,'var(--alpha)','α (오른쪽 8비트)'); s+='<text x="'+(W/2)+'" y="'+(H-12)+'" text-anchor="middle" class="sm">숫자는 궤도 번호. 같은 번호의 β·α 칸이 같은 공간 궤도</text>'; }
+    else { row(50,beta,'var(--beta)','β (왼쪽 8비트)'); row(140,alpha,'var(--alpha)','α (오른쪽 8비트)'); s+='<text x="'+(x0+8*(cell+gap)+24)+'" y="'+(90)+'" class="sm">숫자는 궤도 번호</text><text x="'+(x0+8*(cell+gap)+24)+'" y="'+(110)+'" class="sm">같은 번호의 β·α 칸이</text><text x="'+(x0+8*(cell+gap)+24)+'" y="'+(130)+'" class="sm">같은 공간 궤도</text>'; }
+    svg.innerHTML=s;
+    var cb=beta.split('1').length-1, ca=alpha.split('1').length-1;
+    document.getElementById('read-status').innerHTML=NAMES[cur]+' · <span class="sp-b">β</span> 1의 개수 '+cb+', <span class="sp-a">α</span> 1의 개수 '+ca+' → '+((cb===5&&ca===5)?'<span class="ok">유효 (nelec = (5,5))</span>':'<span class="bad">무효</span>')+' · 확률 '+(TOP[cur][1]*100).toFixed(2)+'%';
+  }
+
+  var pI=document.getElementById('pflip');
+  function drawNoise(){
+    var p=+pI.value; document.getElementById('pflipv').value=p.toFixed(3);
+    var svg=document.getElementById('noise-fig'), n=narrow(), W=n?360:720, H=n?270:300; setVB(svg,W,H);
+    var s=n?STN:ST, L=n?44:60, R=W-(n?16:30), T=24, B=H-48, w=R-L, h=B-T;
+    function X(x){return L+w*x/0.1} function Y(y){return B-h*y}
+    for(var k=0;k<=4;k++){var y=Y(k/4); s+='<line x1="'+L+'" y1="'+y+'" x2="'+R+'" y2="'+y+'" stroke="var(--line)"/><text x="'+(L-6)+'" y="'+(y+4)+'" text-anchor="end" class="ax">'+(k*25)+'%</text>';}
+    [0,0.02,0.04,0.06,0.08,0.1].forEach(function(x){s+='<text x="'+X(x)+'" y="'+(B+18)+'" text-anchor="middle" class="ax">'+(x*100).toFixed(0)+'%</text>';});
+    s+='<text x="'+(L+w/2)+'" y="'+(B+38)+'" text-anchor="middle" class="ax">비트당 뒤집힘 확률 p</text>';
+    var p1='',p2='',p3='';
+    NOISE.forEach(function(r,i){p1+=(i?'L':'M')+X(r[0])+' '+Y(r[1]); p2+=(i?'L':'M')+X(r[0])+' '+Y(r[2]); p3+=(i?'L':'M')+X(r[0])+' '+Y(Math.pow(1-r[0],16));});
+    s+='<path d="'+p3+'" fill="none" stroke="var(--ink2)" stroke-width="1.5" stroke-dasharray="3 3"/><path d="'+p1+'" fill="none" stroke="var(--n)" stroke-width="2.5"/><path d="'+p2+'" fill="none" stroke="var(--alpha)" stroke-width="2.5"/>';
+    s+='<line x1="'+X(p)+'" y1="'+T+'" x2="'+X(p)+'" y2="'+B+'" stroke="var(--accent)" stroke-dasharray="4 3"/>';
+    s+='<text x="'+(L+8)+'" y="'+(T+14)+'" class="ax" fill="var(--n)">— 후선별 통과율</text><text x="'+(L+8)+'" y="'+(T+32)+'" class="ax" fill="var(--alpha)">— 통과하고 원래 그대로</text><text x="'+(L+8)+'" y="'+(T+50)+'" class="ax">┈ (1−p)¹⁶</text>';
+    svg.innerHTML=s;
+    var pass=interp(NOISE,1,p), okc=interp(NOISE,2,p), uq=interp(NOISE,3,p);
+    document.getElementById('n-pass').textContent=(pass*100).toFixed(1)+'%';
+    document.getElementById('n-ok').textContent=pass>0?((okc/pass)*100).toFixed(1)+'%':'–';
+    document.getElementById('n-uniq').textContent=Math.round(uq);
+    document.getElementById('n-clean').textContent=(Math.pow(1-p,16)*100).toFixed(1)+'%';
+  }
+  pI.oninput=drawNoise;
+
+  function drawAll(){drawOverview();drawBorn();drawShots();drawRead();drawNoise();}
+  renderPick(); drawAll();
+  if(mq.addEventListener) mq.addEventListener('change',drawAll); else mq.addListener(drawAll);
+  var links=[].slice.call(document.querySelectorAll('nav a')), heads=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  function hl(){var y=window.scrollY+120, cur=0; heads.forEach(function(hh,i){if(hh&&hh.offsetTop<=y)cur=i;}); links.forEach(function(a,i){a.classList.toggle('on',i===cur);});}
+  window.addEventListener('scroll',hl,{passive:true}); hl();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+# 이 세션에서 문서 숫자를 만든 버전 (Python 3.12)
+pyscf==2.14.0
+qiskit==2.5.2
+qiskit-addon-sqd==0.14.0
+ffsim==0.0.84
+qiskit-nature==0.8.0
+numpy==2.4.4
+scipy==1.17.1
+scikit-image==0.26.0

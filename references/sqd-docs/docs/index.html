@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SQD 문서 모음 — 비전공자를 위한 Sample-based Quantum Diagonalization</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#F3F5F7;--panel:#FFFFFF;--ink:#1E2A38;--ink2:#5B6878;--line:#D5DBE3;
+  --alpha:#C8731F;--alpha-soft:#F6E3CF;--beta:#1F7A8C;--beta-soft:#D4EAEE;
+  --accent:#2F4F8A;--code:#EEF1F5;--warn:#B23A48;--n:#3B5BA5;--nsoft:#D7E0F5;--active:#BFE6D6;--frozen:#E2E5EA}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161B22;--panel:#1F2630;--ink:#E6EAF0;--ink2:#9AA6B5;--line:#344050;
+  --alpha:#E4954A;--alpha-soft:#4A3420;--beta:#5FB8C9;--beta-soft:#183A42;--accent:#8FB0F0;--code:#111620;--warn:#E07A86;--n:#7F9BE0;--nsoft:#243352;--active:#1F4A3C;--frozen:#2A313B}}
+:root[data-theme="dark"]{--bg:#161B22;--panel:#1F2630;--ink:#E6EAF0;--ink2:#9AA6B5;--line:#344050;
+  --alpha:#E4954A;--alpha-soft:#4A3420;--beta:#5FB8C9;--beta-soft:#183A42;--accent:#8FB0F0;--code:#111620;--warn:#E07A86;--n:#7F9BE0;--nsoft:#243352;--active:#1F4A3C;--frozen:#2A313B}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;font-size:16px;line-height:1.75;word-break:keep-all}
+code,pre,.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+a{color:var(--accent)}
+.wrap{display:grid;grid-template-columns:220px minmax(0,1fr);gap:48px;max-width:1100px;margin:0 auto;padding:32px 24px 96px}
+nav{position:sticky;top:calc(24px + env(safe-area-inset-top,0px));align-self:start;font-size:14px;line-height:1.6}
+nav ol{list-style:none;padding:0;margin:0;border-left:2px solid var(--line)}
+nav li a{display:block;padding:5px 0 5px 14px;color:var(--ink2);text-decoration:none;margin-left:-2px;border-left:2px solid transparent}
+nav li a:hover,nav li a.on{color:var(--ink);border-left-color:var(--accent)}
+nav .tag{margin:0 0 14px;font-size:13px;color:var(--ink2)}
+main{max-width:720px}
+h1{font-size:2.1rem;line-height:1.25;font-weight:600;margin:0 0 10px;letter-spacing:-.01em}
+h2{font-size:1.45rem;font-weight:600;margin:64px 0 14px;padding-top:16px;border-top:1px solid var(--line)}
+h3{font-size:1.08rem;font-weight:600;margin:32px 0 8px}
+p{margin:0 0 14px}
+.lead{font-size:1.1rem;color:var(--ink2);margin-bottom:24px}
+.meta{font-size:13.5px;color:var(--ink2);margin-bottom:28px}
+figure{margin:22px 0;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px}
+figure svg{display:block;width:100%;height:auto;max-width:100%}
+figcaption{font-size:13.5px;color:var(--ink2);margin-top:10px;line-height:1.55}
+.scroll{overflow-x:auto}
+pre{background:var(--code);border:1px solid var(--line);border-radius:6px;padding:14px 16px;overflow-x:auto;font-size:13.5px;line-height:1.6;margin:14px 0}
+code{font-size:.92em}
+p code,li code,td code{background:var(--code);padding:1px 5px;border-radius:3px}
+.c{color:var(--ink2)}.k{color:var(--accent)}.s{color:var(--beta)}.n{color:var(--alpha)}.o{color:var(--ink2)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:14px 0}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--ink2)}
+td.num{text-align:right;font-family:"IBM Plex Mono",monospace}
+.callout{border-left:3px solid var(--accent);padding:4px 14px;margin:18px 0;color:var(--ink2);font-size:15px}
+.ctrl{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;font-size:14px;margin-bottom:10px}
+.ctrl label{display:flex;align-items:center;gap:8px}
+.ctrl input[type=range]{width:160px;accent-color:var(--accent)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:5px;overflow:hidden}
+.seg button{border:0;background:var(--panel);color:var(--ink);padding:6px 12px;font-size:13.5px;cursor:pointer;font-family:"IBM Plex Mono",monospace}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button.on{background:var(--accent);color:#fff}
+button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.readout{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:12px}
+.readout div{background:var(--code);border-radius:5px;padding:8px 12px;font-size:13.5px;color:var(--ink2)}
+.readout b{display:block;font-size:20px;font-weight:500;color:var(--ink);font-family:"IBM Plex Mono",monospace}
+.legend{display:flex;gap:18px;font-size:13.5px;color:var(--ink2);flex-wrap:wrap;margin-top:8px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:-1px;margin-right:6px}
+.sp-a{color:var(--alpha);font-weight:600}.sp-b{color:var(--beta);font-weight:600}
+@media (max-width:860px){.wrap{grid-template-columns:1fr;gap:16px;padding:20px 16px 80px}nav{position:static}nav ol{display:flex;flex-wrap:wrap;gap:2px 10px;border:0}nav li a{padding:2px 0;border:0}h1{font-size:1.7rem}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+@media (max-width:860px){
+  body{font-size:15px}
+  figure{padding:12px 10px;margin:18px 0;overflow:visible}
+  figure svg{width:100%}
+  .readout{grid-template-columns:1fr 1fr}
+  .readout b{font-size:17px}
+  pre{font-size:12.5px;padding:12px}
+  table{font-size:13.5px}
+  th,td{padding:6px 6px}
+  .ctrl input[type=range]{width:120px}
+  .two{grid-template-columns:1fr}
+  #prodgrid{min-width:0}
+  .bits button.bit{width:28px}
+}
+
+/* layout safety: nothing may widen the page */
+html,body{max-width:100%;overflow-x:hidden}
+.wrap{grid-template-columns:220px minmax(0,1fr);width:100%}
+main{min-width:0;max-width:720px;width:100%}
+nav{min-width:0}
+figure,pre,table,.readout,.ctrl{min-width:0;max-width:100%}
+figure svg{max-width:100%}
+p,li,figcaption,td,th{overflow-wrap:anywhere}
+@media (max-width:860px){
+  .wrap{grid-template-columns:minmax(0,1fr)}
+  main{max-width:100%}
+  table{display:block;overflow-x:auto}
+}
+
+.wrap{display:block;max-width:860px}
+.grid{display:grid;grid-template-columns:1fr;gap:12px;margin:24px 0}
+.card{display:block;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px 20px;text-decoration:none;color:var(--ink);transition:border-color .15s}
+.card:hover{border-color:var(--accent)}
+.card .num{font-size:13px;color:var(--ink2);font-family:"IBM Plex Mono",monospace}
+.card .em{font-size:16px;margin-left:4px}
+.card h3{margin:6px 0 2px;font-size:1.05rem}
+.card .sub{color:var(--ink2);font-size:13.5px;margin:0 0 8px}
+.card .desc{font-size:14px;margin:0 0 8px;line-height:1.6}
+.card .tagline{font-size:12.5px;color:var(--accent);margin:0;font-family:"IBM Plex Mono",monospace}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:14px;margin:12px 0}
+.flow span{background:var(--code);border:1px solid var(--line);border-radius:5px;padding:4px 10px}
+.flow i{color:var(--ink2);font-style:normal}
+</style>
+</head>
+<body>
+<div class="wrap">
+<main style="max-width:860px">
+<h1>SQD 문서 모음<br><span style="font-weight:400;color:var(--ink2);font-size:1.3rem">비전공자를 위한 Sample-based Quantum Diagonalization</span></h1>
+<p class="meta">한 세션에서 만든 문서 열한 편입니다. "준비"는 수학 문서를 위한 벡터·행렬·확률 기초, "수학"은 입문의 대각화·샘플링을 식으로 세운 보충, "배경"은 주기율표·원자 상식, "입문"이 배경지식 없는 독자용 출발점, 0번이 코드가 있는 시작점이고, 1~6이 데이터 흐름 순서로 깊이 들어갑니다. 모두 같은 예제(N₂, cc-pVDZ, 활성 8궤도·10전자)와 실제 계산값을 쓰고, 폰에서도 읽히도록 만들었습니다. 각 문서 위아래에 이전·다음 문서 링크가 있습니다. qiskit-addon-sqd 0.14, PySCF 2.x, ffsim, Qiskit 2.x 기준.</p>
+
+<h2 style="margin-top:32px">데이터가 흐르는 순서 = 문서 순서</h2>
+<div class="flow">
+<span>분자 + 기저</span><i>→</i><span>HF</span><i>→</i><span>활성 공간</span><i>→</i><span>hcore, eri</span><i>→</i><span>큐비트 대응</span><i>→</i><span>회로 각도</span><i>→</i><span>양자 회로</span><i>→</i><span>측정</span><i>→</i><span>bit_array</span><i>→</i><span>후선별 · 복구 · 대각화</span><i>→</i><span>에너지</span>
+</div>
+<table>
+<tr><th>문서</th><th>파이프라인 구간</th><th>SQD 함수의 어떤 인자</th></tr>
+<tr><td>0</td><td>전체 (공식 Quickstart 순서: 입력 → 샘플 → 후처리)</td><td>전부, 가장 짧게</td></tr>
+<tr><td>1</td><td>분자 → hcore, eri, norb, nelec</td><td><code>hcore, eri, norb, nelec</code></td></tr>
+<tr><td>2</td><td>hcore, eri → 큐비트 대응</td><td>—</td></tr>
+<tr><td>3</td><td>→ 회로 각도 (t₂ → 궤도 회전 · 쿨롱), 최적화</td><td>—</td></tr>
+<tr><td>4</td><td>→ 회로 조립 → 양자 상태, 끝까지 실행</td><td>—</td></tr>
+<tr><td>5</td><td>양자 상태 → 측정 → bit_array</td><td><code>bit_array</code></td></tr>
+<tr><td>6</td><td>bit_array → 후선별 · 복구 · 대각화 → 에너지</td><td>함수 본체</td></tr>
+</table>
+<p>배경이 없다면 입문부터, 코드를 바로 보려면 0부터 시작해 전체 윤곽을 잡은 뒤 1부터 6까지 차례로 읽으면 파이프라인을 처음부터 끝까지 따라가게 됩니다. 2와 3은 가장 기술적인 부분이라, 처음에는 1 → 4 → 5 → 6으로 건너뛰고 나중에 2·3을 채우는 것도 괜찮습니다. 코드만 빨리 돌리고 싶다면 4의 "전체 코드" 30줄이 여섯 문서를 전부 잇습니다.</p>
+
+<div class="grid">
+<a class="card" href="background-atoms.html">
+  <div class="num">배경 <span class="em">🧬</span></div>
+  <h3>주기율표와 원자, 계산에 필요한 만큼만</h3>
+  <p class="sub">양자 화학 알고리즘을 읽기 위한 배경</p>
+  <p class="desc">원자 번호 = 전자 수, 껍질(1s·2s·2p), 내각과 원자가, 스핀과 두 규칙(파울리·훈트), 분자로 합치기. 1~18번 원소를 누르면 전자 수·↑↓·내각/원자가·최소 기저 자리 수가 나오는 주기율표.</p>
+  <p class="tagline">입문과 문서 1에서 "전자 몇 개, 자리 몇 개"가 나올 때 돌아올 곳</p>
+</a>
+<a class="card" href="intro.html">
+  <div class="num">입문 <span class="em">🌱</span></div>
+  <h3>SQD, 처음부터</h3>
+  <p class="sub">행렬을 몰라도 읽는 양자 화학 계산 이야기</p>
+  <p class="desc">이과 1학년 수준, 코드 없음. 수소 분자 H₂(배치 4개)로 "전자는 자리에 앉는다 → 에너지 표 → 섞으면 내려간다 → 대각화 → 배치 수 폭발 → 후보 명단 → 양자컴퓨터는 가중 주사위 → 틀린 것 고치기 → 한 바퀴"까지. 실제 H₂ 계산값과 인터랙티브 그림 10개.</p>
+  <p class="tagline">가장 먼저 읽는 문서 · 용어 대응표로 0~6과 연결</p>
+</a>
+<a class="card" href="prep-math.html">
+  <div class="num">준비 <span class="em">🧮</span></div>
+  <h3>수학 문서 읽기 전에</h3>
+  <p class="sub">벡터·행렬·확률, 작은 숫자로 미리 만져 보기</p>
+  <p class="desc">대학 1학년 대상. 장난감 행렬 [[2,1],[1,2]] 하나로 벡터·내적·행렬 변환·대칭·고유벡터·대각화·반복 수렴을, diag(1,2,3)으로 부분공간(3D)을, 주사위와 동전으로 기댓값·분산·이항분포·희귀 사건·로그 눈금을. 마지막에 H₂로 연결, 점검 퀴즈 8문항.</p>
+  <p class="tagline">입문 → 준비 → 수학 순서로</p>
+</a>
+<a class="card" href="math.html">
+  <div class="num">수학 <span class="em">📐</span></div>
+  <h3>대각화와 샘플링, 수학으로</h3>
+  <p class="sub">SQD의 두 기둥을 식으로 세우기</p>
+  <p class="desc">고등학교 벡터·행렬에서 출발. A부: 레일리 몫 → 라그랑주 → Hc = λc, H₂ 2×2 손계산, 멱법, 랑초스 법(N₂ 3,136차원 실제 수렴), 레일리–리츠 부분공간 정리. B부: Born 규칙, 샷 통계와 오차, 발견 확률 1 − (1−p)^M, 커버리지와 에너지 오차, 잡음 모형. 인터랙티브 6개.</p>
+  <p class="tagline">입문 4·7절의 보충 · 확률 기초는 전제</p>
+</a>
+<a class="card" href="00-quickstart.html">
+  <div class="num">0 <span class="em">🚀</span></div>
+  <h3>SQD 퀵스타트 따라가기</h3>
+  <p class="sub">공식 Quickstart를 한 줄씩 풀어 읽기</p>
+  <p class="desc">qiskit-addon-sqd 공식 Quickstart(N₂ STO-3G, 난수 비트열 10,000개)를 셀 단위로 설명. 입력 준비 → 잡음 샘플 → SQD 후처리의 세 단계, 옵션 하나씩, 반복별 실제 결과. 전체 흐름을 가장 짧게 보는 시작점.</p>
+  <p class="tagline">시작점 · 1~6 문서로 연결</p>
+</a>
+<a class="card" href="01-pyscf.html">
+  <div class="num">1 <span class="em">🧪</span></div>
+  <h3>PySCF로 SQD 입력 만들기</h3>
+  <p class="sub">질소 분자 N₂ 예제</p>
+  <p class="desc">기저 선택 → Hartree-Fock → 활성 공간 → 적분 텐서. hcore, eri, norb, nelec의 정의와 "가격표" 비유.</p>
+  <p class="tagline">분자 + 기저 → HF → 활성 공간 → hcore, eri</p>
+</a>
+<a class="card" href="02-jordan-wigner.html">
+  <div class="num">2 <span class="em">🔀</span></div>
+  <h3>궤도를 큐비트로</h3>
+  <p class="sub">Jordan–Wigner 변환</p>
+  <p class="desc">스핀 궤도 = 큐비트, 점유 = Z, 이동 = X/Y + Z 사슬, 파울리 항 수, SQD 코드에서 이 변환이 쓰이는 자리.</p>
+  <p class="tagline">hcore, eri → 큐비트 대응</p>
+</a>
+<a class="card" href="03-ucj-inside.html">
+  <div class="num">3 <span class="em">🎛️</span></div>
+  <h3>UCJ 회로 안쪽</h3>
+  <p class="sub">층의 구조, 각도의 출처, 최적화</p>
+  <p class="desc">Givens 회전 네트워크, 대각 쿨롱 쌍 선택, t₂ 이중 인수분해, n_reps, 각도 최적화로 오차 50→9 mHa.</p>
+  <p class="tagline">→ 회로 각도</p>
+</a>
+<a class="card" href="04-circuit.html">
+  <div class="num">4 <span class="em">🔧</span></div>
+  <h3>양자 회로: 근사 바닥상태 만들기</h3>
+  <p class="sub">hcore·eri에서 양자 상태까지</p>
+  <p class="desc">회로 조립(HF 준비 + UCJ 층), UCJ/LUCJ 비교, 만든 상태 vs 정답, 여섯 문서를 잇는 30줄 코드.</p>
+  <p class="tagline">→ 양자 회로 → 양자 상태</p>
+</a>
+<a class="card" href="05-sampling.html">
+  <div class="num">5 <span class="em">🎲</span></div>
+  <h3>샘플링: 비트열 얻기</h3>
+  <p class="sub">양자 상태에서 bit_array까지</p>
+  <p class="desc">Born 규칙, 샷 수와 커버율, BitArray 형식, 비트 뒤집힘 잡음, 후선별.</p>
+  <p class="tagline">→ 측정 → bit_array</p>
+</a>
+<a class="card" href="06-sqd-guide.html">
+  <div class="num">6 <span class="em">⚛️</span></div>
+  <h3>SQD 이해하기</h3>
+  <p class="sub">qiskit-addon-sqd 구조와 알고리즘</p>
+  <p class="desc">고전 후처리 전체. 비트열 규약과 모듈 지도 뒤에, N₂ 잡음 샘플로 실제 실행한 한 바퀴를 따라가며 후선별 · 구성 복구 · 부분공간 · 대각화 · 수렴을 설명.</p>
+  <p class="tagline">→ 후선별 · 복구 · 대각화 → 에너지</p>
+</a>
+</div>
+
+<h2>문서를 관통하는 숫자 (N₂)</h2>
+<table>
+<tr><th>항목</th><th>값</th><th>문서</th></tr>
+<tr><td>궤도 수 (cc-pVDZ 전체 / 활성)</td><td class="num">28 / 8</td><td>1</td></tr>
+<tr><td>전자 수 (전체 / 활성)</td><td class="num">14 / (5, 5)</td><td>1</td></tr>
+<tr><td>큐비트 수</td><td class="num">16</td><td>2, 4</td></tr>
+<tr><td>유효 배치 수 (2¹⁶ 중)</td><td class="num">3,136 (65,536 중)</td><td>2, 5</td></tr>
+<tr><td>HF / CCSD / CASCI 에너지 (Ha)</td><td class="num">−108.954 / −109.033 / −109.034</td><td>1, 4</td></tr>
+<tr><td>UCJ / LUCJ 1회 반복 각도 수</td><td class="num">136 / 73</td><td>3, 4</td></tr>
+<tr><td>회로 깊이 UCJ / LUCJ</td><td class="num">307 / 166</td><td>4</td></tr>
+<tr><td>UCJ 각도 최적화 후 상태 오차</td><td class="num">9 mHa</td><td>3</td></tr>
+<tr><td>HF 배치의 바닥상태 확률</td><td class="num">94.2%</td><td>5</td></tr>
+<tr><td>상위 50개 배치의 누적 확률</td><td class="num">99.8%</td><td>5</td></tr>
+<tr><td>SQD 오차, UCJ 10만 샷 (최적화 전)</td><td class="num">13 mHa</td><td>4</td></tr>
+<tr><td>SQD 오차, 3% 잡음 샘플 8회 반복</td><td class="num">4.0 → 1.4 mHa</td><td>6</td></tr>
+</table>
+
+<h2>비전공자가 알아야 할 범위</h2>
+<p><strong>반드시:</strong> 배치 = 비트열, 비트열 규약 [β|α], norb·nelec은 크기이고 hcore·eri는 가격표, 측정 빈도 ≈ 진폭², 양자컴퓨터는 후보만 만들고 에너지는 고전 대각화가 구함, 전자 수 불일치 = 잡음.</p>
+<p><strong>알면 좋음:</strong> 기저 = 블록 수, 활성 공간 = 궤도 자르기, HF는 출발점, charge·spin이 전자 수와 α/β를 정함, ecore를 더해야 전체 에너지, 상관이 커지는 상황이 SQD가 필요한 이유.</p>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>수학 문서 읽기 전에 — 벡터·행렬·확률, 작은 숫자로 미리 만져 보기</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#F3F5F7;--panel:#FFFFFF;--ink:#1E2A38;--ink2:#5B6878;--line:#D5DBE3;
+  --alpha:#C8731F;--alpha-soft:#F6E3CF;--beta:#1F7A8C;--beta-soft:#D4EAEE;
+  --accent:#2F4F8A;--code:#EEF1F5;--warn:#B23A48;--n:#3B5BA5;--nsoft:#D7E0F5;--active:#BFE6D6;--frozen:#E2E5EA}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161B22;--panel:#1F2630;--ink:#E6EAF0;--ink2:#9AA6B5;--line:#344050;
+  --alpha:#E4954A;--alpha-soft:#4A3420;--beta:#5FB8C9;--beta-soft:#183A42;--accent:#8FB0F0;--code:#111620;--warn:#E07A86;--n:#7F9BE0;--nsoft:#243352;--active:#1F4A3C;--frozen:#2A313B}}
+:root[data-theme="dark"]{--bg:#161B22;--panel:#1F2630;--ink:#E6EAF0;--ink2:#9AA6B5;--line:#344050;
+  --alpha:#E4954A;--alpha-soft:#4A3420;--beta:#5FB8C9;--beta-soft:#183A42;--accent:#8FB0F0;--code:#111620;--warn:#E07A86;--n:#7F9BE0;--nsoft:#243352;--active:#1F4A3C;--frozen:#2A313B}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;font-size:16px;line-height:1.75;word-break:keep-all}
+code,pre,.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+a{color:var(--accent)}
+.wrap{display:grid;grid-template-columns:220px minmax(0,1fr);gap:48px;max-width:1100px;margin:0 auto;padding:32px 24px 96px}
+nav{position:sticky;top:calc(24px + env(safe-area-inset-top,0px));align-self:start;font-size:14px;line-height:1.6}
+nav ol{list-style:none;padding:0;margin:0;border-left:2px solid var(--line)}
+nav li a{display:block;padding:5px 0 5px 14px;color:var(--ink2);text-decoration:none;margin-left:-2px;border-left:2px solid transparent}
+nav li a:hover,nav li a.on{color:var(--ink);border-left-color:var(--accent)}
+nav .tag{margin:0 0 14px;font-size:13px;color:var(--ink2)}
+main{max-width:720px}
+h1{font-size:2.1rem;line-height:1.25;font-weight:600;margin:0 0 10px;letter-spacing:-.01em}
+h2{font-size:1.45rem;font-weight:600;margin:64px 0 14px;padding-top:16px;border-top:1px solid var(--line)}
+h3{font-size:1.08rem;font-weight:600;margin:32px 0 8px}
+p{margin:0 0 14px}
+.lead{font-size:1.1rem;color:var(--ink2);margin-bottom:24px}
+.meta{font-size:13.5px;color:var(--ink2);margin-bottom:28px}
+figure{margin:22px 0;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px}
+figure svg{display:block;width:100%;height:auto;max-width:100%}
+figcaption{font-size:13.5px;color:var(--ink2);margin-top:10px;line-height:1.55}
+.scroll{overflow-x:auto}
+pre{background:var(--code);border:1px solid var(--line);border-radius:6px;padding:14px 16px;overflow-x:auto;font-size:13.5px;line-height:1.6;margin:14px 0}
+code{font-size:.92em}
+p code,li code,td code{background:var(--code);padding:1px 5px;border-radius:3px}
+.c{color:var(--ink2)}.k{color:var(--accent)}.s{color:var(--beta)}.n{color:var(--alpha)}.o{color:var(--ink2)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:14px 0}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--ink2)}
+td.num{text-align:right;font-family:"IBM Plex Mono",monospace}
+.callout{border-left:3px solid var(--accent);padding:4px 14px;margin:18px 0;color:var(--ink2);font-size:15px}
+.ctrl{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;font-size:14px;margin-bottom:10px}
+.ctrl label{display:flex;align-items:center;gap:8px}
+.ctrl input[type=range]{width:160px;accent-color:var(--accent)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:5px;overflow:hidden}
+.seg button{border:0;background:var(--panel);color:var(--ink);padding:6px 12px;font-size:13.5px;cursor:pointer;font-family:"IBM Plex Mono",monospace}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button.on{background:var(--accent);color:#fff}
+button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.readout{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:12px}
+.readout div{background:var(--code);border-radius:5px;padding:8px 12px;font-size:13.5px;color:var(--ink2)}
+.readout b{display:block;font-size:20px;font-weight:500;color:var(--ink);font-family:"IBM Plex Mono",monospace}
+.legend{display:flex;gap:18px;font-size:13.5px;color:var(--ink2);flex-wrap:wrap;margin-top:8px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:-1px;margin-right:6px}
+.sp-a{color:var(--alpha);font-weight:600}.sp-b{color:var(--beta);font-weight:600}
+@media (max-width:860px){.wrap{grid-template-columns:1fr;gap:16px;padding:20px 16px 80px}nav{position:static}nav ol{display:flex;flex-wrap:wrap;gap:2px 10px;border:0}nav li a{padding:2px 0;border:0}h1{font-size:1.7rem}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+@media (max-width:860px){
+  body{font-size:15px}
+  figure{padding:12px 10px;margin:18px 0;overflow:visible}
+  figure svg{width:100%}
+  .readout{grid-template-columns:1fr 1fr}
+  .readout b{font-size:17px}
+  pre{font-size:12.5px;padding:12px}
+  table{font-size:13.5px}
+  th,td{padding:6px 6px}
+  .ctrl input[type=range]{width:120px}
+  .two{grid-template-columns:1fr}
+  #prodgrid{min-width:0}
+  .bits button.bit{width:28px}
+}
+
+/* layout safety: nothing may widen the page */
+html,body{max-width:100%;overflow-x:hidden}
+.wrap{grid-template-columns:220px minmax(0,1fr);width:100%}
+main{min-width:0;max-width:720px;width:100%}
+nav{min-width:0}
+figure,pre,table,.readout,.ctrl{min-width:0;max-width:100%}
+figure svg{max-width:100%}
+p,li,figcaption,td,th{overflow-wrap:anywhere}
+@media (max-width:860px){
+  .wrap{grid-template-columns:minmax(0,1fr)}
+  main{max-width:100%}
+  table{display:block;overflow-x:auto}
+}
+
+.btn{border:1px solid var(--accent);background:var(--accent);color:#fff;border-radius:5px;padding:6px 14px;font-size:13.5px;cursor:pointer;font-family:inherit}
+.btn2{background:var(--panel);color:var(--ink);border-color:var(--line)}
+.ok{color:var(--beta)}.bad{color:var(--warn)}
+.qz{border:1px solid var(--line);border-radius:6px;padding:12px 14px;margin:10px 0;background:var(--panel)}
+.qq{margin:0 0 8px}.qo{display:flex;flex-wrap:wrap;gap:6px}.qo button{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:5px;padding:6px 12px;font-size:14px;cursor:pointer;font-family:inherit}
+.qo button.right{border-color:var(--beta);background:var(--beta-soft)}.qo button.wrong{border-color:var(--warn)}
+.qf{margin:8px 0 0;font-size:14px;color:var(--ink2)}
+.docnav{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;font-size:13.5px;padding:10px 0;border-bottom:1px solid var(--line);margin-bottom:20px}
+.docnav .pn{display:flex;gap:16px;flex-wrap:wrap}.docnav a{text-decoration:none}.docnav .dim{color:var(--ink2)}
+.docnav.bottom{border-bottom:0;border-top:1px solid var(--line);margin:48px 0 0;padding-top:16px}
+sub,sup{font-size:.75em}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav aria-label="목차">
+  <p class="tag">준비 · 대학 1학년 · 손계산 가능한 숫자</p>
+  <ol>
+    <li><a href="#s0">0. 읽는 법</a></li>
+    <li><a href="#s1">1. 벡터</a></li>
+    <li><a href="#s2">2. 내적과 그림자</a></li>
+    <li><a href="#s3">3. 행렬 × 벡터</a></li>
+    <li><a href="#s4">4. 대칭 행렬</a></li>
+    <li><a href="#s5">5. 고유벡터·고유값</a></li>
+    <li><a href="#s6">6. 축 바꾸기</a></li>
+    <li><a href="#s7">7. 반복과 수렴</a></li>
+    <li><a href="#s8">8. 부분공간 (3D)</a></li>
+    <li><a href="#s9">9. 기댓값과 분산</a></li>
+    <li><a href="#s10">10. 반복 시행과 오차</a></li>
+    <li><a href="#s11">11. 희귀한 것 보기</a></li>
+    <li><a href="#s12">12. 로그 눈금</a></li>
+    <li><a href="#s13">13. H₂로 한 번에</a></li>
+    <li><a href="#quiz">점검 퀴즈</a></li>
+  </ol>
+</nav>
+
+<main>
+<div class="docnav"><a class="idx" href="index.html">📚 문서 모음</a><span class="pn"><a href="intro.html">← 입문: SQD, 처음부터</a><a href="math.html">수학: 대각화와 샘플링 →</a></span></div>
+<h1>수학 문서 읽기 전에<br><span style="font-weight:400;color:var(--ink2)">벡터·행렬·확률, 작은 숫자로 미리 만져 보기</span></h1>
+<p class="meta">"대각화와 샘플링, 수학으로"를 읽기 전에 보는 준비 문서입니다. 고등학교 수학을 마친 대학 1학년을 가정합니다. 개념 열네 개를 다루고, 개념마다 "한 줄 정의 → 손으로 푸는 예제 → 만져 보는 그림 → 수학 문서의 어디에 쓰이는지" 순서로 갑니다. 예제는 화학이 아니라 정수로 떨어지는 장난감 숫자이고, 마지막 13절에서만 H₂로 연결합니다.</p>
+
+<h2 id="s0">0. 이 문서를 읽는 법</h2>
+<p>문서 전체에서 행렬 하나를 끝까지 씁니다.</p>
+<p style="text-align:center;font-size:1.15rem" class="mono">M = [ 2 1 ]<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 1 2 ]</p>
+<p>이 행렬은 모든 계산이 정수와 √2로 끝나서 손으로 확인할 수 있습니다. 3~7절은 전부 M으로, 8절만 3차원 행렬로, 9~12절은 동전과 주사위로 진행합니다. 아래 지도는 각 개념이 수학 문서의 어느 절에 쓰이는지입니다.</p>
+<figure>
+<svg id="map-fig" viewBox="0 0 720 360" role="img" aria-label="개념 열네 개와 수학 문서 절의 대응 지도"></svg>
+<figcaption>왼쪽 열이 이 문서의 절, 오른쪽 열이 수학 문서의 절. 선은 "이 개념이 저기서 쓰인다". 벡터·행렬 묶음은 A부(대각화), 확률 묶음은 B부(샘플링)로 갑니다.</figcaption>
+</figure>
+
+<h2 id="s1">1. 벡터: 화살표이자 숫자 목록</h2>
+<p><strong>정의.</strong> 벡터는 숫자 몇 개를 순서대로 적은 목록이고, 숫자가 둘이면 평면 위의 화살표로 그릴 수 있습니다. (3, 4)는 "오른쪽으로 3, 위로 4"인 화살표입니다.</p>
+<p><strong>길이.</strong> 피타고라스로 √(3² + 4²) = 5. 길이로 나누면 길이 1인 <strong>단위벡터</strong> (0.6, 0.8)가 됩니다.</p>
+<p><strong>덧셈과 실수배.</strong> (1, 0)을 0.6배, (0, 1)을 0.8배 해서 더하면 (0.6, 0.8). 두 "재료 방향"을 비율대로 섞어 새 방향을 만드는 것입니다. 수학 문서에서 축 (1, 0)은 "배치 A", (0, 1)은 "배치 D"이고, 섞인 상태가 바로 이런 벡터입니다.</p>
+<figure>
+<div class="ctrl"><label>두 번째 재료(D)의 몫 <input type="range" id="s1s" min="0" max="90" step="1" value="53"><output id="s1v" class="mono">53°</output></label></div>
+<svg id="s1-fig" viewBox="0 0 720 300" role="img" aria-label="두 축 벡터를 섞어 단위벡터를 만드는 그림"></svg>
+<div class="readout"><div>벡터<b id="s1c">(0.60, 0.80)</b></div><div>길이<b id="s1l">1.000</b></div><div>첫 성분²<b id="s1a">36%</b></div><div>둘째 성분²<b id="s1d">64%</b></div></div>
+<figcaption>길이 1을 유지한 채 방향을 바꾸면 두 성분의 제곱이 항상 합 100%입니다. 이 "제곱 합 = 1"이 수학 문서와 입문 문서의 "비중 합 100%"이고, 9절에서는 이 제곱이 확률이 됩니다. → 수학 문서 A1, A2, B1</figcaption>
+</figure>
+
+<h2 id="s2">2. 내적과 그림자</h2>
+<p><strong>정의.</strong> 두 벡터 u, v의 내적은 같은 자리끼리 곱해서 더한 것입니다. u·v = u₁v₁ + u₂v₂.</p>
+<p><strong>예제.</strong> (1, 0)·(1, 1) = 1. (1, 1)·(1, −1) = 1 − 1 = 0.</p>
+<p><strong>뜻.</strong> u가 단위벡터면 v·u는 "v가 u 방향으로 드리운 그림자의 길이"(정사영)입니다. 내적이 0이면 그림자가 없다, 즉 두 벡터가 <strong>수직</strong>입니다. (1, 1)과 (1, −1)이 수직인 것을 계산 한 줄로 확인했습니다. 이 둘은 5절에서 M의 특별한 두 방향으로 다시 나옵니다.</p>
+<figure>
+<div class="ctrl"><label>v의 방향 <input type="range" id="s2s" min="0" max="180" step="1" value="45"><output id="s2v" class="mono">45°</output></label></div>
+<svg id="s2-fig" viewBox="0 0 720 280" role="img" aria-label="벡터 v가 단위벡터 u 방향으로 드리운 그림자"></svg>
+<figcaption>u = (1, 0) 고정, v는 길이 √2인 화살표. 주황 막대가 그림자(= v·u). v가 u와 수직(90°)이면 0, 반대(180°)면 음수. 수학 문서에서 "에너지"는 출력 화살표 Hc가 입력 c 방향으로 드리운 그림자입니다. → 수학 문서 A3, A4</figcaption>
+</figure>
+
+<h2 id="s3">3. 행렬 × 벡터 = 화살표를 바꾸는 기계</h2>
+<p><strong>정의.</strong> 행렬에 벡터를 곱하면 새 벡터가 나옵니다. 각 행과 벡터의 내적이 새 벡터의 각 성분입니다.</p>
+<p style="text-align:center" class="mono">M (x, y) = (2x + y, x + 2y)</p>
+<p><strong>예제.</strong> M(1, 0) = (2, 1). M(0, 1) = (1, 2). M(1, 1) = (3, 3). M(1, −1) = (1, −1).</p>
+<p>첫 두 줄이 중요합니다. 축 방향 화살표 (1, 0)과 (0, 1)이 어디로 가는지만 알면 행렬 전체를 아는 것입니다. 행렬의 첫 열 (2, 1)이 "(1, 0)이 가는 곳", 둘째 열 (1, 2)가 "(0, 1)이 가는 곳"입니다. 마지막 두 줄은 5절의 복선입니다.</p>
+<figure>
+<div class="ctrl"><label>입력 화살표 방향 <input type="range" id="s3s" min="-180" max="180" step="1" value="0"><output id="s3v" class="mono">0°</output></label></div>
+<svg id="s3-fig" viewBox="0 0 720 340" role="img" aria-label="입력 화살표와 출력 화살표, 격자의 변형"></svg>
+<div class="readout"><div>입력<b id="s3c">(1.00, 0.00)</b></div><div>출력 M × 입력<b id="s3o">(2.00, 1.00)</b></div><div>늘어난 배율<b id="s3r">2.24배</b></div><div>꺾인 각도<b id="s3a">26.6°</b></div></div>
+<figcaption>왼쪽: 길이 1인 입력(검정)과 출력(파랑). 오른쪽: 평면의 모든 점을 한꺼번에 넣은 결과. 회색 격자의 각 점이 파란 격자의 대응점으로 가고, 왼쪽의 입력·출력 끝점이 그중 한 쌍(검은 점 → 파란 점)입니다. 대부분의 방향에서 출력은 꺾입니다. → 수학 문서 A1</figcaption>
+</figure>
+
+<h2 id="s4">4. 대칭 행렬: 원이 수직 축 타원이 된다</h2>
+<p><strong>정의.</strong> 대각선을 기준으로 접었을 때 같은 행렬. M의 오른쪽 위 1과 왼쪽 아래 1이 같으니 M은 대칭입니다.</p>
+<p><strong>왜 중요한가.</strong> 길이 1인 화살표를 모든 방향으로 넣으면(단위원) 출력이 타원을 그립니다. 대칭 행렬이면 이 타원의 긴 축과 짧은 축이 <strong>반드시 수직</strong>이고, 그 축 방향이 입력에서도 수직인 두 방향에서 옵니다. 비대칭이면 이 성질이 깨집니다. 에너지 표는 "A→D의 세기 = D→A의 세기"라서 항상 대칭이고, 그래서 수학 문서의 모든 그림이 깔끔합니다.</p>
+<figure>
+<div class="ctrl"><span>행렬:</span><div class="seg" id="s4seg" role="group"><button data-m="sym" class="on">대칭 M = [[2,1],[1,2]]</button><button data-m="asym">비대칭 [[2,1],[0,1]]</button></div></div>
+<svg id="s4-fig" viewBox="0 0 720 320" role="img" aria-label="단위원이 행렬을 거쳐 타원이 되는 그림, 대칭과 비대칭 비교"></svg>
+<figcaption>색점 하나하나가 입력 원의 점과 출력의 대응점. 점선은 5절에서 찾을 "꺾이지 않는 방향". 대칭이면 두 점선이 수직(45°와 −45°), 비대칭이면 0°와 −45°로 수직이 아닙니다. → 수학 문서 A2</figcaption>
+</figure>
+
+<h2 id="s5">5. 고유벡터와 고유값: 꺾이지 않는 방향</h2>
+<p><strong>정의.</strong> 행렬을 곱해도 방향이 그대로이고 길이만 바뀌는 벡터를 고유벡터, 그 배율을 고유값이라 합니다.</p>
+<p><strong>예제.</strong> 3절에서 이미 계산했습니다.</p>
+<p style="text-align:center" class="mono">M(1, 1) = (3, 3) = <strong>3</strong> × (1, 1)<br>M(1, −1) = (1, −1) = <strong>1</strong> × (1, −1)</p>
+<p>(1, 1) 방향은 3배로 늘기만 하고, (1, −1) 방향은 그대로(1배)입니다. M의 고유값은 3과 1, 고유벡터는 45° 방향과 −45° 방향입니다. 2절에서 확인했듯 둘은 수직입니다.</p>
+<p><strong>배율과 그림자.</strong> 길이 1인 c를 넣었을 때 출력 Mc가 c 방향으로 드리운 그림자(c·Mc)를 "그 방향의 값"이라 합시다. 고유벡터 방향에서는 출력이 정확히 c 방향이라 그림자 = 배율입니다. 다른 방향에서는 출력 일부가 옆으로 새서 그림자가 두 배율 <strong>사이</strong>(1과 3 사이) 값이 됩니다. 그래서 "모든 방향 중 그림자가 가장 작은 방향 = 가장 작은 고유값의 고유벡터"입니다. 수학 문서에서 이 그림자가 에너지이고, 가장 작은 방향이 바닥상태입니다.</p>
+<figure>
+<div class="ctrl"><label>입력 방향 <input type="range" id="s5s" min="-90" max="90" step="1" value="20"><output id="s5v" class="mono">20°</output></label> <span id="s5hit" class="mono" style="color:var(--beta)"></span></div>
+<svg id="s5-fig" viewBox="0 0 720 300" role="img" aria-label="방향에 따른 꺾인 각도와 그림자 값"></svg>
+<figcaption>파란 곡선: 출력이 꺾인 각도, 0이 되는 곳이 고유벡터(−45°, 45°). 주황 곡선: 그 방향의 값 c·Mc, 1과 3 사이를 오가며 고유벡터에서 최소 1, 최대 3. 슬라이더를 ±45°에 맞춰 보세요. → 수학 문서 A3</figcaption>
+</figure>
+
+<h2 id="s6">6. 축 바꾸기: 대각화</h2>
+<p><strong>정의.</strong> 고유벡터 두 개를 새 좌표축으로 쓰면, 행렬은 "첫 축으로 3배, 둘째 축으로 1배"라는 <strong>축마다 늘리기</strong>가 됩니다. 새 축에서 표를 다시 쓰면 대각선에만 숫자가 남습니다.</p>
+<p style="text-align:center" class="mono">원래 축: [ 2 1 ; 1 2 ]  →  고유벡터 축: [ 3 0 ; 0 1 ]</p>
+<p>같은 기계를 다른 좌표로 적은 것일 뿐입니다. 이렇게 "고유값과 고유벡터를 전부 구해 행렬을 대각선만 남게 다시 쓰는 것"을 대각화라 합니다. 수학 문서에서는 고유값 중 가장 작은 것 하나만 필요하므로, 실제로는 전부 구하지 않고 7절의 방법으로 하나만 찾습니다.</p>
+<figure>
+<div class="ctrl"><label>축 회전 <input type="range" id="s6s" min="0" max="100" step="1" value="0"><output id="s6v" class="mono">원래 축</output></label></div>
+<svg id="s6-fig" viewBox="0 0 720 300" role="img" aria-label="좌표축을 돌리며 행렬 표가 대각 행렬로 바뀌는 그림"></svg>
+<figcaption>축을 0°에서 45°까지 돌리면 표의 대각선 밖 숫자가 1에서 0으로 줄고, 대각선이 (2, 2)에서 (3, 1)이 됩니다. 실제로 회전된 축에서 M을 다시 계산한 값입니다. → 수학 문서 A4</figcaption>
+</figure>
+
+<h2 id="s7">7. 반복과 수렴: 계속 곱하면 한 방향으로 간다</h2>
+<p><strong>예제.</strong> (1, 0)에 M을 반복해서 곱합니다.</p>
+<table>
+<tr><th>횟수</th><th>벡터</th><th>방향(각도)</th><th>45°와의 차이</th></tr>
+<tr><td class="num">0</td><td class="num">(1, 0)</td><td class="num">0°</td><td class="num">45°</td></tr>
+<tr><td class="num">1</td><td class="num">(2, 1)</td><td class="num">26.6°</td><td class="num">18.4°</td></tr>
+<tr><td class="num">2</td><td class="num">(5, 4)</td><td class="num">38.7°</td><td class="num">6.3°</td></tr>
+<tr><td class="num">3</td><td class="num">(14, 13)</td><td class="num">42.9°</td><td class="num">2.1°</td></tr>
+<tr><td class="num">4</td><td class="num">(41, 40)</td><td class="num">44.3°</td><td class="num">0.7°</td></tr>
+</table>
+<p><strong>왜.</strong> (1, 0) = ½(1, 1) + ½(1, −1)로 쪼개면, M을 한 번 곱할 때마다 (1, 1) 성분은 3배, (1, −1) 성분은 1배가 됩니다. k번 곱하면 ½·3ᵏ(1, 1) + ½·1ᵏ(1, −1). 두 성분의 비율이 (1/3)ᵏ로 줄어드는 <strong>등비수열</strong>이라, 큰 배율 쪽 방향이 지수적으로 이깁니다. 표의 "45°와의 차이"가 매번 약 1/3씩 줄어드는 것이 그 비율입니다.</p>
+<p>이것이 수학 문서의 멱법입니다. 큰 고유값이 아니라 <em>작은</em> 고유값을 찾고 싶으면 "작을수록 크게 만드는" 기계(예: 4 − M, 배율이 1과 3에서 3과 1로 뒤집힘)를 반복하면 됩니다. 두 배율의 비율이 1에 가까울수록 느리게 수렴합니다.</p>
+<figure>
+<div class="ctrl"><button type="button" id="s7step" class="btn">M을 한 번 더 곱하기</button> <button type="button" id="s7reset" class="btn btn2">처음으로</button> <span id="s7n" class="mono">0회</span></div>
+<svg id="s7-fig" viewBox="0 0 720 300" role="img" aria-label="반복 곱셈에 따라 방향이 45도로 수렴하는 그림"></svg>
+<figcaption>왼쪽: 매번 길이 1로 줄여 그린 방향(점점 진해짐)이 45° 점선으로 모입니다. 오른쪽: 45°와의 차이를 로그 눈금으로 그리면 직선, 기울기가 비율 1/3입니다(12절). → 수학 문서 A5, A6</figcaption>
+</figure>
+
+<h2 id="s8">8. 부분공간: 3차원 타원체를 평면으로 자르기</h2>
+<p><strong>정의.</strong> 원점을 지나는 직선이나 평면처럼, 그 안의 벡터끼리 더하고 실수배해도 그 안에 머무는 영역을 부분공간이라 합니다. 3차원에서 원점을 지나는 평면은 2차원 부분공간입니다.</p>
+<p><strong>예제.</strong> 3차원 대각 행렬 diag(1, 2, 3)은 x축 1배, y축 2배, z축 3배입니다(이미 대각화된 상태). 단위구를 넣으면 반지름이 1, 2, 3인 타원체가 됩니다. 가장 긴 반지름 3이 가장 큰 고유값입니다.</p>
+<p>이 타원체를 원점을 지나는 평면으로 자르면 단면은 타원이고, 그 단면의 가장 긴 반지름은 <strong>전체의 가장 긴 반지름 3을 넘을 수 없습니다</strong>. 단면은 타원체의 일부이기 때문입니다. 평면이 z축을 포함하면 정확히 3, 포함하지 않으면 3보다 작습니다. "작은 공간에서 찾은 답은 전체의 답을 넘지 못하고, 그 공간이 정답 방향을 담으면 같다", 이것이 수학 문서의 레일리–리츠 정리이고, SQD의 "명단"이 바로 이 평면입니다.</p>
+<figure>
+<div class="ctrl"><span>자르는 평면:</span><div class="seg" id="s8seg" role="group"><button data-p="xy" class="on">x–y 평면</button><button data-p="yz">y–z 평면</button><button data-p="tilt">비스듬한 평면</button><button data-p="none">안 자름</button></div><span class="sm" style="font-size:13px;color:var(--ink2)">드래그로 회전</span></div>
+<div id="s8-3d" style="position:relative;width:100%;height:360px;border-radius:6px;overflow:hidden;background:var(--code);touch-action:none" aria-label="반지름 1, 2, 3인 타원체와 평면 단면"><div id="s8lab" style="position:absolute;left:12px;top:10px;font-size:13.5px;line-height:1.5;background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:6px 10px;pointer-events:none"></div></div>
+<figcaption>x–y 평면은 z축(반지름 3)을 담지 않아 단면 최대가 2. y–z 평면은 z축을 담아 정확히 3. 비스듬한 평면(x축과 (0,1,1) 방향을 담는 평면)은 그 사이. 수학 문서 A7은 같은 그림을 H₂로 그린 것인데, 거기서는 에너지가 <em>낮을수록</em> 길게 그려서 "가장 긴 축 = 바닥상태"입니다. → 수학 문서 A7</figcaption>
+</figure>
+
+<h2 id="s9">9. 기댓값과 분산</h2>
+<p>여기서부터 샘플링(수학 문서 B부)을 위한 확률입니다.</p>
+<p><strong>확률분포.</strong> 일어날 수 있는 결과마다 음수 아닌 확률을 붙이고, 합이 1인 것. 주사위는 1~6 각각 1/6.</p>
+<p><strong>기댓값.</strong> "결과 × 확률"을 전부 더한 것, 평균적으로 기대되는 값입니다. 주사위: (1 + 2 + 3 + 4 + 5 + 6)/6 = <strong>3.5</strong>. 한 번 던져 3.5가 나오는 일은 없지만, 많이 던진 평균은 3.5로 갑니다.</p>
+<p><strong>분산과 표준편차.</strong> 결과가 기댓값에서 얼마나 퍼지는지. 분산 = "(결과 − 기댓값)² × 확률"의 합. 주사위: ((−2.5)² + (−1.5)² + (−0.5)² + 0.5² + 1.5² + 2.5²)/6 = 17.5/6 ≈ <strong>2.92</strong>. 표준편차는 그 제곱근 ≈ <strong>1.71</strong>, "보통 이 정도 벗어난다"는 크기입니다.</p>
+<p><strong>평균의 퍼짐.</strong> 독립적으로 N번 던진 평균의 표준편차는 원래 표준편차를 √N으로 나눈 것입니다. 100번이면 1.71/10 = 0.17. N을 4배 늘려야 퍼짐이 절반이 됩니다. 이 "1/√N 법칙"이 B부 전체를 지배합니다.</p>
+<figure>
+<div class="ctrl"><button type="button" id="s9roll" class="btn">주사위 10번 던지기</button> <button type="button" id="s9roll100" class="btn">100번</button> <button type="button" id="s9reset" class="btn btn2">처음으로</button> <span id="s9n" class="mono">0번</span></div>
+<svg id="s9-fig" viewBox="0 0 720 300" role="img" aria-label="주사위 누적 평균이 3.5로 수렴하고 퍼짐이 1/√N으로 좁아지는 그림"></svg>
+<div class="readout"><div>던진 횟수 N<b id="s9N">0</b></div><div>지금까지 평균<b id="s9m">—</b></div><div>기댓값<b>3.5</b></div><div>평균의 표준편차 1.71/√N<b id="s9se">—</b></div></div>
+<figcaption>파란 선이 누적 평균, 회색 띠가 3.5 ± 1.71/√N. 처음엔 크게 출렁이다가 띠가 좁아지며 3.5에 붙습니다. 대부분의 시간 동안 파란 선이 띠 안에 있는 것이 표준편차의 뜻입니다. → 수학 문서 B2</figcaption>
+</figure>
+
+<h2 id="s10">10. 반복 시행과 오차: 동전에서 측정으로</h2>
+<p><strong>베르누이 시행.</strong> 확률 p로 "나옴"(1), 1 − p로 "안 나옴"(0)인 실험 한 번. 기댓값 p, 분산 p(1 − p). 앞면 확률 p인 동전 하나입니다.</p>
+<p><strong>M번 반복.</strong> 나온 횟수 n은 이항분포를 따르고, 9절의 규칙(독립이면 기댓값과 분산이 더해짐)으로 기댓값 Mp, 분산 Mp(1 − p), 표준편차 √(Mp(1 − p)). 빈도 n/M은 p를 중심으로 √(p(1 − p)/M) ≈ √(p/M)만큼 흔들립니다(p가 작을 때).</p>
+<p><strong>상대 오차.</strong> 흔들림 ÷ 값 = √(p/M)/p = 1/√(Mp) = 1/√(기대 횟수). 100번 나올 만한 것은 10% 정확, 4번이면 50%, 1번이면 100% 불확실.</p>
+<p><strong>측정과의 연결.</strong> 1절의 단위벡터 (0.6, 0.8)을 양자 상태로 보면, 측정했을 때 첫 결과가 나올 확률은 0.6² = 36%, 둘째는 0.8² = 64%입니다(성분의 제곱 = 확률). 이 상태를 M번 측정하는 것은 p = 0.36인 동전을 M번 던지는 것과 같습니다.</p>
+<figure>
+<div class="ctrl"><label>p <input type="range" id="s10p" min="-3" max="-0.15" step="0.05" value="-0.44"><output id="s10pv" class="mono">0.36</output></label><label>M <input type="range" id="s10M" min="1" max="4" step="0.1" value="2"><output id="s10Mv" class="mono">100</output></label></div>
+<svg id="s10-fig" viewBox="0 0 720 300" role="img" aria-label="M번 시행에서 나온 횟수의 분포 막대와 기댓값, 표준편차"></svg>
+<div class="readout"><div>기댓값 Mp<b id="s10E">36</b></div><div>표준편차<b id="s10sd">4.8</b></div><div>빈도의 흔들림 √(p(1−p)/M)<b id="s10fe">±0.048</b></div><div>상대 오차 1/√(Mp)<b id="s10re">±17%</b></div></div>
+<figcaption>막대는 "M번 중 k번 나올 확률"(이항분포를 정확히 계산). 세로 선이 기댓값, 띠가 ±1 표준편차. p를 0.001까지 줄이면 분포가 0 근처에 몰리고 "한 번도 안 나옴"(k = 0)의 막대가 커집니다. 그것이 11절의 주제입니다. → 수학 문서 B2</figcaption>
+</figure>
+
+<h2 id="s11">11. 희귀한 것을 보려면: (1 − p)ᴹ</h2>
+<p><strong>한 번도 안 나올 확률.</strong> 한 번에 안 나올 확률이 1 − p이고 독립이니 M번 연속은 (1 − p)ᴹ. 그러니 적어도 한 번 볼 확률은 1 − (1 − p)ᴹ.</p>
+<p><strong>예제.</strong> p = 1%, M = 300: (0.99)³⁰⁰ ≈ 0.049. 95% 확률로 한 번은 봅니다.</p>
+<p><strong>근사.</strong> p가 작으면 (1 − p)ᴹ ≈ e<sup>−Mp</sup>. 위 예제는 e<sup>−3</sup> ≈ 0.050으로 거의 같습니다. 그래서 "95% 확신으로 보려면 Mp ≈ 3, 즉 M ≈ 3/p". 1%짜리는 300번, 0.1%짜리는 3,000번, 0.01%짜리는 30,000번.</p>
+<figure>
+<div class="ctrl"><label>p <input type="range" id="s11p" min="-5" max="-1" step="0.05" value="-2"><output id="s11pv" class="mono">1%</output></label><label>M <input type="range" id="s11M" min="1" max="6" step="0.05" value="2.48"><output id="s11Mv" class="mono">300</output></label></div>
+<svg id="s11-fig" viewBox="0 0 720 280" role="img" aria-label="M에 따른 발견 확률 곡선, 정확한 값과 e^-Mp 근사"></svg>
+<div class="readout"><div>(1 − p)ᴹ 정확<b id="s11ex">0.049</b></div><div>e<sup>−Mp</sup> 근사<b id="s11ap">0.050</b></div><div>적어도 한 번 볼 확률<b id="s11f">95.1%</b></div><div>95%에 필요한 M ≈ 3/p<b id="s11n">300</b></div></div>
+<figcaption>가로축 M(로그), 세로축 "적어도 한 번 볼 확률". 실선이 정확한 값, 점선이 e<sup>−Mp</sup> 근사로 거의 겹칩니다. p를 10배 줄이면 곡선이 오른쪽으로 10배 밀립니다. 양자컴퓨터 측정에서 "비중 0.01%인 배치를 명단에 넣으려면 3만 샷"이 이 계산입니다. → 수학 문서 B3, B4</figcaption>
+</figure>
+
+<h2 id="s12">12. 로그 눈금 읽기</h2>
+<p>수학 문서의 그래프는 대부분 세로축이나 가로축이 로그 눈금입니다. <strong>로그 눈금에서는 1, 10, 100, 1000이 같은 간격</strong>입니다. 곱하기가 같은 거리가 되는 자입니다.</p>
+<p>왜 쓰나. 7절의 오차는 18.4°, 6.3°, 2.1°, 0.7°…로 매번 1/3배입니다. 보통 눈금에 그리면 금방 바닥에 붙어 구별이 안 되지만, 로그 눈금에 그리면 <strong>직선</strong>이 되고 기울기가 비율(1/3)을 말해 줍니다. 수학 문서의 랑초스 수렴 곡선, 부분공간 오차, 발견 확률 곡선이 모두 이 방식으로 읽힙니다. "직선으로 내려간다 = 지수적으로 줄어든다".</p>
+<figure>
+<div class="ctrl"><span>세로축:</span><div class="seg" id="s12seg" role="group"><button data-s="lin" class="on">보통 눈금</button><button data-s="log">로그 눈금</button></div></div>
+<svg id="s12-fig" viewBox="0 0 720 280" role="img" aria-label="같은 데이터를 보통 눈금과 로그 눈금으로 비교"></svg>
+<figcaption>7절의 반복 곱셈 오차(45°와의 차이)를 12번까지. 보통 눈금에서는 4번째 이후가 바닥에 붙어 보이지 않고, 로그 눈금에서는 한 칸(10배)을 약 2.1번에 내려가는 직선입니다(3²·¹ ≈ 10).</figcaption>
+</figure>
+
+<h2 id="s13">13. H₂로 한 번에</h2>
+<p>이제 장난감 M을 H₂의 실제 숫자로 바꿔 끼우면 수학 문서의 A부가 됩니다.</p>
+<table>
+<tr><th>이 문서</th><th>장난감 M</th><th>H₂의 A–D 블록</th></tr>
+<tr><td>행렬</td><td class="mono">[[2, 1], [1, 2]]</td><td class="mono">[[−1.117, 0.181], [0.181, 0.463]]</td></tr>
+<tr><td>축 (1, 0), (0, 1)</td><td>그냥 x, y</td><td>배치 A, 배치 D</td></tr>
+<tr><td>단위벡터의 성분² (1절)</td><td>섞는 비율</td><td>배치의 비중 = 측정 확률</td></tr>
+<tr><td>대칭 (4절)</td><td>1 = 1</td><td>A→D 세기 = D→A 세기 = 0.181</td></tr>
+<tr><td>고유벡터 (5절)</td><td>45°, −45°</td><td>−6.4°, 83.6°</td></tr>
+<tr><td>고유값 (5절)</td><td>3, 1</td><td>−1.137, +0.483</td></tr>
+<tr><td>그림자 c·Mc가 가장 작은 방향 (5절)</td><td>−45°, 값 1</td><td>−6.4°, 값 −1.137 = 바닥상태 에너지</td></tr>
+<tr><td>그 방향의 성분² (1절)</td><td>50%, 50%</td><td>A 98.7%, D 1.3%</td></tr>
+<tr><td>반복 곱셈 (7절)</td><td>비율 1/3</td><td>비율 (0.6 − 0.483)/(0.6 + 1.137) ≈ 0.07, 매우 빠름</td></tr>
+<tr><td>평면으로 자르기 (8절)</td><td>diag(1, 2, 3)</td><td>A, D, B 세 축의 에너지 타원체</td></tr>
+</table>
+<p>확률 쪽(9~11절)은 바닥상태의 성분²를 동전의 p로 보면 그대로 B부입니다. A 98.7%는 100번 측정하면 99번쯤, D 1.3%는 1번쯤 나오고, 1.3%짜리를 95% 확신으로 한 번 보려면 3/0.013 ≈ 230번 측정이 필요합니다.</p>
+<p>준비가 끝났습니다. <a id="tomath" href="math.html">수학 문서 "대각화와 샘플링, 수학으로" →</a></p>
+
+<h2 id="quiz">점검 퀴즈</h2>
+<p>각 문제의 답을 누르면 맞았는지와 짧은 설명이 나옵니다.</p>
+<div id="quizbox"></div>
+<p class="meta">이 문서의 장난감 숫자는 손계산으로 검증되는 값이고, H₂ 숫자는 PySCF STO-3G 계산값입니다. 9~11절의 그림은 브라우저에서 정확한 확률 계산(이항분포, (1−p)ᴹ)과 난수 시뮬레이션으로 그립니다.</p>
+<div class="docnav bottom"><a class="idx" href="index.html">📚 문서 모음</a><span class="pn"><a href="intro.html">← 입문: SQD, 처음부터</a><a href="math.html">수학: 대각화와 샘플링 →</a></span></div>
+</main>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
+<script>
+(function(){
+  var mq=window.matchMedia('(max-width:600px)'); function narrow(){return mq.matches}
+  var ST='<style>.lb{font:13.5px "IBM Plex Sans KR",sans-serif;fill:var(--ink)}.sm{font:11.5px "IBM Plex Sans KR",sans-serif;fill:var(--ink2)}.mi{font:11.5px "IBM Plex Mono",monospace;fill:var(--ink)}.ax{font:11.5px "IBM Plex Sans KR",sans-serif;fill:var(--ink2)}</style>';
+  var STN='<style>.lb{font:14px "IBM Plex Sans KR",sans-serif;fill:var(--ink)}.sm{font:12px "IBM Plex Sans KR",sans-serif;fill:var(--ink2)}.mi{font:12px "IBM Plex Mono",monospace;fill:var(--ink)}.ax{font:12px "IBM Plex Sans KR",sans-serif;fill:var(--ink2)}</style>';
+  function setVB(svg,w,h){svg.setAttribute('viewBox','0 0 '+w+' '+h)}
+  function $(id){return document.getElementById(id)}
+  function fmt(x,d){return x.toFixed(d).replace('-','−')}
+  var M=[[2,1],[1,2]];
+  function mv(A,v){return [A[0][0]*v[0]+A[0][1]*v[1],A[1][0]*v[0]+A[1][1]*v[1]]}
+  function arrow(x1,y1,x2,y2,col,w){var dx=x2-x1,dy=y2-y1,L=Math.sqrt(dx*dx+dy*dy)||1,ux=dx/L,uy=dy/L,hx=x2-ux*9,hy=y2-uy*9;return '<line x1="'+x1+'" y1="'+y1+'" x2="'+hx+'" y2="'+hy+'" stroke="'+col+'" stroke-width="'+(w||2.5)+'"/><path d="M'+x2+' '+y2+' L'+(hx-uy*5)+' '+(hy+ux*5)+' L'+(hx+uy*5)+' '+(hy-ux*5)+' Z" fill="'+col+'"/>';}
+  function plane(s,cx,cy,r,lx,ly){s.v+='<line x1="'+(cx-r)+'" y1="'+cy+'" x2="'+(cx+r)+'" y2="'+cy+'" stroke="var(--line)"/><line x1="'+cx+'" y1="'+(cy-r)+'" x2="'+cx+'" y2="'+(cy+r)+'" stroke="var(--line)"/><text class="sm" x="'+(cx+r+4)+'" y="'+(cy+4)+'">'+lx+'</text><text class="sm" x="'+(cx+4)+'" y="'+(cy-r-6)+'">'+ly+'</text>';}
+  function axes(s,L,R,T,B,yt,xt){yt.forEach(function(t){s.v+='<line x1="'+L+'" y1="'+t[1]+'" x2="'+R+'" y2="'+t[1]+'" stroke="var(--line)"/><text class="ax" x="'+(L-6)+'" y="'+(t[1]+4)+'" text-anchor="end">'+t[0]+'</text>';});xt.forEach(function(t){s.v+='<text class="ax" x="'+t[1]+'" y="'+(B+18)+'" text-anchor="middle">'+t[0]+'</text>';});}
+
+  // 0 map
+  function drawMap(){var svg=$('map-fig'),n=narrow(),W=n?360:720;
+    var L=[['1 벡터',['A1','A2','B1']],['2 내적',['A3','A4']],['3 행렬×벡터',['A1']],['4 대칭',['A2']],['5 고유벡터',['A3']],['6 축 바꾸기',['A4']],['7 반복',['A5','A6']],['8 부분공간',['A7']],['9 기댓값·분산',['B2']],['10 반복 시행',['B2']],['11 희귀 사건',['B3','B4']],['12 로그 눈금',['A6','A7','B2','B3']]];
+    var R=['A1 기계','A2 원→타원','A3 꺾이지 않는 방향','A4 축 회전','A5 멱법','A6 랑초스','A7 타원체 자르기','B1 Born 규칙','B2 샷 통계','B3 발견 확률','B4 커버리지'];
+    var rowH=n?26:26, H=Math.max(L.length,R.length)*rowH+30; setVB(svg,W,H); var s={v:n?STN:ST};
+    var xl=n?10:40, xr=n?220:470, wl=n?110:160, wr=n?130:200;
+    function yL(i){return 20+i*rowH} function yR(i){return 20+i*(L.length*rowH/R.length)}
+    L.forEach(function(l,i){ l[1].forEach(function(t){ var j=R.map(function(r){return r.split(' ')[0]}).indexOf(t); s.v+='<path d="M'+(xl+wl)+' '+(yL(i)+8)+' C'+((xl+wl+xr)/2)+' '+(yL(i)+8)+' '+((xl+wl+xr)/2)+' '+(yR(j)+8)+' '+xr+' '+(yR(j)+8)+'" fill="none" stroke="'+(i<8?'var(--n)':'var(--alpha)')+'" stroke-opacity=".45" stroke-width="1.5"/>'; }); });
+    L.forEach(function(l,i){ s.v+='<rect x="'+xl+'" y="'+(yL(i)-4)+'" width="'+wl+'" height="22" rx="4" fill="'+(i<8?'var(--nsoft)':'var(--alpha-soft)')+'"/><text class="sm" x="'+(xl+8)+'" y="'+(yL(i)+11)+'" style="fill:var(--ink)">'+l[0]+'</text>'; });
+    R.forEach(function(r,j){ s.v+='<rect x="'+xr+'" y="'+(yR(j)-4)+'" width="'+wr+'" height="22" rx="4" fill="var(--code)" stroke="var(--line)"/><text class="sm" x="'+(xr+8)+'" y="'+(yR(j)+11)+'" style="fill:var(--ink)">'+r+'</text>'; });
+    svg.innerHTML=s.v;}
+
+  // 1 vector mixing
+  var s1=$('s1s'); function drawS1(){var d=+s1.value,t=d*Math.PI/180,c=[Math.cos(t),Math.sin(t)]; $('s1v').value=d+'°';
+    var svg=$('s1-fig'),n=narrow(),W=n?360:720; setVB(svg,W,300); var s={v:n?STN:ST}, cx=n?110:200, cy=230, R=n?170:190;
+    s.v+='<line x1="'+(cx-20)+'" y1="'+cy+'" x2="'+(cx+R+20)+'" y2="'+cy+'" stroke="var(--line)"/><line x1="'+cx+'" y1="'+(cy+20)+'" x2="'+cx+'" y2="'+(cy-R-20)+'" stroke="var(--line)"/><text class="sm" x="'+(cx+R+24)+'" y="'+(cy+4)+'">A (1,0)</text><text class="sm" x="'+(cx+4)+'" y="'+(cy-R-24)+'">D (0,1)</text>';
+    s.v+='<path d="M'+(cx+R)+' '+cy+' A'+R+' '+R+' 0 0 0 '+cx+' '+(cy-R)+'" fill="none" stroke="var(--line)" stroke-dasharray="3 3"/>';
+    s.v+='<line x1="'+(cx+R*c[0])+'" y1="'+cy+'" x2="'+(cx+R*c[0])+'" y2="'+(cy-R*c[1])+'" stroke="var(--alpha)" stroke-dasharray="4 3"/><line x1="'+cx+'" y1="'+(cy-R*c[1])+'" x2="'+(cx+R*c[0])+'" y2="'+(cy-R*c[1])+'" stroke="var(--n)" stroke-dasharray="4 3"/>';
+    s.v+=arrow(cx,cy,cx+R*c[0],cy,'var(--n)',3)+arrow(cx,cy,cx,cy-R*c[1],'var(--alpha)',3)+arrow(cx,cy,cx+R*c[0],cy-R*c[1],'var(--ink)',3.5);
+    s.v+='<text class="sm" x="'+(cx+R*c[0]/2)+'" y="'+(cy+18)+'" text-anchor="middle" fill="var(--n)">'+c[0].toFixed(2)+' × A</text><text class="sm" x="'+(cx-8)+'" y="'+(cy-R*c[1]/2)+'" text-anchor="end" fill="var(--alpha)">'+c[1].toFixed(2)+' × D</text>';
+    if(!n){var bx=470,by=60,bw=200; s.v+='<text class="lb" x="'+bx+'" y="'+(by-10)+'">비중 = 성분²</text><rect x="'+bx+'" y="'+by+'" width="'+bw*c[0]*c[0]+'" height="28" fill="var(--n)"/><rect x="'+(bx+bw*c[0]*c[0])+'" y="'+by+'" width="'+bw*c[1]*c[1]+'" height="28" fill="var(--alpha)"/><text class="sm" x="'+bx+'" y="'+(by+48)+'">A '+(c[0]*c[0]*100).toFixed(0)+'% + D '+(c[1]*c[1]*100).toFixed(0)+'% = 100%</text>';}
+    svg.innerHTML=s.v; $('s1c').textContent='('+c[0].toFixed(2)+', '+c[1].toFixed(2)+')'; $('s1l').textContent='1.000'; $('s1a').textContent=(c[0]*c[0]*100).toFixed(0)+'%'; $('s1d').textContent=(c[1]*c[1]*100).toFixed(0)+'%';}
+  s1.oninput=drawS1;
+
+  // 2 projection
+  var s2=$('s2s'); function drawS2(){var d=+s2.value,t=d*Math.PI/180,L=Math.SQRT2,v=[L*Math.cos(t),L*Math.sin(t)]; $('s2v').value=d+'°';
+    var svg=$('s2-fig'),n=narrow(),W=n?360:720; setVB(svg,W,280); var s={v:n?STN:ST}, cx=n?180:260, cy=190, sc=n?80:100;
+    s.v+='<line x1="'+(cx-sc*1.7)+'" y1="'+cy+'" x2="'+(cx+sc*1.7)+'" y2="'+cy+'" stroke="var(--line)"/>';
+    s.v+=arrow(cx,cy,cx+sc,cy,'var(--n)',3)+'<text class="sm" x="'+(cx+sc)+'" y="'+(cy+18)+'" text-anchor="middle" fill="var(--n)">u = (1, 0)</text>';
+    s.v+='<line x1="'+(cx+sc*v[0])+'" y1="'+(cy-sc*v[1])+'" x2="'+(cx+sc*v[0])+'" y2="'+cy+'" stroke="var(--ink2)" stroke-dasharray="3 3"/>';
+    s.v+='<rect x="'+Math.min(cx,cx+sc*v[0])+'" y="'+(cy-4)+'" width="'+Math.abs(sc*v[0])+'" height="8" fill="var(--alpha)" opacity=".85"/>';
+    s.v+=arrow(cx,cy,cx+sc*v[0],cy-sc*v[1],'var(--ink)',3)+'<text class="sm" x="'+(cx+sc*v[0]*1.1)+'" y="'+(cy-sc*v[1]*1.1-6)+'" text-anchor="middle">v</text>';
+    var rx=n?20:480, ry=n?30:80; if(!n){ s.v+='<text class="lb" x="'+rx+'" y="'+ry+'">v = ('+fmt(v[0],2)+', '+fmt(v[1],2)+')</text><text class="lb" x="'+rx+'" y="'+(ry+30)+'" fill="var(--alpha)">u·v = '+fmt(v[0],3)+'</text><text class="sm" x="'+rx+'" y="'+(ry+56)+'">= 그림자 길이</text><text class="sm" x="'+rx+'" y="'+(ry+80)+'">'+(Math.abs(v[0])<0.02?'수직! 내적 0':(v[0]<0?'반대쪽: 음수':'같은 쪽: 양수'))+'</text>'; }
+    else s.v+='<text class="lb" x="'+rx+'" y="'+ry+'" fill="var(--alpha)">u·v = '+fmt(v[0],3)+(Math.abs(v[0])<0.02?' (수직)':'')+'</text>';
+    svg.innerHTML=s.v;}
+  s2.oninput=drawS2;
+
+  // 3 matrix x vector
+  var s3=$('s3s'); function drawS3(){var d=+s3.value,t=d*Math.PI/180,c=[Math.cos(t),Math.sin(t)],o=mv(M,c); $('s3v').value=d+'°';
+    var svg=$('s3-fig'),n=narrow(),W=n?360:720; setVB(svg,W,n?600:340); var s={v:n?STN:ST}, cx=n?180:170, cy=n?170:170, sc=n?45:48;
+    plane(s,cx,cy,sc*3.3,'x','y'); s.v+='<circle cx="'+cx+'" cy="'+cy+'" r="'+sc+'" fill="none" stroke="var(--line)" stroke-dasharray="3 3"/>';
+    s.v+=arrow(cx,cy,cx+sc*c[0],cy-sc*c[1],'var(--ink)',3)+arrow(cx,cy,cx+sc*o[0],cy-sc*o[1],'var(--accent)',3);
+    var gx=n?180:530, gy=n?450:170, gs=n?32:34;
+    for(var k=-2;k<=2;k++){ [[[k,-2],[k,2]],[[-2,k],[2,k]]].forEach(function(sg){ s.v+='<line x1="'+(gx+gs*sg[0][0]/2)+'" y1="'+(gy-gs*sg[0][1]/2)+'" x2="'+(gx+gs*sg[1][0]/2)+'" y2="'+(gy-gs*sg[1][1]/2)+'" stroke="var(--line)"/>'; var a=mv(M,sg[0]),b=mv(M,sg[1]); s.v+='<line x1="'+(gx+gs*a[0]/2)+'" y1="'+(gy-gs*a[1]/2)+'" x2="'+(gx+gs*b[0]/2)+'" y2="'+(gy-gs*b[1]/2)+'" stroke="var(--accent)" stroke-width="1.3" opacity=".8"/>'; }); }
+    s.v+='<circle cx="'+(gx+gs*c[0])+'" cy="'+(gy-gs*c[1])+'" r="5.5" fill="var(--ink)"/><circle cx="'+(gx+gs*o[0])+'" cy="'+(gy-gs*o[1])+'" r="5.5" fill="var(--accent)"/><line x1="'+(gx+gs*c[0])+'" y1="'+(gy-gs*c[1])+'" x2="'+(gx+gs*o[0])+'" y2="'+(gy-gs*o[1])+'" stroke="var(--ink2)" stroke-dasharray="3 3"/>';
+    s.v+='<text class="sm" x="'+gx+'" y="'+(gy+gs*3.6)+'" text-anchor="middle">회색 격자 → 파란 격자 · 검은 점 → 파란 점</text>';
+    svg.innerHTML=s.v; var L=Math.sqrt(o[0]*o[0]+o[1]*o[1]), a=Math.atan2(o[1],o[0])-t; a=Math.atan2(Math.sin(a),Math.cos(a))*180/Math.PI;
+    $('s3c').textContent='('+fmt(c[0],2)+', '+fmt(c[1],2)+')'; $('s3o').textContent='('+fmt(o[0],2)+', '+fmt(o[1],2)+')'; $('s3r').textContent=L.toFixed(2)+'배'; $('s3a').textContent=fmt(a,1)+'°';}
+  s3.oninput=drawS3;
+
+  // 4 symmetric vs asymmetric
+  var s4mode='sym', s4seg=$('s4seg');
+  function drawS4(){var A=s4mode==='sym'?M:[[2,1],[0,1]], ev=s4mode==='sym'?[45,-45]:[0,-45];
+    var svg=$('s4-fig'),n=narrow(),W=n?360:720; setVB(svg,W,n?580:320); var s={v:n?STN:ST};
+    var c1=[n?180:170,n?150:160], c2=[n?180:530,n?420:160], sc=n?40:44, R=sc*3.3;
+    plane(s,c1[0],c1[1],sc*1.6,'x','y'); plane(s,c2[0],c2[1],R,'x','y');
+    for(var d=0;d<360;d+=4){var t=d*Math.PI/180,c=[Math.cos(t),Math.sin(t)],o=mv(A,c); s.v+='<circle cx="'+(c1[0]+sc*c[0])+'" cy="'+(c1[1]-sc*c[1])+'" r="3" fill="hsl('+d+',60%,50%)"/><circle cx="'+(c2[0]+sc*o[0])+'" cy="'+(c2[1]-sc*o[1])+'" r="3" fill="hsl('+d+',60%,50%)"/>';}
+    ev.forEach(function(e,i){var t=e*Math.PI/180,c=[Math.cos(t),Math.sin(t)],col=i?'var(--alpha)':'var(--accent)'; s.v+='<line x1="'+(c1[0]-sc*1.5*c[0])+'" y1="'+(c1[1]+sc*1.5*c[1])+'" x2="'+(c1[0]+sc*1.5*c[0])+'" y2="'+(c1[1]-sc*1.5*c[1])+'" stroke="'+col+'" stroke-dasharray="5 4" stroke-width="2"/>';});
+    var ang=Math.abs(ev[0]-ev[1]); s.v+='<text class="sm" x="'+c1[0]+'" y="'+(c1[1]+sc*2.2)+'" text-anchor="middle">입력 원 · 점선 사이 각도 '+ang+'°'+(ang===90?' (수직)':' (수직 아님)')+'</text><text class="sm" x="'+c2[0]+'" y="'+(c2[1]+R+18)+'" text-anchor="middle">출력 타원</text>';
+    svg.innerHTML=s.v; [].forEach.call(s4seg.children,function(b){b.classList.toggle('on',b.dataset.m===s4mode)});}
+  s4seg.onclick=function(e){var b=e.target.closest('button'); if(b){s4mode=b.dataset.m; drawS4();}};
+
+  // 5 eigen
+  var s5=$('s5s'); function bend(d){var t=d*Math.PI/180,c=[Math.cos(t),Math.sin(t)],o=mv(M,c),a=Math.atan2(o[1],o[0])-t; a=Math.atan2(Math.sin(a),Math.cos(a))*180/Math.PI; return a;}
+  function rq(d){var t=d*Math.PI/180,c=[Math.cos(t),Math.sin(t)],o=mv(M,c); return c[0]*o[0]+c[1]*o[1];}
+  function drawS5(){var d=+s5.value; $('s5v').value=d+'°'; $('s5hit').textContent=Math.abs(Math.abs(d)-45)<1?'← 고유벡터! 배율 '+(d>0?3:1):'';
+    var svg=$('s5-fig'),n=narrow(),W=n?360:720,Hh=n?280:300; setVB(svg,W,Hh); var s={v:n?STN:ST}, L=n?50:70,R=W-(n?50:70),T=24,B=Hh-50,w=R-L,h=B-T;
+    function X(x){return L+w*(x+90)/180} function Yb(a){return B-h*(a+40)/80} function Yr(v){return B-h*(v-0.8)/2.4}
+    axes(s,L,R,T,B,[['−30°',Yb(-30)],['0°',Yb(0)],['30°',Yb(30)]],[['−90°',X(-90)],['−45°',X(-45)],['0°',X(0)],['45°',X(45)],['90°',X(90)]]);
+    [1,2,3].forEach(function(v){s.v+='<text class="ax" x="'+(R+6)+'" y="'+(Yr(v)+4)+'" fill="var(--alpha)">'+v+'</text>';});
+    var p1='',p2=''; for(var x=-90;x<=90;x+=1){p1+=(x>-90?'L':'M')+X(x)+' '+Yb(bend(x)); p2+=(x>-90?'L':'M')+X(x)+' '+Yr(rq(x));}
+    s.v+='<path d="'+p2+'" fill="none" stroke="var(--alpha)" stroke-width="2.5"/><path d="'+p1+'" fill="none" stroke="var(--accent)" stroke-width="2.5"/>';
+    [-45,45].forEach(function(x){s.v+='<line x1="'+X(x)+'" y1="'+T+'" x2="'+X(x)+'" y2="'+B+'" stroke="var(--ink2)" stroke-dasharray="4 3"/>';});
+    s.v+='<circle cx="'+X(d)+'" cy="'+Yb(bend(d))+'" r="5" fill="var(--accent)"/><circle cx="'+X(d)+'" cy="'+Yr(rq(d))+'" r="5" fill="var(--alpha)"/>';
+    s.v+='<text class="ax" x="'+(L+6)+'" y="'+(T+12)+'" fill="var(--accent)">— 꺾인 각도 (왼쪽)</text><text class="ax" x="'+(L+6)+'" y="'+(T+28)+'" fill="var(--alpha)">— 그 방향의 값 c·Mc (오른쪽)</text><text class="ax" x="'+(L+w/2)+'" y="'+(B+38)+'" text-anchor="middle">입력 방향</text>';
+    svg.innerHTML=s.v;}
+  s5.oninput=drawS5;
+
+  // 6 axis rotation
+  var s6=$('s6s'); function drawS6(){var f=+s6.value/100, th=f*Math.PI/4, co=Math.cos(th), si=Math.sin(th); $('s6v').value=f===0?'원래 축':(f===1?'고유벡터 축 (45°)':(f*45).toFixed(0)+'°');
+    // R^T M R with R=[[co,-si],[si,co]]
+    var e1=[co,si], e2=[-si,co], Me1=mv(M,e1), Me2=mv(M,e2);
+    var T=[[e1[0]*Me1[0]+e1[1]*Me1[1], e1[0]*Me2[0]+e1[1]*Me2[1]],[e2[0]*Me1[0]+e2[1]*Me1[1], e2[0]*Me2[0]+e2[1]*Me2[1]]];
+    var svg=$('s6-fig'),n=narrow(),W=n?360:720; setVB(svg,W,n?520:300); var s={v:n?STN:ST}, cx=n?180:170, cy=n?150:150, sc=n?40:44;
+    plane(s,cx,cy,sc*3.2,'',''); s.v+=arrow(cx,cy,cx+sc*2.6*e1[0],cy-sc*2.6*e1[1],'var(--n)',2.5)+arrow(cx,cy,cx+sc*2.6*e2[0],cy-sc*2.6*e2[1],'var(--alpha)',2.5);
+    s.v+=arrow(cx,cy,cx+sc*Me1[0],cy-sc*Me1[1],'var(--n)',1.5)+arrow(cx,cy,cx+sc*Me2[0],cy-sc*Me2[1],'var(--alpha)',1.5);
+    s.v+='<text class="sm" x="'+cx+'" y="'+(cy+sc*3.6)+'" text-anchor="middle">굵은 화살표 = 새 축, 가는 화살표 = M이 보낸 곳</text>';
+    var tx=n?100:440, ty=n?370:90, cell=n?72:84;
+    s.v+='<text class="lb" x="'+tx+'" y="'+(ty-16)+'">새 축에서 쓴 M</text>';
+    for(var i=0;i<2;i++)for(var j=0;j<2;j++){var v=T[i][j], dg=i===j; s.v+='<rect x="'+(tx+j*cell)+'" y="'+(ty+i*cell)+'" width="'+cell+'" height="'+cell+'" fill="'+(dg?'var(--n)':'var(--alpha)')+'" fill-opacity="'+(dg?0.85:0.15+0.7*Math.abs(v))+'" stroke="var(--line)"/><text class="mi" x="'+(tx+j*cell+cell/2)+'" y="'+(ty+i*cell+cell/2+5)+'" text-anchor="middle" style="font-size:15px;fill:'+(dg?'#fff':'var(--ink)')+'">'+fmt(Math.abs(v)<0.0005?0:v,3)+'</text>';}
+    svg.innerHTML=s.v;}
+  s6.oninput=drawS6;
+
+  // 7 power iteration
+  var s7v=[1,0], s7n=0, s7hist=[[1,0]];
+  function drawS7(){var svg=$('s7-fig'),n=narrow(),W=n?360:720; setVB(svg,W,n?560:300); var s={v:n?STN:ST}, cx=n?150:140, cy=n?230:230, R=n?190:190;
+    s.v+='<line x1="'+(cx-10)+'" y1="'+cy+'" x2="'+(cx+R+10)+'" y2="'+cy+'" stroke="var(--line)"/><line x1="'+cx+'" y1="'+(cy+10)+'" x2="'+cx+'" y2="'+(cy-R-10)+'" stroke="var(--line)"/>';
+    s.v+='<line x1="'+cx+'" y1="'+cy+'" x2="'+(cx+R*Math.SQRT1_2)+'" y2="'+(cy-R*Math.SQRT1_2)+'" stroke="var(--accent)" stroke-dasharray="5 4" stroke-width="2"/><text class="sm" fill="var(--accent)" x="'+(cx+R*0.72)+'" y="'+(cy-R*0.72-6)+'">45° (고유값 3)</text>';
+    s7hist.forEach(function(v,i){var L=Math.sqrt(v[0]*v[0]+v[1]*v[1]), u=[v[0]/L,v[1]/L], op=0.25+0.75*(i+1)/s7hist.length; s.v+=arrow(cx,cy,cx+R*0.9*u[0],cy-R*0.9*u[1],i===s7hist.length-1?'var(--ink)':'rgba(91,104,120,'+op+')',i===s7hist.length-1?3.5:2);});
+    var last=s7hist[s7hist.length-1]; s.v+='<text class="lb" x="'+cx+'" y="'+(cy+28)+'">현재 ('+last[0]+', '+last[1]+')</text>';
+    var L2=n?50:420,R2=W-(n?16:30),T2=n?320:30,B2=n?520:240,w=R2-L2,h=B2-T2; function X(i){return L2+w*i/12} function Y(e){return B2-h*(Math.log10(Math.max(e,1e-6))+5)/7}
+    axes(s,L2,R2,T2,B2,[['100°',Y(100)],['1°',Y(1)],['0.01°',Y(0.01)],['0.0001°',Y(1e-4)]],[[0,X(0)],[4,X(4)],[8,X(8)],[12,X(12)]]);
+    var p=''; s7hist.forEach(function(v,i){var a=45-Math.atan2(v[1],v[0])*180/Math.PI; p+=(i?'L':'M')+X(i)+' '+Y(a); }); s.v+='<path d="'+p+'" fill="none" stroke="var(--accent)" stroke-width="2.5"/>';
+    s7hist.forEach(function(v,i){var a=45-Math.atan2(v[1],v[0])*180/Math.PI; s.v+='<circle cx="'+X(i)+'" cy="'+Y(a)+'" r="3.5" fill="var(--accent)"/>';});
+    s.v+='<text class="ax" x="'+(L2+w/2)+'" y="'+(B2+34)+'" text-anchor="middle">곱한 횟수 → 45°와의 차이 (로그)</text>';
+    svg.innerHTML=s.v; $('s7n').textContent=s7n+'회';}
+  $('s7step').onclick=function(){ if(s7n>=12) return; s7v=mv(M,s7v); s7n++; s7hist.push(s7v.slice()); drawS7(); };
+  $('s7reset').onclick=function(){ s7v=[1,0]; s7n=0; s7hist=[[1,0]]; drawS7(); };
+
+  // 8 3D
+  function setupS8(){var el=$('s8-3d'), lab=$('s8lab'); if(!el||!window.THREE){ if(el) el.innerHTML='<p style="padding:12px;font-size:13px;color:var(--ink2)">3D 뷰어를 표시할 수 없는 환경입니다.</p>'; return; }
+    var W=el.clientWidth||600,H=el.clientHeight||360,dark=matchMedia('(prefers-color-scheme: dark)').matches;
+    var ren=new THREE.WebGLRenderer({antialias:true,alpha:true}); ren.setPixelRatio(Math.min(2,window.devicePixelRatio||1)); ren.setSize(W,H); el.insertBefore(ren.domElement,el.firstChild);
+    var sc=new THREE.Scene(), cam=new THREE.PerspectiveCamera(40,W/H,0.1,100); cam.position.set(0,2.5,9.5); cam.lookAt(0,0,0);
+    sc.add(new THREE.AmbientLight(0xffffff,0.8)); var dl=new THREE.DirectionalLight(0xffffff,0.7); dl.position.set(3,5,6); sc.add(dl);
+    var root=new THREE.Group(); sc.add(root); var a=[1,2,3], k=0.8;
+    var geo=new THREE.SphereGeometry(1,48,32); geo.scale(a[0]*k,a[2]*k,a[1]*k); // three: x, y(up)=z-axis(3), z=y-axis(2)
+    root.add(new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:0x3b5ba5,transparent:true,opacity:0.3,side:THREE.DoubleSide})));
+    root.add(new THREE.LineSegments(new THREE.WireframeGeometry(geo),new THREE.LineBasicMaterial({color:0x3b5ba5,transparent:true,opacity:0.08})));
+    function V(x,y,z){return new THREE.Vector3(x,z,y);} // math (x,y,z) -> three (x,z,y)
+    [[1,0,0,'x'],[0,1,0,'y'],[0,0,1,'z']].forEach(function(d){ root.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([V(-d[0]*3.2,-d[1]*3.2,-d[2]*3.2),V(d[0]*3.2,d[1]*3.2,d[2]*3.2)]),new THREE.LineBasicMaterial({color:dark?0x9aa6b5:0x5b6878}))); });
+    var zbar=new THREE.Mesh(new THREE.CylinderGeometry(0.03,0.03,2*3*k,8),new THREE.MeshStandardMaterial({color:0x2f4f8a})); root.add(zbar);
+    var sec=new THREE.Group(); root.add(sec);
+    function rad(c){return 1/Math.sqrt(c[0]*c[0]/1+c[1]*c[1]/4+c[2]*c[2]/9);}
+    function section(mode){ while(sec.children.length) sec.remove(sec.children[0]);
+      if(mode==='none'){ lab.innerHTML='<b>전체 타원체</b><br>반지름 1, 2, 3 (x, y, z)<br>가장 긴 반지름 3 = 가장 큰 고유값'; return; }
+      var u,w; if(mode==='xy'){u=[1,0,0];w=[0,1,0];} else if(mode==='yz'){u=[0,1,0];w=[0,0,1];} else {u=[1,0,0];w=[0,Math.SQRT1_2,Math.SQRT1_2];}
+      var pts=[],best=0,bc=null; for(var i=0;i<=160;i++){var t=2*Math.PI*i/160, c=[u[0]*Math.cos(t)+w[0]*Math.sin(t),u[1]*Math.cos(t)+w[1]*Math.sin(t),u[2]*Math.cos(t)+w[2]*Math.sin(t)], r=rad(c); pts.push(V(c[0]*r*k,c[1]*r*k,c[2]*r*k)); if(r>best){best=r;bc=c;}}
+      sec.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:0xc8731f})));
+      var disc=new THREE.Mesh(new THREE.CircleGeometry(3.2,48),new THREE.MeshBasicMaterial({color:0xc8731f,transparent:true,opacity:0.12,side:THREE.DoubleSide}));
+      var nrm=new THREE.Vector3().crossVectors(V(u[0],u[1],u[2]),V(w[0],w[1],w[2])).normalize(); disc.quaternion.setFromUnitVectors(new THREE.Vector3(0,0,1),nrm); sec.add(disc);
+      var bar=new THREE.Mesh(new THREE.CylinderGeometry(0.04,0.04,2*best*k,8),new THREE.MeshStandardMaterial({color:0xc8731f})); bar.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),V(bc[0],bc[1],bc[2]).normalize()); sec.add(bar);
+      var names={xy:'x–y 평면',yz:'y–z 평면',tilt:'비스듬한 평면'};
+      lab.innerHTML='<b>'+names[mode]+'의 단면</b><br>단면의 가장 긴 반지름 <span class="mono">'+best.toFixed(3)+'</span><br>전체 최대 3 '+(Math.abs(best-3)<1e-3?'과 같음 (z축 포함)':'보다 작음');}
+    section('xy'); var seg=$('s8seg'); seg.onclick=function(e){var b=e.target.closest('button'); if(!b) return; [].forEach.call(seg.children,function(x){x.classList.toggle('on',x===b)}); section(b.dataset.p);};
+    var drag=false,px=0,py=0,rx=0.35,ry=0.6,auto=true;
+    function down(x,y){drag=true;auto=false;px=x;py=y} function move(x,y){if(!drag)return; ry+=(x-px)*0.01; rx+=(y-py)*0.01; px=x;py=y}
+    el.addEventListener('mousedown',function(e){down(e.clientX,e.clientY)}); window.addEventListener('mousemove',function(e){move(e.clientX,e.clientY)}); window.addEventListener('mouseup',function(){drag=false});
+    el.addEventListener('touchstart',function(e){var t=e.touches[0];down(t.clientX,t.clientY)},{passive:true}); el.addEventListener('touchmove',function(e){var t=e.touches[0];move(t.clientX,t.clientY)},{passive:true}); el.addEventListener('touchend',function(){drag=false});
+    (function frame(){ if(auto) ry+=0.003; root.rotation.set(rx,ry,0); ren.render(sc,cam); requestAnimationFrame(frame); })();
+    window.addEventListener('resize',function(){var w=el.clientWidth,h=el.clientHeight; ren.setSize(w,h); cam.aspect=w/h; cam.updateProjectionMatrix();});}
+
+  // 9 dice
+  var dice=[]; function drawS9(){var svg=$('s9-fig'),n=narrow(),W=n?360:720,Hh=n?280:300; setVB(svg,W,Hh); var s={v:n?STN:ST};
+    var L=n?44:60,R=W-(n?16:30),T=20,B=Hh-50,w=R-L,h=B-T, N=dice.length, Nmax=Math.max(10,N);
+    function X(i){return L+w*Math.log10(i)/Math.log10(Nmax)} function Y(m){return B-h*(m-1)/5}
+    axes(s,L,R,T,B,[['1',Y(1)],['2',Y(2)],['3',Y(3)],['3.5',Y(3.5)],['4',Y(4)],['5',Y(5)],['6',Y(6)]],[[1,X(1)],[10,X(10)]].concat(Nmax>=100?[[100,X(100)]]:[]).concat(Nmax>=1000?[[1000,X(1000)]]:[]));
+    var band='M'+X(1)+' '+Y(Math.min(6,3.5+1.71)); for(var i=1;i<=Nmax;i=Math.ceil(i*1.15)){band+='L'+X(i)+' '+Y(Math.min(6,3.5+1.71/Math.sqrt(i)));} band+='L'+X(Nmax)+' '+Y(3.5+1.71/Math.sqrt(Nmax)); band+='L'+X(Nmax)+' '+Y(3.5-1.71/Math.sqrt(Nmax)); var back=[]; for(var i=1;i<=Nmax;i=Math.ceil(i*1.15)) back.push(i); back.reverse().forEach(function(i){band+='L'+X(i)+' '+Y(Math.max(1,3.5-1.71/Math.sqrt(i)));}); band+='Z';
+    s.v+='<path d="'+band+'" fill="var(--ink2)" opacity=".15"/><line x1="'+L+'" y1="'+Y(3.5)+'" x2="'+R+'" y2="'+Y(3.5)+'" stroke="var(--ink2)" stroke-dasharray="4 3"/>';
+    if(N){var sum=0,p=''; dice.forEach(function(d,i){sum+=d; p+=(i?'L':'M')+X(i+1)+' '+Y(sum/(i+1));}); s.v+='<path d="'+p+'" fill="none" stroke="var(--accent)" stroke-width="2"/>';}
+    s.v+='<text class="ax" x="'+(L+w/2)+'" y="'+(B+38)+'" text-anchor="middle">던진 횟수 N (로그) → 누적 평균</text>';
+    svg.innerHTML=s.v; var m=N?dice.reduce(function(a,b){return a+b},0)/N:null; $('s9n').textContent=N+'번'; $('s9N').textContent=N; $('s9m').textContent=m===null?'—':m.toFixed(3); $('s9se').textContent=N?'±'+(1.71/Math.sqrt(N)).toFixed(3):'—';}
+  function roll(k){for(var i=0;i<k;i++) dice.push(1+Math.floor(Math.random()*6)); drawS9();}
+  $('s9roll').onclick=function(){roll(10)}; $('s9roll100').onclick=function(){roll(100)}; $('s9reset').onclick=function(){dice=[]; drawS9();};
+
+  // 10 binomial
+  function lgam(x){ var c=[76.18009172947146,-86.50532032941677,24.01409824083091,-1.231739572450155,0.1208650973866179e-2,-0.5395239384953e-5],y=x,t=x+5.5; t-=(x+0.5)*Math.log(t); var s=1.000000000190015; for(var j=0;j<6;j++) s+=c[j]/++y; return -t+Math.log(2.5066282746310005*s/x); }
+  function binom(Mn,p,k){ if(p<=0) return k===0?1:0; if(p>=1) return k===Mn?1:0; return Math.exp(lgam(Mn+1)-lgam(k+1)-lgam(Mn-k+1)+k*Math.log(p)+(Mn-k)*Math.log(1-p)); }
+  var s10p=$('s10p'), s10M=$('s10M');
+  function drawS10(){var p=Math.pow(10,+s10p.value), Mn=Math.round(Math.pow(10,+s10M.value)); $('s10pv').value=p<0.01?p.toPrecision(2):p.toFixed(3); $('s10Mv').value=Mn.toLocaleString();
+    var E=Mn*p, sd=Math.sqrt(Mn*p*(1-p)); var lo=Math.max(0,Math.floor(E-4.5*sd-1)), hi=Math.min(Mn,Math.ceil(E+4.5*sd+1)); if(hi-lo<8){hi=Math.min(Mn,lo+8);} var step=Math.max(1,Math.ceil((hi-lo+1)/60));
+    var svg=$('s10-fig'),n=narrow(),W=n?360:720,Hh=n?280:300; setVB(svg,W,Hh); var s={v:n?STN:ST}, L=n?44:60,R=W-(n?16:30),T=20,B=Hh-50,w=R-L,h=B-T;
+    var bars=[],mx=0; for(var k=lo;k<=hi;k+=step){var pr=0; for(var j=k;j<Math.min(k+step,hi+1);j++) pr+=binom(Mn,p,j); bars.push([k,pr]); if(pr>mx) mx=pr;}
+    function X(k){return L+w*(k-lo)/(hi-lo+step)} var bw=Math.max(1,w/bars.length-1);
+    s.v+='<rect x="'+X(E-sd)+'" y="'+T+'" width="'+Math.max(1,X(E+sd)-X(E-sd))+'" height="'+(B-T)+'" fill="var(--ink2)" opacity=".12"/>';
+    bars.forEach(function(b){var hh=h*b[1]/mx; s.v+='<rect x="'+X(b[0])+'" y="'+(B-hh)+'" width="'+bw+'" height="'+hh+'" fill="'+(b[0]===0?'var(--warn)':'var(--n)')+'"/>';});
+    s.v+='<line x1="'+X(E)+'" y1="'+T+'" x2="'+X(E)+'" y2="'+B+'" stroke="var(--accent)" stroke-width="2"/><line x1="'+L+'" y1="'+B+'" x2="'+R+'" y2="'+B+'" stroke="var(--line)"/>';
+    [lo,Math.round((lo+hi)/2),hi].forEach(function(k){s.v+='<text class="ax" x="'+X(k)+'" y="'+(B+18)+'" text-anchor="middle">'+k+'</text>';});
+    s.v+='<text class="ax" x="'+(L+w/2)+'" y="'+(B+38)+'" text-anchor="middle">나온 횟수 k  (빨강 = 0번, 띠 = 기댓값 ± 표준편차)</text>';
+    if(lo===0) s.v+='<text class="ax" x="'+(X(0)+bw+4)+'" y="'+(T+14)+'" fill="var(--warn)">0번일 확률 '+(binom(Mn,p,0)*100).toFixed(1)+'%</text>';
+    svg.innerHTML=s.v; $('s10E').textContent=E<10?E.toFixed(2):E.toFixed(1); $('s10sd').textContent=sd.toFixed(sd<10?2:1); $('s10fe').textContent='±'+Math.sqrt(p*(1-p)/Mn).toPrecision(2); $('s10re').textContent=E>0?'±'+(100/Math.sqrt(E)).toFixed(0)+'%':'—';}
+  s10p.oninput=drawS10; s10M.oninput=drawS10;
+
+  // 11 rare
+  var s11p=$('s11p'), s11M=$('s11M');
+  function drawS11(){var p=Math.pow(10,+s11p.value), Mn=Math.round(Math.pow(10,+s11M.value)); $('s11pv').value=(p*100<0.1?(p*100).toPrecision(1):(p*100).toPrecision(2))+'%'; $('s11Mv').value=Mn.toLocaleString();
+    var svg=$('s11-fig'),n=narrow(),W=n?360:720,Hh=n?260:280; setVB(svg,W,Hh); var s={v:n?STN:ST}, L=n?44:60,R=W-(n?16:30),T=20,B=Hh-50,w=R-L,h=B-T;
+    function X(m){return L+w*(Math.log10(m))/6} function Y(q){return B-h*q}
+    axes(s,L,R,T,B,[['0%',Y(0)],['50%',Y(0.5)],['95%',Y(0.95)],['100%',Y(1)]],[['1',X(1)],['100',X(100)],['10⁴',X(1e4)],['10⁶',X(1e6)]]);
+    var p1='',p2=''; for(var e=0;e<=6;e+=0.03){var m=Math.pow(10,e); p1+=(e?'L':'M')+X(m)+' '+Y(1-Math.pow(1-p,m)); p2+=(e?'L':'M')+X(m)+' '+Y(1-Math.exp(-m*p));}
+    s.v+='<path d="'+p2+'" fill="none" stroke="var(--alpha)" stroke-width="2" stroke-dasharray="5 4"/><path d="'+p1+'" fill="none" stroke="var(--accent)" stroke-width="2.5"/>';
+    var f=1-Math.pow(1-p,Mn); s.v+='<line x1="'+X(Mn)+'" y1="'+T+'" x2="'+X(Mn)+'" y2="'+B+'" stroke="var(--ink2)" stroke-dasharray="3 3"/><circle cx="'+X(Mn)+'" cy="'+Y(f)+'" r="6" fill="var(--ink)"/>';
+    s.v+='<text class="ax" x="'+(L+6)+'" y="'+(T+12)+'" fill="var(--accent)">— 1 − (1−p)ᴹ 정확</text><text class="ax" x="'+(L+6)+'" y="'+(T+28)+'" fill="var(--alpha)">┈ 1 − e^(−Mp) 근사</text><text class="ax" x="'+(L+w/2)+'" y="'+(B+38)+'" text-anchor="middle">반복 횟수 M (로그)</text>';
+    svg.innerHTML=s.v; $('s11ex').textContent=Math.pow(1-p,Mn).toPrecision(3); $('s11ap').textContent=Math.exp(-Mn*p).toPrecision(3); $('s11f').textContent=(f*100).toFixed(1)+'%'; $('s11n').textContent=Math.round(3/p).toLocaleString();}
+  s11p.oninput=drawS11; s11M.oninput=drawS11;
+
+  // 12 log scale
+  var s12mode='lin', s12seg=$('s12seg');
+  function drawS12(){var data=[]; var v=[1,0]; for(var i=0;i<=12;i++){data.push(45-Math.atan2(v[1],v[0])*180/Math.PI); v=mv(M,v);}
+    var svg=$('s12-fig'),n=narrow(),W=n?360:720,Hh=n?260:280; setVB(svg,W,Hh); var s={v:n?STN:ST}, L=n?56:70,R=W-(n?16:30),T=20,B=Hh-50,w=R-L,h=B-T;
+    function X(i){return L+w*i/12} var Y; if(s12mode==='lin'){ Y=function(e){return B-h*e/45}; axes(s,L,R,T,B,[['0°',Y(0)],['15°',Y(15)],['30°',Y(30)],['45°',Y(45)]],[[0,X(0)],[4,X(4)],[8,X(8)],[12,X(12)]]); }
+    else { Y=function(e){return B-h*(Math.log10(Math.max(e,1e-5))+5)/(Math.log10(45)+5)}; axes(s,L,R,T,B,[['10°',Y(10)],['0.1°',Y(0.1)],['0.001°',Y(0.001)],['0.00001°',Y(1e-5)]],[[0,X(0)],[4,X(4)],[8,X(8)],[12,X(12)]]); }
+    var p=''; data.forEach(function(e,i){p+=(i?'L':'M')+X(i)+' '+Y(e);}); s.v+='<path d="'+p+'" fill="none" stroke="var(--accent)" stroke-width="2.5"/>'; data.forEach(function(e,i){s.v+='<circle cx="'+X(i)+'" cy="'+Y(e)+'" r="4" fill="var(--accent)"/>';});
+    s.v+='<text class="ax" x="'+(L+w/2)+'" y="'+(B+38)+'" text-anchor="middle">곱한 횟수 → 45°와의 차이</text>';
+    svg.innerHTML=s.v; [].forEach.call(s12seg.children,function(b){b.classList.toggle('on',b.dataset.s===s12mode)});}
+  s12seg.onclick=function(e){var b=e.target.closest('button'); if(b){s12mode=b.dataset.s; drawS12();}};
+
+  // quiz
+  var Q=[
+   ['벡터 (3, 4)를 단위벡터로 만들면?',['(0.3, 0.4)','(0.6, 0.8)','(0.75, 1)'],1,'길이 √(9+16) = 5로 나눕니다. 성분² 합 0.36 + 0.64 = 1.'],
+   ['(1, 1)과 (1, −1)의 내적과 그 뜻은?',['2, 같은 방향','0, 수직','−1, 반대 방향'],1,'1×1 + 1×(−1) = 0. 내적 0은 그림자가 없다 = 수직.'],
+   ['M = [[2,1],[1,2]]에 (1, 1)을 곱하면?',['(3, 3) = 3 × (1, 1)','(2, 2)','(3, 1)'],0,'방향은 그대로, 길이만 3배. (1, 1)이 고유벡터, 3이 고유값.'],
+   ['길이 1인 c에 대해 c·Mc가 가장 작은 방향은?',['45° (고유값 3)','0° (축 방향)','−45° (고유값 1)'],2,'그 방향의 값은 고유값 사이를 오가며, 가장 작은 고유값의 고유벡터에서 최소. 수학 문서의 바닥상태가 이것.'],
+   ['(1, 0)에 M을 반복해 곱하면 45°와의 차이는 매번 대략 몇 배가 되나?',['1/2','1/3','1/9'],1,'두 고유값의 비율 1/3. 로그 눈금에서 직선.'],
+   ['반지름 1, 2, 3인 타원체를 x–y 평면으로 자르면 단면의 가장 긴 반지름은?',['3','2','√5'],1,'x–y 평면엔 z축(3)이 없어 2. 작은 공간의 답은 전체의 답을 넘지 못함.'],
+   ['주사위를 100번 던진 평균의 표준편차는 대략?',['1.71','0.17','0.017'],1,'1.71/√100 = 0.17. 4배 던져야 절반.'],
+   ['확률 0.1%인 것을 95% 확신으로 한 번 보려면 대략 몇 번?',['300','3,000','30,000'],1,'M ≈ 3/p = 3/0.001 = 3,000. e^(−3) ≈ 0.05.']];
+  function renderQuiz(){var box=$('quizbox'); box.innerHTML=''; Q.forEach(function(q,i){var d=document.createElement('div'); d.className='qz'; d.innerHTML='<p class="qq"><b>'+(i+1)+'.</b> '+q[0]+'</p>'; var opts=document.createElement('div'); opts.className='qo'; var fb=document.createElement('p'); fb.className='qf';
+      q[1].forEach(function(o,j){var b=document.createElement('button'); b.type='button'; b.textContent=o; b.onclick=function(){[].forEach.call(opts.children,function(x){x.disabled=true}); b.classList.add(j===q[2]?'right':'wrong'); if(j!==q[2]) opts.children[q[2]].classList.add('right'); fb.innerHTML=(j===q[2]?'<span class="ok">맞았습니다.</span> ':'<span class="bad">아쉽네요.</span> ')+q[3];}; opts.appendChild(b);});
+      d.appendChild(opts); d.appendChild(fb); box.appendChild(d);});}
+
+  function drawAll(){[drawMap,drawS1,drawS2,drawS3,drawS4,drawS5,drawS6,drawS7,drawS9,drawS10,drawS11,drawS12].forEach(function(f){try{f();}catch(e){if(window.console)console.error(f.name,e);}});}
+  try{renderQuiz();}catch(e){}
+  drawAll(); try{setupS8();}catch(e){var el=$('s8-3d'); if(el) el.innerHTML='<p style="padding:12px;font-size:13px;color:var(--ink2)">3D 뷰어를 표시할 수 없는 환경입니다.</p>';}
+  if(mq.addEventListener) mq.addEventListener('change',drawAll); else mq.addListener(drawAll);
+  var links=[].slice.call(document.querySelectorAll('nav a')), heads=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  function hl(){var y=window.scrollY+120,cur=0; heads.forEach(function(hh,i){if(hh&&hh.offsetTop<=y)cur=i;}); links.forEach(function(a,i){a.classList.toggle('on',i===cur);});}
+  window.addEventListener('scroll',hl,{passive:true}); hl();
+})();
+</script>
+</body>
+</html>

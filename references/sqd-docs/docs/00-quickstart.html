@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SQD 퀵스타트 따라가기 — 공식 Quickstart를 한 줄씩 풀어 읽기</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#F3F5F7;--panel:#FFFFFF;--ink:#1E2A38;--ink2:#5B6878;--line:#D5DBE3;
+  --alpha:#C8731F;--alpha-soft:#F6E3CF;--beta:#1F7A8C;--beta-soft:#D4EAEE;
+  --accent:#2F4F8A;--code:#EEF1F5;--warn:#B23A48;--n:#3B5BA5;--nsoft:#D7E0F5;--active:#BFE6D6;--frozen:#E2E5EA}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161B22;--panel:#1F2630;--ink:#E6EAF0;--ink2:#9AA6B5;--line:#344050;
+  --alpha:#E4954A;--alpha-soft:#4A3420;--beta:#5FB8C9;--beta-soft:#183A42;--accent:#8FB0F0;--code:#111620;--warn:#E07A86;--n:#7F9BE0;--nsoft:#243352;--active:#1F4A3C;--frozen:#2A313B}}
+:root[data-theme="dark"]{--bg:#161B22;--panel:#1F2630;--ink:#E6EAF0;--ink2:#9AA6B5;--line:#344050;
+  --alpha:#E4954A;--alpha-soft:#4A3420;--beta:#5FB8C9;--beta-soft:#183A42;--accent:#8FB0F0;--code:#111620;--warn:#E07A86;--n:#7F9BE0;--nsoft:#243352;--active:#1F4A3C;--frozen:#2A313B}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;font-size:16px;line-height:1.75;word-break:keep-all}
+code,pre,.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+a{color:var(--accent)}
+.wrap{display:grid;grid-template-columns:220px minmax(0,1fr);gap:48px;max-width:1100px;margin:0 auto;padding:32px 24px 96px}
+nav{position:sticky;top:calc(24px + env(safe-area-inset-top,0px));align-self:start;font-size:14px;line-height:1.6}
+nav ol{list-style:none;padding:0;margin:0;border-left:2px solid var(--line)}
+nav li a{display:block;padding:5px 0 5px 14px;color:var(--ink2);text-decoration:none;margin-left:-2px;border-left:2px solid transparent}
+nav li a:hover,nav li a.on{color:var(--ink);border-left-color:var(--accent)}
+nav .tag{margin:0 0 14px;font-size:13px;color:var(--ink2)}
+main{max-width:720px}
+h1{font-size:2.1rem;line-height:1.25;font-weight:600;margin:0 0 10px;letter-spacing:-.01em}
+h2{font-size:1.45rem;font-weight:600;margin:64px 0 14px;padding-top:16px;border-top:1px solid var(--line)}
+h3{font-size:1.08rem;font-weight:600;margin:32px 0 8px}
+p{margin:0 0 14px}
+.lead{font-size:1.1rem;color:var(--ink2);margin-bottom:24px}
+.meta{font-size:13.5px;color:var(--ink2);margin-bottom:28px}
+figure{margin:22px 0;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px}
+figure svg{display:block;width:100%;height:auto;max-width:100%}
+figcaption{font-size:13.5px;color:var(--ink2);margin-top:10px;line-height:1.55}
+.scroll{overflow-x:auto}
+pre{background:var(--code);border:1px solid var(--line);border-radius:6px;padding:14px 16px;overflow-x:auto;font-size:13.5px;line-height:1.6;margin:14px 0}
+code{font-size:.92em}
+p code,li code,td code{background:var(--code);padding:1px 5px;border-radius:3px}
+.c{color:var(--ink2)}.k{color:var(--accent)}.s{color:var(--beta)}.n{color:var(--alpha)}.o{color:var(--ink2)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:14px 0}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--ink2)}
+td.num{text-align:right;font-family:"IBM Plex Mono",monospace}
+.callout{border-left:3px solid var(--accent);padding:4px 14px;margin:18px 0;color:var(--ink2);font-size:15px}
+.ctrl{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;font-size:14px;margin-bottom:10px}
+.ctrl label{display:flex;align-items:center;gap:8px}
+.ctrl input[type=range]{width:160px;accent-color:var(--accent)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:5px;overflow:hidden}
+.seg button{border:0;background:var(--panel);color:var(--ink);padding:6px 12px;font-size:13.5px;cursor:pointer;font-family:"IBM Plex Mono",monospace}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button.on{background:var(--accent);color:#fff}
+button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.readout{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:12px}
+.readout div{background:var(--code);border-radius:5px;padding:8px 12px;font-size:13.5px;color:var(--ink2)}
+.readout b{display:block;font-size:20px;font-weight:500;color:var(--ink);font-family:"IBM Plex Mono",monospace}
+.legend{display:flex;gap:18px;font-size:13.5px;color:var(--ink2);flex-wrap:wrap;margin-top:8px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:-1px;margin-right:6px}
+.sp-a{color:var(--alpha);font-weight:600}.sp-b{color:var(--beta);font-weight:600}
+@media (max-width:860px){.wrap{grid-template-columns:1fr;gap:16px;padding:20px 16px 80px}nav{position:static}nav ol{display:flex;flex-wrap:wrap;gap:2px 10px;border:0}nav li a{padding:2px 0;border:0}h1{font-size:1.7rem}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+@media (max-width:860px){
+  body{font-size:15px}
+  figure{padding:12px 10px;margin:18px 0;overflow:visible}
+  figure svg{width:100%}
+  .readout{grid-template-columns:1fr 1fr}
+  .readout b{font-size:17px}
+  pre{font-size:12.5px;padding:12px}
+  table{font-size:13.5px}
+  th,td{padding:6px 6px}
+  .ctrl input[type=range]{width:120px}
+  .two{grid-template-columns:1fr}
+  #prodgrid{min-width:0}
+  .bits button.bit{width:28px}
+}
+
+/* layout safety: nothing may widen the page */
+html,body{max-width:100%;overflow-x:hidden}
+.wrap{grid-template-columns:220px minmax(0,1fr);width:100%}
+main{min-width:0;max-width:720px;width:100%}
+nav{min-width:0}
+figure,pre,table,.readout,.ctrl{min-width:0;max-width:100%}
+figure svg{max-width:100%}
+p,li,figcaption,td,th{overflow-wrap:anywhere}
+@media (max-width:860px){
+  .wrap{grid-template-columns:minmax(0,1fr)}
+  main{max-width:100%}
+  table{display:block;overflow-x:auto}
+}
+.docnav{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;font-size:13.5px;padding:10px 0;border-bottom:1px solid var(--line);margin-bottom:20px}
+.docnav .pn{display:flex;gap:16px;flex-wrap:wrap}.docnav a{text-decoration:none}.docnav .dim{color:var(--ink2)}
+.docnav.bottom{border-bottom:0;border-top:1px solid var(--line);margin:48px 0 0;padding-top:16px}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav aria-label="목차">
+  <p class="tag">qiskit-addon-sqd Quickstart 기준 · 실제 재현값</p>
+  <ol>
+    <li><a href="#overview">한눈에 보기</a></li>
+    <li><a href="#prep">1. 입력 준비</a></li>
+    <li><a href="#samples">2. 잡음 샘플 만들기</a></li>
+    <li><a href="#sqd">3. SQD로 후처리</a></li>
+    <li><a href="#opts">4. 옵션 하나씩</a></li>
+    <li><a href="#lesson">5. 이 예제가 보여 주는 것</a></li>
+    <li><a href="#full">전체 코드</a></li>
+    <li><a href="#next">다음 단계</a></li>
+  </ol>
+</nav>
+
+<main>
+<div class="docnav"><a class="idx" href="index.html">📚 문서 모음</a><span class="pn"><a href="intro.html">← 입문: SQD, 처음부터</a><a href="01-pyscf.html">1. PySCF로 SQD 입력 만들기 →</a></span></div><p class="meta" style="margin:0 0 4px">문서 0 / 6 · 시작점</p>
+<h1>SQD 퀵스타트 따라가기<br><span style="font-weight:400;color:var(--ink2)">공식 Quickstart를 한 줄씩 풀어 읽기</span></h1>
+<p class="meta">qiskit-addon-sqd 공식 문서의 Quickstart 노트북을 뼈대로 삼아, 각 셀이 무엇을 하는지와 왜 그런 결과가 나오는지를 설명합니다. 코드는 노트북 그대로이고, 숫자는 이 세션에서 다시 실행해 얻은 값입니다(패키지 버전에 따라 반복 횟수가 노트북과 한두 번 다를 수 있습니다). 각 단계 끝에 더 깊이 볼 문서를 연결해 두었습니다.</p>
+
+<p class="lead">Quickstart의 요점은 하나입니다. 양자컴퓨터 없이 <strong>완전히 무작위인 비트열</strong>을 넣어도 SQD는 정확한 바닥상태에 도달한다. 이 예제가 작아서 가능한 일이지만, 알고리즘의 각 부품이 무엇을 하는지 보기에는 가장 좋은 예제입니다.</p>
+
+<h2 id="overview">한눈에 보기</h2>
+<figure>
+<svg id="overview-fig" viewBox="0 0 720 150" role="img" aria-label="Quickstart의 세 단계: 입력 준비, 잡음 샘플, SQD 후처리"></svg>
+<figcaption>공식 튜토리얼은 2단계에 실제 양자 회로(LUCJ)와 QPU 샘플링이 들어가지만, Quickstart는 그 자리를 균일 난수로 대신합니다. 1단계와 3단계는 튜토리얼과 같습니다.</figcaption>
+</figure>
+
+<h2 id="prep">1. 입력 준비</h2>
+<p>N₂를 STO-3G 기저로 만들고, 내각 궤도 2개를 얼린 활성 공간 8궤도·10전자를 잡습니다. 문서 1과 같은 절차인데 기저만 작습니다(STO-3G는 N 원자당 함수 5개, 전체 10개).</p>
+<pre><code><span class="k">from</span> pyscf <span class="k">import</span> ao2mo, gto, mcscf, scf
+
+mol = gto.M(atom=<span class="s">"N 0 0 0; N 0 0 1.09768"</span>, basis=<span class="s">"sto-3g"</span>, spin=<span class="n">0</span>, charge=<span class="n">0</span>, verbose=<span class="n">0</span>)
+mf = scf.RHF(mol).run()
+cas = mcscf.CASCI(mf, ncas=<span class="n">8</span>, nelecas=<span class="n">10</span>)        <span class="c"># 활성 궤도 8, 활성 전자 10 → PySCF가 (5,5)로 나눔</span>
+hcore, nuclear_repulsion_energy = cas.get_h1eff()   <span class="c"># (8,8) 와 상수 (내각 + 핵 반발)</span>
+eri = ao2mo.restore(<span class="n">1</span>, cas.get_h2eff(), cas.ncas)    <span class="c"># (8,8,8,8)</span>
+nelec = cas.nelecas                                 <span class="c"># (5, 5)</span>
+<span class="c"># Spatial orbitals: 8 / Qubits: 16 / Electrons (alpha, beta): (5, 5)</span></code></pre>
+<table>
+<tr><th>값</th><th>이 예제 (STO-3G)</th><th>문서 1~6 (cc-pVDZ)</th></tr>
+<tr><td>전체 궤도 / 활성 궤도</td><td class="num">10 / 8</td><td class="num">28 / 8</td></tr>
+<tr><td>활성 전자</td><td class="num">(5, 5)</td><td class="num">(5, 5)</td></tr>
+<tr><td>큐비트</td><td class="num">16</td><td class="num">16</td></tr>
+<tr><td>HF 에너지 (Ha)</td><td class="num">−107.496</td><td class="num">−108.954</td></tr>
+<tr><td>정확한 에너지 (Ha)</td><td class="num">−107.653</td><td class="num">−109.034</td></tr>
+<tr><td>상수 <code>nuclear_repulsion_energy</code></td><td class="num">−76.409</td><td class="num">−77.417</td></tr>
+</table>
+<p class="callout">변수 이름이 <code>nuclear_repulsion_energy</code>지만 실제 값은 핵 반발 에너지 + 얼린 내각 전자의 에너지입니다(문서 1의 <code>ecore</code>와 같은 것). SQD가 돌려주는 에너지에 이 상수를 더해야 전체 에너지가 됩니다. 노트북의 모든 출력이 <code>result.energy + nuclear_repulsion_energy</code>인 이유입니다.</p>
+<p>깊이 보기: 기저와 활성 공간, hcore·eri의 뜻은 <strong>문서 1</strong>, 16큐비트와 비트열 규약의 관계는 <strong>문서 2</strong>.</p>
+
+<h2 id="samples">2. 잡음 샘플 만들기</h2>
+<p>실제 워크플로에서는 회로를 설계하고 QPU에서 샘플링합니다. Quickstart는 그 자리를 <strong>균일 난수 비트열 10,000개</strong>로 채웁니다. 바닥상태에 대한 정보가 전혀 없는 최악의 입력입니다.</p>
+<pre><code><span class="k">import</span> numpy <span class="k">as</span> np
+<span class="k">from</span> qiskit_addon_sqd.counts <span class="k">import</span> generate_bit_array_uniform
+
+rng = np.random.default_rng(<span class="n">24</span>)
+bit_array = generate_bit_array_uniform(<span class="n">10_000</span>, num_orbitals * <span class="n">2</span>, rand_seed=rng)
+<span class="c"># Generated 10000 uniformly-random, 16-qubit samples.</span></code></pre>
+<figure>
+<svg id="valid-fig" viewBox="0 0 720 240" role="img" aria-label="난수 비트열 중 전자 수가 맞는 비율"></svg>
+<figcaption>16비트 난수는 65,536가지이고 그중 전자 수가 맞는 것은 C(8,5)² = 3,136가지, 비율로 4.79%입니다. 실제로 뽑힌 10,000개 중 유효한 것은 4.97%, 고유 비트열로는 9,300종류 중 458종류였습니다. 공식 튜토리얼은 이 4.79%를 "QPU가 무작위보다 나은지 판단하는 기준선"으로 씁니다.</figcaption>
+</figure>
+<table>
+<tr><th></th><th>난수 (Quickstart)</th><th>정확한 상태 샘플 (문서 5)</th><th>LUCJ 회로 샘플 (문서 4)</th></tr>
+<tr><td>유효 비율</td><td class="num">5%</td><td class="num">100%</td><td class="num">100% (시뮬레이터)</td></tr>
+<tr><td>HF 배치의 빈도</td><td class="num">0.02%</td><td class="num">94%</td><td class="num">98~99%</td></tr>
+<tr><td>고유 비트열 (유효)</td><td class="num">458</td><td class="num">45</td><td class="num">6~22</td></tr>
+<tr><td>바닥상태 정보</td><td>없음</td><td>완벽</td><td>근사</td></tr>
+</table>
+<p>난수 샘플의 특이한 점이 하나 있습니다. 유효 비트열이 458종류로 <em>많습니다</em>. 좋은 회로에서는 중요한 배치 몇십 개가 반복해서 나오지만, 난수는 3,136개 전체에 얇게 퍼집니다. 이것이 3절에서 부분공간이 전체 공간까지 자라는 이유입니다.</p>
+<p>깊이 보기: 실제 회로와 QPU에서 비트열이 어떻게 나오는지는 <strong>문서 4·5</strong>.</p>
+
+<h2 id="sqd">3. SQD로 후처리</h2>
+<p>이제 핵심입니다. 난수 비트열을 넣고 반복마다 "전자 수 맞추기 → 작은 공간에서 대각화 → 점유도로 비트열 교정"을 돌립니다.</p>
+<pre><code><span class="k">from</span> functools <span class="k">import</span> partial
+<span class="k">from</span> pyscf <span class="k">import</span> fci
+<span class="k">from</span> qiskit_addon_sqd.fermion <span class="k">import</span> SCIResult, diagonalize_fermionic_hamiltonian, solve_sci_batch
+
+<span class="c"># 비교용 정답: 활성 공간 FCI</span>
+exact_energy, _ = fci.direct_spin1.kernel(hcore, eri, num_orbitals, nelec)
+exact_energy += nuclear_repulsion_energy          <span class="c"># -107.652521 Ha</span>
+
+sci_solver = partial(solve_sci_batch, spin_sq=<span class="n">0.0</span>, max_cycle=<span class="n">200</span>)
+
+result_history = []
+<span class="k">def</span> callback(results: list[SCIResult]):
+    result_history.append(results)
+    <span class="k">for</span> i, result <span class="k">in</span> enumerate(results):
+        print(result.energy + nuclear_repulsion_energy,
+              np.prod(result.sci_state.amplitudes.shape))   <span class="c"># 에너지, 부분공간 차원</span>
+
+result = diagonalize_fermionic_hamiltonian(
+    hcore, eri, bit_array,
+    samples_per_batch=<span class="n">20</span>,
+    norb=num_orbitals, nelec=nelec,
+    occupancies_tol=<span class="n">1e-7</span>,
+    max_iterations=<span class="n">30</span>,
+    sci_solver=sci_solver,
+    symmetrize_spin=<span class="k">True</span>,
+    callback=callback,
+    seed=np.random.default_rng(<span class="n">32</span>),
+)</code></pre>
+
+<figure>
+<svg id="iter-fig" viewBox="0 0 720 320" role="img" aria-label="반복에 따른 에너지 오차와 부분공간 차원"></svg>
+<figcaption>이 세션에서 재현한 8번 반복. 오차(파랑, 로그 눈금)는 두 번째 반복까지 0.7 Ha로 멈춰 있다가 세 번째에 0.027 Ha로 뚝 떨어지고, 일곱 번째에 정확히 0이 됩니다. 부분공간(주황)은 784에서 시작해 3,136 = 전체 공간까지 자랍니다.</figcaption>
+</figure>
+<table>
+<tr><th>반복</th><th>에너지 (Ha)</th><th>부분공간 (|S|²)</th><th>오차 (Ha)</th><th>무슨 일이</th></tr>
+<tr><td>1</td><td class="num">−106.9068</td><td class="num">28² = 784</td><td class="num">0.7457</td><td>후선별된 난수 20개로 시작. HF 배치가 없음</td></tr>
+<tr><td>2</td><td class="num">−106.9304</td><td class="num">39² = 1,521</td><td class="num">0.7221</td><td>점유도가 아직 흐릿해 복구가 큰 도움 안 됨</td></tr>
+<tr><td>3</td><td class="num">−107.6257</td><td class="num">46² = 2,116</td><td class="num">0.0268</td><td>복구된 비트열에 HF 배치가 들어옴 → 급락</td></tr>
+<tr><td>4~5</td><td class="num">−107.628</td><td class="num">2,500 → 2,809</td><td class="num">0.025</td><td>들뜬 배치들이 하나씩 추가됨</td></tr>
+<tr><td>6</td><td class="num">−107.6525</td><td class="num">55² = 3,025</td><td class="num">0.00003</td><td>거의 전체 공간</td></tr>
+<tr><td>7</td><td class="num">−107.6525</td><td class="num">56² = 3,136</td><td class="num">0</td><td>전체 공간 = FCI. 8번째에서 수렴 판정</td></tr>
+</table>
+<p>세 번째 반복의 급락이 알고리즘의 심장입니다. 처음 두 번은 난수에서 걸러진 비트열로 만든 공간이라 HF 배치(바닥상태의 92%)가 들어 있지 않습니다. 그래도 그 공간의 최저 에너지 상태는 "낮은 궤도가 차 있는 쪽"으로 기울어 있어서, 점유도가 궤도 0~4는 높고 5~7은 낮게 나옵니다. 그 점유도로 난수 비트열을 교정하면 HF 배치와 그 주변이 만들어지고, 그것이 공간에 들어오는 순간 오차가 30배 줄어듭니다.</p>
+<figure>
+<svg id="occ-fig" viewBox="0 0 720 200" role="img" aria-label="최종 반복의 궤도 점유도 합 (α+β)"></svg>
+<figcaption>마지막 반복의 궤도 점유도(α + β, 최대 2). 궤도 0~4가 거의 2, 궤도 5~7이 거의 0. 노트북 마지막 그림과 같은 것이며, STO-3G라 cc-pVDZ(문서 6)보다 π→π* 들뜸 비중이 조금 큽니다(궤도 3·4가 1.93).</figcaption>
+</figure>
+<p>깊이 보기: 후선별·복구·부분공간·수렴 각 단계의 내부는 <strong>문서 6</strong>.</p>
+
+<h2 id="opts">4. 옵션 하나씩</h2>
+<p>Quickstart의 호출에는 문서 6에서 다루지 않은 인자가 몇 개 있습니다.</p>
+<table>
+<tr><th>인자</th><th>값</th><th>뜻</th></tr>
+<tr><td><code>sci_solver</code></td><td><code>partial(solve_sci_batch, spin_sq=0.0, max_cycle=200)</code></td><td>대각화 함수를 바꿔 끼우는 자리. 기본 solver에 "총 스핀 S² = 0(싱글릿)으로 제한"과 "반복 상한 200"을 미리 넣어 둔 것. 싱글릿 제한이 없으면 같은 공간에서 트리플릿 상태가 더 낮게 나올 수 있어 엉뚱한 답을 고를 위험이 있음</td></tr>
+<tr><td><code>symmetrize_spin</code></td><td><code>True</code></td><td>S<sub>α</sub>와 S<sub>β</sub>를 합집합으로 통일. 닫힌 껍질 분자는 α↔β 대칭이라 이렇게 해야 공간이 대칭이 되고 수렴이 빠름. 이 예제에서 끄면 수렴에 13번 걸리고 1 mHa 오차가 남음</td></tr>
+<tr><td><code>samples_per_batch</code></td><td><code>20</code></td><td>배치당 비트열 수. 20이면 8번, 100이면 3번 만에 수렴. 작게 잡은 것은 반복 과정을 보여 주기 위해서</td></tr>
+<tr><td><code>occupancies_tol</code></td><td><code>1e-7</code></td><td>점유도 변화가 이보다 작아야 수렴. 매우 엄격하게 잡아 전체 공간에 닿을 때까지 돌림</td></tr>
+<tr><td><code>max_iterations</code></td><td><code>30</code></td><td>상한. 실제로는 8번에 멈춤</td></tr>
+<tr><td><code>num_batches</code></td><td>(기본값 1)</td><td>튜토리얼은 3. 여기서는 배치 하나라 출력에 Subsample 0만 보임</td></tr>
+<tr><td><code>seed</code></td><td><code>default_rng(32)</code></td><td>부분추출과 복구의 난수. 샘플 생성(24)과 별도</td></tr>
+</table>
+<table>
+<tr><th>samples_per_batch</th><th>symmetrize_spin</th><th>수렴까지 반복</th><th>최종 오차</th></tr>
+<tr><td class="num">20</td><td>True (노트북)</td><td class="num">8</td><td class="num">0</td></tr>
+<tr><td class="num">20</td><td>False</td><td class="num">13</td><td class="num">1.2 mHa</td></tr>
+<tr><td class="num">100</td><td>True</td><td class="num">3</td><td class="num">0</td></tr>
+<tr><td class="num">100</td><td>False</td><td class="num">5</td><td class="num">0</td></tr>
+</table>
+<p class="meta">같은 난수 샘플, 같은 seed로 옵션만 바꿔 실행한 결과.</p>
+
+<h2 id="lesson">5. 이 예제가 보여 주는 것과 보여 주지 않는 것</h2>
+<p><strong>보여 주는 것.</strong> 구성 복구가 얼마나 강한지. 바닥상태 정보가 0인 입력에서 출발해도, 대각화 → 점유도 → 교정의 피드백만으로 정확한 답에 도달합니다. 각 단계(후선별, 복구, 부분추출, 대각화, 수렴)가 코드에서 어떻게 호출되는지도 가장 짧은 형태로 보입니다.</p>
+<p><strong>보여 주지 않는 것.</strong> 이것이 되는 이유는 전체 공간이 3,136차원이라 고전 컴퓨터가 통째로 다룰 수 있기 때문입니다. 부분공간이 자라서 전체 공간이 되면 당연히 정답입니다. 궤도 36개·전자 36개면 전체는 10¹⁸이라 이런 식으로는 닿을 수 없고, 그때는 양자 회로가 "중요한 배치"를 처음부터 집어 줘야 합니다. 즉 Quickstart는 후처리의 작동 원리를 보여 주는 것이지, 양자컴퓨터가 필요한 이유를 보여 주는 것이 아닙니다. 그 이유는 문서 4·5·6에 있습니다.</p>
+
+<h2 id="full">전체 코드</h2>
+<pre><code><span class="k">from</span> functools <span class="k">import</span> partial
+<span class="k">import</span> numpy <span class="k">as</span> np
+<span class="k">from</span> pyscf <span class="k">import</span> ao2mo, gto, mcscf, scf, fci
+<span class="k">from</span> qiskit_addon_sqd.counts <span class="k">import</span> generate_bit_array_uniform
+<span class="k">from</span> qiskit_addon_sqd.fermion <span class="k">import</span> SCIResult, diagonalize_fermionic_hamiltonian, solve_sci_batch
+
+<span class="c"># 1. 입력</span>
+mol = gto.M(atom=<span class="s">"N 0 0 0; N 0 0 1.09768"</span>, basis=<span class="s">"sto-3g"</span>, spin=<span class="n">0</span>, charge=<span class="n">0</span>, verbose=<span class="n">0</span>)
+mf = scf.RHF(mol).run()
+cas = mcscf.CASCI(mf, ncas=<span class="n">8</span>, nelecas=<span class="n">10</span>)
+hcore, nuclear_repulsion_energy = cas.get_h1eff()
+num_orbitals = cas.ncas
+eri = ao2mo.restore(<span class="n">1</span>, cas.get_h2eff(), num_orbitals)
+nelec = cas.nelecas
+
+<span class="c"># 2. 잡음 샘플 (균일 난수)</span>
+rng = np.random.default_rng(<span class="n">24</span>)
+bit_array = generate_bit_array_uniform(<span class="n">10_000</span>, num_orbitals * <span class="n">2</span>, rand_seed=rng)
+
+<span class="c"># 3. SQD</span>
+exact_energy, _ = fci.direct_spin1.kernel(hcore, eri, num_orbitals, nelec)
+exact_energy += nuclear_repulsion_energy
+sci_solver = partial(solve_sci_batch, spin_sq=<span class="n">0.0</span>, max_cycle=<span class="n">200</span>)
+result_history = []
+
+<span class="k">def</span> callback(results: list[SCIResult]):
+    result_history.append(results)
+    <span class="k">for</span> i, r <span class="k">in</span> enumerate(results):
+        e = r.energy + nuclear_repulsion_energy
+        print(<span class="s">f"iter {len(result_history)}  E={e:.6f}  dim={np.prod(r.sci_state.amplitudes.shape)}  err={e - exact_energy:.6f}"</span>)
+
+result = diagonalize_fermionic_hamiltonian(
+    hcore, eri, bit_array, samples_per_batch=<span class="n">20</span>, norb=num_orbitals, nelec=nelec,
+    occupancies_tol=<span class="n">1e-7</span>, max_iterations=<span class="n">30</span>, sci_solver=sci_solver,
+    symmetrize_spin=<span class="k">True</span>, callback=callback, seed=np.random.default_rng(<span class="n">32</span>),
+)
+print(result.energy + nuclear_repulsion_energy, exact_energy)   <span class="c"># -107.652521 -107.652521</span></code></pre>
+
+<h2 id="next">다음 단계</h2>
+<p>Quickstart에서 난수로 대신한 2단계를 실제 양자 회로로 바꾸면 공식 튜토리얼이 됩니다. 그 튜토리얼은 STO-6G 시뮬레이터 예제와 cc-pVDZ 26궤도·52큐비트 실기기 예제로 되어 있고, 이 문서 모음의 1 → 6이 그 흐름을 따라갑니다.</p>
+<table>
+<tr><th>Quickstart 단계</th><th>튜토리얼에서는</th><th>이 문서 모음에서는</th></tr>
+<tr><td>1. 입력 준비</td><td>같음 (STO-6G / cc-pVDZ)</td><td>문서 1, 2</td></tr>
+<tr><td>2. 잡음 샘플</td><td>LUCJ 회로 → transpile → Sampler (시뮬레이터 또는 QPU)</td><td>문서 3, 4, 5</td></tr>
+<tr><td>3. SQD 후처리</td><td>같음 + <code>initial_occupancies</code>, <code>max_dim</code>, <code>carryover_threshold</code>, 배치 3개</td><td>문서 6</td></tr>
+</table>
+<p class="meta">출처: qiskit-addon-sqd Quickstart (© IBM Corp.) · 이 문서의 수치는 PySCF 2.x, qiskit-addon-sqd 0.14.0에서 재현. 노트북 원문은 반복 2→3 사이의 급락이 3→4 사이에 있는 등 버전 차이로 반복 번호가 조금 다릅니다.</p>
+<div class="docnav bottom"><a class="idx" href="index.html">📚 문서 모음</a><span class="pn"><a href="intro.html">← 입문: SQD, 처음부터</a><a href="01-pyscf.html">1. PySCF로 SQD 입력 만들기 →</a></span></div>
+</main>
+</div>
+<script>
+(function(){
+  var mq=window.matchMedia('(max-width:600px)'); function narrow(){return mq.matches}
+  var ST='<style>.lb{font:13.5px "IBM Plex Sans KR",sans-serif;fill:var(--ink)}.sm{font:11.5px "IBM Plex Sans KR",sans-serif;fill:var(--ink2)}.mo{font:11.5px "IBM Plex Mono",monospace;fill:var(--accent)}.mi{font:11.5px "IBM Plex Mono",monospace;fill:var(--ink)}.ax{font:11.5px "IBM Plex Sans KR",sans-serif;fill:var(--ink2)}</style>';
+  var STN='<style>.lb{font:14px "IBM Plex Sans KR",sans-serif;fill:var(--ink)}.sm{font:12px "IBM Plex Sans KR",sans-serif;fill:var(--ink2)}.mo{font:12px "IBM Plex Mono",monospace;fill:var(--accent)}.mi{font:12px "IBM Plex Mono",monospace;fill:var(--ink)}.ax{font:12px "IBM Plex Sans KR",sans-serif;fill:var(--ink2)}</style>';
+  var AR='<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--ink2)"/></marker></defs>';
+  function setVB(svg,w,h){svg.setAttribute('viewBox','0 0 '+w+' '+h)}
+  function drawOverview(){
+    var svg=document.getElementById('overview-fig'), steps=[['1. 입력 준비','PySCF: hcore, eri, nelec','N₂ STO-3G, 8궤도'],['2. 잡음 샘플','generate_bit_array_uniform','난수 10,000개 (튜토리얼: QPU)'],['3. SQD 후처리','diagonalize_fermionic_hamiltonian','8번 반복 → FCI와 일치']];
+    var s;
+    if(narrow()){ setVB(svg,360,3*86+10); s=STN+AR; steps.forEach(function(st,i){var y=10+i*86,q=i===1; s+='<rect x="30" y="'+y+'" width="300" height="60" rx="6" fill="'+(q?'var(--alpha-soft)':'var(--panel)')+'" stroke="'+(q?'var(--alpha)':'var(--line)')+'"/><text x="48" y="'+(y+25)+'" class="lb">'+st[0]+'</text><text x="48" y="'+(y+46)+'" class="mo" style="font-size:10.5px">'+st[1]+'</text>'; if(i<2) s+='<line x1="180" y1="'+(y+62)+'" x2="180" y2="'+(y+82)+'" stroke="var(--ink2)" marker-end="url(#ar)"/>';}); }
+    else { setVB(svg,720,150); s=ST+AR; steps.forEach(function(st,i){var x=20+i*240,q=i===1,w=200,cx=x+w/2; s+='<rect x="'+x+'" y="30" width="'+w+'" height="64" rx="6" fill="'+(q?'var(--alpha-soft)':'var(--panel)')+'" stroke="'+(q?'var(--alpha)':'var(--line)')+'"/><text x="'+cx+'" y="54" text-anchor="middle" class="lb">'+st[0]+'</text><text x="'+cx+'" y="74" text-anchor="middle" class="mo" style="font-size:10.5px">'+st[1]+'</text><text x="'+cx+'" y="120" text-anchor="middle" class="sm">'+st[2]+'</text>'; if(i<2) s+='<line x1="'+(x+w+2)+'" y1="62" x2="'+(x+w+36)+'" y2="62" stroke="var(--ink2)" marker-end="url(#ar)"/>';}); }
+    svg.innerHTML=s;
+  }
+  function drawValid(){
+    var svg=document.getElementById('valid-fig'), n=narrow(), W=n?360:720; setVB(svg,W,n?260:240);
+    var s=n?STN:ST, L=n?20:40, w=W-2*L, y=60, h=56;
+    s+='<text x="'+L+'" y="30" class="lb">16비트 난수 65,536가지</text>';
+    s+='<rect x="'+L+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="6" fill="var(--code)" stroke="var(--line)"/>';
+    var vw=w*0.0479; s+='<rect x="'+L+'" y="'+y+'" width="'+Math.max(vw,6)+'" height="'+h+'" rx="6" fill="var(--beta)"/>';
+    s+='<text x="'+(L+vw+10)+'" y="'+(y+h/2+5)+'" class="sm">← 전자 수가 맞는 3,136가지 = 4.79%</text>';
+    var y2=y+h+40;
+    s+='<text x="'+L+'" y="'+(y2-10)+'" class="lb">실제로 뽑힌 10,000개</text>';
+    s+='<rect x="'+L+'" y="'+y2+'" width="'+w+'" height="'+h+'" rx="6" fill="var(--code)" stroke="var(--line)"/>';
+    var vw2=w*0.0497; s+='<rect x="'+L+'" y="'+y2+'" width="'+vw2+'" height="'+h+'" rx="6" fill="var(--beta)"/>';
+    s+='<text x="'+(L+vw2+10)+'" y="'+(y2+h/2+5)+'" class="sm">← 유효 497개 = 4.97% (고유 458종류). 나머지 95%는 후선별에서 버려짐</text>';
+    svg.innerHTML=s;
+  }
+  var IT=[[0.745718,784],[0.722129,1521],[0.026798,2116],[0.025606,2500],[0.024265,2809],[0.000031,3025],[0.0000001,3136],[0.0000001,3136]];
+  function drawIter(){
+    var svg=document.getElementById('iter-fig'), n=narrow(), W=n?360:720, H=n?300:320; setVB(svg,W,H);
+    var L=n?50:76,R=W-(n?50:76),T=28,B=H-50,w=R-L,h=B-T, s=n?STN:ST, lo=-7, hi=0;
+    function Y(e){return B-h*(Math.log10(Math.max(e,1e-7))-lo)/(hi-lo)} function X(i){return L+w*i/7} function Yd(d){return B-h*d/3500}
+    [1e-6,1e-4,1e-2,1].forEach(function(t){var y=Y(t); s+='<line x1="'+L+'" y1="'+y+'" x2="'+R+'" y2="'+y+'" stroke="var(--line)"/><text class="ax" x="'+(L-6)+'" y="'+(y+4)+'" text-anchor="end">'+(t>=1?'1':t.toExponential(0).replace('e-','e−'))+'</text>';});
+    [0,1000,2000,3000].forEach(function(d){ s+='<text class="ax" x="'+(R+6)+'" y="'+(Yd(d)+4)+'">'+d+'</text>'; });
+    s+='<line x1="'+L+'" y1="'+Y(0.0016)+'" x2="'+R+'" y2="'+Y(0.0016)+'" stroke="var(--warn)" stroke-dasharray="5 4"/><text class="ax" x="'+(L+6)+'" y="'+(Y(0.0016)-6)+'" fill="var(--warn)">화학 정확도 1.6 mHa</text>';
+    var pe='',pd=''; IT.forEach(function(c,i){pe+=(i?'L':'M')+X(i)+' '+Y(c[0]); pd+=(i?'L':'M')+X(i)+' '+Yd(c[1]); s+='<text class="ax" x="'+X(i)+'" y="'+(B+18)+'" text-anchor="middle">'+(i+1)+'</text>';});
+    s+='<path d="'+pd+'" fill="none" stroke="var(--alpha)" stroke-width="2" stroke-dasharray="5 4"/><path d="'+pe+'" fill="none" stroke="var(--accent)" stroke-width="2.5"/>';
+    IT.forEach(function(c,i){ s+='<circle cx="'+X(i)+'" cy="'+Y(c[0])+'" r="4" fill="var(--accent)"/><circle cx="'+X(i)+'" cy="'+Yd(c[1])+'" r="3.5" fill="var(--alpha)"/>'; });
+    s+='<text class="ax" x="'+(L+w/2)+'" y="'+(B+38)+'" text-anchor="middle">반복 (iteration)</text>';
+    s+='<text class="ax" x="'+L+'" y="'+(T-10)+'" fill="var(--accent)">오차 (Ha, 로그)</text><text class="ax" x="'+R+'" y="'+(T-10)+'" text-anchor="end" fill="var(--alpha)">부분공간 차원</text>';
+    svg.innerHTML=s;
+  }
+  function drawOcc(){
+    var svg=document.getElementById('occ-fig'), n=narrow(), W=n?360:720; setVB(svg,W,200);
+    var occ=[1.991,1.986,1.932,1.932,1.986,0.077,0.077,0.019], s=n?STN:ST, L=n?40:80, R=W-(n?16:60), B=160, T=30, w=(R-L)/8;
+    for(var k=0;k<=2;k++){var y=B-(B-T)*k/2; s+='<line x1="'+L+'" y1="'+y+'" x2="'+R+'" y2="'+y+'" stroke="var(--line)"/><text x="'+(L-6)+'" y="'+(y+4)+'" text-anchor="end" class="ax">'+k+'</text>';}
+    occ.forEach(function(o,i){ var x=L+i*w+w*0.2, hh=(B-T)*o/2; s+='<rect x="'+x+'" y="'+(B-hh)+'" width="'+(w*0.6)+'" height="'+hh+'" rx="3" fill="'+(o>1?'var(--n)':'var(--alpha)')+'"/><text x="'+(x+w*0.3)+'" y="'+(B-hh-6)+'" text-anchor="middle" class="ax">'+o.toFixed(2)+'</text><text x="'+(x+w*0.3)+'" y="'+(B+16)+'" text-anchor="middle" class="ax">'+i+'</text>'; });
+    s+='<text x="'+(L+(R-L)/2)+'" y="'+(B+36)+'" text-anchor="middle" class="ax">궤도 번호 · 점유도 합 (α + β)</text>';
+    svg.innerHTML=s;
+  }
+  function drawAll(){drawOverview();drawValid();drawIter();drawOcc();}
+  drawAll(); if(mq.addEventListener) mq.addEventListener('change',drawAll); else mq.addListener(drawAll);
+  var links=[].slice.call(document.querySelectorAll('nav a')), heads=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  function hl(){var y=window.scrollY+120, cur=0; heads.forEach(function(hh,i){if(hh&&hh.offsetTop<=y)cur=i;}); links.forEach(function(a,i){a.classList.toggle('on',i===cur);});}
+  window.addEventListener('scroll',hl,{passive:true}); hl();
+})();
+</script>
+</body>
+</html>

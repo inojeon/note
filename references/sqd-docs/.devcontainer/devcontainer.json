@@ -1,0 +1,10 @@
+{
+  "name": "sqd-docs",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "22" }
+  },
+  "postCreateCommand": "pip install -r requirements.txt && curl -fsSL https://claude.ai/install.sh | bash",
+  "forwardPorts": [8000],
+  "customizations": { "vscode": { "extensions": ["ms-python.python"] } }
+}

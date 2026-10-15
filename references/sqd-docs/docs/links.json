@@ -1,0 +1,62 @@
+{
+  "index.html": {
+    "title": "문서 모음",
+    "published_artifact": "https://claude.ai/artifact/Qixf9K4nJ6dpEqcQoJmNcq",
+    "origin_file": "sqd-index.html"
+  },
+  "background-atoms.html": {
+    "title": "배경: 주기율표와 원자",
+    "published_artifact": "https://claude.ai/artifact/XXeTn5ZN7TuSJooNoxm4Zp",
+    "origin_file": "sqd-atoms.html"
+  },
+  "intro.html": {
+    "title": "입문: SQD, 처음부터",
+    "published_artifact": "https://claude.ai/artifact/AZX771wUd4Q2o456FMjTw3",
+    "origin_file": "sqd-intro.html"
+  },
+  "prep-math.html": {
+    "title": "준비: 수학 문서 읽기 전에",
+    "published_artifact": "https://claude.ai/artifact/HFbNqMNUF9dEZ9xQiNBVnK",
+    "origin_file": "sqd-prep.html"
+  },
+  "math.html": {
+    "title": "수학: 대각화와 샘플링",
+    "published_artifact": "https://claude.ai/artifact/M4eABUKSxpvVQHtcDyiw2w",
+    "origin_file": "sqd-math.html"
+  },
+  "00-quickstart.html": {
+    "title": "0. SQD 퀵스타트 따라가기",
+    "published_artifact": "https://claude.ai/artifact/Cj6XFSyjBjtjfu32sfrzEy",
+    "origin_file": "sqd-quickstart.html"
+  },
+  "01-pyscf.html": {
+    "title": "1. PySCF로 SQD 입력 만들기",
+    "published_artifact": "https://claude.ai/artifact/PPD6PdorRM9qN25iiPx7Fm",
+    "origin_file": "pyscf-for-sqd.html"
+  },
+  "02-jordan-wigner.html": {
+    "title": "2. 궤도를 큐비트로",
+    "published_artifact": "https://claude.ai/artifact/4EhjQZakKvc1ncL3Dj4v8R",
+    "origin_file": "sqd-jordan-wigner.html"
+  },
+  "03-ucj-inside.html": {
+    "title": "3. UCJ 회로 안쪽",
+    "published_artifact": "https://claude.ai/artifact/YWAvMpoVenuePC27PkSMck",
+    "origin_file": "sqd-ucj-inside.html"
+  },
+  "04-circuit.html": {
+    "title": "4. 양자 회로",
+    "published_artifact": "https://claude.ai/artifact/8YhXx8qsSMrURsA5WM7Su7",
+    "origin_file": "sqd-circuit.html"
+  },
+  "05-sampling.html": {
+    "title": "5. 샘플링",
+    "published_artifact": "https://claude.ai/artifact/Bys6pzycwbqRfEjwoSVNYx",
+    "origin_file": "sqd-sampling.html"
+  },
+  "06-sqd-guide.html": {
+    "title": "6. SQD 이해하기",
+    "published_artifact": "https://claude.ai/artifact/3DKnaoL6iKWvBSJMK5KzGH",
+    "origin_file": "sqd-guide.html"
+  }
+}

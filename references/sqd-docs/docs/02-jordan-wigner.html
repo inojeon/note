@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>궤도를 큐비트로 — Jordan–Wigner 변환</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#F3F5F7;--panel:#FFFFFF;--ink:#1E2A38;--ink2:#5B6878;--line:#D5DBE3;
+  --alpha:#C8731F;--alpha-soft:#F6E3CF;--beta:#1F7A8C;--beta-soft:#D4EAEE;
+  --accent:#2F4F8A;--code:#EEF1F5;--warn:#B23A48;--n:#3B5BA5;--nsoft:#D7E0F5;--active:#BFE6D6;--frozen:#E2E5EA}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161B22;--panel:#1F2630;--ink:#E6EAF0;--ink2:#9AA6B5;--line:#344050;
+  --alpha:#E4954A;--alpha-soft:#4A3420;--beta:#5FB8C9;--beta-soft:#183A42;--accent:#8FB0F0;--code:#111620;--warn:#E07A86;--n:#7F9BE0;--nsoft:#243352;--active:#1F4A3C;--frozen:#2A313B}}
+:root[data-theme="dark"]{--bg:#161B22;--panel:#1F2630;--ink:#E6EAF0;--ink2:#9AA6B5;--line:#344050;
+  --alpha:#E4954A;--alpha-soft:#4A3420;--beta:#5FB8C9;--beta-soft:#183A42;--accent:#8FB0F0;--code:#111620;--warn:#E07A86;--n:#7F9BE0;--nsoft:#243352;--active:#1F4A3C;--frozen:#2A313B}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;font-size:16px;line-height:1.75;word-break:keep-all}
+code,pre,.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+a{color:var(--accent)}
+.wrap{display:grid;grid-template-columns:220px minmax(0,1fr);gap:48px;max-width:1100px;margin:0 auto;padding:32px 24px 96px}
+nav{position:sticky;top:calc(24px + env(safe-area-inset-top,0px));align-self:start;font-size:14px;line-height:1.6}
+nav ol{list-style:none;padding:0;margin:0;border-left:2px solid var(--line)}
+nav li a{display:block;padding:5px 0 5px 14px;color:var(--ink2);text-decoration:none;margin-left:-2px;border-left:2px solid transparent}
+nav li a:hover,nav li a.on{color:var(--ink);border-left-color:var(--accent)}
+nav .tag{margin:0 0 14px;font-size:13px;color:var(--ink2)}
+main{max-width:720px}
+h1{font-size:2.1rem;line-height:1.25;font-weight:600;margin:0 0 10px;letter-spacing:-.01em}
+h2{font-size:1.45rem;font-weight:600;margin:64px 0 14px;padding-top:16px;border-top:1px solid var(--line)}
+h3{font-size:1.08rem;font-weight:600;margin:32px 0 8px}
+p{margin:0 0 14px}
+.lead{font-size:1.1rem;color:var(--ink2);margin-bottom:24px}
+.meta{font-size:13.5px;color:var(--ink2);margin-bottom:28px}
+figure{margin:22px 0;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px}
+figure svg{display:block;width:100%;height:auto;max-width:100%}
+figcaption{font-size:13.5px;color:var(--ink2);margin-top:10px;line-height:1.55}
+.scroll{overflow-x:auto}
+pre{background:var(--code);border:1px solid var(--line);border-radius:6px;padding:14px 16px;overflow-x:auto;font-size:13.5px;line-height:1.6;margin:14px 0}
+code{font-size:.92em}
+p code,li code,td code{background:var(--code);padding:1px 5px;border-radius:3px}
+.c{color:var(--ink2)}.k{color:var(--accent)}.s{color:var(--beta)}.n{color:var(--alpha)}.o{color:var(--ink2)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:14px 0}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--ink2)}
+td.num{text-align:right;font-family:"IBM Plex Mono",monospace}
+.callout{border-left:3px solid var(--accent);padding:4px 14px;margin:18px 0;color:var(--ink2);font-size:15px}
+.ctrl{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;font-size:14px;margin-bottom:10px}
+.ctrl label{display:flex;align-items:center;gap:8px}
+.ctrl input[type=range]{width:160px;accent-color:var(--accent)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:5px;overflow:hidden}
+.seg button{border:0;background:var(--panel);color:var(--ink);padding:6px 12px;font-size:13.5px;cursor:pointer;font-family:"IBM Plex Mono",monospace}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button.on{background:var(--accent);color:#fff}
+button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.readout{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:12px}
+.readout div{background:var(--code);border-radius:5px;padding:8px 12px;font-size:13.5px;color:var(--ink2)}
+.readout b{display:block;font-size:20px;font-weight:500;color:var(--ink);font-family:"IBM Plex Mono",monospace}
+.legend{display:flex;gap:18px;font-size:13.5px;color:var(--ink2);flex-wrap:wrap;margin-top:8px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:-1px;margin-right:6px}
+.sp-a{color:var(--alpha);font-weight:600}.sp-b{color:var(--beta);font-weight:600}
+@media (max-width:860px){.wrap{grid-template-columns:1fr;gap:16px;padding:20px 16px 80px}nav{position:static}nav ol{display:flex;flex-wrap:wrap;gap:2px 10px;border:0}nav li a{padding:2px 0;border:0}h1{font-size:1.7rem}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+@media (max-width:860px){
+  body{font-size:15px}
+  figure{padding:12px 10px;margin:18px 0;overflow:visible}
+  figure svg{width:100%}
+  .readout{grid-template-columns:1fr 1fr}
+  .readout b{font-size:17px}
+  pre{font-size:12.5px;padding:12px}
+  table{font-size:13.5px}
+  th,td{padding:6px 6px}
+  .ctrl input[type=range]{width:120px}
+  .two{grid-template-columns:1fr}
+  #prodgrid{min-width:0}
+  .bits button.bit{width:28px}
+}
+
+/* layout safety: nothing may widen the page */
+html,body{max-width:100%;overflow-x:hidden}
+.wrap{grid-template-columns:220px minmax(0,1fr);width:100%}
+main{min-width:0;max-width:720px;width:100%}
+nav{min-width:0}
+figure,pre,table,.readout,.ctrl{min-width:0;max-width:100%}
+figure svg{max-width:100%}
+p,li,figcaption,td,th{overflow-wrap:anywhere}
+@media (max-width:860px){
+  .wrap{grid-template-columns:minmax(0,1fr)}
+  main{max-width:100%}
+  table{display:block;overflow-x:auto}
+}
+
+.docnav{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;font-size:13.5px;padding:10px 0;border-bottom:1px solid var(--line);margin-bottom:20px}
+.docnav .pn{display:flex;gap:16px;flex-wrap:wrap}.docnav a{text-decoration:none}.docnav .dim{color:var(--ink2)}
+.docnav.bottom{border-bottom:0;border-top:1px solid var(--line);margin:48px 0 0;padding-top:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav aria-label="목차">
+  <p class="tag">qiskit-nature · ffsim · 실제 계산값</p>
+  <ol>
+    <li><a href="#overview">한눈에 보기</a></li>
+    <li><a href="#occ">1. 점유 수 = 비트</a></li>
+    <li><a href="#toy">2. 2궤도 장난감</a></li>
+    <li><a href="#ops">3. 전자 연산 → 큐비트 연산</a></li>
+    <li><a href="#sign">4. Z 사슬: 부호 문제</a></li>
+    <li><a href="#ham">5. 해밀토니안 전체</a></li>
+    <li><a href="#sqd">6. SQD에서의 위치</a></li>
+    <li><a href="#full">전체 코드</a></li>
+    <li><a href="#scope">마무리</a></li>
+  </ol>
+</nav>
+
+<main>
+<div class="docnav"><a class="idx" href="index.html">📚 문서 모음</a><span class="pn"><a href="01-pyscf.html">← 1. PySCF로 SQD 입력 만들기</a><a href="03-ucj-inside.html">3. UCJ 회로 안쪽 →</a></span></div>
+<p class="meta" style="margin:0 0 4px">문서 2 / 6</p><h1>궤도를 큐비트로<br><span style="font-weight:400;color:var(--ink2)">Jordan–Wigner 변환</span></h1>
+<p class="meta">문서 4에서 "ffsim이 알아서 한다"고 넘어간 대응을 한 겹 더 엽니다. 전자 문제가 어떻게 큐비트 문제가 되는지, 비트열 규약이 왜 그 모양인지, 그리고 SQD 코드 어디에서 이 변환이 등장하는지. 숫자는 N₂(활성 8궤도)와 H₂(2궤도) 실제 계산값입니다.</p>
+
+<p class="lead">전자가 "있다/없다"를 큐비트의 |1⟩/|0⟩에 대응시키는 것이 전부입니다. 나머지는 전자가 서로 자리를 바꿀 때 생기는 부호를 큐비트로 흉내 내는 장치입니다.</p>
+
+<h2 id="overview">한눈에 보기</h2>
+<figure>
+<svg id="overview-fig" viewBox="0 0 720 150" role="img" aria-label="궤도, 점유 수, 큐비트, 비트열, 배치로 이어지는 대응"></svg>
+<figcaption>스핀 궤도(α 또는 β가 들어갈 자리) 하나가 큐비트 하나. 16큐비트의 비트열은 곧 16개 자리의 점유 상태이고, 그것이 SQD가 다루는 배치입니다.</figcaption>
+</figure>
+
+<h2 id="occ">1. 점유 수 = 비트</h2>
+<p>궤도 i에 α 전자가 있는지는 0 또는 1, β 전자가 있는지도 0 또는 1입니다. 이 두 "자리"를 스핀 궤도라 부르고, 궤도 8개면 스핀 궤도 16개입니다. 스핀 궤도 하나를 큐비트 하나로 쓰면 전자 배치 하나가 16비트 문자열 하나와 정확히 일대일로 대응합니다.</p>
+<table>
+<tr><th>스핀 궤도</th><th>큐비트 번호 (ffsim 규약)</th><th>비트열에서의 위치</th></tr>
+<tr><td>α, 궤도 p</td><td>p (0~7)</td><td>오른쪽 절반, 오른쪽에서 p번째</td></tr>
+<tr><td>β, 궤도 p</td><td>8 + p (8~15)</td><td>왼쪽 절반, 오른쪽에서 p번째</td></tr>
+</table>
+<p>Qiskit은 비트열을 큐비트 번호가 큰 쪽부터 출력합니다. 그래서 큐비트 15~8(β)이 왼쪽, 7~0(α)이 오른쪽에 찍히고, 문서 6의 규약 <code>[b_7…b_0 | a_7…a_0]</code>이 나옵니다. 규약은 "약속"이 아니라 이 번호 매기기의 결과입니다.</p>
+
+<h2 id="toy">2. 2궤도 장난감: H₂</h2>
+<p>궤도 2개, 전자 α1·β1이면 큐비트 4개입니다. 가능한 비트열 16개 중 전자 수가 맞는 것은 4개뿐이고, SQD의 후선별이 거르는 것이 나머지 12개입니다.</p>
+<figure>
+<svg id="toy-fig" viewBox="0 0 720 300" role="img" aria-label="4큐비트 비트열 16개 중 전자 수가 맞는 4개를 표시"></svg>
+<figcaption>16개 비트열을 전부 나열한 것. 색칠된 4개만 α 1개·β 1개 조건을 만족합니다. 궤도 8개·전자 (5,5)인 N₂에서는 2¹⁶ = 65,536개 중 C(8,5)² = 3,136개가 유효합니다. 큐비트 공간은 항상 전자 수 공간보다 훨씬 크고, 그 차이가 잡음이 들어갈 자리입니다.</figcaption>
+</figure>
+
+<h2 id="ops">3. 전자 연산 → 큐비트 연산</h2>
+<p>hcore와 eri의 각 칸은 "전자를 i에서 빼서 k에 넣는다" 같은 연산에 붙는 계수였습니다. 이 연산을 큐비트로 옮기면 "큐비트 i를 1→0으로, 큐비트 k를 0→1로"가 되고, 이는 X와 Y 게이트의 조합으로 쓸 수 있습니다.</p>
+<table>
+<tr><th>전자 연산</th><th>뜻</th><th>큐비트 연산 (부호 장치 제외)</th></tr>
+<tr><td>a†<sub>k</sub></td><td>k에 전자 넣기 (0→1)</td><td>(X<sub>k</sub> − iY<sub>k</sub>)/2</td></tr>
+<tr><td>a<sub>i</sub></td><td>i에서 전자 빼기 (1→0)</td><td>(X<sub>i</sub> + iY<sub>i</sub>)/2</td></tr>
+<tr><td>a†<sub>i</sub>a<sub>i</sub></td><td>i에 전자가 있는지 세기</td><td>(I − Z<sub>i</sub>)/2</td></tr>
+<tr><td>a†<sub>k</sub>a<sub>i</sub></td><td>i → k 이동 (hcore[i,k]에 붙음)</td><td>위 둘의 곱 + Z 사슬</td></tr>
+</table>
+<p>세 번째 줄이 가장 직관적입니다. Z<sub>i</sub>는 |0⟩에 +1, |1⟩에 −1이므로 (I − Z)/2는 |0⟩에 0, |1⟩에 1을 줍니다. 즉 "전자 수 세기"가 Z 게이트 하나입니다. hcore의 대각 칸은 이 연산자에 붙고, eri의 "둘 다 머물 때" 칸은 Z<sub>i</sub>Z<sub>j</sub>에 붙습니다. 문서 4의 "대각 쿨롱 층 = ZZ 위상"이 바로 이것입니다.</p>
+
+<h2 id="sign">4. Z 사슬: 부호 문제</h2>
+<p>전자는 페르미온이라 두 전자의 자리를 바꾸면 상태에 −1이 붙습니다. 큐비트에는 이런 성질이 없으므로, 전자를 옮기는 연산에 "지나치는 큐비트마다 Z를 하나씩" 끼워 넣어 부호를 맞춥니다. 이 Z 사슬이 Jordan–Wigner 변환의 유일한 복잡함입니다.</p>
+<figure>
+<svg id="chain-fig" viewBox="0 0 720 240" role="img" aria-label="큐비트 0의 전자를 큐비트 2로 옮기는 연산이 X, Y와 중간 Z 사슬로 표현되는 그림"></svg>
+<figcaption>4큐비트에서 a†<sub>2</sub>a<sub>0</sub>(큐비트 0 → 2)를 qiskit-nature로 변환한 실제 결과: <code>IXZY, IXZX, IYZY, IYZX</code>에 계수 ±0.25. 양 끝의 X/Y가 전자를 빼고 넣는 부분, 가운데 Z가 사이에 있는 큐비트 1의 점유 여부에 따라 부호를 바꾸는 장치입니다. 멀리 옮길수록 Z가 길어집니다.</figcaption>
+</figure>
+<pre><code><span class="k">from</span> qiskit_nature.second_q.operators <span class="k">import</span> FermionicOp
+<span class="k">from</span> qiskit_nature.second_q.mappers <span class="k">import</span> JordanWignerMapper
+hop = FermionicOp({<span class="s">"+_2 -_0"</span>: <span class="n">1.0</span>}, num_spin_orbitals=<span class="n">4</span>)   <span class="c"># 큐비트 0 → 2</span>
+print(JordanWignerMapper().map(hop))
+<span class="c"># SparsePauliOp(['IXZY', 'IXZX', 'IYZY', 'IYZX'], coeffs=[0.25j, 0.25, 0.25, -0.25j])</span></code></pre>
+
+<h2 id="ham">5. 해밀토니안 전체를 바꾸면</h2>
+<p>hcore·eri의 모든 칸을 이렇게 바꿔 더하면 큐비트 해밀토니안이 됩니다. 파울리 문자열(I, X, Y, Z를 큐비트 수만큼 이어 쓴 것)에 계수가 붙은 긴 합입니다.</p>
+<table>
+<tr><th>분자</th><th>궤도</th><th>큐비트</th><th>전자 연산 항</th><th>파울리 항</th></tr>
+<tr><td>H₂ (sto-3g)</td><td class="num">2</td><td class="num">4</td><td class="num">—</td><td class="num">15</td></tr>
+<tr><td>N₂ (활성 8궤도)</td><td class="num">8</td><td class="num">16</td><td class="num">3,288</td><td class="num">1,177</td></tr>
+</table>
+<pre><code><span class="k">from</span> qiskit_nature.second_q.hamiltonians <span class="k">import</span> ElectronicEnergy
+ham = ElectronicEnergy.from_raw_integrals(hcore, eri)        <span class="c"># 문서 1의 두 표</span>
+qubit_op = JordanWignerMapper().map(ham.second_q_op())      <span class="c"># SparsePauliOp, 1177항, 16큐비트</span></code></pre>
+<p class="callout">H₂의 15항은 전부 적어 볼 수 있습니다. <code>IIIZ, IIZI, …</code>(점유 수), <code>IIZZ, …</code>(둘 다 머물 때), <code>XXYY, YYXX, …</code>(두 전자가 동시에 자리를 바꾸는 항). N₂의 1,177항도 같은 세 종류입니다. 항 수는 궤도 수의 4제곱 정도로 늘어나므로 36궤도면 수십만 항이 됩니다.</p>
+
+<h2 id="sqd">6. SQD에서 이 변환이 있는 자리</h2>
+<p>중요한 사실: <strong>SQD의 페르미온 경로(<code>fermion.py</code>)는 이 변환을 쓰지 않습니다.</strong> 비트열을 배치로 읽고 hcore·eri를 PySCF에 그대로 넘기므로, 파울리 문자열이 등장할 일이 없습니다. 변환이 필요한 곳은 두 군데입니다.</p>
+<table>
+<tr><th>어디</th><th>무엇을 위해</th><th>누가 처리</th></tr>
+<tr><td>양자 회로 (문서 4)</td><td>궤도 회전과 쿨롱 층을 큐비트 게이트로</td><td>ffsim이 내부적으로</td></tr>
+<tr><td><code>qubit.py</code> (문서 6의 7번째 모듈)</td><td>분자가 아닌 일반 큐비트 해밀토니안(<code>SparsePauliOp</code>)을 비트열 부분공간에 투영해 풀 때</td><td>사용자가 qiskit-nature 등으로 만들어 넘김</td></tr>
+</table>
+<p>즉 분자 계산만 한다면 Jordan–Wigner를 직접 다룰 일은 없고, 비트열 규약이 왜 그 모양인지만 알면 됩니다. 스핀 모형이나 격자 모형처럼 처음부터 큐비트로 정의된 문제를 SQD로 풀 때 <code>qubit.solve_qubit</code>과 함께 이 변환이 전면에 나옵니다.</p>
+
+<h2 id="full">전체 코드</h2>
+<pre><code><span class="k">from</span> pyscf <span class="k">import</span> gto, scf, mcscf, ao2mo
+<span class="k">from</span> qiskit_nature.second_q.hamiltonians <span class="k">import</span> ElectronicEnergy
+<span class="k">from</span> qiskit_nature.second_q.operators <span class="k">import</span> FermionicOp
+<span class="k">from</span> qiskit_nature.second_q.mappers <span class="k">import</span> JordanWignerMapper
+
+<span class="c"># N₂ 활성 공간 적분 (문서 1)</span>
+mol = gto.M(atom=<span class="s">"N 0 0 0; N 0 0 1.098"</span>, basis=<span class="s">"cc-pvdz"</span>)
+mf = scf.RHF(mol).run()
+cas = mcscf.CASCI(mf, <span class="n">8</span>, (<span class="n">5</span>, <span class="n">5</span>))
+hcore, ecore = cas.get_h1eff()
+eri = ao2mo.restore(<span class="n">1</span>, cas.get_h2eff(), <span class="n">8</span>)
+
+<span class="c"># 전자 연산자 → 큐비트 연산자</span>
+fermionic = ElectronicEnergy.from_raw_integrals(hcore, eri).second_q_op()
+qubit_op = JordanWignerMapper().map(fermionic)
+print(len(fermionic), len(qubit_op), qubit_op.num_qubits)   <span class="c"># 3288 1177 16</span>
+
+<span class="c"># 이동 연산 하나만 보기</span>
+hop = FermionicOp({<span class="s">"+_2 -_0"</span>: <span class="n">1.0</span>}, num_spin_orbitals=<span class="n">4</span>)
+print(JordanWignerMapper().map(hop))
+
+<span class="c"># 이 큐비트 연산자를 SQD의 큐비트 경로로 풀 때 (분자에는 보통 불필요)</span>
+<span class="c"># from qiskit_addon_sqd.qubit import solve_qubit</span>
+<span class="c"># energies, vecs = solve_qubit(bitstring_matrix, qubit_op)</span></code></pre>
+
+<h2 id="scope">마무리: 이 문서에서 가져갈 것</h2>
+<ul>
+<li>스핀 궤도 1개 = 큐비트 1개. 점유 1 = |1⟩. 비트열 규약은 큐비트 번호 매기기(α 0~7, β 8~15)와 Qiskit의 출력 순서에서 나온다.</li>
+<li>"전자 수 세기"는 Z 하나, "둘이 머물 때 밀어냄"은 ZZ. 그래서 회로의 쿨롱 층이 ZZ 위상이다.</li>
+<li>전자를 옮기는 연산에는 Z 사슬이 붙는다. 이것이 페르미온 부호를 흉내 내는 장치이고 JW의 유일한 복잡함이다.</li>
+<li>N₂ 8궤도 해밀토니안은 16큐비트 파울리 항 1,177개. 큐비트 공간 65,536 중 유효 배치는 3,136개.</li>
+<li>SQD의 분자 경로는 이 변환을 쓰지 않는다. 회로(ffsim 내부)와 <code>qubit.py</code>(일반 큐비트 문제)에서만 등장한다.</li>
+</ul>
+<p class="meta">qiskit-nature: qiskit-community.github.io/qiskit-nature · 수치는 PySCF 2.x, qiskit-nature 0.8, ffsim 규약 기준.</p>
+<div class="docnav bottom"><a class="idx" href="index.html">📚 문서 모음</a><span class="pn"><a href="01-pyscf.html">← 1. PySCF로 SQD 입력 만들기</a><a href="03-ucj-inside.html">3. UCJ 회로 안쪽 →</a></span></div>
+</main>
+</div>
+<script>
+(function(){
+  var mq=window.matchMedia('(max-width:600px)'); function narrow(){return mq.matches}
+  var ST='<style>.lb{font:13.5px "IBM Plex Sans KR",sans-serif;fill:var(--ink)}.sm{font:11.5px "IBM Plex Sans KR",sans-serif;fill:var(--ink2)}.mo{font:11.5px "IBM Plex Mono",monospace;fill:var(--accent)}.mi{font:11.5px "IBM Plex Mono",monospace;fill:var(--ink)}.ax{font:11.5px "IBM Plex Sans KR",sans-serif;fill:var(--ink2)}</style>';
+  var STN='<style>.lb{font:14px "IBM Plex Sans KR",sans-serif;fill:var(--ink)}.sm{font:12px "IBM Plex Sans KR",sans-serif;fill:var(--ink2)}.mo{font:12px "IBM Plex Mono",monospace;fill:var(--accent)}.mi{font:12px "IBM Plex Mono",monospace;fill:var(--ink)}.ax{font:12px "IBM Plex Sans KR",sans-serif;fill:var(--ink2)}</style>';
+  var AR='<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--ink2)"/></marker></defs>';
+  function setVB(svg,w,h){svg.setAttribute('viewBox','0 0 '+w+' '+h)}
+  function chain(id,steps,hi){ var svg=document.getElementById(id), s;
+    if(narrow()){ setVB(svg,360,steps.length*86+10); s=STN+AR; steps.forEach(function(st,i){var y=10+i*86,q=hi.indexOf(i)>=0; s+='<rect x="30" y="'+y+'" width="300" height="60" rx="6" fill="'+(q?'var(--beta-soft)':'var(--panel)')+'" stroke="'+(q?'var(--beta)':'var(--line)')+'"/><text x="48" y="'+(y+25)+'" class="lb">'+st[0]+'</text><text x="48" y="'+(y+46)+'" class="mo">'+st[1]+'</text><text x="312" y="'+(y+36)+'" text-anchor="end" class="sm">'+st[2]+'</text>'; if(i<steps.length-1) s+='<line x1="180" y1="'+(y+62)+'" x2="180" y2="'+(y+82)+'" stroke="var(--ink2)" marker-end="url(#ar)"/>';}); }
+    else { setVB(svg,720,150); s=ST+AR; var w=128,step=(720-20-w)/(steps.length-1); steps.forEach(function(st,i){var x=10+i*step,q=hi.indexOf(i)>=0,cx=x+w/2; s+='<rect x="'+x+'" y="30" width="'+w+'" height="64" rx="6" fill="'+(q?'var(--beta-soft)':'var(--panel)')+'" stroke="'+(q?'var(--beta)':'var(--line)')+'"/><text x="'+cx+'" y="54" text-anchor="middle" class="lb">'+st[0]+'</text><text x="'+cx+'" y="74" text-anchor="middle" class="mo" style="font-size:10.5px">'+st[1]+'</text><text x="'+cx+'" y="120" text-anchor="middle" class="sm">'+st[2]+'</text>'; if(i<steps.length-1) s+='<line x1="'+(x+w+1)+'" y1="62" x2="'+(x+step-2)+'" y2="62" stroke="var(--ink2)" marker-end="url(#ar)"/>';}); }
+    svg.innerHTML=s; }
+  function drawOverview(){ chain('overview-fig',[['공간 궤도 8개','p = 0 … 7','문서 1'],['스핀 궤도 16개','(α,p), (β,p)','있다 / 없다'],['큐비트 16개','q = p, 8+p','|1⟩ = 전자 있음'],['비트열','[β | α]','Qiskit 출력'],['배치','SQD의 단위','문서 6, 3']],[2,3]); }
+  function drawToy(){
+    var svg=document.getElementById('toy-fig'), n=narrow(), W=n?360:720, cols=n?4:8, cw=n?80:84, ch=46, x0=n?12:30, y0=40, rows=16/cols; setVB(svg,W,y0+rows*(ch+8)+20);
+    var s=n?STN:ST;
+    for(var v=0;v<16;v++){ var b=v.toString(2).padStart(4,'0'), beta=b.slice(0,2), alpha=b.slice(2), ok=(beta.split('1').length-1===1)&&(alpha.split('1').length-1===1);
+      var x=x0+(v%cols)*(cw+4), y=y0+Math.floor(v/cols)*(ch+8);
+      s+='<rect x="'+x+'" y="'+y+'" width="'+cw+'" height="'+ch+'" rx="5" fill="'+(ok?'var(--beta-soft)':'var(--code)')+'" stroke="'+(ok?'var(--beta)':'var(--line)')+'"/>';
+      s+='<text x="'+(x+cw/2)+'" y="'+(y+ch/2+5)+'" text-anchor="middle" class="mi" style="font-size:14px"><tspan fill="var(--beta)">'+beta+'</tspan><tspan fill="var(--ink2)">|</tspan><tspan fill="var(--alpha)">'+alpha+'</tspan></text>'; }
+    s+='<text x="'+x0+'" y="24" class="sm">큐비트 4개 = 2⁴ = 16가지. 색칠 = α 1개, β 1개 (유효 배치 4개)</text>';
+    svg.innerHTML=s;
+  }
+  function drawChain(){
+    var svg=document.getElementById('chain-fig'), n=narrow(), W=n?360:720; setVB(svg,W,n?300:240);
+    var s=n?STN:ST, cell=n?60:70, gap=n?12:20, x0=n?(W-4*cell-3*gap)/2:120, y=n?70:60;
+    var labels=['q3','q2','q1','q0'], roles=['I','X 또는 Y','Z','X 또는 Y'], note=['건드리지 않음','전자 넣기 (0→1)','부호 맞춤','전자 빼기 (1→0)'], col=['var(--code)','var(--alpha)','var(--beta)','var(--alpha)'];
+    for(var i=0;i<4;i++){ var x=x0+i*(cell+gap); s+='<rect x="'+x+'" y="'+y+'" width="'+cell+'" height="'+cell+'" rx="6" fill="'+col[i]+'" stroke="var(--line)"/><text x="'+(x+cell/2)+'" y="'+(y+cell/2+5)+'" text-anchor="middle" class="lb" style="fill:'+(i===0?'var(--ink2)':'#fff')+'">'+roles[i]+'</text><text x="'+(x+cell/2)+'" y="'+(y-12)+'" text-anchor="middle" class="sm">'+labels[i]+'</text><text x="'+(x+cell/2)+'" y="'+(y+cell+18)+'" text-anchor="middle" class="sm">'+note[i]+'</text>'; }
+    s+='<path d="M'+(x0+3*(cell+gap)+cell/2)+' '+(y+cell+30)+' Q'+(x0+2*(cell+gap)+cell/2)+' '+(y+cell+70)+' '+(x0+1*(cell+gap)+cell/2)+' '+(y+cell+30)+'" fill="none" stroke="var(--alpha)" stroke-width="1.5" marker-end="url(#ar)"/>';
+    s+='<text x="'+(x0+2*(cell+gap)+cell/2)+'" y="'+(y+cell+78)+'" text-anchor="middle" class="sm">a†₂ a₀ : 큐비트 0의 전자를 큐비트 2로</text>';
+    s+='<text x="'+(W/2)+'" y="'+(y+cell+(n?106:100))+'" text-anchor="middle" class="mi">= ¼(IXZX + IYZY) + ¼i(IXZY − IYZX)</text>';
+    s=AR+s; svg.innerHTML=s;
+  }
+  function drawAll(){drawOverview();drawToy();drawChain();}
+  drawAll(); if(mq.addEventListener) mq.addEventListener('change',drawAll); else mq.addListener(drawAll);
+  var links=[].slice.call(document.querySelectorAll('nav a')), heads=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  function hl(){var y=window.scrollY+120, cur=0; heads.forEach(function(hh,i){if(hh&&hh.offsetTop<=y)cur=i;}); links.forEach(function(a,i){a.classList.toggle('on',i===cur);});}
+  window.addEventListener('scroll',hl,{passive:true}); hl();
+})();
+</script>
+</body>
+</html>

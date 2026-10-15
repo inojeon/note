@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>주기율표와 원자, 계산에 필요한 만큼만</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#F3F5F7;--panel:#FFFFFF;--ink:#1E2A38;--ink2:#5B6878;--line:#D5DBE3;
+  --alpha:#C8731F;--alpha-soft:#F6E3CF;--beta:#1F7A8C;--beta-soft:#D4EAEE;
+  --accent:#2F4F8A;--code:#EEF1F5;--warn:#B23A48;--n:#3B5BA5;--nsoft:#D7E0F5;--active:#BFE6D6;--frozen:#E2E5EA}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161B22;--panel:#1F2630;--ink:#E6EAF0;--ink2:#9AA6B5;--line:#344050;
+  --alpha:#E4954A;--alpha-soft:#4A3420;--beta:#5FB8C9;--beta-soft:#183A42;--accent:#8FB0F0;--code:#111620;--warn:#E07A86;--n:#7F9BE0;--nsoft:#243352;--active:#1F4A3C;--frozen:#2A313B}}
+:root[data-theme="dark"]{--bg:#161B22;--panel:#1F2630;--ink:#E6EAF0;--ink2:#9AA6B5;--line:#344050;
+  --alpha:#E4954A;--alpha-soft:#4A3420;--beta:#5FB8C9;--beta-soft:#183A42;--accent:#8FB0F0;--code:#111620;--warn:#E07A86;--n:#7F9BE0;--nsoft:#243352;--active:#1F4A3C;--frozen:#2A313B}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;font-size:16px;line-height:1.75;word-break:keep-all}
+code,pre,.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+a{color:var(--accent)}
+.wrap{display:grid;grid-template-columns:220px minmax(0,1fr);gap:48px;max-width:1100px;margin:0 auto;padding:32px 24px 96px}
+nav{position:sticky;top:calc(24px + env(safe-area-inset-top,0px));align-self:start;font-size:14px;line-height:1.6}
+nav ol{list-style:none;padding:0;margin:0;border-left:2px solid var(--line)}
+nav li a{display:block;padding:5px 0 5px 14px;color:var(--ink2);text-decoration:none;margin-left:-2px;border-left:2px solid transparent}
+nav li a:hover,nav li a.on{color:var(--ink);border-left-color:var(--accent)}
+nav .tag{margin:0 0 14px;font-size:13px;color:var(--ink2)}
+main{max-width:720px}
+h1{font-size:2.1rem;line-height:1.25;font-weight:600;margin:0 0 10px;letter-spacing:-.01em}
+h2{font-size:1.45rem;font-weight:600;margin:64px 0 14px;padding-top:16px;border-top:1px solid var(--line)}
+h3{font-size:1.08rem;font-weight:600;margin:32px 0 8px}
+p{margin:0 0 14px}
+.lead{font-size:1.1rem;color:var(--ink2);margin-bottom:24px}
+.meta{font-size:13.5px;color:var(--ink2);margin-bottom:28px}
+figure{margin:22px 0;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px}
+figure svg{display:block;width:100%;height:auto;max-width:100%}
+figcaption{font-size:13.5px;color:var(--ink2);margin-top:10px;line-height:1.55}
+.scroll{overflow-x:auto}
+pre{background:var(--code);border:1px solid var(--line);border-radius:6px;padding:14px 16px;overflow-x:auto;font-size:13.5px;line-height:1.6;margin:14px 0}
+code{font-size:.92em}
+p code,li code,td code{background:var(--code);padding:1px 5px;border-radius:3px}
+.c{color:var(--ink2)}.k{color:var(--accent)}.s{color:var(--beta)}.n{color:var(--alpha)}.o{color:var(--ink2)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:14px 0}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--ink2)}
+td.num{text-align:right;font-family:"IBM Plex Mono",monospace}
+.callout{border-left:3px solid var(--accent);padding:4px 14px;margin:18px 0;color:var(--ink2);font-size:15px}
+.ctrl{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;font-size:14px;margin-bottom:10px}
+.ctrl label{display:flex;align-items:center;gap:8px}
+.ctrl input[type=range]{width:160px;accent-color:var(--accent)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:5px;overflow:hidden}
+.seg button{border:0;background:var(--panel);color:var(--ink);padding:6px 12px;font-size:13.5px;cursor:pointer;font-family:"IBM Plex Mono",monospace}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button.on{background:var(--accent);color:#fff}
+button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.readout{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:12px}
+.readout div{background:var(--code);border-radius:5px;padding:8px 12px;font-size:13.5px;color:var(--ink2)}
+.readout b{display:block;font-size:20px;font-weight:500;color:var(--ink);font-family:"IBM Plex Mono",monospace}
+.legend{display:flex;gap:18px;font-size:13.5px;color:var(--ink2);flex-wrap:wrap;margin-top:8px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:-1px;margin-right:6px}
+.sp-a{color:var(--alpha);font-weight:600}.sp-b{color:var(--beta);font-weight:600}
+@media (max-width:860px){.wrap{grid-template-columns:1fr;gap:16px;padding:20px 16px 80px}nav{position:static}nav ol{display:flex;flex-wrap:wrap;gap:2px 10px;border:0}nav li a{padding:2px 0;border:0}h1{font-size:1.7rem}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+@media (max-width:860px){
+  body{font-size:15px}
+  figure{padding:12px 10px;margin:18px 0;overflow:visible}
+  figure svg{width:100%}
+  .readout{grid-template-columns:1fr 1fr}
+  .readout b{font-size:17px}
+  pre{font-size:12.5px;padding:12px}
+  table{font-size:13.5px}
+  th,td{padding:6px 6px}
+  .ctrl input[type=range]{width:120px}
+  .two{grid-template-columns:1fr}
+  #prodgrid{min-width:0}
+  .bits button.bit{width:28px}
+}
+
+/* layout safety: nothing may widen the page */
+html,body{max-width:100%;overflow-x:hidden}
+.wrap{grid-template-columns:220px minmax(0,1fr);width:100%}
+main{min-width:0;max-width:720px;width:100%}
+nav{min-width:0}
+figure,pre,table,.readout,.ctrl{min-width:0;max-width:100%}
+figure svg{max-width:100%}
+p,li,figcaption,td,th{overflow-wrap:anywhere}
+@media (max-width:860px){
+  .wrap{grid-template-columns:minmax(0,1fr)}
+  main{max-width:100%}
+  table{display:block;overflow-x:auto}
+}
+
+.ptable{display:grid;grid-template-columns:repeat(18,1fr);gap:3px;margin-bottom:12px}
+.pel{position:relative;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:4px;padding:14px 0 6px;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit}
+.pel .z{position:absolute;top:2px;left:4px;font-size:9px;color:var(--ink2);font-weight:400}
+.pel.on{background:var(--accent);color:#fff;border-color:var(--accent)}.pel.on .z{color:#dfe6f7}
+@media (max-width:600px){.ptable{grid-template-columns:repeat(18,1fr);gap:2px}.pel{padding:12px 0 4px;font-size:11px}.pel .z{display:none}}
+.docnav{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;font-size:13.5px;padding:10px 0;border-bottom:1px solid var(--line);margin-bottom:20px}
+.docnav .pn{display:flex;gap:16px;flex-wrap:wrap}.docnav a{text-decoration:none}.docnav .dim{color:var(--ink2)}
+.docnav.bottom{border-bottom:0;border-top:1px solid var(--line);margin:48px 0 0;padding-top:16px}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav aria-label="목차">
+  <p class="tag">배경 · 코드 없음</p>
+  <ol>
+    <li><a href="#why">왜 이것만 알면 되나</a></li>
+    <li><a href="#atom">1. 원자 번호 = 전자 수</a></li>
+    <li><a href="#shell">2. 전자는 껍질에 쌓인다</a></li>
+    <li><a href="#table">3. 주기율표 눌러 보기</a></li>
+    <li><a href="#core">4. 내각과 원자가</a></li>
+    <li><a href="#spin">5. 스핀과 두 규칙</a></li>
+    <li><a href="#mol">6. 분자로 합치기</a></li>
+    <li><a href="#map">7. 계산에서의 대응</a></li>
+  </ol>
+</nav>
+
+<main>
+<div class="docnav"><a class="idx" href="index.html">📚 문서 모음</a><span class="pn"><span class="dim">배경 문서</span><a href="intro.html">입문: SQD, 처음부터 →</a></span></div>
+<h1>주기율표와 원자, 계산에 필요한 만큼만<br><span style="font-weight:400;color:var(--ink2)">양자 화학 알고리즘을 읽기 위한 배경</span></h1>
+<p class="meta">입문 문서와 문서 1에서 "전자 몇 개, 자리 몇 개, 내각은 얼린다, 스핀은 둘"이라는 말이 나올 때마다 돌아와 확인하는 용도입니다. 화학 교과서의 내용 중 SQD 같은 계산을 이해하는 데 실제로 쓰이는 것만 추렸습니다.</p>
+
+<h2 id="why">왜 이것만 알면 되나</h2>
+<p>양자 화학 계산의 입력은 결국 네 가지 수로 압축됩니다. 전자가 몇 개인지, 그중 ↑와 ↓가 몇 개씩인지, 전자가 앉을 자리가 몇 개인지, 그 자리들 중 계산에서 "고정"해도 되는 것이 몇 개인지. 이 넷은 전부 주기율표에서 읽어 낼 수 있고, 이 문서는 그 읽는 법입니다.</p>
+
+<h2 id="atom">1. 원자 번호 = 전자 수</h2>
+<p>주기율표의 번호(원자 번호)는 핵 속 양성자 수입니다. 중성 원자는 양성자 수만큼 전자를 가지므로, <strong>원자 번호가 곧 전자 수</strong>입니다. 수소 1, 탄소 6, 질소 7, 산소 8. 분자의 전자 수는 원자들의 전자 수를 더하고, 전하가 있으면 그만큼 빼거나 더합니다. H₂ = 1 + 1 = 2, N₂ = 7 + 7 = 14, H₂O = 1 + 1 + 8 = 10, NH₄⁺ = 7 + 4 − 1 = 10.</p>
+
+<h2 id="shell">2. 전자는 껍질에 쌓인다</h2>
+<p>원자 안의 전자 자리(원자 궤도)는 에너지 순으로 층이 있습니다. 핵에 가까운 안쪽 층부터 1s, 2s, 2p, 3s, 3p… 라고 부르고, 각 층의 정원은 s가 2명(자리 1개 × 2), p가 6명(자리 3개 × 2)입니다. 전자는 낮은 층부터 채워집니다.</p>
+<figure>
+<svg id="shell-fig" viewBox="0 0 720 260" role="img" aria-label="1s, 2s, 2p 층에 전자가 채워지는 모습, H N O 예"></svg>
+<figcaption>H, N, O의 전자 채움. 숫자는 각 층의 자리 수와 정원. 2p는 자리가 3개라 전자 6개까지 들어가며, 질소는 3개가 하나씩(같은 방향), 산소는 그중 하나에 둘이 짝을 짓습니다.</figcaption>
+</figure>
+
+<h2 id="table">3. 주기율표 눌러 보기</h2>
+<p>처음 18개 원소입니다. 원소를 누르면 전자 수, 층별 채움, 그리고 계산에서 쓰는 수들이 나옵니다.</p>
+<figure>
+<div id="ptable" class="ptable" role="group" aria-label="주기율표 1~18번"></div>
+<div class="readout" id="pt-read"></div>
+<figcaption>같은 세로줄(족)의 원소는 바깥층 전자 수가 같아 화학적 성질이 비슷합니다. 같은 가로줄(주기)은 바깥층의 번호가 같습니다. 계산에서는 "바깥층에 전자가 몇 개이고 자리가 몇 개인가"가 비용과 정확도를 정합니다.</figcaption>
+</figure>
+
+<h2 id="core">4. 내각과 원자가: 얼려도 되는 전자</h2>
+<p>안쪽 층의 전자(내각, core)는 핵에 단단히 붙어 있어 분자가 만들어지거나 반응해도 거의 변하지 않습니다. 바깥층 전자(원자가, valence)만 결합에 참여합니다. 그래서 계산에서는 내각 전자를 "항상 그 자리에 있음"으로 고정하고 원자가 전자만 다룹니다. 이것이 문서 1의 "활성 공간"이고, 튜토리얼 코드의 <code>n_frozen = 2</code>(N₂의 1s 전자 2쌍을 얼림)입니다.</p>
+<table>
+<tr><th>원자</th><th>전자</th><th>내각</th><th>원자가</th><th>N₂ 계산에서</th></tr>
+<tr><td>H</td><td class="num">1</td><td class="num">0</td><td class="num">1</td><td>내각 없음, 전부 활성</td></tr>
+<tr><td>N</td><td class="num">7</td><td class="num">2 (1s)</td><td class="num">5 (2s, 2p)</td><td>N₂: 내각 4개 얼림 → 활성 전자 10개</td></tr>
+<tr><td>O</td><td class="num">8</td><td class="num">2 (1s)</td><td class="num">6 (2s, 2p)</td><td>O₂: 내각 4개 얼림 → 활성 전자 12개</td></tr>
+<tr><td>Fe</td><td class="num">26</td><td class="num">18</td><td class="num">8 (3d, 4s)</td><td>철-황 클러스터: 3d 전자들이 활성</td></tr>
+</table>
+
+<h2 id="spin">5. 스핀과 두 규칙</h2>
+<p>전자는 스핀이라는 성질을 갖고, 값은 ↑ 또는 ↓ 둘뿐입니다. 같은 전자가 어느 방향으로 있느냐의 차이이고, 중간은 없습니다. 전자를 자리에 앉히는 규칙은 둘입니다.</p>
+<table>
+<tr><th>규칙</th><th>내용</th><th>결과</th></tr>
+<tr><td>파울리 배타 원리</td><td>한 자리에 같은 스핀의 전자가 둘 있을 수 없다</td><td>자리 하나의 정원은 ↑ 하나 + ↓ 하나 = 2</td></tr>
+<tr><td>훈트 규칙</td><td>에너지가 같은 자리가 여럿이면, 한 자리에 둘을 몰기 전에 각 자리에 하나씩 같은 스핀으로 넣는다</td><td>질소 2p는 ↑↑↑, 산소 2p는 ↑↓ ↑ ↑ → 산소에 홀전자 둘</td></tr>
+</table>
+<p>분자의 ↑ 수와 ↓ 수는 이 규칙에서 나옵니다. 전자가 모두 짝을 지으면 ↑ = ↓(싱글릿, N₂·H₂·H₂O), 홀전자가 둘 남으면 ↑ = ↓ + 2(트리플릿, O₂). 계산 코드의 <code>spin</code> 인자가 이 차이이고, 틀리게 넣으면 오류 없이 다른 상태를 계산해 버립니다.</p>
+
+<h2 id="mol">6. 분자로 합치기</h2>
+<p>원자가 만나 분자가 되면 각 원자의 자리들이 섞여 분자 전체의 새 자리(분자 궤도)가 됩니다. 재료 자리의 수가 보존되므로, <strong>분자 궤도 수 = 원자 궤도 수의 합</strong>입니다. 가장 단순한 계산(원자당 최소 자리)에서 H는 1개, N·O는 5개(1s, 2s, 2p×3)를 가져옵니다.</p>
+<table>
+<tr><th>분자</th><th>전자</th><th>↑, ↓</th><th>자리 (최소)</th><th>내각 얼린 뒤 활성</th></tr>
+<tr><td>H₂</td><td class="num">2</td><td class="num">1, 1</td><td class="num">2</td><td>전자 2, 자리 2 → 배치 4</td></tr>
+<tr><td>N₂</td><td class="num">14</td><td class="num">7, 7</td><td class="num">10</td><td>전자 10, 자리 8 → 배치 3,136</td></tr>
+<tr><td>O₂</td><td class="num">16</td><td class="num">9, 7</td><td class="num">10</td><td>전자 12, 자리 8</td></tr>
+<tr><td>H₂O</td><td class="num">10</td><td class="num">5, 5</td><td class="num">7</td><td>전자 8, 자리 6</td></tr>
+</table>
+<p>"층별 채움"은 바닥상태에서 전자가 <em>있는</em> 층이고, 자리는 전자가 <em>있을 수 있는</em> 곳입니다. 수소의 전자는 1s 하나뿐이지만 2s, 2p 같은 빈 자리는 존재하며, 분자 속에서 전자 구름이 옆 원자 쪽으로 쏠리거나 찌그러지는 변형은 이런 빈 자리를 조금씩 섞어야 표현됩니다. 그래서 더 정밀한 계산은 원자당 자리를 더 가져옵니다(기저를 키움). 전자 수는 그대로이고 전자가 퍼질 수 있는 빈 자리만 늘어나는 것입니다. H를 cc-pVDZ로 하면 자리가 1개에서 5개(1s 둘, 2p 셋)가 되고, H₂는 자리 10개·배치 100개가 됩니다. N₂를 cc-pVDZ로 계산하면 원자당 14개, 합 28개가 되고, 내각 2개를 얼리면 26개가 남아 배치가 43억 개가 됩니다. 분자 자체는 같은데 "얼마나 정밀하게 볼지"가 문제의 크기를 정합니다.</p>
+
+<h2 id="map">7. 계산에서의 대응</h2>
+<table>
+<tr><th>이 문서</th><th>코드·다른 문서에서</th></tr>
+<tr><td>원자 번호 합 − 전하</td><td><code>mol.nelectron</code>, <code>charge</code> (문서 1)</td></tr>
+<tr><td>↑ − ↓</td><td><code>spin</code>, <code>nelec=(nα, nβ)</code> (문서 1)</td></tr>
+<tr><td>원자당 자리 수</td><td>기저 세트 <code>basis="sto-3g"</code>, <code>mol.nao</code> (문서 1)</td></tr>
+<tr><td>내각 얼리기</td><td>활성 공간 <code>CASCI(mf, ncas, nelecas)</code>, <code>n_frozen</code> (문서 1, 0)</td></tr>
+<tr><td>자리 하나 = ↑ 칸 + ↓ 칸</td><td>큐비트 2개, 비트열 [β | α] (문서 2, 입문)</td></tr>
+<tr><td>전자를 자리에 앉히는 한 방법</td><td>배치, configuration, 비트열 하나 (입문, 문서 5)</td></tr>
+</table>
+<p class="meta">전자 배치와 궤도 에너지 순서는 교과서적 표준 순서(1s &lt; 2s &lt; 2p &lt; 3s &lt; 3p)를 따릅니다. 전이금속 등에서는 순서가 바뀌는 경우가 있으나 이 문서 범위 밖입니다.</p>
+<div class="docnav bottom"><a class="idx" href="index.html">📚 문서 모음</a><span class="pn"><span class="dim">배경 문서</span><a href="intro.html">입문: SQD, 처음부터 →</a></span></div>
+</main>
+</div>
+<script>
+(function(){
+  var mq=window.matchMedia('(max-width:600px)'); function narrow(){return mq.matches}
+  var ST='<style>.lb{font:13.5px "IBM Plex Sans KR",sans-serif;fill:var(--ink)}.sm{font:11.5px "IBM Plex Sans KR",sans-serif;fill:var(--ink2)}</style>';
+  var STN='<style>.lb{font:14px "IBM Plex Sans KR",sans-serif;fill:var(--ink)}.sm{font:12px "IBM Plex Sans KR",sans-serif;fill:var(--ink2)}</style>';
+  function setVB(svg,w,h){svg.setAttribute('viewBox','0 0 '+w+' '+h)}
+  var EL=[['H',1],['He',2],['Li',3],['Be',4],['B',5],['C',6],['N',7],['O',8],['F',9],['Ne',10],['Na',11],['Mg',12],['Al',13],['Si',14],['P',15],['S',16],['Cl',17],['Ar',18]];
+  var POS={H:[1,1],He:[1,18],Li:[2,1],Be:[2,2],B:[2,13],C:[2,14],N:[2,15],O:[2,16],F:[2,17],Ne:[2,18],Na:[3,1],Mg:[3,2],Al:[3,13],Si:[3,14],P:[3,15],S:[3,16],Cl:[3,17],Ar:[3,18]};
+  var NAMES={H:'수소',He:'헬륨',Li:'리튬',Be:'베릴륨',B:'붕소',C:'탄소',N:'질소',O:'산소',F:'플루오린',Ne:'네온',Na:'나트륨',Mg:'마그네슘',Al:'알루미늄',Si:'규소',P:'인',S:'황',Cl:'염소',Ar:'아르곤'};
+  function config(z){ var shells=[['1s',2],['2s',2],['2p',6],['3s',2],['3p',6]], out=[], left=z; shells.forEach(function(sh){ if(left<=0) return; var n=Math.min(left,sh[1]); out.push([sh[0],n]); left-=n; }); return out; }
+  function unpaired(cfg){ var u=0; cfg.forEach(function(c){ var cap=c[0].indexOf('p')>=0?3:1, n=c[1]; u+= n<=cap? n : 2*cap-n; }); return u; }
+  function coreCount(z){ return z<=2?0:(z<=10?2:10); }
+  function naoMin(z){ return z<=2?1:(z<=10?5:9); }
+  function drawShell(){ var svg=document.getElementById('shell-fig'), n=narrow(), W=n?360:720; setVB(svg,W,n?520:260); var s=n?STN:ST;
+    var atoms=[['H',1],['N',7],['O',8]];
+    function draw(x0,y0,sym,z){ s+='<text x="'+(x0+90)+'" y="'+(y0-10)+'" text-anchor="middle" class="lb">'+sym+' (전자 '+z+')</text>';
+      var rows=[['2p',3,y0+20],['2s',1,y0+80],['1s',1,y0+140]], cfg=config(z), fill={}; cfg.forEach(function(c){fill[c[0]]=c[1];});
+      rows.forEach(function(r){ var name=r[0],k=r[1],y=r[2], cnt=fill[name]||0; s+='<text x="'+(x0)+'" y="'+(y+4)+'" class="sm">'+name+'</text>';
+        for(var i=0;i<k;i++){ var lx=x0+30+i*52; s+='<line x1="'+lx+'" y1="'+y+'" x2="'+(lx+40)+'" y2="'+y+'" stroke="var(--ink)" stroke-width="2"/>'; }
+        var up=Math.min(cnt,k), dn=cnt-up;
+        for(var i=0;i<k;i++){ var lx=x0+30+i*52+20; if(i<up) s+='<line x1="'+(lx-7)+'" y1="'+(y-2)+'" x2="'+(lx-7)+'" y2="'+(y-18)+'" stroke="var(--alpha)" stroke-width="2.5"/>'; if(i<dn) s+='<line x1="'+(lx+7)+'" y1="'+(y-18)+'" x2="'+(lx+7)+'" y2="'+(y-2)+'" stroke="var(--beta)" stroke-width="2.5"/>'; } }); }
+    if(n){ draw(40,40,'H',1); draw(40,210,'N',7); draw(40,380,'O',8); }
+    else { draw(30,40,'H',1); draw(270,40,'N',7); draw(510,40,'O',8); s+='<text x="360" y="240" text-anchor="middle" class="sm">1s·2s: 자리 1개 (정원 2) · 2p: 자리 3개 (정원 6) · 주황 ↑, 청록 ↓</text>'; }
+    svg.innerHTML=s; }
+  var pt=document.getElementById('ptable'), read=document.getElementById('pt-read'), cur='N';
+  function renderPT(){ pt.innerHTML=''; EL.forEach(function(e){ var sym=e[0], p=POS[sym], b=document.createElement('button'); b.type='button'; b.className='pel'+(sym===cur?' on':''); b.style.gridRow=p[0]; b.style.gridColumn=p[1]; b.innerHTML='<span class="z">'+e[1]+'</span>'+sym; b.setAttribute('aria-pressed',sym===cur); b.onclick=function(){cur=sym;renderPT();showEl();}; pt.appendChild(b); }); }
+  function showEl(){ var z=EL.filter(function(e){return e[0]===cur})[0][1], cfg=config(z), txt=cfg.map(function(c){return c[0]+'<sup>'+c[1]+'</sup>'}).join(' '), u=unpaired(cfg), core=coreCount(z), val=z-core, nao=naoMin(z), up=Math.ceil((z+u)/2), dn=z-up;
+    read.innerHTML='<div>'+NAMES[cur]+' '+cur+'<b>전자 '+z+'개</b></div><div>층별 채움<b style="font-size:16px">'+txt+'</b></div><div>↑, ↓<b>'+up+', '+dn+'</b></div><div>홀전자<b>'+u+'</b></div><div>내각 / 원자가<b>'+core+' / '+val+'</b></div><div>최소 기저 자리 수<b>'+nao+'</b></div>'; }
+  function drawAll(){drawShell();}
+  renderPT(); showEl(); drawAll(); if(mq.addEventListener) mq.addEventListener('change',drawAll); else mq.addListener(drawAll);
+  var links=[].slice.call(document.querySelectorAll('nav a')), heads=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  function hl(){var y=window.scrollY+120, cur=0; heads.forEach(function(hh,i){if(hh&&hh.offsetTop<=y)cur=i;}); links.forEach(function(a,i){a.classList.toggle('on',i===cur);});}
+  window.addEventListener('scroll',hl,{passive:true}); hl();
+})();
+</script>
+</body>
+</html>
