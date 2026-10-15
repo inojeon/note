@@ -74,11 +74,16 @@ const pages = ['quantum-chemistry', 'quantum-state', 'born-rule', 'superposition
       assert.equal(await active().getAttribute('data-page'), 'quantum-state');
       await page.reload();
       assert.equal(await active().getAttribute('data-page'), 'quantum-state');
+      assert(await page.locator('#qstate-general-state math munderover').count());
+      assert.equal(await page.locator('#qstate-general-state math').evaluate(e=>e.namespaceURI), 'http://www.w3.org/1998/Math/MathML');
+      assert.equal(await page.locator('#qstate-coordinate-map math mtr').count(), 3);
 
       for (const deg of [-90,-40,0,35,90]) {
         await slider('#qstate-angle', deg);
         const values = await column('#qstate-rotated'), theta = (35-deg)*Math.PI/180;
         near(values[0], Math.cos(theta)); near(values[1], Math.sin(theta));
+        const dirac = (await page.locator('#qstate-expansion > div').nth(1).locator('math > mrow > mn').allTextContents()).map(Number);
+        near(dirac[0], Math.abs(values[0])); near(dirac[1], Math.abs(values[1]));
         near(values[0]**2+values[1]**2, 1, .0015); states++;
       }
       await page.locator('#qstate-aligned').click();
@@ -150,6 +155,10 @@ const pages = ['quantum-chemistry', 'quantum-state', 'born-rule', 'superposition
         const figures=await active().locator('svg').evaluateAll(es=>es.map(e=>e.innerHTML));
         assert(figures.every(s=>s.length>50&&!/NaN|Infinity/.test(s)));
         await active().locator('details').evaluateAll(es=>es.forEach(e=>e.open=true));
+        const overflow = await active().locator('math').evaluateAll(es=>es.filter(e=>!e.closest('.term-popover')).filter(e=>{
+          const r=e.getBoundingClientRect();return r.width>0&&(r.left<0||r.right>innerWidth+1);
+        }).map(e=>e.getAttribute('aria-label')));
+        assert.deepEqual(overflow,[], `Math must fit the viewport on ${slug}`);
         for (const trigger of await active().locator('.term-trigger').all()) {
           await trigger.click();
           const id=await trigger.getAttribute('aria-controls');

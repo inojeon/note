@@ -8,6 +8,7 @@ from html.parser import HTMLParser
 import html
 import json
 import re
+from concept_math import typeset_html
 
 ROOT = Path(__file__).resolve().parents[1]
 VOID = {'area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr'}
@@ -79,7 +80,7 @@ for path in sorted((ROOT/'docs').glob('concept-*.html')):
     seen=set();panels=[];slug=path.stem.removeprefix('concept-')
     def walk(node):
         classes=node.attrs.get('class','').split()
-        if node.tag in {'head','script','style','nav','a','h1','h2','h3','svg','button','summary'} or any(c in classes for c in ['meta','eyebrow','lead','formula','math-array','term-hint']):return
+        if node.tag in {'head','script','style','nav','a','h1','h2','h3','svg','math','button','summary'} or any(c in classes for c in ['meta','eyebrow','lead','formula','math-array','term-hint']):return
         result=[]
         for c in node.children:
             if isinstance(c,Node):walk(c);result.append(c);continue
@@ -106,6 +107,6 @@ for path in sorted((ROOT/'docs').glob('concept-*.html')):
     output=tree.render()
     if 'class="term-hint"' not in output:
         output=output.replace('<h2>정의</h2>','<h2>정의</h2><p class="term-hint">점선 밑줄 용어에 마우스를 올리거나 터치하면 뜻을 볼 수 있습니다.</p>',1)
-    path.write_text(output)
+    path.write_text(typeset_html(output))
     summary[slug]=len(seen)
 print(json.dumps(summary,ensure_ascii=False))
