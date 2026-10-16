@@ -108,3 +108,5 @@ H₂ 예제는 `scripts/vqe_h2.py`로 생성한 `data/vqe_h2.json`을 사용하�
 
 ## 노트 검색
 단일 파일 리더 상단의 검색 버튼과 Ctrl/⌘+K는 `tools/reader-search.html` 대화상자를 연다. `build_concepts.py`가 제목·소개·본문 텍스트 색인을 내장하며 script/style/nav/용어 설명창은 제외한다. `assets/concept-search.js`는 한국어/영어·공백/문장부호·일부 표기 변형을 정규화하고 제목을 우선하여 로컬 검색한다. 사용자 입력과 결과는 textContent로 표시한다. 서버나 외부 검색 요청은 없다. `tools/check_search.cjs`는 전체 제목, IME·키보드·터치, 해시 이동/뒤로 가기, 모바일 화면과 세 리더 진입점을 검사한다.
+
+STO-3G 노트의 준위 그림은 `scripts/basis_orbital_levels.py`가 계산한 H₂/0.74 Å RHF 결과 `data/basis_orbital_levels.json`을 사용한다. 계산 조건과 재현 절차는 `scripts/basis_orbital_levels_README.md`에 있다. 그림 소스는 `tools/basis-orbital-lab.html`, 삽입 도구는 `tools/build_basis_orbitals.py`이며 enrich/build 전에 실행한다. `check_basis_orbitals.cjs`는 준위 수/축척/축퇴/표와 지도 상단 `qc-basis-entry` 링크를 검증한다. 오비탈 에너지와 다전자 전체 에너지는 구별한다.

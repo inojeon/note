@@ -1,0 +1,41 @@
+<section class="qc-lab" id="sto-orbital-lab" aria-labelledby="sto-orbital-title"><h2 id="sto-orbital-title">실험 · 기저별 오비탈 에너지 준위 비교</h2><p>같은 H₂를 <strong>결합 길이 0.74 Å, 중성·단일항, 제한 하트리–폭(Restricted Hartree–Fock, RHF)</strong> 조건으로 계산했습니다. 열마다 기저만 다릅니다. 가로선 하나가 공간 오비탈 하나이며, 세로 위치가 그 오비탈의 에너지입니다.</p>
+<div class="qc-presets" role="group" aria-label="비교할 기저 집합"><button type="button" data-sto-comparison="basic" aria-pressed="true">기본·편극 함수 비교</button><button type="button" data-sto-comparison="extended" aria-pressed="false">퍼진 함수·cc 계열 비교</button></div>
+<div class="qc-presets" role="group" aria-label="에너지 표시 범위"><button type="button" data-sto-range="low" aria-pressed="true">낮은 에너지 확대</button><button type="button" data-sto-range="all" aria-pressed="false">전체 준위 보기</button></div>
+<figure><svg id="sto-levels-fig" role="img" aria-label="세 기저 집합의 H2 오비탈 에너지 준위"></svg><figcaption><strong>파랑: 점유 오비탈(전자 2개) · 주황: 비점유 오비탈(전자 0개)</strong><p id="sto-levels-summary" aria-live="polite"></p><p>×2 표시는 같은 에너지의 오비탈 두 개를 뜻합니다. 같은 그림의 세 열은 동일한 에너지 눈금을 사용합니다.</p></figcaption></figure>
+<p>STO-3G에서는 공간 오비탈 두 개만 표현합니다. 더 큰 기저에서는 비점유 오비탈이 추가되고 기존 준위의 값도 달라집니다. <strong>오비탈 수가 늘어도 H₂의 전자는 두 개</strong>이며, 이 RHF 계산에서는 가장 낮은 공간 오비탈 하나에 두 전자가 들어갑니다.</p>
+<details><summary>각 오비탈의 실제 계산값 보기</summary><div class="sto-level-table"><table><caption>현재 비교 중인 기저 · 에너지 단위 Hartree(Eh)</caption><thead><tr><th scope="col">기저</th><th scope="col">오비탈 번호</th><th scope="col">에너지</th><th scope="col">전자 수</th></tr></thead><tbody id="sto-level-rows"></tbody></table></div><p class="meta">번호는 각 기저의 에너지 순서입니다. 다른 기저의 같은 번호가 같은 모양의 오비탈이라는 뜻은 아닙니다.</p></details>
+<details><summary>이 그림을 해석할 때 알아둘 점</summary><p>이 선들은 수렴한 Fock 행렬의 고유값인 <strong>오비탈 에너지(Orbital Energy)</strong>입니다. 앞서 배운 다전자 해밀토니안의 고유에너지나 분자 전체 에너지와는 다릅니다. 점유 오비탈 에너지를 단순히 더해도 전체 에너지가 되지는 않습니다.</p><p>비점유 오비탈은 유한한 기저로 표현한 후보 함수입니다. 특히 양의 에너지 선을 실제로 결합된 전자 상태나 측정 가능한 들뜸 에너지로 그대로 읽으면 안 됩니다. 기저가 커졌다고 모든 선이 반드시 낮아지는 것도 아닙니다.</p><p>이미지의 6-31G*는 보통 6-31G(d)를 뜻하며, 수소에는 편극 p 함수를 추가하지 않습니다. 따라서 H₂에서는 6-31G와 같은 함수 구성을 갖습니다. 여기서는 수소의 방향 변형도 비교하도록 <strong>6-31G(d,p), 즉 6-31G**</strong>를 사용합니다.</p><p>계산 자료: PySCF 2.14.0 내장 기저, 구면 조화 함수, RHF 수렴 기준 10⁻¹⁴ Hartree와 궤도 경사 기준 10⁻¹⁰. 원자핵은 고정하며 그림은 저장된 계산 결과를 읽습니다.</p></details>
+<style>.sto-level-table{overflow-x:auto}.sto-level-table table{width:100%;border-collapse:collapse;font-size:.8rem}.sto-level-table th,.sto-level-table td{padding:7px 4px;text-align:right;border-bottom:1px solid var(--line)}.sto-level-table th:first-child,.sto-level-table td:first-child{text-align:left}#sto-orbital-lab figure{margin:14px 0;padding:10px}#sto-orbital-lab svg{display:block;width:100%;height:auto}</style>
+<script>
+(function(){
+const data=STO_ORBITAL_DATA,el=id=>document.getElementById(id),mq=window.matchMedia('(max-width:600px)');
+const sets={basic:['sto-3g','6-31g','6-31g(d,p)'],extended:['6-31g(d,p)','6-31++g(d,p)','cc-pvdz']};
+const names={'sto-3g':'STO-3G','6-31g':'6-31G','6-31g(d,p)':'6-31G(d,p)','6-31++g(d,p)':'6-31++G(d,p)','cc-pvdz':'cc-pVDZ'};
+let comparison='basic',range='low';
+function draw(){
+ const rows=sets[comparison].map(name=>data.rows.find(r=>r.basis===name)),w=mq.matches?340:660,h=440,left=46,right=12,top=60,bottom=370,emin=range==='low'?-.85:-1,emax=range==='low'?1.5:5;
+ const width=(w-left-right)/3,y=e=>bottom-(e-emin)/(emax-emin)*(bottom-top),svg=el('sto-levels-fig');
+ let markup='<title>H2 RHF · 기저별 오비탈 에너지</title><text x="'+left+'" y="16" fill="var(--ink2)" font-size="12">오비탈 에너지 (Eh)</text>';
+ const ticks=range==='low'?[-.5,0,.5,1,1.5]:[-1,0,1,2,3,4,5];
+ for(const t of ticks)markup+='<line x1="'+left+'" y1="'+y(t)+'" x2="'+(w-right)+'" y2="'+y(t)+'" stroke="var(--line)"'+(t===0?' stroke-dasharray="4 4"':'')+'/><text x="'+(left-7)+'" y="'+(y(t)+4)+'" text-anchor="end" fill="var(--ink2)" font-size="11">'+t.toFixed(1)+'</text>';
+ const counts=[];
+ rows.forEach((row,i)=>{
+  const cx=left+width*(i+.5);let shown=0,groups=[];
+  row.orbital_energies_hartree.forEach((e,j)=>{if(e<emin||e>emax)return;shown++;const previous=groups.at(-1);if(previous&&Math.abs(previous.e-e)<1e-7)previous.ids.push(j);else groups.push({e,ids:[j],occupied:row.occupations[j]>0});});
+  markup+='<text x="'+cx+'" y="40" text-anchor="middle" fill="var(--ink)" font-size="'+(mq.matches?10:13)+'">'+names[row.basis]+'</text>';
+  for(const group of groups){const bar=mq.matches?27:52;markup+='<line data-sto-energy="'+group.e+'" data-sto-basis-name="'+row.basis+'" data-sto-multiplicity="'+group.ids.length+'" x1="'+(cx-bar/2)+'" y1="'+y(group.e)+'" x2="'+(cx+bar/2)+'" y2="'+y(group.e)+'" stroke="var(--'+(group.occupied?'n':'alpha')+')" stroke-width="'+(group.occupied?4:2)+'"><title>'+names[row.basis]+' · '+group.ids.map(j=>j+1).join(', ')+'번 · '+group.e.toFixed(6)+' Eh</title></line>';if(group.ids.length>1)markup+='<text x="'+(cx+bar/2+3)+'" y="'+(y(group.e)+4)+'" fill="var(--ink2)" font-size="10">×'+group.ids.length+'</text>';}
+  counts.push(names[row.basis]+': '+shown+'/'+row.spatial_functions+'개 표시');
+  markup+='<text x="'+cx+'" y="400" text-anchor="middle" fill="var(--ink2)" font-size="11">'+shown+'/'+row.spatial_functions+'개</text>';
+  if(shown<row.spatial_functions)markup+='<text x="'+cx+'" y="420" text-anchor="middle" fill="var(--ink2)" font-size="10">범위 밖 '+(row.spatial_functions-shown)+'개</text>';
+ });
+ svg.setAttribute('viewBox','0 0 '+w+' '+h);svg.dataset.range=JSON.stringify([emin,emax]);svg.dataset.bases=JSON.stringify(sets[comparison]);svg.innerHTML=markup;
+ el('sto-levels-summary').textContent=counts.join(' · ')+(range==='low'?' 높은 준위는 전체 준위 보기로 확인하세요.':'');
+ el('sto-level-rows').innerHTML=rows.map(row=>row.orbital_energies_hartree.map((e,j)=>'<tr><th scope="row">'+names[row.basis]+'</th><td>'+(j+1)+'</td><td>'+e.toFixed(6)+'</td><td>'+row.occupations[j]+'</td></tr>').join('')).join('');
+ document.querySelectorAll('[data-sto-comparison]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.stoComparison===comparison)));
+ document.querySelectorAll('[data-sto-range]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.stoRange===range)));
+}
+function render(){try{draw()}catch(error){console.error('basis-orbital-levels',error);}}
+document.querySelectorAll('[data-sto-comparison]').forEach(b=>b.addEventListener('click',()=>{comparison=b.dataset.stoComparison;render()}));document.querySelectorAll('[data-sto-range]').forEach(b=>b.addEventListener('click',()=>{range=b.dataset.stoRange;render()}));mq.addEventListener('change',render);render();
+})();
+</script>
+</section>
