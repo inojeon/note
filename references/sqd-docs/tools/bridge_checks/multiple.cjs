@@ -1,3 +1,4 @@
+const choose=require('../choose_option.cjs');
 const assert=require('node:assert/strict');
 module.exports=async({page,go,near})=>{
  await go('tensor-product');
@@ -11,9 +12,9 @@ module.exports=async({page,go,near})=>{
  await go('entanglement');
  const cases={zero:{z:[1,0,0,0],x:[.25,.25,.25,.25]},plus:{z:[.25,.25,.25,.25],x:[1,0,0,0]},bell:{z:[.5,0,0,.5],x:[.5,0,0,.5]},mixture:{z:[.5,0,0,.5],x:[.25,.25,.25,.25]}};
  for(const [name,bases] of Object.entries(cases)){
-  await page.locator('#bn-state').selectOption(name);
+  await choose(page,'bn-state',name);
   for(const [basis,expected] of Object.entries(bases)){
-   await page.locator('#bn-basis').selectOption(basis);
+   await choose(page,'bn-basis',basis);
    const actual=JSON.parse(await page.locator('#bn-lab').getAttribute('data-probabilities'));
    for(let i=0;i<4;i++){near(actual[i],expected[i],1e-12);near(Number((await page.locator('#bn-p'+i).innerText()).replace('%','')),100*expected[i],.0051);}
    const m=JSON.parse(await page.locator('#bn-lab').getAttribute('data-marginals'));

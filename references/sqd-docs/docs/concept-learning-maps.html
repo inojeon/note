@@ -12,6 +12,36 @@
 <li><a href="concept-quantum-computing.html"><span class="map-step">03 · 양자컴퓨터의 언어</span><strong>큐빗·회로·측정</strong><span>큐빗(Qubit)의 상태를 어떻게 바꾸고, 측정 결과를 어떻게 읽는지 알아봅니다.</span><span class="map-topics">계산 기저 · 게이트 · 회전 · 에너지 측정 · 얽힘</span><span class="map-action">큐빗·회로·측정 지도 열기 →</span></a></li>
 <li><a href="concept-vqe.html"><span class="map-step">04 · 알고리즘으로 연결</span><strong>VQE 학습 지도</strong><span>변분 양자 고유값 풀이법(Variational Quantum Eigensolver)으로 분자의 낮은 에너지 상태를 찾아갑니다.</span><span class="map-topics">기댓값 · 안사츠 · 측정 · 최적화 · 수소 분자</span><span class="map-action">VQE 지도 열기 →</span></a></li>
 </ul>
-<section class="box" aria-labelledby="maps-reading-order"><h2 id="maps-reading-order">처음이라면 이 순서로</h2><p><strong>수학 → 양자화학 → 큐빗·회로·측정 → VQE</strong></p><p>수식이 낯설면 수학부터, 전자와 분자가 궁금하면 양자화학부터 시작하세요. 양자화학을 읽었는데 회로와 측정이 낯설다면 세 번째 지도가 그 사이를 연결해 줍니다.</p></section>
+<section class="box" aria-labelledby="maps-reading-order"><h2 id="maps-reading-order">처음이라면 이 순서로</h2><p><strong>수학 → 양자화학 → <span class="term-wrap"><button type="button" class="term-trigger" popovertarget="glossary-learning-maps-qubit" aria-controls="glossary-learning-maps-qubit" aria-describedby="glossary-learning-maps-qubit" aria-expanded="false">큐빗(Qubit)</button></span>·회로·측정 → VQE</strong></p><p>수식이 낯설면 수학부터, 전자와 분자가 궁금하면 양자화학부터 시작하세요. 양자화학을 읽었는데 회로와 측정이 낯설다면 세 번째 지도가 그 사이를 연결해 줍니다.</p></section>
 <p class="meta">노트의 점선 밑줄 용어는 마우스를 올리거나 터치하면 정의와 예시를 볼 수 있습니다. 위쪽의 ‘전체 학습 지도’로 언제든 돌아올 수 있습니다.</p>
-</main></body></html>
+<span id="glossary-learning-maps-qubit" class="term-popover" popover="auto" role="note" aria-label="큐빗(Qubit) 설명"><strong>큐빗(Qubit)</strong><span>두 개의 직교 기저 상태로 표현하는 양자 정보의 단위입니다. 가능한 상태가 0과 1 두 개뿐인 것이 아니라 그 중첩도 포함합니다.</span><span class="term-example"><b>간단한 예시</b><span>0과 1을 같은 확률로 측정하는 순수상태의 예는 (<span class="math-tex" data-tex="\lvert 0\rangle ">|0⟩</span>+<span class="math-tex" data-tex="\lvert 1\rangle ">|1⟩</span>)/√2입니다.</span><span class="term-example-math"><span class="example-equation-text">α<span class="math-tex" data-tex="\lvert 0\rangle ">|0⟩</span> + β<span class="math-tex" data-tex="\lvert 1\rangle ">|1⟩</span>; |α|² + |β|² = 1</span></span></span><span class="term-formula">α<span class="math-tex" data-tex="\lvert 0\rangle ">|0⟩</span> + β<span class="math-tex" data-tex="\lvert 1\rangle ">|1⟩</span>; |α|² + |β|² = 1</span><a href="concept-qubit.html">관련 개념 읽기 →</a></span><script>(function(){
+const triggers=Array.from(document.querySelectorAll('.term-trigger'));if(!triggers.length)return;let active=null,pinned=false,timer,suppressFocus=false;
+function position(){
+if(!active)return;
+const box=document.getElementById(active.getAttribute('aria-controls')),rect=active.getBoundingClientRect(),gap=12;
+box.style.width=Math.min(380,window.innerWidth-32)+'px';
+box.style.maxHeight=(window.innerHeight-32)+'px';
+const height=box.getBoundingClientRect().height,below=window.innerHeight-16-rect.bottom-gap,above=rect.top-gap-16;
+const useBelow=height<=below||(height>above&&below>=above);
+box.style.maxHeight=Math.max(80,useBelow?below:above)+'px';
+const bounds=box.getBoundingClientRect();
+box.style.left=Math.max(16,Math.min(rect.left,window.innerWidth-bounds.width-16))+'px';
+box.style.top=Math.max(16,Math.min(useBelow?rect.bottom+gap:rect.top-gap-bounds.height,window.innerHeight-bounds.height-16))+'px';
+}
+function close(){clearTimeout(timer);const previous=active;active=null;pinned=false;suppressFocus=true;if(previous){previous.setAttribute('aria-expanded','false');const box=document.getElementById(previous.getAttribute('aria-controls'));if(box.matches(':popover-open'))box.hidePopover()}queueMicrotask(()=>{suppressFocus=false});}
+function open(button){clearTimeout(timer);if(active!==button){close();active=button}const box=document.getElementById(button.getAttribute('aria-controls'));if(!box.matches(':popover-open'))box.showPopover();button.setAttribute('aria-expanded','true');position();}
+function scheduleClose(){clearTimeout(timer);timer=setTimeout(()=>{if(!pinned)close()},160)}
+triggers.forEach(button=>{const box=document.getElementById(button.getAttribute('aria-controls'));
+button.addEventListener('pointerenter',event=>{if(event.pointerType==='mouse')open(button)});
+button.addEventListener('pointerleave',scheduleClose);
+button.addEventListener('focus',()=>{if(!suppressFocus&&button.matches(':focus-visible'))open(button)});
+button.addEventListener('blur',()=>{if(!pinned)scheduleClose()});
+button.addEventListener('click',event=>{event.preventDefault();if(active===button&&pinned)close();else{open(button);pinned=true}});
+box.addEventListener('pointerenter',()=>clearTimeout(timer));box.addEventListener('pointerleave',scheduleClose);
+box.addEventListener('toggle',()=>{if(!box.matches(':popover-open')){button.setAttribute('aria-expanded','false');if(active===button){active=null;pinned=false}}});
+});
+document.addEventListener('keydown',event=>{if(event.key==='Escape')close()});
+document.addEventListener('click',event=>{if(active&&!active.contains(event.target)&&!document.getElementById(active.getAttribute('aria-controls')).contains(event.target))close()});
+window.addEventListener('resize',position);window.addEventListener('scroll',position,{passive:true});window.addEventListener('hashchange',close);
+})();
+</script></main></body></html>

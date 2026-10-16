@@ -90,3 +90,6 @@ H₂ 예제는 `scripts/vqe_h2.py`로 생성한 `data/vqe_h2.json`을 사용하�
 
 ## 전체 학습 지도 메인
 `docs/concept-learning-maps.html`은 수학·양자화학·큐빗/회로/측정·VQE 네 지도를 연결하는 메인 소스다. `build_concepts.py`는 이 지도로 시작하는 독립 파일 `docs/learning-maps.html`도 생성한다. 모든 리더 위쪽에 `#learning-maps`로 돌아가는 링크를 제공한다. `package_concept_site.py`는 이를 게시용 `index.html`로 복사하며 기존 `concepts.html`과 `quantum-chemistry.html` 진입점과 해시 링크를 보존한다. 새 지도 추가 시 메인 카드도 갱신한다.
+
+## 실험의 선택 버튼
+`assets/concept-choices.js`는 실험의 단일 선택 메뉴를 `aria-pressed` 버튼 묶음으로 보여준다. 숨겨진 select의 값과 input/change 이벤트는 기존 수치 계산과 공유하며 초기화 버튼 뒤에도 선택 표시를 동기화한다. 선택 항목에 용어 설명 버튼을 중첩하지 않도록 enrich에서 select/option은 제외한다. 단독 소스에는 defer 스크립트를 포함하고 단일 파일 리더에는 build가 내장한다. 선택 메뉴를 추가할 때도 이 스크립트를 포함한다. 수치 검사는 `tools/choose_option.cjs`를 통해 실제 버튼을 누른다.

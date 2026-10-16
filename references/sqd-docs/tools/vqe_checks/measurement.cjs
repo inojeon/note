@@ -1,3 +1,4 @@
+const choose=require('../choose_option.cjs');
 const assert = require('node:assert/strict');
 module.exports = async ({page, go, near}) => {
   const num = async id => Number(await page.locator('#'+id).getAttribute('data-value'));
@@ -20,7 +21,7 @@ module.exports = async ({page, go, near}) => {
   assert.deepEqual(await counts(),first);
   for(const d of [-180,-90,0,60,90,180]) for(const n of [10,1000]) {
     await range('vs-theta',d);
-    await page.locator('#vs-shots').selectOption(String(n));
+    await choose(page,'vs-shots',String(n));
     const [xp,xm,zp,zm]=await counts();
     assert.equal(xp+xm,n); assert.equal(zp+zm,n);
     for(const count of [xp,xm,zp,zm]) assert.ok(Number.isInteger(count)&&count>=0&&count<=n);

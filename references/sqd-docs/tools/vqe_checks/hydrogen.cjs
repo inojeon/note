@@ -1,3 +1,4 @@
+const choose=require('../choose_option.cjs');
 const assert = require('node:assert/strict');
 const data = require('../../data/vqe_h2.json');
 module.exports = async ({page, go, near}) => {
@@ -6,7 +7,7 @@ module.exports = async ({page, go, near}) => {
   let states=0;
   for(let index=0;index<data.samples.length;index++){
     const s=data.samples[index],p=s.pauli_hartree;
-    await page.locator('#vh-distance').selectOption(String(index));
+    await choose(page,'vh-distance',String(index));
     near(await value('energy'),s.energy_hf_hartree,1e-10);
     for(const deg of [-120,-30,0,60,170]){
       const theta=deg*Math.PI/180;

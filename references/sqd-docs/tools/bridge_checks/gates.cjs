@@ -1,3 +1,4 @@
+const choose=require('../choose_option.cjs');
 const assert=require('node:assert/strict');
 module.exports=async({page,go,near})=>{
  const number=async id=>Number((await page.locator(id).innerText()).replace('%','').replace('°',''));
@@ -5,14 +6,14 @@ module.exports=async({page,go,near})=>{
  await go('quantum-gate');
  const s=Math.SQRT1_2,states={'0':[[1,0],[0,0]],'1':[[0,0],[1,0]],plus:[[s,0],[s,0]],minus:[[s,0],[-s,0]],plusi:[[s,0],[0,s]]};
  for(const [key,v]of Object.entries(states))for(const g of ['X','Z','H']){
-  await page.locator('#bg-input').selectOption(key);await page.locator('#bg-gate').selectOption(g);
+  await choose(page,'bg-input',key);await choose(page,'bg-gate',g);
   // Independently apply each gate to real and imaginary parts.
   const expected=g==='X'?[v[1],v[0]]:g==='Z'?[v[0],v[1].map(x=>-x)]:[[s*(v[0][0]+v[1][0]),s*(v[0][1]+v[1][1])],[s*(v[0][0]-v[1][0]),s*(v[0][1]-v[1][1])]];
   const actual=await data('#bg-out-vector');for(let i=0;i<2;i++)for(let j=0;j<2;j++)near(actual[i][j],expected[i][j],1e-12);
   for(let i=0;i<2;i++)near(await number('#bg-p'+i),100*expected[i].reduce((a,x)=>a+x*x,0),.0051);
   near(await number('#bg-in-norm'),1,1e-8);near(await number('#bg-out-norm'),1,1e-8);
  }
- await page.locator('#bg-input').selectOption('plus');await page.locator('#bg-gate').selectOption('Z');
+ await choose(page,'bg-input','plus');await choose(page,'bg-gate','Z');
  assert((await data('#bg-out-vector'))[1][0]<0,'Z must change relative sign for plus');near(await number('#bg-p0'),50,1e-8);
  await go('rotation-gate');
  for(const deg of [0,1,30,90,137,180,270,359,360,450,720]){

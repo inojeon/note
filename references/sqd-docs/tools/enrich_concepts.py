@@ -91,7 +91,7 @@ for path in sorted((ROOT/'docs').glob('concept-*.html')):
     seen=set();panels=[];slug=path.stem.removeprefix('concept-')
     def walk(node):
         classes=node.attrs.get('class','').split()
-        if node.tag in {'head','script','style','nav','a','h1','h2','h3','svg','math','button','summary'} or any(c in classes for c in ['meta','eyebrow','lead','formula','math-array','math-tex','term-hint']):return
+        if node.tag in {'head','script','style','nav','a','h1','h2','h3','svg','math','button','summary','select','option'} or any(c in classes for c in ['meta','eyebrow','lead','formula','math-array','math-tex','term-hint']):return
         result=[]
         for c in node.children:
             if isinstance(c,Node):walk(c);result.append(c);continue

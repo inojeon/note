@@ -1,3 +1,4 @@
+const choose=require('../choose_option.cjs');
 const assert=require('node:assert/strict');
 module.exports=async({page,go,near})=>{
  const val=async id=>Number((await page.locator(id).innerText()).replace('%',''));
@@ -7,10 +8,10 @@ module.exports=async({page,go,near})=>{
  const prob=(u,v)=>{let re=0,im=0;for(let i=0;i<2;i++){re+=u[i][0]*v[i][0]+u[i][1]*v[i][1];im+=u[i][0]*v[i][1]-u[i][1]*v[i][0];}return re*re+im*im;};
  await go('measurement-basis');
  for(const [name,state] of Object.entries(states)){
-  await page.locator('#bm-state').selectOption(name);
+  await choose(page,'bm-state',name);
   const before=await page.locator('#bm-c0').innerText()+';'+await page.locator('#bm-c1').innerText();
   for(const [basis,u] of Object.entries(bases)){
-   await page.locator('#bm-basis').selectOption(basis);
+   await choose(page,'bm-basis',basis);
    near(await val('#bm-p-first'),100*prob(u,state),.00051);
    near(await val('#bm-p-first')+await val('#bm-p-second'),100,.000001);
    assert.equal(await page.locator('#bm-c0').innerText()+';'+await page.locator('#bm-c1').innerText(),before,'basis selection preserves prepared computational coordinates');

@@ -1,3 +1,4 @@
+const choose=require('../choose_option.cjs');
 module.exports = async ({page,go,near}) => {
   await go('fermion-qubit');
   const assert=(ok,msg)=>{if(!ok)throw new Error('mapping: '+msg);};
@@ -16,7 +17,7 @@ module.exports = async ({page,go,near}) => {
   }
   assert(nTwo===6&&nSpin===4,'enumerated sector dimensions');
   for(const [sector,size] of [['all',16],['two',6],['spin',4],['pair',2]]){
-    await page.locator('#vm-sector').selectOption(sector);
+    await choose(page,'vm-sector',sector);
     assert(Number(await page.locator('#vm-dimension').getAttribute('data-dimension'))===size,'dimension '+sector);
     assert(await page.locator('#vm-basis-list li').count()===size,'basis list '+sector);
   }

@@ -77,3 +77,12 @@
 .learning-map-cards .map-topics{font-size:.8rem;padding-top:8px;border-top:1px solid var(--line)}
 .learning-map-cards .map-action{color:var(--accent);font-weight:600;margin-top:auto}
 @media(max-width:600px){.reader-home-nav{padding:12px 16px 0}}
+
+/* Visible choices with touch targets and an explicit selected state. */
+select[hidden]{display:none!important}
+.choice-buttons{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 18px;min-width:0;max-width:100%}
+.choice-buttons button{font:inherit;line-height:1.5;color:var(--ink);background:var(--panel);border:2px solid var(--line);border-radius:9px;padding:10px 14px;min-height:44px;max-width:100%;white-space:normal;overflow-wrap:anywhere;cursor:pointer}
+.choice-buttons button:hover{border-color:var(--accent)}
+.choice-buttons button[aria-pressed="true"]{border-color:var(--accent);background:var(--nsoft);color:var(--ink);box-shadow:inset 0 -3px 0 var(--accent);font-weight:700}
+.choice-buttons button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.choice-buttons button:disabled{opacity:.5;cursor:not-allowed}
