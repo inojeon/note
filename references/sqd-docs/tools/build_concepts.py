@@ -12,6 +12,7 @@ DOCS = ROOT / 'docs'
 inputs = [('home', ROOT / 'tools/concepts-home.html')]
 inputs += [(p.stem.removeprefix('concept-'), p) for p in sorted(DOCS.glob('concept-*.html'))]
 routes = {p.name: slug for slug, p in inputs}
+routes['learning-maps.html'] = 'learning-maps'
 routes['concepts.html'] = 'home'
 routes['quantum-chemistry.html'] = 'quantum-chemistry'
 sections, scripts = [], []
@@ -70,11 +71,12 @@ window.addEventListener('hashchange',showPage);showPage();
 })();
 '''
 for filename, default_page, title in [
+    ('learning-maps.html', 'learning-maps', '학습 지도 모음 · 개념 노트'),
     ('concepts.html', 'home', '행렬과 벡터 · 개념 지도'),
     ('quantum-chemistry.html', 'quantum-chemistry', '양자화학 · 개념 지도'),
 ]:
     views = ''.join(f'<section id="page-{slug}" data-page="{slug}" aria-label="{heading}"'+('' if slug==default_page else ' hidden')+'>'+body+'</section>' for slug, heading, body in sections)
     page_router = router.replace('DEFAULT_PAGE', repr(default_page))
-    html = '<!doctype html>\n<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+title+'</title><style>'+css+'</style></head><body><a class="skip" href="#reader-content">본문으로 건너뛰기</a><main id="reader-content" tabindex="-1">'+views+'</main>'+katex_script+mol_script+'<script>'+  '\n'.join(scripts) + '\n'+page_router+'\n'+math_runtime+'</script></body></html>\n'
+    html = '<!doctype html>\n<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+title+'</title><style>'+css+'</style></head><body><a class="skip" href="#reader-content">본문으로 건너뛰기</a><nav class="reader-home-nav" aria-label="전체 학습 지도"><a href="#learning-maps">← 전체 학습 지도</a></nav><main id="reader-content" tabindex="-1">'+views+'</main>'+katex_script+mol_script+'<script>'+  '\n'.join(scripts) + '\n'+page_router+'\n'+math_runtime+'</script></body></html>\n'
     (DOCS/filename).write_text(html)
     print(f'Built {filename}: {len(inputs)} views, embedded CSS and scripts')

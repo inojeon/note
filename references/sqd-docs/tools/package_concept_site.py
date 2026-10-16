@@ -35,14 +35,14 @@ def main():
     parser.add_argument('--output', required=True, type=Path)
     output = parser.parse_args().output.resolve()
     files = {}
-    for filename in ['quantum-chemistry.html', 'concepts.html']:
+    for filename in ['learning-maps.html', 'quantum-chemistry.html', 'concepts.html']:
         source = DOCS / filename
         if not source.exists():
             parser.error(f'Missing {source}; run tools/build_concepts.py first.')
         body = source.read_text()
         reader = Reader()
         reader.feed(body)
-        if not {'home', 'quantum-chemistry', 'hamiltonian'} <= reader.pages:
+        if not {'learning-maps', 'home', 'quantum-chemistry', 'quantum-computing', 'vqe', 'hamiltonian'} <= reader.pages:
             parser.error(f'{filename} is not a complete concept reader.')
         broken = [href for href in reader.links if href != '#reader-content'
                   and (not href.startswith('#') or href[1:] not in reader.pages)]
@@ -50,7 +50,7 @@ def main():
             parser.error(f'{filename} has unresolved links or dependencies: '
                          f'{broken + reader.dependencies}')
         files[filename] = body
-    files['index.html'] = files['quantum-chemistry.html']
+    files['index.html'] = files['learning-maps.html']
     files['.nojekyll'] = ''
     if output.exists() and any(output.iterdir()):
         parser.error('Use a new or empty output directory; existing files are preserved.')
@@ -60,7 +60,7 @@ def main():
     for filename, body in files.items():
         (output / filename).write_text(body)
     print(f'Packaged {len(files)} files in {output}')
-    print('index.html opens the quantum chemistry map; concepts.html opens the math map.')
+    print('index.html opens all learning maps; existing reader entry points are preserved.')
 
 
 if __name__ == '__main__':

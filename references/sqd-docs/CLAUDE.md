@@ -87,3 +87,6 @@ H₂ 예제는 `scripts/vqe_h2.py`로 생성한 `data/vqe_h2.json`을 사용하�
 `docs/concept-quantum-computing.html`은 양자화학과 VQE 사이의 선수 개념 지도다. 두 상태 계 → 큐빗 → 계산 기저 → 게이트 → 회전 → 측정 기저 → 에너지 측정 → 텐서곱 → 얽힘 → 기존 전자·큐빗 대응 노트로 연결한다. 상태 벡터, 상태를 바꾸는 게이트, 고정된 에너지 문제인 해밀토니안을 구별한다. 0 상태와 영벡터, 0·1 측정과 에너지 측정, 블로흐 회전과 입자의 실제 궤도를 혼동하지 않도록 한다. 여러 큐빗 예제는 왼쪽 A/오른쪽 B 순서 00·01·10·11을 명시하며, 화학의 스핀 비트 순서와 별개다. 벨 상태는 같은 Z 통계를 가진 고전 혼합과 X 통계도 비교한다.
 
 `energy-expectation` 실험은 일반 기댓값의 뜻을 먼저 설명한 뒤 한 큐빗 예제로 좁힌다. 고정 입력 |0⟩, Ry(θ), 준비된 열벡터 c, Hc, 내적을 순서대로 표시한다. `node tools/check_bridge_concepts.cjs`는 독립 복소 내적·텐서곱·행렬 연산과 두 화면 폭의 모든 펼친 수식을 검증한다. 설정은 기존 Playwright 검사와 같고 BRIDGE_SCREENSHOT_DIR로 화면을 저장한다. 용어 설명창에서 분자 대칭은 `molecular-symmetry`, 전자 좌표 교환은 대수적 교환법칙과 구별하며, 첫 등장에 들어가는 영어 병기로 복합 용어가 분리되지 않는지 확인한다.
+
+## 전체 학습 지도 메인
+`docs/concept-learning-maps.html`은 수학·양자화학·큐빗/회로/측정·VQE 네 지도를 연결하는 메인 소스다. `build_concepts.py`는 이 지도로 시작하는 독립 파일 `docs/learning-maps.html`도 생성한다. 모든 리더 위쪽에 `#learning-maps`로 돌아가는 링크를 제공한다. `package_concept_site.py`는 이를 게시용 `index.html`로 복사하며 기존 `concepts.html`과 `quantum-chemistry.html` 진입점과 해시 링크를 보존한다. 새 지도 추가 시 메인 카드도 갱신한다.

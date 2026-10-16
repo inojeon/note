@@ -333,5 +333,15 @@
     "title": "얽힘(Entanglement)",
     "published_artifact": null,
     "origin_file": "concept-entanglement.html"
+  },
+  "concept-learning-maps.html": {
+    "title": "학습 지도 모음",
+    "published_artifact": null,
+    "origin_file": "concept-learning-maps.html"
+  },
+  "learning-maps.html": {
+    "title": "학습 지도 모음 · 단일 파일",
+    "published_artifact": null,
+    "origin_file": "learning-maps.html"
   }
 }

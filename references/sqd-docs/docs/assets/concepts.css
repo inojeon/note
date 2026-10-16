@@ -66,3 +66,14 @@
 .state-equation{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:18px;margin:22px 0;min-width:0}.state-equation .katex{font-size:1.3em;max-width:100%}
 .state-expansion{display:grid;gap:12px;margin:20px 0}.state-expansion>div{padding:12px;background:var(--code);border-radius:8px;min-width:0}.state-expansion small{display:block;margin-bottom:10px}.state-expansion .katex{font-size:1.15em}
 @media(max-width:600px){.state-notation{padding:14px 12px}.state-equation .katex{font-size:1.12em}.state-expansion .katex{font-size:1.02em}}
+
+/* Shared entry point for every learning map and standalone reader. */
+.reader-home-nav{max-width:760px;margin:auto;padding:20px 24px 0;font-size:.9rem}
+.reader-home-nav a{display:inline-block;padding:8px 0}
+.learning-map-cards a{display:flex;flex-direction:column;gap:10px}
+.learning-map-cards a:hover{border-color:var(--accent)}
+.learning-map-cards strong{font-size:1.15rem;line-height:1.5}
+.learning-map-cards .map-step{color:var(--accent);font-size:.8rem;font-weight:600}
+.learning-map-cards .map-topics{font-size:.8rem;padding-top:8px;border-top:1px solid var(--line)}
+.learning-map-cards .map-action{color:var(--accent);font-weight:600;margin-top:auto}
+@media(max-width:600px){.reader-home-nav{padding:12px 16px 0}}
