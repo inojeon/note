@@ -105,3 +105,6 @@ H₂ 예제는 `scripts/vqe_h2.py`로 생성한 `data/vqe_h2.json`을 사용하�
 에너지 측정 실험의 `#be-live-controls`에는 각도 슬라이더·상태 열벡터·평균을 모은다. 모바일의 충분히 높은 화면에서만 실험 영역 안에 sticky로 유지하며, 상세 계산 `.be-calculation`은 기본 접힘이다. 수치 검사는 계산 패널을 명시적으로 펼쳐 검사한다.
 
 `concept-sto-3g.html`은 일반 기저 집합 노트의 후속 설명으로 STO-3G 수축, 원자가 분할, 편극/퍼진 함수와 cc 계열을 비교한다. H₂ 공간 함수 수는 `.venv/bin/python scripts/basis_set_counts.py`가 생성하는 `data/basis_set_counts.json`으로 검증한다. 일반 HTML 빌드는 PySCF 없이 가능하다. `tools/check_sto3g.cjs`는 비교 버튼과 데이터 일치, 지도 링크, 용어창, 수식을 검사한다. 함수 수를 에너지 정확도 순위나 축소 후 큐빗 수로 해석하지 않는다.
+
+## 노트 검색
+단일 파일 리더 상단의 검색 버튼과 Ctrl/⌘+K는 `tools/reader-search.html` 대화상자를 연다. `build_concepts.py`가 제목·소개·본문 텍스트 색인을 내장하며 script/style/nav/용어 설명창은 제외한다. `assets/concept-search.js`는 한국어/영어·공백/문장부호·일부 표기 변형을 정규화하고 제목을 우선하여 로컬 검색한다. 사용자 입력과 결과는 textContent로 표시한다. 서버나 외부 검색 요청은 없다. `tools/check_search.cjs`는 전체 제목, IME·키보드·터치, 해시 이동/뒤로 가기, 모바일 화면과 세 리더 진입점을 검사한다.

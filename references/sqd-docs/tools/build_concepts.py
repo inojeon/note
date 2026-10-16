@@ -6,6 +6,9 @@ then rebuild. Refresh docs/assets/concept-glossary.json through tools/enrich_con
 from pathlib import Path
 import re
 import base64
+import json
+import html as html_lib
+from html.parser import HTMLParser
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / 'docs'
@@ -35,6 +38,41 @@ for slug, path in inputs:
     body = re.sub(r'<p>실제 문제로 이어가기:[\s\S]*?</p>', '', body)
     title = re.search(r'<h1>([\s\S]*?)</h1>', body).group(1)
     sections.append((slug, title, body))
+
+class SearchText(HTMLParser):
+    """Exclude navigation, popovers and executable content from the index."""
+    def __init__(self):
+        super().__init__()
+        self.stack = []
+        self.parts = []
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        skip = (any(self.stack) or tag in {'script','style','nav','svg'}
+                or 'term-popover' in attrs.get('class','').split())
+        if tag not in {'input','br','hr','img','meta','link','wbr','source'}:
+            self.stack.append(skip)
+    def handle_endtag(self, tag):
+        if self.stack and tag not in {'input','br','hr','img','meta','link','wbr','source'}:
+            self.stack.pop()
+    def handle_data(self, data):
+        if not any(self.stack):
+            self.parts.append(data)
+
+def plain(text):
+    return ' '.join(html_lib.unescape(re.sub(r'<[^>]+>', ' ', text)).split())
+
+search_records = []
+for slug, title, body in sections:
+    parser = SearchText()
+    parser.feed(body)
+    lead = re.search(r'<p class="lead">(.*?)</p>', body, re.S)
+    search_records.append({'slug': slug, 'title': plain(title),
+                           'lead': plain(lead.group(1)) if lead else '',
+                           'text': ' '.join(' '.join(parser.parts).split())})
+search_data = '<script type="application/json" id="reader-search-index">' + json.dumps(search_records, ensure_ascii=False).replace('<', r'\u003c') + '</script>'
+search_markup = (ROOT/'tools/reader-search.html').read_text()
+search_runtime = (DOCS/'assets/concept-search.js').read_text()
+
 vendor = DOCS / 'assets/vendor/katex'
 def embed_font(match):
     data = (vendor / match.group(1)).read_bytes()
@@ -78,6 +116,6 @@ for filename, default_page, title in [
 ]:
     views = ''.join(f'<section id="page-{slug}" data-page="{slug}" aria-label="{heading}"'+('' if slug==default_page else ' hidden')+'>'+body+'</section>' for slug, heading, body in sections)
     page_router = router.replace('DEFAULT_PAGE', repr(default_page))
-    html = '<!doctype html>\n<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+title+'</title><style>'+css+'</style></head><body><a class="skip" href="#reader-content">본문으로 건너뛰기</a><nav class="reader-home-nav" aria-label="전체 학습 지도"><a href="#learning-maps">← 전체 학습 지도</a></nav><main id="reader-content" tabindex="-1">'+views+'</main>'+katex_script+mol_script+'<script>'+  '\n'.join(scripts) + '\n'+page_router+'\n'+math_runtime+'\n'+choices_runtime+'</script></body></html>\n'
+    html = '<!doctype html>\n<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+title+'</title><style>'+css+'</style></head><body><a class="skip" href="#reader-content">본문으로 건너뛰기</a><nav class="reader-home-nav" aria-label="전체 학습 지도"><a href="#learning-maps">← 전체 학습 지도</a><button type="button" id="reader-search-open" aria-haspopup="dialog" aria-controls="reader-search" aria-keyshortcuts="Control+k Meta+k">노트 검색</button></nav>'+search_markup+'<main id="reader-content" tabindex="-1">'+views+'</main>'+search_data+katex_script+mol_script+'<script>'+  '\n'.join(scripts) + '\n'+page_router+'\n'+math_runtime+'\n'+choices_runtime+'\n'+search_runtime+'</script></body></html>\n'
     (DOCS/filename).write_text(html)
     print(f'Built {filename}: {len(inputs)} views, embedded CSS and scripts')

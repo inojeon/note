@@ -86,3 +86,22 @@ select[hidden]{display:none!important}
 .choice-buttons button[aria-pressed="true"]{border-color:var(--accent);background:var(--nsoft);color:var(--ink);box-shadow:inset 0 -3px 0 var(--accent);font-weight:700}
 .choice-buttons button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .choice-buttons button:disabled{opacity:.5;cursor:not-allowed}
+
+/* Search is bundled with the notes and makes no network requests. */
+.reader-home-nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
+#reader-search-open,#reader-search-close{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:8px;min-height:44px;padding:8px 14px;cursor:pointer}
+#reader-search{color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:16px;width:min(640px,calc(100% - 24px));max-height:85vh;max-height:85dvh;padding:20px;overflow:hidden}
+#reader-search[open]{display:flex;flex-direction:column}
+#reader-search::backdrop{background:#0009}
+.search-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.search-heading h2{margin:0;font-size:1.2rem}
+#reader-search label{font-size:.9rem;margin:12px 0 6px}
+#reader-search-input{font:inherit;width:100%;min-height:48px;border:1px solid var(--line);border-radius:8px;padding:10px;background:var(--bg);color:var(--ink)}
+#reader-search-status,.search-help{font-size:.8rem;color:var(--ink2);margin:10px 0}
+#reader-search-results{list-style:none;padding:0;margin:0;overflow-y:auto;overscroll-behavior:contain;min-height:0}
+#reader-search-results li+li{border-top:1px solid var(--line)}
+#reader-search-results a{display:block;padding:12px 8px;text-decoration:none;overflow-wrap:anywhere;border-radius:6px}
+#reader-search-results a:hover,#reader-search-results a:focus-visible{background:var(--code);outline-offset:-3px}
+#reader-search-results strong,#reader-search-results span{display:block}
+#reader-search-results span{font-size:.85rem;color:var(--ink2);margin-top:4px}
+#reader-search button:focus-visible,#reader-search-open:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media(max-width:600px){#reader-search{padding:14px}.search-help{font-size:.75rem}}
