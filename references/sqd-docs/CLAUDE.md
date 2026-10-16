@@ -118,4 +118,4 @@ STO-3G 노트의 준위 그림은 `scripts/basis_orbital_levels.py`가 계산한
 
 `python tools/enrich_concepts.py` → `python tools/build_concepts.py` 후 `node tools/check_sqd_concepts.cjs`와 `node tools/check_search.cjs`를 실행한다. PLAYWRIGHT_MODULE/CHROMIUM_PATH는 기존 브라우저 검사와 동일하다. SQD 검사는 독립적인 16차원 게이트 계산, 표본 초기화, 고유벡터 잔차, 지도·앞뒤 링크, 모바일 수식과 터치 설명창을 확인한다. `SQD_SCREENSHOT_DIR`로 검증 화면을 저장할 수 있다.
 
-SQD 상태 준비 회로 그림은 적용된 게이트를 누적해서 표시하고 현재 마지막 게이트를 강조한다. 모바일에서는 3개씩 줄을 나눠 같은 회로가 이어지도록 표시하며, 현재 게이트 하나만 남기지 않는다. 이전/초기화/완성 버튼과 회로 그림의 단계 수가 함께 갱신되어야 한다.
+SQD 상태 준비 회로 그림은 적용된 게이트를 누적해서 표시하고 현재 마지막 게이트를 강조한다. 모바일에서도 600px 한 줄 회로를 좌우 스크롤로 탐색한다. 게이트 중심 간격은 60px이며, 단계가 바뀔 때 현재 게이트를 스크롤 영역 안에 드러낸다. 현재 게이트 하나만 남기지 않는다. 이전/초기화/완성 버튼과 회로 그림의 단계 수가 함께 갱신되어야 한다.
