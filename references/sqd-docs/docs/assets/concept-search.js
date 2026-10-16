@@ -7,7 +7,7 @@ const input=document.getElementById('reader-search-input'),list=document.getElem
 const aliases=[[/큐비트/g,'큐빗'],[/백터/g,'벡터'],[/슈레딩거|슈뢰딩거|슈뢰덴거/g,'슈뢰딩거']];
 function normalize(text){let s=text.normalize('NFKC').toLowerCase();for(const [pattern,replacement]of aliases)s=s.replace(pattern,replacement);return s.replace(/[^\p{L}\p{N}]/gu,'');}
 const notes=JSON.parse(document.getElementById('reader-search-index').textContent).map(n=>({...n,key:normalize(n.title+' '+n.slug),bodyKey:normalize(n.text)}));
-const mapOrder=['learning-maps','home','quantum-chemistry','quantum-computing','vqe'];
+const mapOrder=['learning-maps','home','quantum-chemistry','quantum-computing','vqe','sqd'];
 let composing=false;
 function render(){
  const query=input.value.trim(),whole=normalize(query),tokens=query.split(/\s+/).map(normalize).filter(Boolean);

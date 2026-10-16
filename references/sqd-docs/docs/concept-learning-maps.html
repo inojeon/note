@@ -3,7 +3,7 @@
 <body><a class="skip" href="#content">본문으로 건너뛰기</a><main id="content">
 <p class="eyebrow">개념 노트 · 학습 지도 모음</p>
 <h1>무엇부터 이해해 볼까요?</h1>
-<p class="lead">수학에서 양자화학을 거쳐 VQE까지.<br>지도를 고르고, 한 번에 하나의 개념을 배워보세요.</p>
+<p class="lead">수학에서 양자화학을 거쳐 VQE와 SQD까지.<br>지도를 고르고, 한 번에 하나의 개념을 배워보세요.</p>
 <p>각 지도는 짧은 개념 설명과 직접 조작하는 실험으로 이어집니다. 이미 익숙한 주제는 건너뛰고 궁금한 곳부터 시작해도 좋습니다.</p>
 <h2>전체 학습 지도</h2>
 <ul class="cards learning-map-cards" id="all-learning-maps">
@@ -11,8 +11,9 @@
 <li><a href="concept-quantum-chemistry.html"><span class="map-step">02 · 물리와 화학</span><strong>양자화학(Quantum Chemistry)</strong><span>양자 상태와 에너지에서 출발해 원자와 분자의 전자 구조를 이해합니다.</span><span class="map-topics">파동함수 · 해밀토니안 · 슈뢰딩거 방정식 · 전자 구조</span><span class="map-action">양자화학 지도 열기 →</span></a></li>
 <li><a href="concept-quantum-computing.html"><span class="map-step">03 · 양자컴퓨터의 언어</span><strong>큐빗·회로·측정</strong><span>큐빗(Qubit)의 상태를 어떻게 바꾸고, 측정 결과를 어떻게 읽는지 알아봅니다.</span><span class="map-topics">계산 기저 · 게이트 · 회전 · 에너지 측정 · 얽힘</span><span class="map-action">큐빗·회로·측정 지도 열기 →</span></a></li>
 <li><a href="concept-vqe.html"><span class="map-step">04 · 알고리즘으로 연결</span><strong>VQE 학습 지도</strong><span>변분 양자 고유값 풀이법(Variational Quantum Eigensolver)으로 분자의 낮은 에너지 상태를 찾아갑니다.</span><span class="map-topics">기댓값 · 안사츠 · 측정 · 최적화 · 수소 분자</span><span class="map-action">VQE 지도 열기 →</span></a></li>
+<li><a href="concept-sqd.html"><span class="map-step">05 · 표본에서 에너지로</span><strong>SQD 학습 지도</strong><span>양자회로가 전자 배치를 준비하고 측정하는 과정을 게이트 하나씩 따라갑니다.</span><span class="map-topics">점유수 · 기준 상태 · 중첩 회로 · 표본 · 부분공간 대각화</span><span class="map-action">SQD 지도 열기 →</span></a></li>
 </ul>
-<section class="box" aria-labelledby="maps-reading-order"><h2 id="maps-reading-order">처음이라면 이 순서로</h2><p><strong>수학 → 양자화학 → <span class="term-wrap"><button type="button" class="term-trigger" popovertarget="glossary-learning-maps-qubit" aria-controls="glossary-learning-maps-qubit" aria-describedby="glossary-learning-maps-qubit" aria-expanded="false">큐빗(Qubit)</button></span>·회로·측정 → VQE</strong></p><p>수식이 낯설면 수학부터, 전자와 분자가 궁금하면 양자화학부터 시작하세요. 양자화학을 읽었는데 회로와 측정이 낯설다면 세 번째 지도가 그 사이를 연결해 줍니다.</p></section>
+<section class="box" aria-labelledby="maps-reading-order"><h2 id="maps-reading-order">처음이라면 이 순서로</h2><p><strong>수학 → 양자화학 → <span class="term-wrap"><button type="button" class="term-trigger" popovertarget="glossary-learning-maps-qubit" aria-controls="glossary-learning-maps-qubit" aria-describedby="glossary-learning-maps-qubit" aria-expanded="false">큐빗(Qubit)</button></span>·회로·측정 → VQE 또는 SQD</strong></p><p>수식이 낯설면 수학부터, 전자와 분자가 궁금하면 양자화학부터 시작하세요. 양자화학을 읽었는데 회로와 측정이 낯설다면 세 번째 지도가 그 사이를 연결해 줍니다.</p></section>
 <p class="meta">노트의 점선 밑줄 용어는 마우스를 올리거나 터치하면 정의와 예시를 볼 수 있습니다. 위쪽의 ‘전체 학습 지도’로 언제든 돌아올 수 있습니다.</p>
 <span id="glossary-learning-maps-qubit" class="term-popover" popover="auto" role="note" aria-label="큐빗(Qubit) 설명"><strong>큐빗(Qubit)</strong><span>두 개의 직교 기저 상태로 표현하는 양자 정보의 단위입니다. 가능한 상태가 0과 1 두 개뿐인 것이 아니라 그 중첩도 포함합니다.</span><span class="term-example"><b>간단한 예시</b><span>0과 1을 같은 확률로 측정하는 순수상태의 예는 (<span class="math-tex" data-tex="\lvert 0\rangle ">|0⟩</span>+<span class="math-tex" data-tex="\lvert 1\rangle ">|1⟩</span>)/√2입니다.</span><span class="term-example-math"><span class="example-equation-text">α<span class="math-tex" data-tex="\lvert 0\rangle ">|0⟩</span> + β<span class="math-tex" data-tex="\lvert 1\rangle ">|1⟩</span>; |α|² + |β|² = 1</span></span></span><span class="term-formula">α<span class="math-tex" data-tex="\lvert 0\rangle ">|0⟩</span> + β<span class="math-tex" data-tex="\lvert 1\rangle ">|1⟩</span>; |α|² + |β|² = 1</span><a href="concept-qubit.html">관련 개념 읽기 →</a></span><script>(function(){
 const triggers=Array.from(document.querySelectorAll('.term-trigger'));if(!triggers.length)return;let active=null,pinned=false,timer,suppressFocus=false;

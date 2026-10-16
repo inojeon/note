@@ -89,7 +89,7 @@ H₂ 예제는 `scripts/vqe_h2.py`로 생성한 `data/vqe_h2.json`을 사용하�
 `energy-expectation` 실험은 일반 기댓값의 뜻을 먼저 설명한 뒤 한 큐빗 예제로 좁힌다. 고정 입력 |0⟩, Ry(θ), 준비된 열벡터 c, Hc, 내적을 순서대로 표시한다. `node tools/check_bridge_concepts.cjs`는 독립 복소 내적·텐서곱·행렬 연산과 두 화면 폭의 모든 펼친 수식을 검증한다. 설정은 기존 Playwright 검사와 같고 BRIDGE_SCREENSHOT_DIR로 화면을 저장한다. 용어 설명창에서 분자 대칭은 `molecular-symmetry`, 전자 좌표 교환은 대수적 교환법칙과 구별하며, 첫 등장에 들어가는 영어 병기로 복합 용어가 분리되지 않는지 확인한다.
 
 ## 전체 학습 지도 메인
-`docs/concept-learning-maps.html`은 수학·양자화학·큐빗/회로/측정·VQE 네 지도를 연결하는 메인 소스다. `build_concepts.py`는 이 지도로 시작하는 독립 파일 `docs/learning-maps.html`도 생성한다. 모든 리더 위쪽에 `#learning-maps`로 돌아가는 링크를 제공한다. `package_concept_site.py`는 이를 게시용 `index.html`로 복사하며 기존 `concepts.html`과 `quantum-chemistry.html` 진입점과 해시 링크를 보존한다. 새 지도 추가 시 메인 카드도 갱신한다.
+`docs/concept-learning-maps.html`은 수학·양자화학·큐빗/회로/측정·VQE·SQD 다섯 지도를 연결하는 메인 소스다. `build_concepts.py`는 이 지도로 시작하는 독립 파일 `docs/learning-maps.html`도 생성한다. 모든 리더 위쪽에 `#learning-maps`로 돌아가는 링크를 제공한다. `package_concept_site.py`는 이를 게시용 `index.html`로 복사하며 기존 `concepts.html`과 `quantum-chemistry.html` 진입점과 해시 링크를 보존한다. 새 지도 추가 시 메인 카드도 갱신한다.
 
 ## 실험의 선택 버튼
 `assets/concept-choices.js`는 실험의 단일 선택 메뉴를 `aria-pressed` 버튼 묶음으로 보여준다. 숨겨진 select의 값과 input/change 이벤트는 기존 수치 계산과 공유하며 초기화 버튼 뒤에도 선택 표시를 동기화한다. 선택 항목에 용어 설명 버튼을 중첩하지 않도록 enrich에서 select/option은 제외한다. 단독 소스에는 defer 스크립트를 포함하고 단일 파일 리더에는 build가 내장한다. 선택 메뉴를 추가할 때도 이 스크립트를 포함한다. 수치 검사는 `tools/choose_option.cjs`를 통해 실제 버튼을 누른다.
@@ -110,3 +110,10 @@ H₂ 예제는 `scripts/vqe_h2.py`로 생성한 `data/vqe_h2.json`을 사용하�
 단일 파일 리더 상단의 검색 버튼과 Ctrl/⌘+K는 `tools/reader-search.html` 대화상자를 연다. `build_concepts.py`가 제목·소개·본문 텍스트 색인을 내장하며 script/style/nav/용어 설명창은 제외한다. `assets/concept-search.js`는 한국어/영어·공백/문장부호·일부 표기 변형을 정규화하고 제목을 우선하여 로컬 검색한다. 사용자 입력과 결과는 textContent로 표시한다. 서버나 외부 검색 요청은 없다. `tools/check_search.cjs`는 전체 제목, IME·키보드·터치, 해시 이동/뒤로 가기, 모바일 화면과 세 리더 진입점을 검사한다.
 
 STO-3G 노트의 준위 그림은 `scripts/basis_orbital_levels.py`가 계산한 H₂/0.74 Å RHF 결과 `data/basis_orbital_levels.json`을 사용한다. 계산 조건과 재현 절차는 `scripts/basis_orbital_levels_README.md`에 있다. 그림 소스는 `tools/basis-orbital-lab.html`, 삽입 도구는 `tools/build_basis_orbitals.py`이며 enrich/build 전에 실행한다. `check_basis_orbitals.cjs`는 준위 수/축척/축퇴/표와 지도 상단 `qc-basis-entry` 링크를 검증한다. 오비탈 에너지와 다전자 전체 에너지는 구별한다.
+
+## SQD 학습 지도
+`concept-sqd.html`은 양자 컴퓨터가 하는 일에 집중한 첫 묶음이다. `occupation-bitstrings` → `hf-preparation` → `excitation-state` → `sqd-state-circuit` → `sqd-sampling` → `sqd-subspace` 순서이며 각 노트 하단에 앞뒤 링크를 유지한다. 메인 지도와 검색 기본 목록에 SQD를 포함한다. 공통 예제의 순서는 q₃q₂q₁q₀ = β₁β₀α₁α₀, 기준 배치는 0101, 비교 배치는 1010이다. 공간 궤도 2개를 스핀 궤도 4개/큐빗 4개에 직접 대응시킨 설명용 모형이다.
+
+회로 예제는 X₀, X₂로 기준 상태를 만든 뒤 CNOT₀→₁, CNOT₀→₂, CNOT₀→₃, Ry₀(−θ), CNOT₀→₃, CNOT₀→₂, CNOT₀→₁을 실행하여 cos(θ/2)|0101⟩ + sin(θ/2)|1010⟩를 준비한다. 중간 상태는 전자 수를 보존하지 않을 수 있으며 이 전체 회로를 일반 전자 들뜸 연산자나 UCJ 회로로 설명하지 않는다. 확률 표본은 실제 하드웨어 실행이 아닌 시뮬레이션이다. 부분공간 예제는 임의 단위의 H=[[0.8,−0.5],[−0.5,1.2]]를 사용하고 실제 분자 에너지로 표시하지 않는다. 측정 빈도는 최종 고유벡터 계수가 아니며, 중복 제거 뒤 같은 배치 집합이면 이 예제의 대각화 결과는 같다. 실제 SQD의 복구·배치 추출에서 빈도가 영향을 줄 수 있다는 점은 별개다.
+
+`python tools/enrich_concepts.py` → `python tools/build_concepts.py` 후 `node tools/check_sqd_concepts.cjs`와 `node tools/check_search.cjs`를 실행한다. PLAYWRIGHT_MODULE/CHROMIUM_PATH는 기존 브라우저 검사와 동일하다. SQD 검사는 독립적인 16차원 게이트 계산, 표본 초기화, 고유벡터 잔차, 지도·앞뒤 링크, 모바일 수식과 터치 설명창을 확인한다. `SQD_SCREENSHOT_DIR`로 검증 화면을 저장할 수 있다.
