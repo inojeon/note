@@ -27,11 +27,11 @@ const near=(a,b)=>assert(Math.abs(a-b)<1e-10,`${a} != ${b}`);
   for(const d of [0,60,90,180]){
    await range('ssc-theta',d);await page.locator('#ssc-reset').tap();let expected=Array(16).fill(0);expected[0]=1;
    const gates=[['x',0],['x',2],['cx',1],['cx',2],['cx',3],['ry',0],['cx',3],['cx',2],['cx',1]];
-   for(const [kind,target]of gates){const next=Array(16).fill(0);for(let i=0;i<16;i++){
+   for(const [gateIndex,[kind,target]]of gates.entries()){const next=Array(16).fill(0);for(let i=0;i<16;i++){
     if(kind==='x')next[i^(1<<target)]+=expected[i];
     else if(kind==='cx')next[(i&1)?i^(1<<target):i]+=expected[i];
     else {const c=Math.cos(-d*Math.PI/360),s=Math.sin(-d*Math.PI/360);next[i]+=c*expected[i];next[i^1]+=((i&1)?-s:s)*expected[i];}
-   }expected=next;await page.locator('#ssc-next').tap();const actual=await data('ssc-amplitudes','values');actual.forEach((a,i)=>near(a,expected[i]));near(actual.reduce((v,a)=>v+a*a,0),1);}
+   }expected=next;await page.locator('#ssc-next').tap();assert.deepEqual(await page.locator('#ssc-fig [data-ssc-gate]').evaluateAll(es=>es.map(e=>Number(e.dataset.sscGate))),Array.from({length:gateIndex+1},(_,i)=>i+1));assert.equal(await page.locator('#ssc-fig [data-current="true"]').getAttribute('data-ssc-gate'),String(gateIndex+1));const actual=await data('ssc-amplitudes','values');actual.forEach((a,i)=>near(a,expected[i]));near(actual.reduce((v,a)=>v+a*a,0),1);}
    const actual=await data('ssc-amplitudes','values');near(actual[5],Math.cos(d*Math.PI/360));near(actual[10],Math.sin(d*Math.PI/360));
    await page.locator('#ssc-back').tap();assert.equal(await data('ssc-stage','step'),8);await page.locator('#ssc-finish').tap();assert.equal(await data('ssc-stage','step'),9);
   }
