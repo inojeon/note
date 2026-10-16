@@ -103,3 +103,5 @@ H₂ 예제는 `scripts/vqe_h2.py`로 생성한 `data/vqe_h2.json`을 사용하�
 에너지 측정 노트는 같은 각도에서 Hc와 c†Hc, 에너지 고유값의 확률 가중 평균을 나란히 갱신한다. Hc는 준비된 정규화 상태가 아니라 계산 중간 벡터로 설명한다. 문서 뒤 수학 풀이에는 교차항과 90° 예제를 포함한다. `tools/check_energy_walkthrough.cjs`로 각도별 중간값·평균 일치·펼친 수식의 모바일 폭을 확인한다.
 
 에너지 측정 실험의 `#be-live-controls`에는 각도 슬라이더·상태 열벡터·평균을 모은다. 모바일의 충분히 높은 화면에서만 실험 영역 안에 sticky로 유지하며, 상세 계산 `.be-calculation`은 기본 접힘이다. 수치 검사는 계산 패널을 명시적으로 펼쳐 검사한다.
+
+`concept-sto-3g.html`은 일반 기저 집합 노트의 후속 설명으로 STO-3G 수축, 원자가 분할, 편극/퍼진 함수와 cc 계열을 비교한다. H₂ 공간 함수 수는 `.venv/bin/python scripts/basis_set_counts.py`가 생성하는 `data/basis_set_counts.json`으로 검증한다. 일반 HTML 빌드는 PySCF 없이 가능하다. `tools/check_sto3g.cjs`는 비교 버튼과 데이터 일치, 지도 링크, 용어창, 수식을 검사한다. 함수 수를 에너지 정확도 순위나 축소 후 큐빗 수로 해석하지 않는다.

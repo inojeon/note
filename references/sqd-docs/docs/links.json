@@ -343,5 +343,10 @@
     "title": "학습 지도 모음 · 단일 파일",
     "published_artifact": null,
     "origin_file": "learning-maps.html"
+  },
+  "concept-sto-3g.html": {
+    "title": "STO-3G와 기저 집합의 선택",
+    "published_artifact": null,
+    "origin_file": "concept-sto-3g.html"
   }
 }

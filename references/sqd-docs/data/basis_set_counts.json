@@ -1,0 +1,37 @@
+{
+  "pyscf_version": "2.14.0",
+  "convention": "contracted spatial AO functions; spherical harmonics",
+  "hydrogen_sto3g_primitives": 3,
+  "rows": [
+    {
+      "basis": "sto-3g",
+      "hydrogen_spatial_functions": 1,
+      "h2_spatial_functions": 2,
+      "h2_spin_orbitals": 4
+    },
+    {
+      "basis": "6-31g",
+      "hydrogen_spatial_functions": 2,
+      "h2_spatial_functions": 4,
+      "h2_spin_orbitals": 8
+    },
+    {
+      "basis": "6-31g(d,p)",
+      "hydrogen_spatial_functions": 5,
+      "h2_spatial_functions": 10,
+      "h2_spin_orbitals": 20
+    },
+    {
+      "basis": "6-31++g(d,p)",
+      "hydrogen_spatial_functions": 6,
+      "h2_spatial_functions": 12,
+      "h2_spin_orbitals": 24
+    },
+    {
+      "basis": "cc-pvdz",
+      "hydrogen_spatial_functions": 5,
+      "h2_spatial_functions": 10,
+      "h2_spin_orbitals": 20
+    }
+  ]
+}

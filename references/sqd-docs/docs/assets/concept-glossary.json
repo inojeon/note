@@ -4495,5 +4495,65 @@
       "제외한 상태로의 전이가 무시 가능한지 확인해야 합니다."
     ],
     "example": "제외한 상태로의 전이가 무시 가능한지 확인해야 합니다."
+  },
+  {
+    "id": "minimal-basis",
+    "term": "최소 기저 집합",
+    "english": "Minimal Basis Set",
+    "description": "원자의 전자 구조를 나타내는 데 필요한 원자 오비탈들에 최소한의 기저 함수 묶음을 배정한 기저 집합입니다.",
+    "example": "수소의 STO-3G는 1s형 수축 함수 하나를 사용합니다.",
+    "worked_example": "수소의 STO-3G는 1s형 수축 함수 하나를 사용합니다.",
+    "worked_parts": [],
+    "page": "sto-3g"
+  },
+  {
+    "id": "contracted-gaussian",
+    "term": "수축 가우스 함수",
+    "english": "Contracted Gaussian Function",
+    "description": "여러 원시 가우스 함수를 고정된 계수로 묶어 하나의 기저 함수로 사용하는 것입니다.",
+    "example": "수소 STO-3G는 가우스 함수 세 개를 묶지만 독립적인 공간 기저 함수는 하나입니다.",
+    "worked_example": "수소 STO-3G는 가우스 함수 세 개를 묶지만 독립적인 공간 기저 함수는 하나입니다.",
+    "worked_parts": [],
+    "page": "sto-3g"
+  },
+  {
+    "id": "polarization-function",
+    "term": "편극 함수",
+    "english": "Polarization Function",
+    "description": "추가적인 각운동량 형태로 결합 환경에 따른 전자 분포의 방향 변형을 표현하게 하는 기저 함수입니다.",
+    "example": "6-31G(d,p)는 수소에 p형 함수를 추가해 s형만으로 어려운 방향 변형을 표현합니다.",
+    "worked_example": "6-31G(d,p)는 수소에 p형 함수를 추가해 s형만으로 어려운 방향 변형을 표현합니다.",
+    "worked_parts": [],
+    "page": "sto-3g"
+  },
+  {
+    "id": "diffuse-function",
+    "term": "퍼진 함수",
+    "english": "Diffuse Function",
+    "description": "지수가 작아 핵에서 멀리까지 퍼지는 가우스형 기저 함수입니다.",
+    "example": "6-31++G(d,p)는 수소에도 퍼진 s 함수를 더해 멀리 퍼진 전자 분포를 표현할 여지를 늘립니다.",
+    "worked_example": "6-31++G(d,p)는 수소에도 퍼진 s 함수를 더해 멀리 퍼진 전자 분포를 표현할 여지를 늘립니다.",
+    "worked_parts": [],
+    "page": "sto-3g"
+  },
+  {
+    "id": "split-valence-basis",
+    "term": "원자가 분할 기저",
+    "english": "Split-Valence Basis",
+    "description": "원자가 오비탈의 방사 방향 모양을 여러 기저 함수 묶음으로 표현하는 기저 집합입니다.",
+    "example": "수소의 6-31G는 세 가우스의 수축 함수와 단일 가우스 함수로 두 s형 함수를 사용합니다.",
+    "worked_example": "수소의 6-31G는 세 가우스의 수축 함수와 단일 가우스 함수로 두 s형 함수를 사용합니다.",
+    "worked_parts": [],
+    "page": "sto-3g"
+  },
+  {
+    "id": "slater-type-orbital",
+    "term": "슬레이터형 오비탈",
+    "english": "Slater-Type Orbital",
+    "description": "원자핵에서의 거리에 대해 지수적으로 감소하는 방사 부분을 갖는 원자 중심 함수입니다. 가우스형 함수와는 방사 형태가 다릅니다.",
+    "example": "1s형 STO의 방사 부분은 e^(−ζr)에 비례합니다.",
+    "worked_example": "수소 1s의 지수적으로 감소하는 형태를 STO로 나타낼 수 있고, STO-3G는 그 형태를 세 가우스 함수의 묶음으로 근사합니다.",
+    "worked_parts": [],
+    "page": "sto-3g"
   }
 ]

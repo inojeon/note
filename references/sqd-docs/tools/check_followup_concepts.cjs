@@ -36,7 +36,7 @@ const near=(actual,expected,tolerance=1e-5)=>{assert(String(actual).trim()!=='')
   assert.equal(await page.locator('#glossary-born-oppenheimer-dimensionless strong').textContent(),'무차원(Dimensionless)');
   assert((await page.locator('#page-hartree-fock .term-trigger').allTextContents()).includes('하트리–폭(Hartree–Fock, HF)'),'Keep an introduced acronym with its term');
   const roadmap=await page.locator('#qc-followup-map a').evaluateAll(es=>es.map(e=>e.hash.slice(1)));
-  assert.deepEqual(new Set(roadmap),new Set(slugs),'Every planned topic has a page');
+  assert.deepEqual(new Set(roadmap),new Set([...slugs,'sto-3g']),'Every planned topic and basis-set companion has a page');
 
   for(const [width,colorScheme] of [[360,'dark'],[1280,'light']]){
    await page.setViewportSize({width,height:900});
