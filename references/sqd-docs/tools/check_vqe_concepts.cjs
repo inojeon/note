@@ -38,7 +38,8 @@ async function energyChecks({page,go}){
   const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
   const go=async slug=>{await page.evaluate(slug=>{location.hash=slug;},slug);await page.locator('#page-'+slug).waitFor({state:'visible'});};
   await page.goto('http://concept-reader.test/quantum-chemistry.html');
-  assert.equal(await page.locator('[data-page]').count(),44,'All existing and new concept views must be bundled');
+  const sourceViews=fs.readdirSync(path.join(__dirname,'../docs')).filter(name=>/^concept-.*\.html$/.test(name)).length+1;
+  assert.equal(await page.locator('[data-page]').count(),sourceViews,'All source concept views must be bundled');
   const ids=await page.locator('[id]').evaluateAll(es=>es.map(e=>e.id));assert.equal(new Set(ids).size,ids.length,'Global IDs must be unique');
   const broken=await page.locator('a[href]').evaluateAll(es=>es.map(e=>e.getAttribute('href')).filter(h=>h!=='#reader-content'&&(!h.startsWith('#')||!Array.from(document.querySelectorAll('[data-page]')).some(e=>e.dataset.page===h.slice(1)))));
   assert.deepEqual(broken,[],'All navigation links must resolve offline');
@@ -71,6 +72,6 @@ async function energyChecks({page,go}){
    if(process.env.VQE_SCREENSHOT_DIR){fs.mkdirSync(process.env.VQE_SCREENSHOT_DIR,{recursive:true});for(const slug of ['vqe','vqe-algorithm']){await go(slug);await page.screenshot({path:path.join(process.env.VQE_SCREENSHOT_DIR,slug+'-'+width+'.png'),fullPage:true});}}
   }
   assert.equal(requests.length,3,'No runtime requests beyond initial load and two reloads');assert.deepEqual(errors,[],'Browser errors');
-  console.log('PASS: VQE map and nine notes; independent numerical checks across six groups; 44-view offline links, KaTeX, touch explanations, 360px dark and 1280px light');
+  console.log('PASS: VQE map and nine notes; independent numerical checks across six groups; all-view offline links, KaTeX, touch explanations, 360px dark and 1280px light');
  }finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});

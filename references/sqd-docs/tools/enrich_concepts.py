@@ -75,7 +75,7 @@ def render_worked_example(entry):
     return '<span class="term-example"><b>간단한 예시</b><span>'+html.escape(entry['worked_example'])+'</span><span class="term-example-math">'+''.join(parts)+'</span></span>'
 
 entries=json.loads((ROOT/'docs/assets/concept-glossary.json').read_text())
-aliases={'하트리–포크':'하트리–폭','완전 구성 상호작용':'전체 구성 상호작용','크릴로프 공간':'크릴로프 부분공간','랑초스':'랑초스 알고리즘','직교성':'직교',
+aliases={'사영 측정':'투영 측정','곱 상태':'곱상태','하트리–포크':'하트리–폭','완전 구성 상호작용':'전체 구성 상호작용','크릴로프 공간':'크릴로프 부분공간','랑초스':'랑초스 알고리즘','직교성':'직교',
          '순수 상태':'순수상태','혼합 상태':'혼합상태','복소 켤레':'켤레','복소켤레':'켤레',
          '복소켤레 전치':'켤레전치', '공간오비탈':'공간 오비탈', '스핀오비탈':'스핀 오비탈', '원자오비탈':'원자 오비탈', '분자오비탈':'분자 오비탈', '전자배치':'전자 배치', '슬레이터행렬식':'슬레이터 행렬식','들뜬 고유상태':'들뜬상태'}
 lookup={e['term']:e for e in entries}

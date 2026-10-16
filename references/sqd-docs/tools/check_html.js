@@ -12,6 +12,13 @@ for (const file of targets) {
   const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map(m => m[1]);
   const dup = ids.filter((x, i) => ids.indexOf(x) !== i);
   const vals = {}; for (const m of html.matchAll(/<input[^>]*id="([^"]+)"[^>]*value="([^"]*)"/g)) vals[m[1]] = m[2];
+  // Native selects begin at the explicitly selected option, or the first one.
+  for (const select of html.matchAll(/<select\b([^>]*)>([\s\S]*?)<\/select>/g)) {
+    const id = select[1].match(/\bid="([^"]+)"/);
+    const options = [...select[2].matchAll(/<option\b([^>]*)>([\s\S]*?)<\/option>/g)];
+    const chosen = options.find(option => /\bselected(?:\s|=|$)/.test(option[1])) || options[0];
+    if (id && chosen) vals[id[1]] = chosen[1].match(/\bvalue="([^"]*)"/)?.[1] ?? chosen[2].replace(/<[^>]*>/g, '').trim();
+  }
   const els = {}, errors = [];
   const mk = id => els[id] || (els[id] = { id, innerHTML: '', textContent: '', value: vals[id] || '0', style: {}, dataset: {}, children: [], attrs: {},
     clientWidth: narrow ? 360 : 700, clientHeight: 360, firstChild: null, setAttribute(k, v) { this.attrs[k] = v }, getAttribute(k) { return this.attrs[k] },

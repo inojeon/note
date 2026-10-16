@@ -283,5 +283,55 @@
     "title": "VQE로 수소 분자 계산하기",
     "published_artifact": null,
     "origin_file": "concept-vqe-hydrogen.html"
+  },
+  "concept-quantum-computing.html": {
+    "title": "큐빗·회로·측정",
+    "published_artifact": null,
+    "origin_file": "concept-quantum-computing.html"
+  },
+  "concept-two-level-system.html": {
+    "title": "두 상태 계(Two-Level System)",
+    "published_artifact": null,
+    "origin_file": "concept-two-level-system.html"
+  },
+  "concept-qubit.html": {
+    "title": "큐빗(Qubit)",
+    "published_artifact": null,
+    "origin_file": "concept-qubit.html"
+  },
+  "concept-computational-basis.html": {
+    "title": "계산 기저(Computational Basis)와 상태 벡터",
+    "published_artifact": null,
+    "origin_file": "concept-computational-basis.html"
+  },
+  "concept-quantum-gate.html": {
+    "title": "양자 게이트(Quantum Gate)",
+    "published_artifact": null,
+    "origin_file": "concept-quantum-gate.html"
+  },
+  "concept-rotation-gate.html": {
+    "title": "회전 게이트(Rotation Gate)와 블로흐 구",
+    "published_artifact": null,
+    "origin_file": "concept-rotation-gate.html"
+  },
+  "concept-measurement-basis.html": {
+    "title": "측정 기저(Measurement Basis)",
+    "published_artifact": null,
+    "origin_file": "concept-measurement-basis.html"
+  },
+  "concept-energy-measurement.html": {
+    "title": "계산 기저 측정과 에너지 측정(Energy Measurement)",
+    "published_artifact": null,
+    "origin_file": "concept-energy-measurement.html"
+  },
+  "concept-tensor-product.html": {
+    "title": "텐서곱(Tensor Product)과 여러 큐빗",
+    "published_artifact": null,
+    "origin_file": "concept-tensor-product.html"
+  },
+  "concept-entanglement.html": {
+    "title": "얽힘(Entanglement)",
+    "published_artifact": null,
+    "origin_file": "concept-entanglement.html"
   }
 }
