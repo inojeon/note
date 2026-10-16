@@ -93,3 +93,5 @@ H₂ 예제는 `scripts/vqe_h2.py`로 생성한 `data/vqe_h2.json`을 사용하�
 
 ## 실험의 선택 버튼
 `assets/concept-choices.js`는 실험의 단일 선택 메뉴를 `aria-pressed` 버튼 묶음으로 보여준다. 숨겨진 select의 값과 input/change 이벤트는 기존 수치 계산과 공유하며 초기화 버튼 뒤에도 선택 표시를 동기화한다. 선택 항목에 용어 설명 버튼을 중첩하지 않도록 enrich에서 select/option은 제외한다. 단독 소스에는 defer 스크립트를 포함하고 단일 파일 리더에는 build가 내장한다. 선택 메뉴를 추가할 때도 이 스크립트를 포함한다. 수치 검사는 `tools/choose_option.cjs`를 통해 실제 버튼을 누른다.
+
+회전 게이트 노트의 블로흐 구는 3차원 구·축·Ry 궤도를 공통 카메라로 정사영한 SVG다. 외부 라이브러리나 WebGL 없이 단일 HTML에서 드래그/터치/방향키와 시점 버튼이 동작한다. 시점은 회로 각도·양자 상태와 분리하며 `tools/check_bloch_3d.cjs`에서 투영, 터치, 시점 변경 전후 상태 불변성, 모바일 폭을 검증한다.
