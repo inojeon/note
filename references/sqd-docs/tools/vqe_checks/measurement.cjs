@@ -10,7 +10,20 @@ module.exports = async ({page, go, near}) => {
     near(await num('vp-x'),2*c*s,1e-12);
     near(await num('vp-z'),c*c-s*s,1e-12);
     near(await num('vp-energy'),.8*c*c-c*s+1.2*s*s,1e-12);
+    const pz=JSON.parse(await page.locator('#vp-z-probabilities').getAttribute('data-values'));
+    const px=JSON.parse(await page.locator('#vp-x-probabilities').getAttribute('data-values'));
+    [c*c,s*s].forEach((v,i)=>near(pz[i],v,1e-12));
+    [(c+s)**2/2,(c-s)**2/2].forEach((v,i)=>near(px[i],v,1e-12));
+    near(px[0]-px[1],await num('vp-x'),1e-12);
+    near(pz[0]-pz[1],await num('vp-z'),1e-12);
   }
+  for(const d of [0,90,-90,180]) {
+    await page.locator('[data-vp-preset="'+d+'"]').tap();
+    assert.equal(Number(await page.locator('#vp-theta').inputValue()),d);
+    near(await num('vp-x'),Math.sin(d*Math.PI/180),1e-12);
+  }
+  assert.match(await page.locator('#vp-x-circuit-fig').textContent(),/하다마드/);
+  assert.doesNotMatch(await page.locator('#vp-z-circuit-fig').textContent(),/하다마드/);
   await go('measurement-shots');
   await page.locator('#vs-reset').click();
   const counts = async()=>Promise.all(['xplus','xminus','zplus','zminus'].map(k=>num('vs-'+k)));
