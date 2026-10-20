@@ -1,0 +1,6 @@
+# Molecular Hamiltonian comparison
+
+Run `.venv/bin/python scripts/hamiltonian_comparison.py` then `python tools/build_h2_hamiltonian.py`, enrich and build.
+Data: H2 neutral at 0.74 Å; HeH+ charge +1 at 1.00 Å. Both have two electrons, one alpha and one beta, two canonical RHF spatial orbitals in STO-3G. Nuclear repulsion is included. Fixed nuclei, nonrelativistic, no zero-point energy. MO orbitals ordered by orbital energy; determinant order is alpha-string × beta-string: (1α1β, 1α2β, 2α1β, 2α2β). The selected pair is indices 0,3. MO/determinant phase changes can change off-diagonal signs but not energies.
+
+PySCF FCI contractions on four unit vectors construct the full matrix. Hermiticity, the variational inequality, and agreement with an independent singlet FCI solve are asserted. H2 pair/full energies match by inversion symmetry and the location of its ground state. HeH+ lacks this symmetry; its selected pair is a truncation, with about 0.4807 mEh error at the specified geometry. RHF reference-to-single-excitation couplings are near zero by stationarity (Brillouin condition), not H2 parity. Different molecular total energies must not be interpreted as a comparison of bond strengths.
