@@ -119,3 +119,6 @@ STO-3G 노트의 준위 그림은 `scripts/basis_orbital_levels.py`가 계산한
 `python tools/enrich_concepts.py` → `python tools/build_concepts.py` 후 `node tools/check_sqd_concepts.cjs`와 `node tools/check_search.cjs`를 실행한다. PLAYWRIGHT_MODULE/CHROMIUM_PATH는 기존 브라우저 검사와 동일하다. SQD 검사는 독립적인 16차원 게이트 계산, 표본 초기화, 고유벡터 잔차, 지도·앞뒤 링크, 모바일 수식과 터치 설명창을 확인한다. `SQD_SCREENSHOT_DIR`로 검증 화면을 저장할 수 있다.
 
 SQD 상태 준비 회로 그림은 적용된 게이트를 누적해서 표시하고 현재 마지막 게이트를 강조한다. 모바일에서도 600px 한 줄 회로를 좌우 스크롤로 탐색한다. 게이트 중심 간격은 60px이며, 단계가 바뀔 때 현재 게이트를 스크롤 영역 안에 드러낸다. 현재 게이트 하나만 남기지 않는다. 이전/초기화/완성 버튼과 회로 그림의 단계 수가 함께 갱신되어야 한다.
+
+## H₂의 해밀토니안 설명 노트
+`concept-h2-hamiltonian.html`은 일반 해밀토니안/행렬원소 노트와 양자화학 지도에서 연결한다. 기존 검증된 `data/vqe_h2.json`을 `python tools/build_h2_hamiltonian.py`로 내장하고 enrich/build한다. A=g²(0101), B=u²(1010)인 짝수 반전 대칭 블록이며, 핵 반발을 포함한 총 해밀토니안이다. 핵 반발을 다시 더하지 않는다. 대각/비대각 네 칸을 누르는 설명과 배치 계수·상대 부호·에너지 기여 실험을 제공한다. `node tools/check_h2_hamiltonian.cjs`는 네 거리의 행렬값, 기댓값, 같은 확률/반대 부호, 핵 반발 회계, 모바일 수식과 내부 링크를 검증한다. 생성 데이터의 근거는 `scripts/vqe_h2_README.md`에 있다.
