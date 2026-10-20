@@ -124,3 +124,5 @@ SQD 상태 준비 회로 그림은 적용된 게이트를 누적해서 표시하
 `concept-h2-hamiltonian.html`은 일반 해밀토니안/행렬원소 노트와 양자화학 지도에서 연결한다. 기존 검증된 `data/vqe_h2.json`을 `python tools/build_h2_hamiltonian.py`로 내장하고 enrich/build한다. A=g²(0101), B=u²(1010)인 짝수 반전 대칭 블록이며, 핵 반발을 포함한 총 해밀토니안이다. 핵 반발을 다시 더하지 않는다. 대각/비대각 네 칸을 누르는 설명과 배치 계수·상대 부호·에너지 기여 실험을 제공한다. `node tools/check_h2_hamiltonian.cjs`는 네 거리의 행렬값, 기댓값, 같은 확률/반대 부호, 핵 반발 회계, 모바일 수식과 내부 링크를 검증한다. 생성 데이터의 근거는 `scripts/vqe_h2_README.md`에 있다.
 
 `concept-h2-hamiltonian.html`의 주 내용은 기저와 분자 비교다. 기존 H₂ 2배치 실험은 접힌 상세 설명에 보존한다. 비교 데이터는 `scripts/hamiltonian_comparison.py`가 만든 `data/hamiltonian_comparison.json`이며 H₂(0.74 Å)와 HeH⁺(1.00 Å)의 4배치 및 선택한 2배치를 비교한다. H₂의 대칭 블록 분리와 HeH⁺의 일반적인 기저 절단을 구분하고 RHF 기준-단일 치환 사이의 거의 0인 원소를 반전 대칭으로 설명하지 않는다. 재현 조건은 `scripts/hamiltonian_comparison_README.md`, UI 검사는 `tools/check_hamiltonian_comparison.cjs`를 사용한다.
+
+`concept-large-hamiltonian.html`은 적분으로 해밀토니안을 정의하는 단계와 다전자 바닥상태 풀이를 구별하는 연결 노트다. M²/M⁴ 첨자 조합 수는 독립 적분 수나 계산 시간이 아니며, BigInt로 배치 수를 계산한다. 전자 수만 고정한 C(M,N)와 α·β를 각각 N/2로 고정한 C(M/2,N/2)²를 별도로 표시한다. 메모리는 실수 8바이트와 십진 단위 가정이며 전체 조밀 행렬이 아니라 상태 벡터 하나의 크기다. `node tools/check_large_hamiltonian.cjs`로 정확한 수치와 모바일 수식을 검증한다.
