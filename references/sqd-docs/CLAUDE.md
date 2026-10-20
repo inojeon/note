@@ -66,7 +66,7 @@ IBM 공식 노트북 두 개(Quickstart, SQD 튜토리얼). 00-quickstart.html�
 ## 양자화학 개념 지도
 `docs/concept-quantum-chemistry.html`은 지도 소스다. 첫 학습 묶음은 `quantum-state` → `born-rule` → `superposition` → `observable` → 기존 `hamiltonian` → `schrodinger` 순서다. 후속 16개 노트는 `born-oppenheimer`부터 `potential-energy`까지 핵·전자 분리, 다전자 상태, 적분과 행렬원소, 근사 계산과 화학적 해석의 네 묶음으로 연결한다. 지도에서는 기존 노트와 같은 제목·핵심 질문 카드로 표시하고, 네 주제 묶음을 유지한다. 새 주제를 추가할 때 실제 페이지가 준비된 링크만 제공한다.
 
-`python3 tools/build_concepts.py`는 동일한 전체 개념 노트를 포함하는 독립 HTML 두 개를 생성한다. `docs/concepts.html`은 수학 지도로, `docs/quantum-chemistry.html`은 양자화학 지도로 시작한다. 둘 다 CSS·스크립트·관련 개념을 포함하므로 단일 파일 미리보기에서 링크가 동작한다. 공유할 때는 소스 페이지 대신 이 생성 파일을 사용한다. 지도 선택 버튼이 동적으로 만드는 링크도 단일 파일에서는 해시 경로를 사용해야 한다.
+`python3 tools/build_concepts.py`는 동일한 전체 개념 노트를 포함하는 독립 HTML 세 개를 생성한다. `docs/concepts.html`은 수학 지도로, `docs/quantum-chemistry.html`은 양자화학 지도로 시작한다. 둘 다 CSS·스크립트·관련 개념을 포함하므로 단일 파일 미리보기에서 링크가 동작한다. 공유할 때는 소스 페이지 대신 이 생성 파일을 사용한다. 지도 선택 버튼이 동적으로 만드는 링크도 단일 파일에서는 해시 경로를 사용해야 한다.
 
 양자화학 예시는 기저·정규화·측정 관측량과 단위를 밝힌다. 정규직교 기저의 확률 진폭과 오비탈 전개 계수를 구별하며, 에너지 기댓값과 한 번의 측정 결과를 구별한다. 기댓값의 반복 측정은 동일한 상태를 매번 새로 준비하는 상황으로 설명한다. 전역 위상·상대 위상·기저 표현 변경은 서로 다른 조작임을 표시한다. 정상상태도 파동함수의 전역 위상은 시간에 따라 변한다.
 
@@ -109,7 +109,7 @@ H₂ 예제는 `scripts/vqe_h2.py`로 생성한 `data/vqe_h2.json`을 사용하�
 ## 노트 검색
 단일 파일 리더 상단의 검색 버튼과 Ctrl/⌘+K는 `tools/reader-search.html` 대화상자를 연다. `build_concepts.py`가 제목·소개·본문 텍스트 색인을 내장하며 script/style/nav/용어 설명창은 제외한다. `assets/concept-search.js`는 한국어/영어·공백/문장부호·일부 표기 변형을 정규화하고 제목을 우선하여 로컬 검색한다. 사용자 입력과 결과는 textContent로 표시한다. 서버나 외부 검색 요청은 없다. `tools/check_search.cjs`는 전체 제목, IME·키보드·터치, 해시 이동/뒤로 가기, 모바일 화면과 세 리더 진입점을 검사한다.
 
-STO-3G 노트의 준위 그림은 `scripts/basis_orbital_levels.py`가 계산한 H₂/0.74 Å RHF 결과 `data/basis_orbital_levels.json`을 사용한다. 계산 조건과 재현 절차는 `scripts/basis_orbital_levels_README.md`에 있다. 그림 소스는 `tools/basis-orbital-lab.html`, 삽입 도구는 `tools/build_basis_orbitals.py`이며 enrich/build 전에 실행한다. `check_basis_orbitals.cjs`는 준위 수/축척/축퇴/표와 지도 상단 `qc-basis-entry` 링크를 검증한다. 오비탈 에너지와 다전자 전체 에너지는 구별한다.
+`basis-orbital-energies` 노트의 준위 그림은 `scripts/basis_orbital_levels.py`가 계산한 H₂/0.74 Å RHF 결과 `data/basis_orbital_levels.json`을 사용한다. 계산 조건과 재현 절차는 `scripts/basis_orbital_levels_README.md`에 있다. 그림 소스는 `tools/basis-orbital-lab.html`, 삽입 도구는 `tools/build_basis_orbitals.py`이며 enrich/build 전에 실행한다. `check_basis_orbitals.cjs`는 준위 수/축척/축퇴/표와 지도 상단 `qc-basis-entry` 링크를 검증한다. 오비탈 에너지와 다전자 전체 에너지는 구별한다.
 
 ## SQD 학습 지도
 `concept-sqd.html`은 양자 컴퓨터가 하는 일에 집중한 첫 묶음이다. `occupation-bitstrings` → `hf-preparation` → `excitation-state` → `sqd-state-circuit` → `sqd-sampling` → `sqd-subspace` 순서이며 각 노트 하단에 앞뒤 링크를 유지한다. 메인 지도와 검색 기본 목록에 SQD를 포함한다. 공통 예제의 순서는 q₃q₂q₁q₀ = β₁β₀α₁α₀, 기준 배치는 0101, 비교 배치는 1010이다. 공간 궤도 2개를 스핀 궤도 4개/큐빗 4개에 직접 대응시킨 설명용 모형이다.
@@ -121,8 +121,56 @@ STO-3G 노트의 준위 그림은 `scripts/basis_orbital_levels.py`가 계산한
 SQD 상태 준비 회로 그림은 적용된 게이트를 누적해서 표시하고 현재 마지막 게이트를 강조한다. 모바일에서도 600px 한 줄 회로를 좌우 스크롤로 탐색한다. 게이트 중심 간격은 60px이며, 단계가 바뀔 때 현재 게이트를 스크롤 영역 안에 드러낸다. 현재 게이트 하나만 남기지 않는다. 이전/초기화/완성 버튼과 회로 그림의 단계 수가 함께 갱신되어야 한다.
 
 ## H₂의 해밀토니안 설명 노트
-`concept-h2-hamiltonian.html`은 일반 해밀토니안/행렬원소 노트와 양자화학 지도에서 연결한다. 기존 검증된 `data/vqe_h2.json`을 `python tools/build_h2_hamiltonian.py`로 내장하고 enrich/build한다. A=g²(0101), B=u²(1010)인 짝수 반전 대칭 블록이며, 핵 반발을 포함한 총 해밀토니안이다. 핵 반발을 다시 더하지 않는다. 대각/비대각 네 칸을 누르는 설명과 배치 계수·상대 부호·에너지 기여 실험을 제공한다. `node tools/check_h2_hamiltonian.cjs`는 네 거리의 행렬값, 기댓값, 같은 확률/반대 부호, 핵 반발 회계, 모바일 수식과 내부 링크를 검증한다. 생성 데이터의 근거는 `scripts/vqe_h2_README.md`에 있다.
+`concept-h2-state-energy.html`은 기저·분자 비교 노트 및 양자화학 지도에서 연결한다. 기존 검증된 `data/vqe_h2.json`을 `python tools/build_h2_hamiltonian.py`로 내장하고 enrich/build한다. A=g²(0101), B=u²(1010)인 짝수 반전 대칭 블록이며, 핵 반발을 포함한 총 해밀토니안이다. 핵 반발을 다시 더하지 않는다. 대각/비대각 네 칸을 누르는 설명과 배치 계수·상대 부호·에너지 기여 실험을 제공한다. `node tools/check_h2_hamiltonian.cjs`는 네 거리의 행렬값, 기댓값, 같은 확률/반대 부호, 핵 반발 회계, 모바일 수식과 내부 링크를 검증한다. 생성 데이터의 근거는 `scripts/vqe_h2_README.md`에 있다.
 
-`concept-h2-hamiltonian.html`의 주 내용은 기저와 분자 비교다. 기존 H₂ 2배치 실험은 접힌 상세 설명에 보존한다. 비교 데이터는 `scripts/hamiltonian_comparison.py`가 만든 `data/hamiltonian_comparison.json`이며 H₂(0.74 Å)와 HeH⁺(1.00 Å)의 4배치 및 선택한 2배치를 비교한다. H₂의 대칭 블록 분리와 HeH⁺의 일반적인 기저 절단을 구분하고 RHF 기준-단일 치환 사이의 거의 0인 원소를 반전 대칭으로 설명하지 않는다. 재현 조건은 `scripts/hamiltonian_comparison_README.md`, UI 검사는 `tools/check_hamiltonian_comparison.cjs`를 사용한다.
+`concept-h2-hamiltonian.html`의 주 내용은 기저와 분자 비교다. 기존 H₂ 2배치 실험은 `concept-h2-state-energy.html`에 분리하고 관련 카드로 연결한다. 비교 데이터는 `scripts/hamiltonian_comparison.py`가 만든 `data/hamiltonian_comparison.json`이며 H₂(0.74 Å)와 HeH⁺(1.00 Å)의 4배치 및 선택한 2배치를 비교한다. H₂의 대칭 블록 분리와 HeH⁺의 일반적인 기저 절단을 구분하고 RHF 기준-단일 치환 사이의 거의 0인 원소를 반전 대칭으로 설명하지 않는다. 재현 조건은 `scripts/hamiltonian_comparison_README.md`, UI 검사는 `tools/check_hamiltonian_comparison.cjs`를 사용한다.
 
-`concept-large-hamiltonian.html`은 적분으로 해밀토니안을 정의하는 단계와 다전자 바닥상태 풀이를 구별하는 연결 노트다. M²/M⁴ 첨자 조합 수는 독립 적분 수나 계산 시간이 아니며, BigInt로 배치 수를 계산한다. 전자 수만 고정한 C(M,N)와 α·β를 각각 N/2로 고정한 C(M/2,N/2)²를 별도로 표시한다. 메모리는 실수 8바이트와 십진 단위 가정이며 전체 조밀 행렬이 아니라 상태 벡터 하나의 크기다. `node tools/check_large_hamiltonian.cjs`로 정확한 수치와 모바일 수식을 검증한다.
+`concept-large-hamiltonian.html`은 적분으로 해밀토니안을 정의하는 단계와 다전자 바닥상태 풀이를 구별하는 연결 노트다. 수치 비교는 `concept-hamiltonian-size.html`로 분리했다. M²/M⁴ 첨자 조합 수는 독립 적분 수나 계산 시간이 아니며, BigInt로 배치 수를 계산한다. 전자 수만 고정한 C(M,N)와 α·β를 각각 N/2로 고정한 C(M/2,N/2)²를 별도로 표시한다. 메모리는 실수 8바이트와 십진 단위 가정이며 전체 조밀 행렬이 아니라 상태 벡터 하나의 크기다. `node tools/check_large_hamiltonian.cjs`로 정확한 수치와 모바일 수식을 검증한다.
+
+## 개념 노트 공통 구성 (2026-10 개편)
+
+현재 개념 노트는 63개, 학습 지도·메인은 6개다. 기존 해시 주소를 유지한다.
+일반 개념과 응용은 제목 위에서 구분하고, 각 노트는 하나의 핵심 질문을 다룬다.
+
+1. **정의와 핵심**: 짧은 교과서 정의, 쉬운 해설. 선수 개념은 최대 두 개.
+2. **예시와 실험**: 주된 예시 하나와 무엇을 바꾸고 관찰할지 알려주는 안내.
+3. **기억할 점**: 중요한 조건은 보이게 두고 계산 전개는 접는다. 확인 질문 하나를 둔다.
+4. **연결해서 읽기**: 이유가 적힌 카드 최대 세 개. 추가 링크는 별도로 펼친다.
+
+질문·실험 안내·확인 문답·관련 카드·앞뒤 순서는 `docs/assets/note-catalog.json`에서
+관리한다. 본문과 실험은 각 `concept-*.html`에서 편집하며 `data-note-generated` 블록을
+직접 수정하지 않는다. 새 노트는 목록과 해당 지도 카드에 함께 등록한다.
+
+기본 본문은 공백을 정규화한 2,200자 이하로 유지한다. 제목·탐색·관련 카드·펼치기 전
+상세 내용·스크립트·SVG는 제외하고 예시의 정적인 설명/라벨은 포함한다. 이 한도를
+맞추기 위해 필수 전제를 숨기지 않는다. 질문이나 주된 실험이 둘이면 노트로 나눈다.
+긴 회로는 기존처럼 한 줄의 가로 스크롤을 유지한다.
+
+분리한 실험:
+
+- `diagonalization` → `diagonalization-coordinates`: 좌표축을 바꾸는 실험.
+- `sto-3g` → `basis-orbital-energies`: RHF 오비탈 에너지 준위. `build_basis_orbitals.py`는 새 노트를 갱신한다.
+- `h2-hamiltonian` → `h2-state-energy`: 기존 H₂ 두 배치 실험. `build_h2_hamiltonian.py`는 두 페이지의 데이터를 각각 갱신한다.
+- `large-hamiltonian` → `hamiltonian-size`: 적분·배치 수와 메모리 규모 실험.
+
+생성 순서: 필요한 데이터/실험 삽입 도구 → `python tools/remodel_notes.py` →
+`python tools/enrich_concepts.py` → `python tools/build_concepts.py`.
+`remodel_notes.py`를 다시 실행해도 본문을 재분할하지 않고 안내·카드만 갱신한다.
+
+공통 확인:
+
+```bash
+python tools/check_note_structure.py
+node tools/check_note_remodel.cjs
+node tools/check_html.js
+node tools/check_html.js --narrow
+```
+
+기존 주제별 수치 검사도 변경 범위에 맞게 실행한다. `check_note_remodel.cjs`는 63개
+노트의 모든 펼친 수식, 터치 확인 질문, 카드, 새 주소로의 이동을 검사한다.
+검토 범위와 수정 사항은 `docs/NOTE_REVIEW.md`에 기록한다.
+
+용어 자동 연결은 완전한 용어를 우선한다. ‘행렬식’을 ‘행렬’로 쪼개거나 ‘반교환’을
+교환법칙으로 연결하지 않는다. `교환(Exchange)`과 `교환 법칙(Commutativity)`,
+`생성 연산자(Creation Operator)`와 `생성(Span)`을 구별한다. 다의적인 ‘교환’과
+‘생성’은 저자가 영어를 명시한 경우에만 자동 설명을 붙인다.

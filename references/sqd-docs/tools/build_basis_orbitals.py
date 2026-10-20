@@ -2,7 +2,7 @@
 import json
 from pathlib import Path
 root=Path(__file__).resolve().parents[1]
-p=root/'docs/concept-sto-3g.html'
+p=root/'docs/concept-basis-orbital-energies.html'
 s=p.read_text()
 start='<!-- STO_ORBITAL_LAB_START -->'
 end='<!-- STO_ORBITAL_LAB_END -->'

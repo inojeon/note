@@ -176,9 +176,9 @@
   },
   {
     "id": "commutative",
-    "term": "교환",
+    "term": "교환 법칙",
     "english": "Commutativity",
-    "description": "덧셈에서 두 벡터의 순서를 바꾸어도 결과가 같습니다.",
+    "description": "연산에서 두 입력의 순서를 바꾸어도 결과가 같은 성질입니다. 전자 좌표를 맞바꾸는 교환이나 페르미온의 반교환과는 다른 개념입니다.",
     "example": "u+v = v+u\n행렬 곱셈은 일반적으로 이 법칙을 만족하지 않습니다.",
     "page": null,
     "worked_example": "두 벡터를 더하는 순서를 바꾸어도 결과가 같습니다. 하나는 오른쪽 1, 다른 하나는 위로 2인 경우입니다.",
@@ -4466,7 +4466,7 @@
     "id": "state-vector",
     "term": "상태 벡터",
     "english": "State Vector",
-    "description": "순수 양자 상태를 선택한 정규직교 기저에서 확률 진폭의 열벡터로 나타낸 표현입니다. 물리적 예측을 위해 정규화하며 전역 위상은 같은 물리적 상태를 나타냅니다.",
+    "description": "순수 양자 상태를 나타내는 힐베르트 공간의 벡터입니다. 기저를 정하면 확률 진폭의 열벡터로 표현할 수 있습니다. 정규화하며, 전체에 같은 전역 위상을 곱한 벡터들은 같은 물리적 상태입니다.",
     "page": "computational-basis",
     "worked_example": "계산 기저에서 0 상태는 첫째 진폭 1, 둘째 진폭 0으로 나타냅니다.",
     "worked_parts": [
@@ -4615,5 +4615,135 @@
     "worked_example": "정규직교 전자 배치 두 개를 선택하면 각 배치 쌍의 행렬 원소로 2×2 행렬을 만듭니다.",
     "page": "sqd-subspace",
     "worked_parts": []
+  },
+  {
+    "id": "determinant",
+    "term": "행렬식",
+    "english": "Determinant",
+    "description": "정사각행렬에 대응하는 하나의 수입니다. 슬레이터 행렬식은 함수값을 배열한 행렬의 행렬식으로 다전자 파동함수를 만듭니다.",
+    "example": "det([[a,b],[c,d]]) = ad − bc",
+    "page": "slater-determinant",
+    "worked_example": "2×2 행렬에서는 두 대각선 곱의 차입니다.",
+    "worked_parts": [
+      "A = ",
+      {
+        "matrix": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      },
+      "; det(A) = ad − bc"
+    ]
+  },
+  {
+    "id": "exchange",
+    "term": "교환",
+    "english": "Exchange",
+    "description": "동일한 전자 두 개의 공간·스핀 좌표를 맞바꾸는 것입니다. 페르미온 파동함수는 이때 부호가 바뀌며, 에너지의 교환 항은 이 반대칭성에서 나옵니다.",
+    "example": "Ψ(x₂,x₁) = −Ψ(x₁,x₂)",
+    "page": "slater-determinant",
+    "worked_example": "전자 좌표 x₁과 x₂를 맞바꾸면 두 전자 파동함수의 부호가 반대가 됩니다.",
+    "worked_parts": [
+      "Ψ(x₂,x₁) = −Ψ(x₁,x₂)"
+    ]
+  },
+  {
+    "id": "anticommutation",
+    "term": "반교환",
+    "english": "Anticommutation",
+    "description": "두 연산자의 순서를 바꾼 곱을 더해 관계를 표현합니다. 서로 다른 페르미온 모드의 소멸 연산자는 순서를 바꾸면 부호가 반대입니다.",
+    "example": "{aₚ, a_q} = 0; {aₚ, a†_q} = δₚq I",
+    "page": "fermion-qubit",
+    "worked_example": "서로 다른 모드 p와 q에서 aₚa_q + a_qaₚ = 0입니다. 생성·소멸을 섞으면 같은 모드에서는 항등 연산자가 남습니다.",
+    "worked_parts": [
+      "{aₚ, a_q} = 0; {aₚ, a†_q} = δₚq I"
+    ]
+  },
+  {
+    "id": "nonorthogonal",
+    "term": "비직교",
+    "english": "Nonorthogonal",
+    "description": "두 벡터 또는 기저 함수의 내적이 0이 아닌 경우를 뜻합니다. 비직교 기저에서는 함수의 길이를 계산할 때 겹침 행렬을 포함합니다.",
+    "example": "⟨u,v⟩ ≠ 0",
+    "page": "basis-set",
+    "worked_example": "아래 두 열벡터의 내적은 1이므로 서로 직교하지 않습니다.",
+    "worked_parts": [
+      {
+        "matrix": [
+          [
+            "1"
+          ],
+          [
+            "0"
+          ]
+        ]
+      },
+      " 와 ",
+      {
+        "matrix": [
+          [
+            "1"
+          ],
+          [
+            "1"
+          ]
+        ]
+      },
+      " → 내적 1"
+    ]
+  },
+  {
+    "id": "hamiltonian-matrix-element",
+    "term": "해밀토니안 행렬원소",
+    "english": "Hamiltonian Matrix Element",
+    "description": "선택한 기저 상태 사이에서 해밀토니안의 작용을 나타내는 수입니다. 행·열은 기저 상태를 가리키며, 원소는 에너지 단위를 가집니다.",
+    "example": "H₁₂ = ⟨D₁|H|D₂⟩",
+    "page": "hamiltonian-elements",
+    "worked_example": "H₁₂는 둘째 기저 상태에 H를 작용시킨 뒤 첫째 기저 상태와 내적한 값입니다.",
+    "worked_parts": [
+      "H₁₂ = ⟨D₁|H|D₂⟩"
+    ]
+  },
+  {
+    "id": "subspace-diagonalization",
+    "term": "부분공간 대각화",
+    "english": "Subspace Diagonalization",
+    "description": "선택한 부분공간에 투영한 해밀토니안의 고유값과 고유벡터를 구하는 계산입니다.",
+    "example": "H_S c = Ec",
+    "page": "sqd-subspace",
+    "worked_example": "100개의 직교 배치를 선택하면 그 배치들 사이의 100×100 행렬을 풉니다.",
+    "worked_parts": [
+      "H_S c = Ec"
+    ]
+  },
+  {
+    "id": "creation-operator",
+    "term": "생성 연산자",
+    "english": "Creation Operator",
+    "description": "한 페르미온 모드의 점유를 하나 늘리는 연산자입니다. 이미 점유된 모드에 다시 적용하면 0이며, 다른 모드의 점유에 따른 부호도 포함합니다.",
+    "example": "a†|0⟩ = |1⟩; a†|1⟩ = 0",
+    "page": "fermion-qubit",
+    "worked_example": "한 모드만 고려하면 비어 있는 상태를 점유 상태로 바꿉니다. 식 오른쪽의 0은 0 상태가 아니라 영벡터를 뜻합니다.",
+    "worked_parts": [
+      "a†|0⟩ = |1⟩; a†|1⟩ = 0"
+    ]
+  },
+  {
+    "id": "annihilation-operator",
+    "term": "소멸 연산자",
+    "english": "Annihilation Operator",
+    "description": "한 페르미온 모드의 점유를 하나 줄이는 연산자입니다. 비어 있는 모드에 적용하면 0이며, 다른 모드의 점유에 따른 부호도 포함합니다.",
+    "example": "a|1⟩ = |0⟩; a|0⟩ = 0",
+    "page": "fermion-qubit",
+    "worked_example": "한 모드만 고려하면 점유 상태를 비어 있는 상태로 바꿉니다. 식 오른쪽의 0은 0 상태가 아니라 영벡터를 뜻합니다.",
+    "worked_parts": [
+      "a|1⟩ = |0⟩; a|0⟩ = 0"
+    ]
   }
 ]

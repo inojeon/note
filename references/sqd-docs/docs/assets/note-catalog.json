@@ -1,0 +1,2630 @@
+{
+  "version": 1,
+  "maps": {
+    "home": [
+      "vector",
+      "basis",
+      "inner-product",
+      "matrix",
+      "symmetric",
+      "eigen",
+      "diagonalization",
+      "diagonalization-coordinates",
+      "power",
+      "subspace",
+      "krylov"
+    ],
+    "quantum-chemistry": [
+      "quantum-state",
+      "born-rule",
+      "superposition",
+      "observable",
+      "hamiltonian",
+      "schrodinger",
+      "born-oppenheimer",
+      "orbital",
+      "electron-spin",
+      "pauli",
+      "electronic-configuration",
+      "slater-determinant",
+      "basis-set",
+      "sto-3g",
+      "basis-orbital-energies",
+      "molecular-orbital",
+      "electron-integrals",
+      "hamiltonian-elements",
+      "h2-hamiltonian",
+      "h2-state-energy",
+      "large-hamiltonian",
+      "hamiltonian-size",
+      "variational-principle",
+      "hartree-fock",
+      "electron-correlation",
+      "configuration-interaction",
+      "active-space",
+      "potential-energy"
+    ],
+    "quantum-computing": [
+      "two-level-system",
+      "qubit",
+      "computational-basis",
+      "quantum-gate",
+      "rotation-gate",
+      "measurement-basis",
+      "energy-measurement",
+      "tensor-product",
+      "entanglement",
+      "fermion-qubit"
+    ],
+    "vqe": [
+      "energy-expectation",
+      "ansatz",
+      "parameterized-circuit",
+      "pauli-decomposition",
+      "measurement-shots",
+      "classical-optimization",
+      "vqe-algorithm",
+      "vqe-hydrogen"
+    ],
+    "sqd": [
+      "occupation-bitstrings",
+      "hf-preparation",
+      "excitation-state",
+      "sqd-state-circuit",
+      "sqd-sampling",
+      "sqd-subspace"
+    ]
+  },
+  "notes": {
+    "vector": {
+      "map": "home",
+      "kind": "개념",
+      "question": "여러 성분(Component)을 하나의 대상으로 다루려면?",
+      "prerequisites": [],
+      "guide": "방향 각도를 바꾸면서 두 성분은 변해도 길이가 1로 유지되는지 보세요.",
+      "check": {
+        "question": "벡터의 성분 제곱을 항상 확률로 읽어도 될까요?",
+        "answer": "아니요. 일반 벡터의 성분은 좌표입니다. 정규화된 양자 상태를 정규직교 측정 기저로 표현했을 때에만 절댓값 제곱을 그 측정의 확률로 읽습니다."
+      },
+      "related": [
+        {
+          "slug": "basis",
+          "relation": "이어서 읽기",
+          "reason": "같은 벡터를 다른 숫자로 적을 수 있을까?"
+        },
+        {
+          "slug": "inner-product",
+          "relation": "함께 이해하기",
+          "reason": "두 벡터가 얼마나 같은 방향을 향할까?"
+        },
+        {
+          "slug": "matrix",
+          "relation": "함께 이해하기",
+          "reason": "벡터를 일관된 규칙으로 바꾸려면?"
+        }
+      ],
+      "other_links": [
+        "basis",
+        "inner-product",
+        "matrix",
+        "hamiltonian"
+      ],
+      "previous": "home",
+      "next": "basis"
+    },
+    "basis": {
+      "map": "home",
+      "kind": "개념",
+      "question": "같은 벡터를 다른 숫자로 적을 수 있을까?",
+      "prerequisites": [
+        "vector"
+      ],
+      "guide": "같은 벡터를 두 기저의 선형결합으로 각각 복원해 보세요.",
+      "check": {
+        "question": "기저를 바꾸면 벡터 자체도 바뀔까요?",
+        "answer": "같은 벡터를 다른 기준으로 적는 경우에는 좌표만 바뀝니다. 새 기저와 새 계수를 함께 사용하면 원래 벡터를 복원합니다."
+      },
+      "related": [
+        {
+          "slug": "inner-product",
+          "relation": "이어서 읽기",
+          "reason": "두 벡터가 얼마나 같은 방향을 향할까?"
+        },
+        {
+          "slug": "matrix",
+          "relation": "함께 이해하기",
+          "reason": "벡터를 일관된 규칙으로 바꾸려면?"
+        },
+        {
+          "slug": "diagonalization",
+          "relation": "함께 이해하기",
+          "reason": "기준을 바꾸면 행렬 계산이 단순해질까?"
+        }
+      ],
+      "other_links": [
+        "vector",
+        "matrix",
+        "diagonalization",
+        "subspace",
+        "basis-set",
+        "molecular-orbital",
+        "inner-product"
+      ],
+      "previous": "vector",
+      "next": "inner-product"
+    },
+    "inner-product": {
+      "map": "home",
+      "kind": "개념",
+      "question": "두 벡터가 얼마나 같은 방향을 향할까?",
+      "prerequisites": [
+        "vector"
+      ],
+      "guide": "두 벡터의 내적과 각각의 길이를 계산하고, 길이로 나눈 벡터를 비교해 보세요.",
+      "check": {
+        "question": "복소수 벡터에서도 성분을 그대로 곱하면 될까요?",
+        "answer": "복소 표준 내적에서는 첫 벡터의 성분을 복소켤레로 바꾼 뒤 곱해 더합니다. 자기 내적은 실수이며 음수가 아닙니다."
+      },
+      "related": [
+        {
+          "slug": "matrix",
+          "relation": "이어서 읽기",
+          "reason": "벡터를 일관된 규칙으로 바꾸려면?"
+        },
+        {
+          "slug": "symmetric",
+          "relation": "함께 이해하기",
+          "reason": "행과 열을 바꿔도 같은 행렬은 왜 특별할까?"
+        },
+        {
+          "slug": "subspace",
+          "relation": "함께 이해하기",
+          "reason": "큰 공간의 일부만으로 근사하려면?"
+        }
+      ],
+      "other_links": [
+        "vector",
+        "symmetric",
+        "subspace",
+        "power",
+        "basis",
+        "matrix"
+      ],
+      "previous": "basis",
+      "next": "matrix"
+    },
+    "matrix": {
+      "map": "home",
+      "kind": "개념",
+      "question": "벡터를 일관된 규칙으로 바꾸려면?",
+      "prerequisites": [
+        "vector",
+        "basis"
+      ],
+      "guide": "첫째·둘째 기준 벡터를 차례로 누른 뒤 두 방향을 더해 보세요. 출력은 두 열의 조합입니다.",
+      "check": {
+        "question": "행렬의 첫째 열은 무엇을 뜻할까요?",
+        "answer": "입력의 첫째 기저 벡터를 변환한 결과를 출력 기저의 좌표로 적은 것입니다."
+      },
+      "related": [
+        {
+          "slug": "symmetric",
+          "relation": "이어서 읽기",
+          "reason": "행과 열을 바꿔도 같은 행렬은 왜 특별할까?"
+        },
+        {
+          "slug": "eigen",
+          "relation": "함께 이해하기",
+          "reason": "변환해도 같은 직선 위에 남는 벡터가 있을까?"
+        },
+        {
+          "slug": "subspace",
+          "relation": "함께 이해하기",
+          "reason": "큰 공간의 일부만으로 근사하려면?"
+        }
+      ],
+      "other_links": [
+        "vector",
+        "basis",
+        "symmetric",
+        "eigen",
+        "subspace",
+        "inner-product"
+      ],
+      "previous": "inner-product",
+      "next": "symmetric"
+    },
+    "symmetric": {
+      "map": "home",
+      "kind": "개념",
+      "question": "행과 열을 바꿔도 같은 행렬은 왜 특별할까?",
+      "prerequisites": [
+        "matrix",
+        "inner-product"
+      ],
+      "guide": "대각선 양쪽의 원소를 비교하고, 두 고유방향의 내적을 계산해 보세요.",
+      "check": {
+        "question": "대칭 행렬이면 고유값이 모두 양수일까요?",
+        "answer": "아니요. 실수 대칭 행렬의 고유값은 실수이지만 0이나 음수도 가능합니다. 양의 정부호성은 추가 조건입니다."
+      },
+      "related": [
+        {
+          "slug": "eigen",
+          "relation": "이어서 읽기",
+          "reason": "변환해도 같은 직선 위에 남는 벡터가 있을까?"
+        },
+        {
+          "slug": "diagonalization",
+          "relation": "함께 이해하기",
+          "reason": "기준을 바꾸면 행렬 계산이 단순해질까?"
+        },
+        {
+          "slug": "krylov",
+          "relation": "함께 이해하기",
+          "reason": "반복 계산의 중간 결과도 활용할 수 있을까?"
+        }
+      ],
+      "other_links": [
+        "matrix",
+        "inner-product",
+        "eigen",
+        "diagonalization",
+        "krylov"
+      ],
+      "previous": "matrix",
+      "next": "eigen"
+    },
+    "eigen": {
+      "map": "home",
+      "kind": "개념",
+      "question": "변환해도 같은 직선 위에 남는 벡터가 있을까?",
+      "prerequisites": [
+        "matrix"
+      ],
+      "guide": "두 예시 벡터에 A를 곱하고, 원래 벡터의 몇 배인지 비교해 보세요.",
+      "check": {
+        "question": "영벡터도 고유벡터일까요?",
+        "answer": "아니요. 고유벡터는 0이 아닌 벡터로 정의합니다. 고유값 0에 대응하는 고유벡터는 있을 수 있습니다."
+      },
+      "related": [
+        {
+          "slug": "diagonalization",
+          "relation": "이어서 읽기",
+          "reason": "기준을 바꾸면 행렬 계산이 단순해질까?"
+        },
+        {
+          "slug": "power",
+          "relation": "함께 이해하기",
+          "reason": "행렬을 계속 곱하면 어떤 성분(Component)이 남을까?"
+        },
+        {
+          "slug": "symmetric",
+          "relation": "함께 이해하기",
+          "reason": "행과 열을 바꿔도 같은 행렬은 왜 특별할까?"
+        }
+      ],
+      "other_links": [
+        "matrix",
+        "diagonalization",
+        "power",
+        "symmetric"
+      ],
+      "previous": "symmetric",
+      "next": "diagonalization"
+    },
+    "diagonalization": {
+      "map": "home",
+      "kind": "개념",
+      "question": "기준을 바꾸면 행렬 계산이 단순해질까?",
+      "prerequisites": [
+        "basis",
+        "eigen"
+      ],
+      "guide": "P·D·P⁻¹를 눌러 각각의 역할을 읽고, 오른쪽부터 벡터에 적용하는 순서를 따라가세요.",
+      "check": {
+        "question": "P만 가역행렬이어야 할까요?",
+        "answer": "P는 기저를 바꾸고 되돌릴 수 있어야 하므로 가역이어야 합니다. A와 D의 가역 여부는 고유값에 0이 있는지에 달려 있습니다."
+      },
+      "related": [
+        {
+          "slug": "diagonalization-coordinates",
+          "relation": "이어서 읽기",
+          "reason": "같은 행렬을 다른 기저로 보면 무엇이 달라질까?"
+        },
+        {
+          "slug": "eigen",
+          "relation": "함께 이해하기",
+          "reason": "변환해도 같은 직선 위에 남는 벡터가 있을까?"
+        },
+        {
+          "slug": "hamiltonian",
+          "relation": "함께 이해하기",
+          "reason": "행렬에서 에너지와 양자 상태를 어떻게 읽을까?"
+        }
+      ],
+      "other_links": [
+        "basis",
+        "eigen",
+        "symmetric",
+        "power",
+        "hamiltonian"
+      ],
+      "previous": "eigen",
+      "next": "diagonalization-coordinates"
+    },
+    "diagonalization-coordinates": {
+      "map": "home",
+      "kind": "개념",
+      "question": "같은 행렬을 다른 기저로 보면 무엇이 달라질까?",
+      "prerequisites": [
+        "diagonalization"
+      ],
+      "guide": "축을 0°에서 45°로 바꾸세요. 같은 변환의 비대각 원소가 어떻게 달라지는지 보세요.",
+      "check": {
+        "question": "좌표축을 돌리면 변환 A가 다른 물리적 작용이 될까요?",
+        "answer": "이 실험은 같은 변환을 다른 기저로 표현합니다. B = QᵀAQ의 숫자가 달라도 원래 공간에서의 입력과 출력은 같습니다."
+      },
+      "related": [
+        {
+          "slug": "diagonalization",
+          "relation": "이어서 읽기",
+          "reason": "기준을 바꾸면 행렬 계산이 단순해질까?"
+        },
+        {
+          "slug": "basis",
+          "relation": "함께 이해하기",
+          "reason": "같은 벡터를 다른 숫자로 적을 수 있을까?"
+        },
+        {
+          "slug": "hamiltonian",
+          "relation": "함께 이해하기",
+          "reason": "행렬에서 에너지와 양자 상태를 어떻게 읽을까?"
+        }
+      ],
+      "other_links": [
+        "diagonalization",
+        "learning-maps",
+        "quantum-chemistry"
+      ],
+      "previous": "diagonalization",
+      "next": "power"
+    },
+    "power": {
+      "map": "home",
+      "kind": "개념",
+      "question": "행렬을 계속 곱하면 어떤 성분(Component)이 남을까?",
+      "prerequisites": [
+        "eigen",
+        "inner-product"
+      ],
+      "guide": "보통의 시작점에서 반복한 뒤, 작은 고유방향에서 정확히 시작한 경우와 비교해 보세요.",
+      "check": {
+        "question": "멱법은 언제나 가장 낮은 에너지를 찾을까요?",
+        "answer": "아니요. 보통의 멱법은 조건이 맞을 때 절댓값이 가장 큰 고유값의 방향을 찾습니다. 시작 벡터에 그 성분이 있어야 합니다."
+      },
+      "related": [
+        {
+          "slug": "subspace",
+          "relation": "이어서 읽기",
+          "reason": "큰 공간의 일부만으로 근사하려면?"
+        },
+        {
+          "slug": "krylov",
+          "relation": "함께 이해하기",
+          "reason": "반복 계산의 중간 결과도 활용할 수 있을까?"
+        },
+        {
+          "slug": "diagonalization",
+          "relation": "함께 이해하기",
+          "reason": "기준을 바꾸면 행렬 계산이 단순해질까?"
+        }
+      ],
+      "other_links": [
+        "eigen",
+        "inner-product",
+        "krylov",
+        "diagonalization",
+        "subspace"
+      ],
+      "previous": "diagonalization-coordinates",
+      "next": "subspace"
+    },
+    "subspace": {
+      "map": "home",
+      "kind": "개념",
+      "question": "큰 공간의 일부만으로 근사하려면?",
+      "prerequisites": [
+        "basis",
+        "inner-product"
+      ],
+      "guide": "xy 평면과 기울어진 평면을 비교하세요. 원래 벡터와 투영의 차이는 평면에 수직입니다.",
+      "check": {
+        "question": "이미 부분공간 안에 있는 벡터를 투영하면 어떻게 될까요?",
+        "answer": "같은 벡터가 남습니다. 직교투영은 부분공간 밖으로 향하는 성분만 제거합니다."
+      },
+      "related": [
+        {
+          "slug": "krylov",
+          "relation": "이어서 읽기",
+          "reason": "반복 계산의 중간 결과도 활용할 수 있을까?"
+        },
+        {
+          "slug": "matrix",
+          "relation": "함께 이해하기",
+          "reason": "벡터를 일관된 규칙으로 바꾸려면?"
+        },
+        {
+          "slug": "hamiltonian",
+          "relation": "함께 이해하기",
+          "reason": "행렬에서 에너지와 양자 상태를 어떻게 읽을까?"
+        }
+      ],
+      "other_links": [
+        "basis",
+        "inner-product",
+        "matrix",
+        "krylov",
+        "hamiltonian",
+        "power"
+      ],
+      "previous": "power",
+      "next": "krylov"
+    },
+    "krylov": {
+      "map": "home",
+      "kind": "개념",
+      "question": "반복 계산의 중간 결과도 활용할 수 있을까?",
+      "prerequisites": [
+        "power",
+        "subspace"
+      ],
+      "guide": "첫째 축·둘째 축·고유벡터의 세 출발점을 비교하며 만들 수 있는 방향 수를 보세요.",
+      "check": {
+        "question": "반복을 늘리면 크릴로프 공간이 끝없이 커질까요?",
+        "answer": "아니요. 이미 있는 방향들의 선형결합만 얻으면 더 커지지 않습니다. 처음부터 고유벡터로 시작하면 한 방향에 머뭅니다."
+      },
+      "related": [
+        {
+          "slug": "home",
+          "relation": "이어서 읽기",
+          "reason": "전체 흐름에서 현재 개념의 위치를 확인하세요."
+        },
+        {
+          "slug": "symmetric",
+          "relation": "함께 이해하기",
+          "reason": "행과 열을 바꿔도 같은 행렬은 왜 특별할까?"
+        },
+        {
+          "slug": "hamiltonian",
+          "relation": "함께 이해하기",
+          "reason": "행렬에서 에너지와 양자 상태를 어떻게 읽을까?"
+        }
+      ],
+      "other_links": [
+        "power",
+        "subspace",
+        "symmetric",
+        "hamiltonian"
+      ],
+      "previous": "subspace",
+      "next": "home"
+    },
+    "hamiltonian": {
+      "map": "quantum-chemistry",
+      "kind": "개념",
+      "question": "행렬에서 에너지와 양자 상태를 어떻게 읽을까?",
+      "prerequisites": [
+        "vector",
+        "eigen"
+      ],
+      "guide": "결합 없음과 두 상태 연결을 비교하세요. 대각 원소와 최저 고유값을 구별해 보세요.",
+      "check": {
+        "question": "대각 원소 하나가 곧 바닥상태 에너지일까요?",
+        "answer": "일반적으로 아닙니다. 대각 원소는 그 기저 상태의 에너지 기댓값입니다. 비대각 결합까지 포함한 고유값 문제를 풀어야 합니다."
+      },
+      "related": [
+        {
+          "slug": "h2-hamiltonian",
+          "relation": "이어서 읽기",
+          "reason": "같은 분자에서 기저를 늘리면?다른 분자인데 행렬 크기가 같다면?"
+        },
+        {
+          "slug": "schrodinger",
+          "relation": "함께 이해하기",
+          "reason": "고유값과 고유벡터를 구하면, 왜 원자의 에너지와 상태를 알 수 있을까?"
+        },
+        {
+          "slug": "energy-expectation",
+          "relation": "함께 이해하기",
+          "reason": "한 번의 측정값과 평균 에너지는 어떻게 다를까?"
+        }
+      ],
+      "other_links": [
+        "quantum-chemistry",
+        "vector",
+        "eigen",
+        "diagonalization",
+        "h2-hamiltonian",
+        "symmetric",
+        "subspace",
+        "krylov",
+        "electron-integrals",
+        "hamiltonian-elements",
+        "observable",
+        "schrodinger"
+      ],
+      "previous": "observable",
+      "next": "schrodinger"
+    },
+    "quantum-state": {
+      "map": "quantum-chemistry",
+      "kind": "개념",
+      "question": "좌표가 달라져도 같은 양자 상태일 수 있을까?",
+      "prerequisites": [
+        "vector",
+        "basis"
+      ],
+      "guide": "주황 상태를 고정하고 기저만 돌리세요. 좌표는 바뀌지만 복원한 상태는 같습니다.",
+      "check": {
+        "question": "같은 상태의 좌표가 달라지는 이유는 무엇일까요?",
+        "answer": "좌표는 기저에 대한 표현이기 때문입니다. 상태를 바꾸는 게이트와 같은 상태의 표현만 바꾸는 기저 변경을 구별해야 합니다."
+      },
+      "related": [
+        {
+          "slug": "born-rule",
+          "relation": "이어서 읽기",
+          "reason": "음수나 복소수인 진폭이 어떻게 확률이 될까?"
+        },
+        {
+          "slug": "orbital",
+          "relation": "함께 이해하기",
+          "reason": "오비탈은 전자가 도는 길일까?"
+        },
+        {
+          "slug": "computational-basis",
+          "relation": "함께 이해하기",
+          "reason": "왜 0 상태는 영벡터가 아니라 첫째 좌표가 1인 벡터일까?"
+        }
+      ],
+      "other_links": [
+        "quantum-chemistry",
+        "vector",
+        "basis",
+        "inner-product",
+        "born-rule",
+        "superposition",
+        "observable",
+        "schrodinger",
+        "hamiltonian",
+        "orbital",
+        "slater-determinant"
+      ],
+      "previous": "quantum-chemistry",
+      "next": "born-rule"
+    },
+    "born-rule": {
+      "map": "quantum-chemistry",
+      "kind": "개념",
+      "question": "음수나 복소수인 진폭이 어떻게 확률이 될까?",
+      "prerequisites": [
+        "quantum-state",
+        "inner-product"
+      ],
+      "guide": "30°와 150°를 비교하세요. 진폭의 부호가 달라도 이 측정의 확률은 같습니다.",
+      "check": {
+        "question": "진폭이 음수이면 확률도 음수일까요?",
+        "answer": "아니요. 확률은 진폭의 절댓값 제곱입니다. 부호나 상대 위상은 다른 기저에서의 측정에 영향을 줄 수 있습니다."
+      },
+      "related": [
+        {
+          "slug": "superposition",
+          "relation": "이어서 읽기",
+          "reason": "확률은 같은데, 다른 측정에서 결과가 달라질 수 있을까?"
+        },
+        {
+          "slug": "observable",
+          "relation": "함께 이해하기",
+          "reason": "평균 에너지가 2라면, 한 번 측정해도 2가 나올까?"
+        },
+        {
+          "slug": "hamiltonian",
+          "relation": "함께 이해하기",
+          "reason": "행렬에서 에너지와 양자 상태를 어떻게 읽을까?"
+        }
+      ],
+      "other_links": [
+        "quantum-chemistry",
+        "quantum-state",
+        "inner-product",
+        "superposition",
+        "observable",
+        "hamiltonian",
+        "schrodinger",
+        "orbital",
+        "electron-spin"
+      ],
+      "previous": "quantum-state",
+      "next": "superposition"
+    },
+    "superposition": {
+      "map": "quantum-chemistry",
+      "kind": "개념",
+      "question": "확률은 같은데, 다른 측정에서 결과가 달라질 수 있을까?",
+      "prerequisites": [
+        "quantum-state",
+        "born-rule"
+      ],
+      "guide": "상대 위상을 0°에서 180°로 바꾸고, 두 측정 기저의 확률을 비교하세요.",
+      "check": {
+        "question": "계산 기저 확률이 같으면 같은 양자 상태일까요?",
+        "answer": "아니요. 상대 위상이 다를 수 있습니다. 다른 기저의 측정에서 그 차이가 드러납니다."
+      },
+      "related": [
+        {
+          "slug": "observable",
+          "relation": "이어서 읽기",
+          "reason": "평균 에너지가 2라면, 한 번 측정해도 2가 나올까?"
+        },
+        {
+          "slug": "basis",
+          "relation": "함께 이해하기",
+          "reason": "같은 벡터를 다른 숫자로 적을 수 있을까?"
+        },
+        {
+          "slug": "schrodinger",
+          "relation": "함께 이해하기",
+          "reason": "고유값과 고유벡터를 구하면, 왜 원자의 에너지와 상태를 알 수 있을까?"
+        }
+      ],
+      "other_links": [
+        "quantum-chemistry",
+        "quantum-state",
+        "born-rule",
+        "basis",
+        "observable",
+        "schrodinger",
+        "hamiltonian",
+        "inner-product",
+        "molecular-orbital",
+        "configuration-interaction"
+      ],
+      "previous": "born-rule",
+      "next": "observable"
+    },
+    "observable": {
+      "map": "quantum-chemistry",
+      "kind": "개념",
+      "question": "평균 에너지가 2라면, 한 번 측정해도 2가 나올까?",
+      "prerequisites": [
+        "quantum-state",
+        "born-rule"
+      ],
+      "guide": "두 결과를 50%씩 선택하세요. 평균 표시가 두 에너지 사이 어디에 놓이는지 보세요.",
+      "check": {
+        "question": "에너지가 1과 3만 가능하면 한 번 측정해 평균인 2도 얻을까요?",
+        "answer": "아니요. 이 이상적 측정의 한 번 결과는 1 또는 3입니다. 2는 같은 상태를 새로 준비해 반복한 결과의 이론적 평균입니다."
+      },
+      "related": [
+        {
+          "slug": "hamiltonian",
+          "relation": "이어서 읽기",
+          "reason": "행렬에서 에너지와 양자 상태를 어떻게 읽을까?"
+        },
+        {
+          "slug": "eigen",
+          "relation": "함께 이해하기",
+          "reason": "변환해도 같은 직선 위에 남는 벡터가 있을까?"
+        },
+        {
+          "slug": "superposition",
+          "relation": "함께 이해하기",
+          "reason": "확률은 같은데, 다른 측정에서 결과가 달라질 수 있을까?"
+        }
+      ],
+      "other_links": [
+        "quantum-chemistry",
+        "quantum-state",
+        "born-rule",
+        "eigen",
+        "hamiltonian",
+        "superposition",
+        "schrodinger",
+        "diagonalization",
+        "electron-spin",
+        "variational-principle"
+      ],
+      "previous": "superposition",
+      "next": "hamiltonian"
+    },
+    "schrodinger": {
+      "map": "quantum-chemistry",
+      "kind": "개념",
+      "question": "고유값과 고유벡터를 구하면, 왜 원자의 에너지와 상태를 알 수 있을까?",
+      "prerequisites": [
+        "eigen",
+        "quantum-state"
+      ],
+      "guide": "바닥·들뜬 고유상태를 차례로 누른 뒤 중간 상태를 골라 잔차를 비교하세요.",
+      "check": {
+        "question": "잔차가 0이면 반드시 바닥상태일까요?",
+        "answer": "아니요. 들뜬 고유상태도 Hc = Ec를 만족합니다. 바닥상태는 가능한 에너지 중 가장 낮은 고유값에 속합니다."
+      },
+      "related": [
+        {
+          "slug": "born-oppenheimer",
+          "relation": "이어서 읽기",
+          "reason": "왜 핵의 위치를 고정하고 전자 문제부터 풀까?"
+        },
+        {
+          "slug": "hamiltonian",
+          "relation": "함께 이해하기",
+          "reason": "행렬에서 에너지와 양자 상태를 어떻게 읽을까?"
+        },
+        {
+          "slug": "diagonalization",
+          "relation": "함께 이해하기",
+          "reason": "기준을 바꾸면 행렬 계산이 단순해질까?"
+        }
+      ],
+      "other_links": [
+        "quantum-chemistry",
+        "eigen",
+        "quantum-state",
+        "hamiltonian",
+        "diagonalization",
+        "krylov",
+        "born-rule",
+        "born-oppenheimer",
+        "variational-principle"
+      ],
+      "previous": "hamiltonian",
+      "next": "born-oppenheimer"
+    },
+    "born-oppenheimer": {
+      "map": "quantum-chemistry",
+      "kind": "개념",
+      "question": "왜 핵의 위치를 고정하고 전자 문제부터 풀까?",
+      "prerequisites": [
+        "schrodinger",
+        "hamiltonian"
+      ],
+      "guide": "핵 간 거리를 바꾸며 전자 에너지와 핵 반발, 그 합을 함께 보세요.",
+      "check": {
+        "question": "핵을 고정한다는 것은 실제 핵이 움직이지 않는다는 뜻일까요?",
+        "answer": "전자 문제를 푸는 단계의 조건입니다. 거리마다 얻은 에너지 곡면을 사용해 핵의 진동·회전을 별도로 다룹니다."
+      },
+      "related": [
+        {
+          "slug": "orbital",
+          "relation": "이어서 읽기",
+          "reason": "오비탈은 전자가 도는 길일까?"
+        },
+        {
+          "slug": "potential-energy",
+          "relation": "함께 이해하기",
+          "reason": "결합 길이와 에너지 곡선에서 무엇을 읽을까?"
+        },
+        {
+          "slug": "molecular-orbital",
+          "relation": "함께 이해하기",
+          "reason": "원자 중심 함수 둘을 더하고 빼면 무엇이 달라질까?"
+        }
+      ],
+      "other_links": [
+        "quantum-chemistry",
+        "schrodinger",
+        "hamiltonian",
+        "potential-energy",
+        "orbital",
+        "molecular-orbital",
+        "hamiltonian-elements"
+      ],
+      "previous": "schrodinger",
+      "next": "orbital"
+    },
+    "orbital": {
+      "map": "quantum-chemistry",
+      "kind": "개념",
+      "question": "오비탈은 전자가 도는 길일까?",
+      "prerequisites": [
+        "quantum-state",
+        "born-rule"
+      ],
+      "guide": "상태 번호를 바꾸고 측정 영역을 넓혀 보세요. 확률은 밀도 곡선 아래의 넓이입니다.",
+      "check": {
+        "question": "파동함수의 부호가 음수인 곳에서는 전자를 찾을 수 없을까요?",
+        "answer": "부호가 음수여도 절댓값 제곱은 양수일 수 있습니다. 영역의 확률은 그 밀도를 적분해서 얻습니다."
+      },
+      "related": [
+        {
+          "slug": "electron-spin",
+          "relation": "이어서 읽기",
+          "reason": "측정축을 돌리면 스핀의 크기도 바뀔까?"
+        },
+        {
+          "slug": "molecular-orbital",
+          "relation": "함께 이해하기",
+          "reason": "원자 중심 함수 둘을 더하고 빼면 무엇이 달라질까?"
+        },
+        {
+          "slug": "pauli",
+          "relation": "함께 이해하기",
+          "reason": "같은 오비탈에 전자를 둘 넣어도 될까?"
+        }
+      ],
+      "other_links": [
+        "quantum-chemistry",
+        "quantum-state",
+        "born-rule",
+        "molecular-orbital",
+        "pauli",
+        "electron-spin",
+        "basis-set",
+        "slater-determinant"
+      ],
+      "previous": "born-oppenheimer",
+      "next": "electron-spin"
+    },
+    "electron-spin": {
+      "map": "quantum-chemistry",
+      "kind": "개념",
+      "question": "측정축을 돌리면 스핀의 크기도 바뀔까?",
+      "prerequisites": [
+        "quantum-state",
+        "observable"
+      ],
+      "guide": "준비 상태는 유지하고 측정축을 0°·90°·180°로 바꿔 보세요.",
+      "check": {
+        "question": "평균 스핀이 0이면 한 번의 결과도 0일까요?",
+        "answer": "이 전자 스핀 성분 측정은 +ℏ/2 또는 −ℏ/2를 줍니다. 두 값의 확률이 같으면 평균이 0입니다."
+      },
+      "related": [
+        {
+          "slug": "pauli",
+          "relation": "이어서 읽기",
+          "reason": "같은 오비탈에 전자를 둘 넣어도 될까?"
+        },
+        {
+          "slug": "born-rule",
+          "relation": "함께 이해하기",
+          "reason": "음수나 복소수인 진폭이 어떻게 확률이 될까?"
+        },
+        {
+          "slug": "orbital",
+          "relation": "함께 이해하기",
+          "reason": "오비탈은 전자가 도는 길일까?"
+        }
+      ],
+      "other_links": [
+        "quantum-chemistry",
+        "quantum-state",
+        "observable",
+        "born-rule",
+        "pauli",
+        "orbital",
+        "electronic-configuration",
+        "superposition"
+      ],
+      "previous": "orbital",
+      "next": "pauli"
+    },
+    "pauli": {
+      "map": "quantum-chemistry",
+      "kind": "개념",
+      "question": "같은 오비탈에 전자를 둘 넣어도 될까?",
+      "prerequisites": [
+        "orbital",
+        "electron-spin"
+      ],
+      "guide": "같은 스핀 오비탈에 두 번 추가해 보고, 같은 공간 오비탈의 반대 스핀도 선택해 보세요.",
+      "check": {
+        "question": "한 공간 오비탈에 전자 둘이 있어도 괜찮을까요?",
+        "answer": "서로 반대 스핀인 서로 다른 스핀 오비탈을 점유하면 가능합니다. 금지되는 것은 동일한 스핀 오비탈의 중복 점유입니다."
+      },
+      "related": [
+        {
+          "slug": "electronic-configuration",
+          "relation": "이어서 읽기",
+          "reason": "같은 공간 오비탈 점유가 같은 다전자 상태를 뜻할까?"
+        },
+        {
+          "slug": "slater-determinant",
+          "relation": "함께 이해하기",
+          "reason": "전자 둘의 이름을 바꾸면 왜 부호가 바뀔까?"
+        },
+        {
+          "slug": "hartree-fock",
+          "relation": "함께 이해하기",
+          "reason": "전자 밀도가 방정식을 바꾸는데, 어떻게 해를 찾을까?"
+        }
+      ],
+      "other_links": [
+        "quantum-chemistry",
+        "orbital",
+        "electron-spin",
+        "slater-determinant",
+        "electronic-configuration",
+        "hartree-fock"
+      ],
+      "previous": "electron-spin",
+      "next": "electronic-configuration"
+    },
+    "slater-determinant": {
+      "map": "quantum-chemistry",
+      "kind": "개념",
+      "question": "전자 둘의 이름을 바꾸면 왜 부호가 바뀔까?",
+      "prerequisites": [
+        "electronic-configuration",
+        "pauli"
+      ],
+      "guide": "좌표 이름을 맞바꿀 때 진폭의 부호와 확률을 비교하세요.",
+      "check": {
+        "question": "두 전자의 좌표를 교환하면 확률도 달라질까요?",
+        "answer": "전체 파동함수의 부호는 바뀌지만 절댓값 제곱은 같으므로 같은 좌표 교환에 대한 확률은 같습니다."
+      },
+      "related": [
+        {
+          "slug": "basis-set",
+          "relation": "이어서 읽기",
+          "reason": "기저 함수가 부족하면 어떤 오차가 남을까?"
+        },
+        {
+          "slug": "matrix",
+          "relation": "함께 이해하기",
+          "reason": "벡터를 일관된 규칙으로 바꾸려면?"
+        },
+        {
+          "slug": "hartree-fock",
+          "relation": "함께 이해하기",
+          "reason": "전자 밀도가 방정식을 바꾸는데, 어떻게 해를 찾을까?"
+        }
+      ],
+      "other_links": [
+        "quantum-chemistry",
+        "electronic-configuration",
+        "pauli",
+        "matrix",
+        "hartree-fock",
+        "configuration-interaction",
+        "electron-correlation"
+      ],
+      "previous": "electronic-configuration",
+      "next": "basis-set"
+    },
+    "electronic-configuration": {
+      "map": "quantum-chemistry",
+      "kind": "개념",
+      "question": "같은 공간 오비탈 점유가 같은 다전자 상태를 뜻할까?",
+      "prerequisites": [
+        "orbital",
+        "electron-spin"
+      ],
+      "guide": "a와 b를 하나씩 점유하는 네 스핀 배치를 비교해 보세요.",
+      "check": {
+        "question": "공간 오비탈 점유가 같으면 다전자 상태도 하나로 정해질까요?",
+        "answer": "아니요. 스핀 점유와 상태들의 조합을 더 알아야 합니다. 공간 배치 하나가 행렬식 하나를 뜻하지는 않습니다."
+      },
+      "related": [
+        {
+          "slug": "slater-determinant",
+          "relation": "이어서 읽기",
+          "reason": "전자 둘의 이름을 바꾸면 왜 부호가 바뀔까?"
+        },
+        {
+          "slug": "pauli",
+          "relation": "함께 이해하기",
+          "reason": "같은 오비탈에 전자를 둘 넣어도 될까?"
+        },
+        {
+          "slug": "configuration-interaction",
+          "relation": "함께 이해하기",
+          "reason": "행렬식을 더하면 상태와 에너지는 어떻게 달라질까?"
+        }
+      ],
+      "other_links": [
+        "quantum-chemistry",
+        "orbital",
+        "electron-spin",
+        "pauli",
+        "slater-determinant",
+        "configuration-interaction",
+        "active-space"
+      ],
+      "previous": "pauli",
+      "next": "slater-determinant"
+    },
+    "molecular-orbital": {
+      "map": "quantum-chemistry",
+      "kind": "개념",
+      "question": "원자 중심 함수 둘을 더하고 빼면 무엇이 달라질까?",
+      "prerequisites": [
+        "orbital",
+        "basis-set"
+      ],
+      "guide": "대칭·반대칭 조합을 비교한 뒤 B 기저의 부호만 다시 정의해 보세요.",
+      "check": {
+        "question": "계수의 부호만 보면 결합성인지 판단할 수 있을까요?",
+        "answer": "기저 함수의 부호 관례도 함께 봐야 합니다. 기저와 계수의 부호를 함께 바꾸면 같은 오비탈을 나타냅니다."
+      },
+      "related": [
+        {
+          "slug": "electron-integrals",
+          "relation": "이어서 읽기",
+          "reason": "오비탈로부터 에너지 계산에 필요한 숫자를 어떻게 만들까?"
+        },
+        {
+          "slug": "superposition",
+          "relation": "함께 이해하기",
+          "reason": "확률은 같은데, 다른 측정에서 결과가 달라질 수 있을까?"
+        },
+        {
+          "slug": "electronic-configuration",
+          "relation": "함께 이해하기",
+          "reason": "같은 공간 오비탈 점유가 같은 다전자 상태를 뜻할까?"
+        }
+      ],
+      "other_links": [
+        "quantum-chemistry",
+        "orbital",
+        "basis-set",
+        "superposition",
+        "electronic-configuration",
+        "hartree-fock",
+        "electron-integrals",
+        "potential-energy"
+      ],
+      "previous": "basis-orbital-energies",
+      "next": "electron-integrals"
+    },
+    "basis-set": {
+      "map": "quantum-chemistry",
+      "kind": "개념",
+      "question": "기저 함수가 부족하면 어떤 오차가 남을까?",
+      "prerequisites": [
+        "basis",
+        "orbital"
+      ],
+      "guide": "함수 하나에서 셋으로 늘리며 목표 곡선과 근사 오차를 비교하세요.",
+      "check": {
+        "question": "기저 계수의 제곱 합은 항상 함수의 길이 제곱일까요?",
+        "answer": "비직교 기저에서는 아닙니다. 겹침 행렬 S를 포함한 c†Sc로 계산합니다."
+      },
+      "related": [
+        {
+          "slug": "sto-3g",
+          "relation": "이어서 읽기",
+          "reason": "STO-3G는 무엇이고, 다른 기저를 쓰면 무엇이 달라질까?"
+        },
+        {
+          "slug": "inner-product",
+          "relation": "함께 이해하기",
+          "reason": "두 벡터가 얼마나 같은 방향을 향할까?"
+        },
+        {
+          "slug": "molecular-orbital",
+          "relation": "함께 이해하기",
+          "reason": "원자 중심 함수 둘을 더하고 빼면 무엇이 달라질까?"
+        }
+      ],
+      "other_links": [
+        "quantum-chemistry",
+        "basis",
+        "orbital",
+        "inner-product",
+        "sto-3g",
+        "molecular-orbital",
+        "electron-integrals",
+        "hartree-fock",
+        "electron-correlation"
+      ],
+      "previous": "slater-determinant",
+      "next": "sto-3g"
+    },
+    "sto-3g": {
+      "map": "quantum-chemistry",
+      "kind": "개념",
+      "question": "STO-3G는 무엇이고, 다른 기저를 쓰면 무엇이 달라질까?",
+      "prerequisites": [
+        "basis-set"
+      ],
+      "guide": "기저 집합 버튼을 바꾸며 수소 한 원자와 H₂ 전체의 함수 수를 비교하세요.",
+      "check": {
+        "question": "STO-3G의 3은 독립적인 공간 오비탈 세 개를 뜻할까요?",
+        "answer": "아니요. 원시 가우스 함수 세 개를 고정된 계수로 묶습니다. 수소에서는 이 묶음 하나가 공간 기저 함수 하나입니다."
+      },
+      "related": [
+        {
+          "slug": "basis-orbital-energies",
+          "relation": "이어서 읽기",
+          "reason": "같은 H₂인데 기저를 바꾸면 왜 준위 수와 위치가 달라질까?"
+        },
+        {
+          "slug": "basis-set",
+          "relation": "함께 이해하기",
+          "reason": "기저 함수가 부족하면 어떤 오차가 남을까?"
+        },
+        {
+          "slug": "vqe-hydrogen",
+          "relation": "분자에 적용",
+          "reason": "실제 분자의 에너지도 회전각을 바꿔 가며 낮출 수 있을까?"
+        }
+      ],
+      "other_links": [
+        "quantum-chemistry",
+        "basis-set",
+        "molecular-orbital",
+        "electron-correlation",
+        "vqe-hydrogen"
+      ],
+      "previous": "basis-set",
+      "next": "basis-orbital-energies"
+    },
+    "basis-orbital-energies": {
+      "map": "quantum-chemistry",
+      "kind": "응용",
+      "question": "같은 H₂인데 기저를 바꾸면 왜 준위 수와 위치가 달라질까?",
+      "prerequisites": [
+        "sto-3g"
+      ],
+      "guide": "같은 에너지 눈금에서 기저별 준위를 비교하고 전체 준위 보기로 범위를 넓혀 보세요.",
+      "check": {
+        "question": "그림의 점유 오비탈 에너지를 더하면 분자 총 에너지일까요?",
+        "answer": "아니요. 이 선은 Fock 연산자의 오비탈 고유값입니다. 단순 합에서는 전자 사이 상호작용을 중복 계산할 수 있습니다."
+      },
+      "related": [
+        {
+          "slug": "sto-3g",
+          "relation": "이어서 읽기",
+          "reason": "STO-3G는 무엇이고, 다른 기저를 쓰면 무엇이 달라질까?"
+        },
+        {
+          "slug": "hartree-fock",
+          "relation": "함께 이해하기",
+          "reason": "전자 밀도가 방정식을 바꾸는데, 어떻게 해를 찾을까?"
+        },
+        {
+          "slug": "potential-energy",
+          "relation": "함께 이해하기",
+          "reason": "결합 길이와 에너지 곡선에서 무엇을 읽을까?"
+        }
+      ],
+      "other_links": [
+        "sto-3g",
+        "learning-maps",
+        "quantum-chemistry"
+      ],
+      "previous": "sto-3g",
+      "next": "molecular-orbital"
+    },
+    "electron-integrals": {
+      "map": "quantum-chemistry",
+      "kind": "개념",
+      "question": "오비탈로부터 에너지 계산에 필요한 숫자를 어떻게 만들까?",
+      "prerequisites": [
+        "molecular-orbital"
+      ],
+      "guide": "오비탈 혼합 각도를 바꾸며 운동·핵 인력·전자 반발의 기여를 따로 보세요.",
+      "check": {
+        "question": "1전자 적분만 있으면 전자 둘의 에너지를 모두 알 수 있을까요?",
+        "answer": "일반적으로 전자 사이 반발을 나타내는 2전자 적분도 필요합니다. 핵 반발을 포함할지와 다전자 상태도 정해야 합니다."
+      },
+      "related": [
+        {
+          "slug": "hamiltonian-elements",
+          "relation": "이어서 읽기",
+          "reason": "오비탈 적분은 어떻게 전자 배치 사이의 행렬이 될까?"
+        },
+        {
+          "slug": "orbital",
+          "relation": "함께 이해하기",
+          "reason": "오비탈은 전자가 도는 길일까?"
+        },
+        {
+          "slug": "basis-set",
+          "relation": "함께 이해하기",
+          "reason": "기저 함수가 부족하면 어떤 오차가 남을까?"
+        }
+      ],
+      "other_links": [
+        "quantum-chemistry",
+        "orbital",
+        "basis-set",
+        "hamiltonian-elements",
+        "hartree-fock",
+        "large-hamiltonian"
+      ],
+      "previous": "molecular-orbital",
+      "next": "hamiltonian-elements"
+    },
+    "hamiltonian-elements": {
+      "map": "quantum-chemistry",
+      "kind": "개념",
+      "question": "오비탈 적분은 어떻게 전자 배치 사이의 행렬이 될까?",
+      "prerequisites": [
+        "electron-integrals"
+      ],
+      "guide": "치환 수를 0부터 3까지 바꾸며 1전자 항과 2전자 항을 따로 확인하세요.",
+      "check": {
+        "question": "직접 행렬원소가 0이면 두 배치가 전혀 섞일 수 없을까요?",
+        "answer": "직접 연결이 없다는 뜻입니다. 다른 배치를 거치는 간접 혼합은 가능할 수 있습니다."
+      },
+      "related": [
+        {
+          "slug": "h2-hamiltonian",
+          "relation": "이어서 읽기",
+          "reason": "같은 분자에서 기저를 늘리면?다른 분자인데 행렬 크기가 같다면?"
+        },
+        {
+          "slug": "electron-integrals",
+          "relation": "함께 이해하기",
+          "reason": "오비탈로부터 에너지 계산에 필요한 숫자를 어떻게 만들까?"
+        },
+        {
+          "slug": "large-hamiltonian",
+          "relation": "함께 이해하기",
+          "reason": "거대한 행렬을 전부 만들지 않고도에너지 문제를 정의할 수 있을까요?"
+        }
+      ],
+      "other_links": [
+        "quantum-chemistry",
+        "h2-hamiltonian",
+        "electron-integrals",
+        "slater-determinant",
+        "configuration-interaction",
+        "electronic-configuration",
+        "hamiltonian",
+        "large-hamiltonian"
+      ],
+      "previous": "electron-integrals",
+      "next": "h2-hamiltonian"
+    },
+    "variational-principle": {
+      "map": "quantum-chemistry",
+      "kind": "개념",
+      "question": "어떤 상태의 에너지를 낮추면 정확한 바닥상태에 가까워질까?",
+      "prerequisites": [
+        "hamiltonian-size"
+      ],
+      "guide": "벡터 배율만 바꿔 보세요. 분자·분모는 변하지만 레일리 몫은 유지됩니다.",
+      "check": {
+        "question": "정규화하지 않은 벡터를 작게 만들면 에너지가 낮아질까요?",
+        "answer": "전체 배율만 바꾸면 물리적 상태는 같습니다. 에너지는 노름 제곱으로 나눈 레일리 몫으로 계산해야 합니다."
+      },
+      "related": [
+        {
+          "slug": "hartree-fock",
+          "relation": "이어서 읽기",
+          "reason": "전자 밀도가 방정식을 바꾸는데, 어떻게 해를 찾을까?"
+        },
+        {
+          "slug": "parameterized-circuit",
+          "relation": "함께 이해하기",
+          "reason": "회전각 하나로 양자 상태를 어떻게 바꿀까?"
+        },
+        {
+          "slug": "energy-expectation",
+          "relation": "함께 이해하기",
+          "reason": "한 번의 측정값과 평균 에너지는 어떻게 다를까?"
+        }
+      ],
+      "other_links": [
+        "quantum-chemistry",
+        "parameterized-circuit",
+        "vqe",
+        "energy-expectation",
+        "ansatz",
+        "schrodinger",
+        "basis-set",
+        "hartree-fock",
+        "configuration-interaction"
+      ],
+      "previous": "hamiltonian-size",
+      "next": "hartree-fock"
+    },
+    "hartree-fock": {
+      "map": "quantum-chemistry",
+      "kind": "개념",
+      "question": "전자 밀도가 방정식을 바꾸는데, 어떻게 해를 찾을까?",
+      "prerequisites": [
+        "variational-principle"
+      ],
+      "guide": "SCF를 한 번씩 진행하며 입력·출력 밀도의 차이와 총 에너지를 보세요.",
+      "check": {
+        "question": "SCF가 수렴하면 정확한 분자 에너지를 찾은 걸까요?",
+        "answer": "자기일관 해를 찾았다는 뜻입니다. 전역 최저 HF 해인지도 별도 문제이며 기저 오차와 HF가 놓치는 전자 상관도 남습니다."
+      },
+      "related": [
+        {
+          "slug": "electron-correlation",
+          "relation": "이어서 읽기",
+          "reason": "하나의 행렬식으로 놓치는 에너지는 어디에서 올까?"
+        },
+        {
+          "slug": "slater-determinant",
+          "relation": "함께 이해하기",
+          "reason": "전자 둘의 이름을 바꾸면 왜 부호가 바뀔까?"
+        },
+        {
+          "slug": "electron-integrals",
+          "relation": "함께 이해하기",
+          "reason": "오비탈로부터 에너지 계산에 필요한 숫자를 어떻게 만들까?"
+        }
+      ],
+      "other_links": [
+        "quantum-chemistry",
+        "slater-determinant",
+        "variational-principle",
+        "electron-integrals",
+        "electron-correlation",
+        "configuration-interaction"
+      ],
+      "previous": "variational-principle",
+      "next": "electron-correlation"
+    },
+    "electron-correlation": {
+      "map": "quantum-chemistry",
+      "kind": "개념",
+      "question": "하나의 행렬식으로 놓치는 에너지는 어디에서 올까?",
+      "prerequisites": [
+        "hartree-fock",
+        "slater-determinant"
+      ],
+      "guide": "반발 U를 높여 RHF와 정확한 해의 차이가 어떻게 달라지는지 보세요.",
+      "check": {
+        "question": "HF가 전자 반발을 전부 무시하나요?",
+        "answer": "아니요. HF에도 반발과 교환이 포함됩니다. 단일 행렬식으로 표현하지 못하는 상관이 추가로 남습니다."
+      },
+      "related": [
+        {
+          "slug": "configuration-interaction",
+          "relation": "이어서 읽기",
+          "reason": "행렬식을 더하면 상태와 에너지는 어떻게 달라질까?"
+        },
+        {
+          "slug": "variational-principle",
+          "relation": "함께 이해하기",
+          "reason": "어떤 상태의 에너지를 낮추면 정확한 바닥상태에 가까워질까?"
+        },
+        {
+          "slug": "active-space",
+          "relation": "함께 이해하기",
+          "reason": "어떤 전자와 오비탈을 자세히 계산할까?"
+        }
+      ],
+      "other_links": [
+        "quantum-chemistry",
+        "hartree-fock",
+        "slater-determinant",
+        "variational-principle",
+        "configuration-interaction",
+        "active-space",
+        "potential-energy"
+      ],
+      "previous": "hartree-fock",
+      "next": "configuration-interaction"
+    },
+    "configuration-interaction": {
+      "map": "quantum-chemistry",
+      "kind": "개념",
+      "question": "행렬식을 더하면 상태와 에너지는 어떻게 달라질까?",
+      "prerequisites": [
+        "slater-determinant",
+        "hamiltonian-elements"
+      ],
+      "guide": "기준 행렬식만 쓴 경우와 CI 바닥상태를 비교하세요. 비대각 기여도 살펴보세요.",
+      "check": {
+        "question": "CI 에너지는 각 배치 에너지를 확률로 평균한 값일까요?",
+        "answer": "비대각 결합에 따른 교차항도 필요합니다. 배치별 확률만으로는 상대 위상에 따른 기여를 알 수 없습니다."
+      },
+      "related": [
+        {
+          "slug": "active-space",
+          "relation": "이어서 읽기",
+          "reason": "어떤 전자와 오비탈을 자세히 계산할까?"
+        },
+        {
+          "slug": "variational-principle",
+          "relation": "함께 이해하기",
+          "reason": "어떤 상태의 에너지를 낮추면 정확한 바닥상태에 가까워질까?"
+        },
+        {
+          "slug": "electron-correlation",
+          "relation": "함께 이해하기",
+          "reason": "하나의 행렬식으로 놓치는 에너지는 어디에서 올까?"
+        }
+      ],
+      "other_links": [
+        "quantum-chemistry",
+        "slater-determinant",
+        "hamiltonian-elements",
+        "variational-principle",
+        "active-space",
+        "electron-correlation",
+        "diagonalization"
+      ],
+      "previous": "electron-correlation",
+      "next": "active-space"
+    },
+    "active-space": {
+      "map": "quantum-chemistry",
+      "kind": "개념",
+      "question": "어떤 전자와 오비탈을 자세히 계산할까?",
+      "prerequisites": [
+        "electronic-configuration",
+        "configuration-interaction"
+      ],
+      "guide": "활성 전자 수와 오비탈 수를 바꾸며 두 종류의 행렬식 수를 비교하세요.",
+      "check": {
+        "question": "α·β 전자 수를 고정하면 총스핀도 고정될까요?",
+        "answer": "스핀의 z성분은 고정되지만 총스핀 S까지 고정되는 것은 아닙니다. 단일항만의 함수 수와 구별해야 합니다."
+      },
+      "related": [
+        {
+          "slug": "potential-energy",
+          "relation": "이어서 읽기",
+          "reason": "결합 길이와 에너지 곡선에서 무엇을 읽을까?"
+        },
+        {
+          "slug": "molecular-orbital",
+          "relation": "함께 이해하기",
+          "reason": "원자 중심 함수 둘을 더하고 빼면 무엇이 달라질까?"
+        },
+        {
+          "slug": "electron-correlation",
+          "relation": "함께 이해하기",
+          "reason": "하나의 행렬식으로 놓치는 에너지는 어디에서 올까?"
+        }
+      ],
+      "other_links": [
+        "quantum-chemistry",
+        "electronic-configuration",
+        "configuration-interaction",
+        "molecular-orbital",
+        "potential-energy",
+        "electron-correlation",
+        "basis-set"
+      ],
+      "previous": "configuration-interaction",
+      "next": "potential-energy"
+    },
+    "potential-energy": {
+      "map": "quantum-chemistry",
+      "kind": "개념",
+      "question": "결합 길이와 에너지 곡선에서 무엇을 읽을까?",
+      "prerequisites": [
+        "born-oppenheimer",
+        "hamiltonian"
+      ],
+      "guide": "평형 거리 양옆에서 힘의 부호를 비교해 보세요.",
+      "check": {
+        "question": "곡선 최솟값에서 핵이 완전히 멈춰 있을까요?",
+        "answer": "힘의 평균적 평형 위치라는 뜻입니다. 핵의 양자 진동은 별도 문제이고 진동 바닥상태에도 영점 에너지가 있습니다."
+      },
+      "related": [
+        {
+          "slug": "quantum-chemistry",
+          "relation": "이어서 읽기",
+          "reason": "상태를 읽고, 에너지를 구하고,분자를 이해하기까지."
+        },
+        {
+          "slug": "variational-principle",
+          "relation": "함께 이해하기",
+          "reason": "어떤 상태의 에너지를 낮추면 정확한 바닥상태에 가까워질까?"
+        },
+        {
+          "slug": "active-space",
+          "relation": "함께 이해하기",
+          "reason": "어떤 전자와 오비탈을 자세히 계산할까?"
+        }
+      ],
+      "other_links": [
+        "quantum-chemistry",
+        "born-oppenheimer",
+        "hamiltonian",
+        "variational-principle",
+        "active-space",
+        "electron-correlation"
+      ],
+      "previous": "active-space",
+      "next": "quantum-chemistry"
+    },
+    "two-level-system": {
+      "map": "quantum-computing",
+      "kind": "개념",
+      "question": "두 상태만으로 문제를 표현한다는 것은 무엇일까?",
+      "prerequisites": [],
+      "guide": "서로 다른 두 상태를 선택하며 남긴 부분공간의 행렬 크기를 확인하세요.",
+      "check": {
+        "question": "두 상태 모형을 쓰면 원자의 다른 상태는 사라질까요?",
+        "answer": "사라지지 않습니다. 계산에서 다룰 공간을 제한한 것입니다. 제외한 상태로의 결합이나 누출이 중요한지 확인해야 합니다."
+      },
+      "related": [
+        {
+          "slug": "qubit",
+          "relation": "이어서 읽기",
+          "reason": "기준 상태는 둘인데 가능한 상태는 왜 더 많을까?"
+        },
+        {
+          "slug": "schrodinger",
+          "relation": "함께 이해하기",
+          "reason": "고유값과 고유벡터를 구하면, 왜 원자의 에너지와 상태를 알 수 있을까?"
+        },
+        {
+          "slug": "subspace",
+          "relation": "함께 이해하기",
+          "reason": "큰 공간의 일부만으로 근사하려면?"
+        }
+      ],
+      "other_links": [
+        "quantum-computing",
+        "vqe",
+        "qubit",
+        "schrodinger",
+        "subspace"
+      ],
+      "previous": "quantum-computing",
+      "next": "qubit"
+    },
+    "qubit": {
+      "map": "quantum-computing",
+      "kind": "개념",
+      "question": "기준 상태는 둘인데 가능한 상태는 왜 더 많을까?",
+      "prerequisites": [
+        "two-level-system"
+      ],
+      "guide": "0·1·+·− 상태를 비교하세요. 기준 상태의 수와 가능한 준비 상태의 수를 구별하세요.",
+      "check": {
+        "question": "한 큐빗에는 가능한 상태가 두 개뿐일까요?",
+        "answer": "정규직교 기저 상태는 두 개지만 그 중첩을 포함한 순수상태는 연속적으로 많습니다."
+      },
+      "related": [
+        {
+          "slug": "computational-basis",
+          "relation": "이어서 읽기",
+          "reason": "왜 0 상태는 영벡터가 아니라 첫째 좌표가 1인 벡터일까?"
+        },
+        {
+          "slug": "superposition",
+          "relation": "함께 이해하기",
+          "reason": "확률은 같은데, 다른 측정에서 결과가 달라질 수 있을까?"
+        },
+        {
+          "slug": "measurement-basis",
+          "relation": "함께 이해하기",
+          "reason": "같은 상태인데, 무엇을 측정하느냐에 따라 결과가 달라질까?"
+        }
+      ],
+      "other_links": [
+        "quantum-computing",
+        "vqe",
+        "computational-basis",
+        "superposition",
+        "measurement-basis",
+        "two-level-system"
+      ],
+      "previous": "two-level-system",
+      "next": "computational-basis"
+    },
+    "computational-basis": {
+      "map": "quantum-computing",
+      "kind": "개념",
+      "question": "왜 0 상태는 영벡터가 아니라 첫째 좌표가 1인 벡터일까?",
+      "prerequisites": [
+        "qubit"
+      ],
+      "guide": "0 상태와 두 성분 모두 0인 벡터를 비교하세요.",
+      "check": {
+        "question": "0 상태의 좌표는 왜 영벡터가 아닐까요?",
+        "answer": "0은 기저 상태의 이름입니다. 그 상태에 계수 1을 주므로 좌표는 첫 성분 1, 둘째 성분 0입니다."
+      },
+      "related": [
+        {
+          "slug": "quantum-gate",
+          "relation": "이어서 읽기",
+          "reason": "행렬을 곱해서 양자 상태를 어떻게 바꿀까?"
+        },
+        {
+          "slug": "born-rule",
+          "relation": "함께 이해하기",
+          "reason": "음수나 복소수인 진폭이 어떻게 확률이 될까?"
+        },
+        {
+          "slug": "energy-measurement",
+          "relation": "함께 이해하기",
+          "reason": "0·1을 읽는 것과 에너지를 읽는 것은 어떻게 다를까?"
+        }
+      ],
+      "other_links": [
+        "quantum-computing",
+        "vqe",
+        "quantum-gate",
+        "born-rule",
+        "energy-measurement",
+        "qubit"
+      ],
+      "previous": "qubit",
+      "next": "quantum-gate"
+    },
+    "quantum-gate": {
+      "map": "quantum-computing",
+      "kind": "개념",
+      "question": "행렬을 곱해서 양자 상태를 어떻게 바꿀까?",
+      "prerequisites": [
+        "computational-basis"
+      ],
+      "guide": "입력을 고정하고 X·Z·하다마드를 바꾸며 출력 계수와 길이를 비교하세요.",
+      "check": {
+        "question": "파동함수가 게이트 역할을 하나요?",
+        "answer": "파동함수나 상태 벡터는 상태의 표현입니다. 게이트는 그 상태에 작용하는 연산입니다."
+      },
+      "related": [
+        {
+          "slug": "rotation-gate",
+          "relation": "이어서 읽기",
+          "reason": "회전각을 바꾸면 무엇이 달라질까?"
+        },
+        {
+          "slug": "measurement-basis",
+          "relation": "함께 이해하기",
+          "reason": "같은 상태인데, 무엇을 측정하느냐에 따라 결과가 달라질까?"
+        }
+      ],
+      "other_links": [
+        "quantum-computing",
+        "vqe",
+        "computational-basis",
+        "rotation-gate",
+        "measurement-basis"
+      ],
+      "previous": "computational-basis",
+      "next": "rotation-gate"
+    },
+    "rotation-gate": {
+      "map": "quantum-computing",
+      "kind": "개념",
+      "question": "회전각을 바꾸면 무엇이 달라질까?",
+      "prerequisites": [
+        "quantum-gate"
+      ],
+      "guide": "회로 각도와 카메라 시점을 따로 바꿔 보세요. 시점만 바꿀 때 확률은 유지됩니다.",
+      "check": {
+        "question": "360°에서 벡터 부호가 바뀌면 다른 물리적 상태일까요?",
+        "answer": "전체 부호만 바뀌면 전역 위상 차이이므로 같은 한 큐빗 상태입니다. 상대 위상 변화와 구별합니다."
+      },
+      "related": [
+        {
+          "slug": "measurement-basis",
+          "relation": "이어서 읽기",
+          "reason": "같은 상태인데, 무엇을 측정하느냐에 따라 결과가 달라질까?"
+        },
+        {
+          "slug": "parameterized-circuit",
+          "relation": "함께 이해하기",
+          "reason": "회전각 하나로 양자 상태를 어떻게 바꿀까?"
+        }
+      ],
+      "other_links": [
+        "quantum-computing",
+        "vqe",
+        "quantum-gate",
+        "measurement-basis",
+        "parameterized-circuit"
+      ],
+      "previous": "quantum-gate",
+      "next": "measurement-basis"
+    },
+    "measurement-basis": {
+      "map": "quantum-computing",
+      "kind": "개념",
+      "question": "같은 상태인데, 무엇을 측정하느냐에 따라 결과가 달라질까?",
+      "prerequisites": [
+        "rotation-gate"
+      ],
+      "guide": "+ 상태를 유지하고 Z·X 측정을 번갈아 선택하세요.",
+      "check": {
+        "question": "블로흐 구의 평면이 측정 기저 상태인가요?",
+        "answer": "기저 상태는 측정 축의 양 끝입니다. 평면은 두 결과의 확률이 같아지는 경계를 나타낸 보조 그림입니다."
+      },
+      "related": [
+        {
+          "slug": "energy-measurement",
+          "relation": "이어서 읽기",
+          "reason": "0·1을 읽는 것과 에너지를 읽는 것은 어떻게 다를까?"
+        },
+        {
+          "slug": "computational-basis",
+          "relation": "함께 이해하기",
+          "reason": "왜 0 상태는 영벡터가 아니라 첫째 좌표가 1인 벡터일까?"
+        },
+        {
+          "slug": "born-rule",
+          "relation": "함께 이해하기",
+          "reason": "음수나 복소수인 진폭이 어떻게 확률이 될까?"
+        }
+      ],
+      "other_links": [
+        "quantum-computing",
+        "vqe",
+        "computational-basis",
+        "born-rule",
+        "energy-measurement",
+        "observable",
+        "rotation-gate"
+      ],
+      "previous": "rotation-gate",
+      "next": "energy-measurement"
+    },
+    "energy-measurement": {
+      "map": "quantum-computing",
+      "kind": "개념",
+      "question": "0·1을 읽는 것과 에너지를 읽는 것은 어떻게 다를까?",
+      "prerequisites": [
+        "measurement-basis"
+      ],
+      "guide": "0 상태와 바닥 고유상태를 비교하며 두 측정의 확률과 평균을 보세요.",
+      "check": {
+        "question": "회로 각도를 바꾸면 H의 고유에너지도 바뀔까요?",
+        "answer": "여기서는 H가 고정되어 고유에너지는 같습니다. 준비 상태와 각 에너지가 나올 확률이 바뀝니다."
+      },
+      "related": [
+        {
+          "slug": "tensor-product",
+          "relation": "이어서 읽기",
+          "reason": "두 큐빗을 함께 보면,각각의 결과를 짝지은 네 가지가 기준이 됩니다."
+        },
+        {
+          "slug": "rotation-gate",
+          "relation": "함께 이해하기",
+          "reason": "회전각을 바꾸면 무엇이 달라질까?"
+        },
+        {
+          "slug": "energy-expectation",
+          "relation": "함께 이해하기",
+          "reason": "한 번의 측정값과 평균 에너지는 어떻게 다를까?"
+        }
+      ],
+      "other_links": [
+        "quantum-computing",
+        "vqe",
+        "measurement-basis",
+        "rotation-gate",
+        "energy-expectation",
+        "pauli-decomposition",
+        "tensor-product"
+      ],
+      "previous": "measurement-basis",
+      "next": "tensor-product"
+    },
+    "tensor-product": {
+      "map": "quantum-computing",
+      "kind": "개념",
+      "question": "큐빗 두 개의 계수는 어떻게 네 개가 될까?",
+      "prerequisites": [
+        "energy-measurement"
+      ],
+      "guide": "두 회전각을 바꾸며 전체 네 계수가 각각의 두 계수에서 어떻게 만들어지는지 보세요.",
+      "check": {
+        "question": "큐빗 둘을 한 번 측정하면 네 계수를 읽을 수 있을까요?",
+        "answer": "아니요. 계산 기저 측정 한 번은 00·01·10·11 중 하나를 줍니다. 네 계수는 측정 전 상태를 표현합니다."
+      },
+      "related": [
+        {
+          "slug": "entanglement",
+          "relation": "이어서 읽기",
+          "reason": "전체 상태는 알지만,각 큐빗에 따로 순수상태를 지정할 수 없을 수 있습니다."
+        },
+        {
+          "slug": "computational-basis",
+          "relation": "함께 이해하기",
+          "reason": "왜 0 상태는 영벡터가 아니라 첫째 좌표가 1인 벡터일까?"
+        },
+        {
+          "slug": "qubit",
+          "relation": "함께 이해하기",
+          "reason": "기준 상태는 둘인데 가능한 상태는 왜 더 많을까?"
+        }
+      ],
+      "other_links": [
+        "quantum-computing",
+        "vqe",
+        "computational-basis",
+        "qubit",
+        "entanglement",
+        "fermion-qubit",
+        "energy-measurement"
+      ],
+      "previous": "energy-measurement",
+      "next": "entanglement"
+    },
+    "entanglement": {
+      "map": "quantum-computing",
+      "kind": "개념",
+      "question": "전체 상태를 각 큐빗의 상태로 나눌 수 있을까?",
+      "prerequisites": [
+        "tensor-product"
+      ],
+      "guide": "벨 상태와 00·11의 확률 혼합을 Z/Z와 X/X에서 각각 비교하세요.",
+      "check": {
+        "question": "Z 측정 결과가 서로 맞으면 얽힌 상태인가요?",
+        "answer": "그 정보만으로는 부족합니다. 고전적 혼합도 같은 Z 통계를 줄 수 있으며 다른 측정과 비교해야 합니다."
+      },
+      "related": [
+        {
+          "slug": "fermion-qubit",
+          "relation": "이어서 읽기",
+          "reason": "전자 두 개인 수소 분자에 왜 큐빗 네 개를 쓰기도 할까?"
+        },
+        {
+          "slug": "measurement-basis",
+          "relation": "함께 이해하기",
+          "reason": "같은 상태인데, 무엇을 측정하느냐에 따라 결과가 달라질까?"
+        },
+        {
+          "slug": "superposition",
+          "relation": "함께 이해하기",
+          "reason": "확률은 같은데, 다른 측정에서 결과가 달라질 수 있을까?"
+        }
+      ],
+      "other_links": [
+        "quantum-computing",
+        "vqe",
+        "tensor-product",
+        "measurement-basis",
+        "superposition",
+        "fermion-qubit"
+      ],
+      "previous": "tensor-product",
+      "next": "fermion-qubit"
+    },
+    "fermion-qubit": {
+      "map": "quantum-computing",
+      "kind": "개념",
+      "question": "전자 두 개인 수소 분자에 왜 큐빗 네 개를 쓰기도 할까?",
+      "prerequisites": [
+        "electronic-configuration",
+        "slater-determinant"
+      ],
+      "guide": "같은 점유 비트열을 두고 허용 공간을 전체·2전자·스핀 고정·두 배치로 바꿔 보세요.",
+      "check": {
+        "question": "스핀 오비탈 네 개와 전자 두 개에 항상 큐빗 두 개를 쓸까요?",
+        "answer": "직접 점유 인코딩에서는 네 큐빗으로 출발합니다. 추가적인 대칭이나 공간 축소 여부에 따라 필요한 수가 달라집니다."
+      },
+      "related": [
+        {
+          "slug": "quantum-computing",
+          "relation": "이어서 읽기",
+          "reason": "상태를 표현하고, 바꾸고, 읽는 방법을하나씩 연결합니다."
+        },
+        {
+          "slug": "basis-set",
+          "relation": "함께 이해하기",
+          "reason": "기저 함수가 부족하면 어떤 오차가 남을까?"
+        },
+        {
+          "slug": "computational-basis",
+          "relation": "함께 이해하기",
+          "reason": "왜 0 상태는 영벡터가 아니라 첫째 좌표가 1인 벡터일까?"
+        }
+      ],
+      "other_links": [
+        "quantum-computing",
+        "vqe",
+        "quantum-chemistry",
+        "electronic-configuration",
+        "slater-determinant",
+        "basis-set",
+        "computational-basis",
+        "vqe-hydrogen",
+        "pauli-decomposition",
+        "tensor-product",
+        "entanglement",
+        "vqe-algorithm"
+      ],
+      "previous": "entanglement",
+      "next": "vqe"
+    },
+    "energy-expectation": {
+      "map": "vqe",
+      "kind": "개념",
+      "question": "한 번의 측정값과 평균 에너지는 어떻게 다를까?",
+      "prerequisites": [],
+      "guide": "바닥 고유상태와 다른 각도를 비교하며 c, Hc, 평균 에너지를 순서대로 보세요.",
+      "check": {
+        "question": "Hc가 회로가 준비한 다음 양자 상태인가요?",
+        "answer": "이 계산에서는 에너지 기댓값을 구하는 중간 벡터입니다. H는 일반적으로 유니터리 상태 준비 게이트가 아닙니다."
+      },
+      "related": [
+        {
+          "slug": "energy-measurement",
+          "relation": "이어서 읽기",
+          "reason": "0·1을 읽는 것과 에너지를 읽는 것은 어떻게 다를까?"
+        },
+        {
+          "slug": "variational-principle",
+          "relation": "함께 이해하기",
+          "reason": "어떤 상태의 에너지를 낮추면 정확한 바닥상태에 가까워질까?"
+        },
+        {
+          "slug": "pauli-decomposition",
+          "relation": "함께 이해하기",
+          "reason": "에너지를 양자컴퓨터에서 측정하기 쉬운 항으로 나누려면?"
+        }
+      ],
+      "other_links": [
+        "quantum-chemistry",
+        "vqe",
+        "computational-basis",
+        "rotation-gate",
+        "quantum-computing",
+        "qubit",
+        "quantum-gate",
+        "energy-measurement",
+        "observable",
+        "variational-principle",
+        "pauli-decomposition",
+        "measurement-shots"
+      ],
+      "previous": "vqe",
+      "next": "ansatz"
+    },
+    "ansatz": {
+      "map": "vqe",
+      "kind": "개념",
+      "question": "어떤 상태들을 후보로 찾아볼까?",
+      "prerequisites": [
+        "energy-expectation"
+      ],
+      "guide": "제한된 후보에서 최선을 찾은 뒤 각도 범위를 넓혀 결과를 비교하세요.",
+      "check": {
+        "question": "최적화를 충분히 하면 후보에 없는 바닥상태도 찾을까요?",
+        "answer": "그 상태가 안사츠의 표현 범위 밖이면 찾을 수 없습니다. 후보를 넓히는 일과 후보 안에서 최적화하는 일은 별개입니다."
+      },
+      "related": [
+        {
+          "slug": "parameterized-circuit",
+          "relation": "이어서 읽기",
+          "reason": "회전각 하나로 양자 상태를 어떻게 바꿀까?"
+        },
+        {
+          "slug": "variational-principle",
+          "relation": "함께 이해하기",
+          "reason": "어떤 상태의 에너지를 낮추면 정확한 바닥상태에 가까워질까?"
+        },
+        {
+          "slug": "classical-optimization",
+          "relation": "함께 이해하기",
+          "reason": "다음 회로 각도는 어떻게 선택할까?"
+        }
+      ],
+      "other_links": [
+        "vqe",
+        "quantum-chemistry",
+        "variational-principle",
+        "parameterized-circuit",
+        "classical-optimization"
+      ],
+      "previous": "energy-expectation",
+      "next": "parameterized-circuit"
+    },
+    "parameterized-circuit": {
+      "map": "vqe",
+      "kind": "개념",
+      "question": "회전각 하나로 양자 상태를 어떻게 바꿀까?",
+      "prerequisites": [
+        "ansatz"
+      ],
+      "guide": "90°와 −90°에서 계수·확률·에너지를 비교하세요.",
+      "check": {
+        "question": "0·1 측정 확률이 같으면 평균 에너지도 같을까요?",
+        "answer": "일반적으로 아닙니다. 상대 부호와 비대각 해밀토니안 원소에 따른 교차항이 에너지에 기여할 수 있습니다."
+      },
+      "related": [
+        {
+          "slug": "pauli-decomposition",
+          "relation": "이어서 읽기",
+          "reason": "에너지를 양자컴퓨터에서 측정하기 쉬운 항으로 나누려면?"
+        },
+        {
+          "slug": "superposition",
+          "relation": "함께 이해하기",
+          "reason": "확률은 같은데, 다른 측정에서 결과가 달라질 수 있을까?"
+        },
+        {
+          "slug": "vqe-algorithm",
+          "relation": "함께 이해하기",
+          "reason": "상태 준비와 에너지 측정이 어떻게 바닥상태 탐색으로 이어질까?"
+        }
+      ],
+      "other_links": [
+        "vqe",
+        "quantum-chemistry",
+        "ansatz",
+        "superposition",
+        "pauli-decomposition",
+        "vqe-algorithm"
+      ],
+      "previous": "ansatz",
+      "next": "pauli-decomposition"
+    },
+    "pauli-decomposition": {
+      "map": "vqe",
+      "kind": "개념",
+      "question": "에너지를 양자컴퓨터에서 측정하기 쉬운 항으로 나누려면?",
+      "prerequisites": [
+        "parameterized-circuit"
+      ],
+      "guide": "+ 상태를 준비해 Z 회로와 X 회로의 측정 결과를 비교하세요.",
+      "check": {
+        "question": "X와 Z의 평균을 같은 큐빗의 연속 측정으로 얻나요?",
+        "answer": "여기서는 동일한 상태를 각각 새로 준비한 별개의 측정 묶음에서 추정합니다. 평균들을 계수로 가중 합합니다."
+      },
+      "related": [
+        {
+          "slug": "measurement-shots",
+          "relation": "이어서 읽기",
+          "reason": "같은 상태를 준비했는데 왜 에너지 추정값이 달라질까?"
+        }
+      ],
+      "other_links": [
+        "vqe",
+        "quantum-chemistry",
+        "parameterized-circuit",
+        "measurement-shots"
+      ],
+      "previous": "parameterized-circuit",
+      "next": "measurement-shots"
+    },
+    "measurement-shots": {
+      "map": "vqe",
+      "kind": "개념",
+      "question": "같은 상태를 준비했는데 왜 에너지 추정값이 달라질까?",
+      "prerequisites": [
+        "pauli-decomposition"
+      ],
+      "guide": "같은 조건에서 다시 측정한 뒤 샷 수를 늘려 흔들림을 비교하세요.",
+      "check": {
+        "question": "샷을 한 번 늘리면 오차가 반드시 작아질까요?",
+        "answer": "한 번의 표본은 그렇지 않을 수 있습니다. 독립 반복에서의 전형적인 추정 변동이 샷 수의 제곱근에 반비례해 줄어듭니다."
+      },
+      "related": [
+        {
+          "slug": "classical-optimization",
+          "relation": "이어서 읽기",
+          "reason": "다음 회로 각도는 어떻게 선택할까?"
+        }
+      ],
+      "other_links": [
+        "vqe",
+        "quantum-chemistry",
+        "pauli-decomposition",
+        "classical-optimization"
+      ],
+      "previous": "pauli-decomposition",
+      "next": "classical-optimization"
+    },
+    "classical-optimization": {
+      "map": "vqe",
+      "kind": "개념",
+      "question": "다음 회로 각도는 어떻게 선택할까?",
+      "prerequisites": [
+        "measurement-shots"
+      ],
+      "guide": "작은 학습률과 큰 학습률로 같은 출발점에서 한 단계씩 진행하세요.",
+      "check": {
+        "question": "기울기가 0이면 반드시 최저점일까요?",
+        "answer": "최댓값이나 다른 정상점일 수도 있습니다. 수렴이나 작은 변화만으로 전역 최저점을 찾았다고 볼 수 없습니다."
+      },
+      "related": [
+        {
+          "slug": "vqe-algorithm",
+          "relation": "이어서 읽기",
+          "reason": "상태 준비와 에너지 측정이 어떻게 바닥상태 탐색으로 이어질까?"
+        },
+        {
+          "slug": "energy-expectation",
+          "relation": "함께 이해하기",
+          "reason": "한 번의 측정값과 평균 에너지는 어떻게 다를까?"
+        },
+        {
+          "slug": "ansatz",
+          "relation": "함께 이해하기",
+          "reason": "어떤 상태들을 후보로 찾아볼까?"
+        }
+      ],
+      "other_links": [
+        "vqe",
+        "quantum-chemistry",
+        "energy-expectation",
+        "ansatz",
+        "vqe-algorithm"
+      ],
+      "previous": "measurement-shots",
+      "next": "vqe-algorithm"
+    },
+    "vqe-algorithm": {
+      "map": "vqe",
+      "kind": "개념",
+      "question": "상태 준비와 에너지 측정이 어떻게 바닥상태 탐색으로 이어질까?",
+      "prerequisites": [
+        "classical-optimization"
+      ],
+      "guide": "상태 준비·측정·에너지 계산·각도 갱신을 한 단계씩 따라가세요.",
+      "check": {
+        "question": "각도를 갱신한 뒤 이전 측정값을 그대로 써도 될까요?",
+        "answer": "새 각도의 상태를 다시 준비하고 에너지를 새로 평가해야 합니다. 일반적으로 최적화 갱신에도 추가 평가가 필요합니다."
+      },
+      "related": [
+        {
+          "slug": "vqe-hydrogen",
+          "relation": "이어서 읽기",
+          "reason": "실제 분자의 에너지도 회전각을 바꿔 가며 낮출 수 있을까?"
+        },
+        {
+          "slug": "variational-principle",
+          "relation": "함께 이해하기",
+          "reason": "어떤 상태의 에너지를 낮추면 정확한 바닥상태에 가까워질까?"
+        },
+        {
+          "slug": "pauli-decomposition",
+          "relation": "함께 이해하기",
+          "reason": "에너지를 양자컴퓨터에서 측정하기 쉬운 항으로 나누려면?"
+        }
+      ],
+      "other_links": [
+        "vqe",
+        "quantum-chemistry",
+        "variational-principle",
+        "pauli-decomposition",
+        "measurement-shots",
+        "classical-optimization",
+        "vqe-hydrogen"
+      ],
+      "previous": "classical-optimization",
+      "next": "vqe-hydrogen"
+    },
+    "vqe-hydrogen": {
+      "map": "vqe",
+      "kind": "응용",
+      "question": "실제 분자의 에너지도 회전각을 바꿔 가며 낮출 수 있을까?",
+      "prerequisites": [
+        "vqe-algorithm"
+      ],
+      "guide": "핵 거리를 고정하고 최적화를 진행한 뒤, 거리를 바꾸어 다시 비교하세요.",
+      "check": {
+        "question": "이 예의 한 큐빗 표현을 모든 분자에 적용할 수 있을까요?",
+        "answer": "이 H₂/STO-3G 예제의 전자 수와 대칭으로 줄인 두 배치 공간을 사용한 것입니다. 일반 분자에는 같은 축소가 보장되지 않습니다."
+      },
+      "related": [
+        {
+          "slug": "vqe",
+          "relation": "이어서 읽기",
+          "reason": "상태를 만들고, 에너지를 재고,더 낮은 에너지의 상태를 찾아갑니다."
+        },
+        {
+          "slug": "pauli-decomposition",
+          "relation": "함께 이해하기",
+          "reason": "에너지를 양자컴퓨터에서 측정하기 쉬운 항으로 나누려면?"
+        },
+        {
+          "slug": "fermion-qubit",
+          "relation": "함께 이해하기",
+          "reason": "전자 두 개인 수소 분자에 왜 큐빗 네 개를 쓰기도 할까?"
+        }
+      ],
+      "other_links": [
+        "vqe",
+        "quantum-chemistry",
+        "vqe-algorithm",
+        "pauli-decomposition",
+        "fermion-qubit",
+        "born-oppenheimer",
+        "basis-set",
+        "configuration-interaction",
+        "sto-3g"
+      ],
+      "previous": "vqe-algorithm",
+      "next": "vqe"
+    },
+    "occupation-bitstrings": {
+      "map": "sqd",
+      "kind": "개념",
+      "question": "비트열 0101을 어떻게 전자 배치로 읽을까?",
+      "prerequisites": [],
+      "guide": "0101과 1010을 번갈아 고르고 전자 수 불일치 예시와 비교하세요.",
+      "check": {
+        "question": "비트의 1은 전자의 위치를 뜻할까요?",
+        "answer": "선택한 스핀 오비탈의 점유를 뜻합니다. 어떤 오비탈과 어떤 비트 순서를 사용하는지 함께 알아야 합니다."
+      },
+      "related": [
+        {
+          "slug": "hf-preparation",
+          "relation": "이어서 읽기",
+          "reason": "전자 배치를 큐빗에 기록하려면 어떤 게이트를 누를까?"
+        },
+        {
+          "slug": "electron-spin",
+          "relation": "함께 이해하기",
+          "reason": "측정축을 돌리면 스핀의 크기도 바뀔까?"
+        },
+        {
+          "slug": "slater-determinant",
+          "relation": "함께 이해하기",
+          "reason": "전자 둘의 이름을 바꾸면 왜 부호가 바뀔까?"
+        }
+      ],
+      "other_links": [
+        "sqd",
+        "quantum-computing",
+        "electron-spin",
+        "slater-determinant",
+        "computational-basis",
+        "hf-preparation"
+      ],
+      "previous": "sqd",
+      "next": "hf-preparation"
+    },
+    "hf-preparation": {
+      "map": "sqd",
+      "kind": "개념",
+      "question": "전자 배치를 큐빗에 기록하려면 어떤 게이트를 누를까?",
+      "prerequisites": [
+        "occupation-bitstrings"
+      ],
+      "guide": "초기화부터 X 두 개를 적용할 때까지 비트열을 따라가세요.",
+      "check": {
+        "question": "X 게이트만으로 HF 오비탈을 계산하나요?",
+        "answer": "오비탈과 점유는 앞선 고전 HF 계산에서 정합니다. 여기의 X 게이트는 그 점유 배치를 큐빗에 기록합니다."
+      },
+      "related": [
+        {
+          "slug": "excitation-state",
+          "relation": "이어서 읽기",
+          "reason": "하나의 전자 배치에서 여러 배치의 중첩 상태를 어떻게 준비할까?"
+        },
+        {
+          "slug": "hartree-fock",
+          "relation": "함께 이해하기",
+          "reason": "전자 밀도가 방정식을 바꾸는데, 어떻게 해를 찾을까?"
+        },
+        {
+          "slug": "quantum-gate",
+          "relation": "함께 이해하기",
+          "reason": "행렬을 곱해서 양자 상태를 어떻게 바꿀까?"
+        }
+      ],
+      "other_links": [
+        "sqd",
+        "quantum-computing",
+        "hartree-fock",
+        "quantum-gate",
+        "molecular-orbital",
+        "occupation-bitstrings",
+        "excitation-state"
+      ],
+      "previous": "occupation-bitstrings",
+      "next": "excitation-state"
+    },
+    "excitation-state": {
+      "map": "sqd",
+      "kind": "개념",
+      "question": "하나의 전자 배치에서 여러 배치의 중첩 상태를 어떻게 준비할까?",
+      "prerequisites": [
+        "hf-preparation"
+      ],
+      "guide": "기준 배치·반반·들뜬 배치 버튼에서 진폭과 확률을 비교하세요.",
+      "check": {
+        "question": "들뜬 배치를 섞으면 자동으로 더 낮은 에너지를 얻을까요?",
+        "answer": "아니요. 같은 H에서 유리한 배치와 상대 위상·계수를 선택해야 합니다. 이 페이지는 상태를 준비하는 역할을 보여 줍니다."
+      },
+      "related": [
+        {
+          "slug": "sqd-state-circuit",
+          "relation": "이어서 읽기",
+          "reason": "X·CNOT·회전 게이트를 지나며 전자 배치의 진폭이 어떻게 달라질까?"
+        },
+        {
+          "slug": "superposition",
+          "relation": "함께 이해하기",
+          "reason": "확률은 같은데, 다른 측정에서 결과가 달라질 수 있을까?"
+        },
+        {
+          "slug": "born-rule",
+          "relation": "함께 이해하기",
+          "reason": "음수나 복소수인 진폭이 어떻게 확률이 될까?"
+        }
+      ],
+      "other_links": [
+        "sqd",
+        "quantum-computing",
+        "superposition",
+        "born-rule",
+        "ansatz",
+        "hf-preparation",
+        "sqd-state-circuit"
+      ],
+      "previous": "hf-preparation",
+      "next": "sqd-state-circuit"
+    },
+    "sqd-state-circuit": {
+      "map": "sqd",
+      "kind": "개념",
+      "question": "X·CNOT·회전 게이트를 지나며 전자 배치의 진폭이 어떻게 달라질까?",
+      "prerequisites": [
+        "excitation-state"
+      ],
+      "guide": "게이트를 하나씩 누적하며 중간 상태와 완성 상태의 점유를 비교하세요.",
+      "check": {
+        "question": "중간의 모든 단계가 목표 전자 수를 보존하나요?",
+        "answer": "이 설명용 회로는 중간에 그 조건을 벗어날 수 있습니다. 정해진 입력에서 완성된 상태는 α·β 전자를 각각 하나씩 갖습니다."
+      },
+      "related": [
+        {
+          "slug": "sqd-sampling",
+          "relation": "이어서 읽기",
+          "reason": "회로를 한 번 실행하면 무엇을 얻고, 반복하면 무엇을 알 수 있을까?"
+        },
+        {
+          "slug": "quantum-gate",
+          "relation": "함께 이해하기",
+          "reason": "행렬을 곱해서 양자 상태를 어떻게 바꿀까?"
+        },
+        {
+          "slug": "rotation-gate",
+          "relation": "함께 이해하기",
+          "reason": "회전각을 바꾸면 무엇이 달라질까?"
+        }
+      ],
+      "other_links": [
+        "sqd",
+        "quantum-computing",
+        "quantum-gate",
+        "rotation-gate",
+        "entanglement",
+        "excitation-state",
+        "sqd-sampling"
+      ],
+      "previous": "excitation-state",
+      "next": "sqd-sampling"
+    },
+    "sqd-sampling": {
+      "map": "sqd",
+      "kind": "개념",
+      "question": "회로를 한 번 실행하면 무엇을 얻고, 반복하면 무엇을 알 수 있을까?",
+      "prerequisites": [
+        "sqd-state-circuit"
+      ],
+      "guide": "한 번 측정한 결과를 본 뒤 100회씩 더해 이론 확률과 비교하세요.",
+      "check": {
+        "question": "비트열 표본에 에너지 값이 함께 들어 있나요?",
+        "answer": "아니요. 표본은 측정된 점유 배치입니다. 에너지는 고전적으로 준비한 해밀토니안 정보와 함께 계산합니다."
+      },
+      "related": [
+        {
+          "slug": "sqd-subspace",
+          "relation": "이어서 읽기",
+          "reason": "양자 컴퓨터가 준 비트열로 어떻게 에너지와 상태를 구할까?"
+        },
+        {
+          "slug": "born-rule",
+          "relation": "함께 이해하기",
+          "reason": "음수나 복소수인 진폭이 어떻게 확률이 될까?"
+        },
+        {
+          "slug": "measurement-shots",
+          "relation": "함께 이해하기",
+          "reason": "같은 상태를 준비했는데 왜 에너지 추정값이 달라질까?"
+        }
+      ],
+      "other_links": [
+        "sqd",
+        "quantum-computing",
+        "born-rule",
+        "measurement-shots",
+        "superposition",
+        "sqd-state-circuit",
+        "sqd-subspace"
+      ],
+      "previous": "sqd-state-circuit",
+      "next": "sqd-subspace"
+    },
+    "sqd-subspace": {
+      "map": "sqd",
+      "kind": "개념",
+      "question": "양자 컴퓨터가 준 비트열로 어떻게 에너지와 상태를 구할까?",
+      "prerequisites": [
+        "sqd-sampling"
+      ],
+      "guide": "99:1과 50:50 입력을 비교하세요. 선택한 배치 집합과 최종 계수를 보세요.",
+      "check": {
+        "question": "측정 빈도가 최종 SQD 상태의 계수인가요?",
+        "answer": "아니요. 이 예에서는 등장 배치로 부분공간을 선택한 뒤 고전 대각화로 새 계수를 구합니다. 실제 SQD의 배치 선택·복구에서는 빈도가 영향을 줄 수 있습니다."
+      },
+      "related": [
+        {
+          "slug": "large-hamiltonian",
+          "relation": "이어서 읽기",
+          "reason": "거대한 행렬을 전부 만들지 않고도에너지 문제를 정의할 수 있을까요?"
+        },
+        {
+          "slug": "hamiltonian-elements",
+          "relation": "함께 이해하기",
+          "reason": "오비탈 적분은 어떻게 전자 배치 사이의 행렬이 될까?"
+        },
+        {
+          "slug": "vqe-algorithm",
+          "relation": "함께 이해하기",
+          "reason": "상태 준비와 에너지 측정이 어떻게 바닥상태 탐색으로 이어질까?"
+        }
+      ],
+      "other_links": [
+        "sqd",
+        "quantum-computing",
+        "hamiltonian-elements",
+        "subspace",
+        "diagonalization",
+        "large-hamiltonian",
+        "sqd-sampling"
+      ],
+      "previous": "sqd-sampling",
+      "next": "sqd"
+    },
+    "h2-hamiltonian": {
+      "map": "quantum-chemistry",
+      "kind": "응용",
+      "question": "기저와 분자를 바꾸면 해밀토니안 행렬은 어떻게 달라질까?",
+      "prerequisites": [
+        "hamiltonian-elements"
+      ],
+      "guide": "H₂의 기저 2개·4개를 비교한 뒤 HeH⁺에서 두 배치만 선택해 보세요.",
+      "check": {
+        "question": "대칭 행렬이라는 사실만으로 두 배치만 남겨도 될까요?",
+        "answer": "아니요. 행렬의 대칭성과 분자의 반전 대칭에 의한 블록 분리는 다릅니다. 제외한 상태와의 결합과 관심 상태가 속한 블록을 확인해야 합니다."
+      },
+      "related": [
+        {
+          "slug": "h2-state-energy",
+          "relation": "이어서 읽기",
+          "reason": "배치의 계수와 상대 부호가 H₂의 에너지를 어떻게 바꿀까?"
+        },
+        {
+          "slug": "hamiltonian-elements",
+          "relation": "함께 이해하기",
+          "reason": "오비탈 적분은 어떻게 전자 배치 사이의 행렬이 될까?"
+        },
+        {
+          "slug": "large-hamiltonian",
+          "relation": "함께 이해하기",
+          "reason": "거대한 행렬을 전부 만들지 않고도에너지 문제를 정의할 수 있을까요?"
+        }
+      ],
+      "other_links": [
+        "quantum-chemistry",
+        "hamiltonian",
+        "hamiltonian-elements",
+        "sto-3g",
+        "vqe-hydrogen",
+        "sqd-subspace",
+        "large-hamiltonian"
+      ],
+      "previous": "hamiltonian-elements",
+      "next": "h2-state-energy"
+    },
+    "h2-state-energy": {
+      "map": "quantum-chemistry",
+      "kind": "응용",
+      "question": "배치의 계수와 상대 부호가 H₂의 에너지를 어떻게 바꿀까?",
+      "prerequisites": [
+        "h2-hamiltonian"
+      ],
+      "guide": "같은 두 배치의 계수에서 상대 부호를 바꾸어 확률과 에너지를 비교하세요.",
+      "check": {
+        "question": "행렬에 핵 반발이 이미 포함되어 있으면 다시 더해야 할까요?",
+        "answer": "다시 더하지 않습니다. 이 페이지의 H와 표시 에너지는 핵 반발을 포함한 총 BO 에너지입니다."
+      },
+      "related": [
+        {
+          "slug": "h2-hamiltonian",
+          "relation": "이어서 읽기",
+          "reason": "같은 분자에서 기저를 늘리면?다른 분자인데 행렬 크기가 같다면?"
+        },
+        {
+          "slug": "vqe-hydrogen",
+          "relation": "분자에 적용",
+          "reason": "실제 분자의 에너지도 회전각을 바꿔 가며 낮출 수 있을까?"
+        },
+        {
+          "slug": "superposition",
+          "relation": "함께 이해하기",
+          "reason": "확률은 같은데, 다른 측정에서 결과가 달라질 수 있을까?"
+        }
+      ],
+      "other_links": [
+        "h2-hamiltonian",
+        "learning-maps",
+        "quantum-chemistry"
+      ],
+      "previous": "h2-hamiltonian",
+      "next": "large-hamiltonian"
+    },
+    "large-hamiltonian": {
+      "map": "quantum-chemistry",
+      "kind": "개념",
+      "question": "거대한 행렬을 전부 만들지 않고도에너지 문제를 정의할 수 있을까요?",
+      "prerequisites": [
+        "h2-state-energy"
+      ],
+      "guide": "VQE와 SQD가 같은 적분을 각각 어떤 계산에 쓰는지 두 경로를 따라가세요.",
+      "check": {
+        "question": "해밀토니안을 정의할 수 있으면 바닥상태도 쉽게 구하나요?",
+        "answer": "계수와 작용 규칙을 준비하는 일과 많은 전자의 최적 상태를 찾는 일은 다릅니다. 뒤의 계산은 상태 공간이 커져 훨씬 어려울 수 있습니다."
+      },
+      "related": [
+        {
+          "slug": "hamiltonian-size",
+          "relation": "이어서 읽기",
+          "reason": "적분은 계산할 수 있는데 왜 많은 전자의 상태는 어려울까?"
+        },
+        {
+          "slug": "pauli-decomposition",
+          "relation": "함께 이해하기",
+          "reason": "에너지를 양자컴퓨터에서 측정하기 쉬운 항으로 나누려면?"
+        },
+        {
+          "slug": "sqd-subspace",
+          "relation": "함께 이해하기",
+          "reason": "양자 컴퓨터가 준 비트열로 어떻게 에너지와 상태를 구할까?"
+        }
+      ],
+      "other_links": [
+        "quantum-chemistry",
+        "h2-hamiltonian",
+        "pauli-decomposition",
+        "sqd-subspace",
+        "electron-integrals",
+        "hamiltonian-elements",
+        "active-space",
+        "fermion-qubit",
+        "sqd"
+      ],
+      "previous": "h2-state-energy",
+      "next": "hamiltonian-size"
+    },
+    "hamiltonian-size": {
+      "map": "quantum-chemistry",
+      "kind": "개념",
+      "question": "적분은 계산할 수 있는데 왜 많은 전자의 상태는 어려울까?",
+      "prerequisites": [
+        "large-hamiltonian"
+      ],
+      "guide": "40궤도·20전자와 더 작은 예를 비교하며 적분 수와 배치 수의 증가를 보세요.",
+      "check": {
+        "question": "40⁴는 독립적인 적분 수나 계산 시간인가요?",
+        "answer": "대칭과 0, 압축을 고려하기 전의 첨자 조합 수입니다. 독립 적분 수·메모리·실행 시간은 구현과 조건에 따라 달라집니다."
+      },
+      "related": [
+        {
+          "slug": "large-hamiltonian",
+          "relation": "이어서 읽기",
+          "reason": "거대한 행렬을 전부 만들지 않고도에너지 문제를 정의할 수 있을까요?"
+        },
+        {
+          "slug": "active-space",
+          "relation": "함께 이해하기",
+          "reason": "어떤 전자와 오비탈을 자세히 계산할까?"
+        },
+        {
+          "slug": "sqd-subspace",
+          "relation": "함께 이해하기",
+          "reason": "양자 컴퓨터가 준 비트열로 어떻게 에너지와 상태를 구할까?"
+        }
+      ],
+      "other_links": [
+        "large-hamiltonian",
+        "learning-maps",
+        "quantum-chemistry"
+      ],
+      "previous": "large-hamiltonian",
+      "next": "variational-principle"
+    }
+  }
+}
