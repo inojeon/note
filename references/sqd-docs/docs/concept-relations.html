@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>개념 관계도 · 개념 노트</title><link rel="stylesheet" href="assets/concepts.css"><link rel="stylesheet" href="assets/note-relations.css"></head>
+<body><a class="skip" href="#content">본문으로 건너뛰기</a><main id="content">
+<nav class="docnav"><a href="concept-learning-maps.html">← 전체 학습 지도</a></nav>
+<p class="eyebrow">개념 노트 · 연결을 따라 이해하기</p>
+<h1>개념 관계도</h1>
+<p class="lead">큰 그림에서 시작해, 궁금한 개념의 이웃을 만나보세요.</p>
+<div class="relations-app" id="relations-app">
+  <div class="rg-toolbar">
+    <div class="rg-modes" role="group" aria-label="관계도 보기 방식">
+      <button type="button" data-rg-view="overview" aria-pressed="true">전체 분야</button>
+      <button type="button" data-rg-view="note" aria-pressed="false">노트 연결</button>
+      <button type="button" data-rg-view="path" aria-pressed="false">학습 경로</button>
+    </div>
+    <div class="rg-search">
+      <label for="rg-search">관계도에서 노트 찾기</label>
+      <input id="rg-search" type="search" placeholder="예: 해밀토니안, qubit, STO-3G" autocomplete="off" spellcheck="false" aria-controls="rg-results">
+      <div class="rg-search-pop" id="rg-search-pop" hidden>
+        <p id="rg-search-status" role="status"></p>
+        <ul id="rg-results" aria-label="관계도 검색 결과"></ul>
+      </div>
+    </div>
+  </div>
+  <div class="rg-filters" id="rg-filters" role="group" aria-label="연결 종류" hidden>
+    <button type="button" data-rg-filter="all" aria-pressed="true">전체 연결</button>
+    <button type="button" data-rg-filter="prerequisite" aria-pressed="false">선수 개념</button>
+    <button type="button" data-rg-filter="application" aria-pressed="false">응용</button>
+    <button type="button" data-rg-filter="related" aria-pressed="false">함께 읽기</button>
+  </div>
+  <div class="rg-paths" id="rg-paths" role="group" aria-label="학습 목표" hidden></div>
+  <div class="rg-layout">
+    <section class="rg-canvas-card" aria-labelledby="rg-heading">
+      <div class="rg-canvas-header"><h2 id="rg-heading">전체 분야</h2><span class="rg-count" id="rg-count"></span></div>
+      <p class="rg-help" id="rg-help">분야를 누르면 그 안의 노트를 볼 수 있습니다.</p>
+      <div id="rg-viewport" class="rg-viewport" tabindex="0" aria-label="관계 그림. 노트가 많으면 위아래로 스크롤하세요.">
+        <div id="rg-stage" class="rg-stage"><svg id="rg-fig" aria-hidden="true"></svg><div id="rg-nodes"></div></div>
+      </div>
+      <div class="rg-legend" id="rg-legend" aria-label="연결선 읽는 법"></div>
+      <p id="rg-live" class="rg-sr-only" role="status" aria-live="polite"></p>
+    </section>
+    <aside class="rg-inspector" id="rg-inspector" aria-labelledby="rg-detail-title" tabindex="-1"></aside>
+  </div>
+  <p class="rg-footnote">선수 개념은 노트에 표시한 준비 지식입니다. ‘함께 읽기’는 순서를 강제하지 않는 연결이며, 학습 경로는 목표에 맞춘 추천 순서입니다.</p>
+</div>
+<noscript><p>관계도를 조작하려면 자바스크립트가 필요합니다. <a href="concept-learning-maps.html">학습 지도 목록</a>에서도 모든 노트를 읽을 수 있습니다.</p></noscript>
+<script id="rg-data" type="application/json">{"groups": [{"id": "home", "title": "선형대수", "caption": "상태를 표현하는 수학", "color": "n", "summary": "벡터와 기저에서 출발해 고유값과 작은 부분공간의 계산으로 이어집니다.", "notes": ["vector", "basis", "inner-product", "matrix", "symmetric", "eigen", "diagonalization", "diagonalization-coordinates", "power", "subspace", "krylov"]}, {"id": "quantum-chemistry", "title": "양자화학", "caption": "상태에서 분자의 에너지로", "color": "beta", "summary": "양자 상태와 해밀토니안으로 원자·분자의 전자 구조를 설명합니다.", "notes": ["quantum-state", "born-rule", "superposition", "observable", "hamiltonian", "schrodinger", "born-oppenheimer", "orbital", "electron-spin", "pauli", "electronic-configuration", "slater-determinant", "basis-set", "sto-3g", "basis-orbital-energies", "molecular-orbital", "electron-integrals", "hamiltonian-elements", "h2-hamiltonian", "h2-state-energy", "large-hamiltonian", "hamiltonian-size", "variational-principle", "hartree-fock", "electron-correlation", "configuration-interaction", "active-space", "potential-energy"]}, {"id": "quantum-computing", "title": "큐빗·회로·측정", "caption": "양자컴퓨터의 언어", "color": "alpha", "summary": "상태를 큐빗으로 표현하고 회로로 준비한 뒤, 측정 결과를 읽습니다.", "notes": ["two-level-system", "qubit", "computational-basis", "quantum-gate", "rotation-gate", "measurement-basis", "energy-measurement", "tensor-product", "entanglement", "fermion-qubit"]}, {"id": "vqe", "title": "VQE", "caption": "에너지를 낮추는 반복", "color": "accent", "summary": "준비한 상태의 평균 에너지를 측정하고 회로의 매개변수를 조절합니다.", "notes": ["energy-expectation", "ansatz", "parameterized-circuit", "pauli-decomposition", "measurement-shots", "classical-optimization", "vqe-algorithm", "vqe-hydrogen"]}, {"id": "sqd", "title": "SQD", "caption": "표본에서 부분공간으로", "color": "beta", "summary": "회로에서 얻은 전자 배치로 부분공간을 만들고 고전 컴퓨터에서 대각화합니다.", "notes": ["occupation-bitstrings", "hf-preparation", "excitation-state", "sqd-state-circuit", "sqd-sampling", "sqd-subspace"]}], "overview": [{"from": "home", "to": "quantum-chemistry"}, {"from": "home", "to": "quantum-computing"}, {"from": "quantum-chemistry", "to": "vqe"}, {"from": "quantum-chemistry", "to": "sqd"}, {"from": "quantum-computing", "to": "vqe"}, {"from": "quantum-computing", "to": "sqd"}], "paths": [{"id": "vqe-energy", "title": "VQE의 에너지 측정 이해", "summary": "한 큐빗 예제로 상태 준비와 에너지 계산의 연결을 따라갑니다.", "steps": [{"slug": "computational-basis", "why": "0·1이라는 기준과 상태의 계수를 먼저 구별합니다."}, {"slug": "rotation-gate", "why": "회로 각도가 상태의 계수를 어떻게 바꾸는지 봅니다."}, {"slug": "energy-expectation", "why": "준비한 상태와 고정된 해밀토니안으로 평균 에너지를 계산합니다."}, {"slug": "pauli-decomposition", "why": "해밀토니안을 측정하기 쉬운 항으로 나누어 읽습니다."}, {"slug": "measurement-shots", "why": "반복 측정으로 평균을 추정할 때 생기는 오차를 이해합니다."}]}, {"id": "sqd-quantum", "title": "SQD의 양자 계산 이해", "summary": "전자 배치가 비트열 표본이 되기까지, 양자회로가 하는 일을 살펴봅니다.", "steps": [{"slug": "occupation-bitstrings", "why": "전자 배치와 큐빗 비트열의 대응부터 확인합니다."}, {"slug": "hf-preparation", "why": "계산의 출발점인 기준 배치를 준비합니다."}, {"slug": "excitation-state", "why": "다른 배치를 중첩하는 이유를 이해합니다."}, {"slug": "sqd-state-circuit", "why": "게이트를 하나씩 적용해 상태 준비 과정을 따라갑니다."}, {"slug": "sqd-sampling", "why": "같은 회로를 반복해 배치의 표본을 모읍니다."}]}, {"id": "define-hamiltonian", "title": "분자의 해밀토니안 정의하기", "summary": "함수를 선택하고 적분을 계산해 다전자 에너지 문제를 정의합니다.", "steps": [{"slug": "basis-set", "why": "오비탈을 표현할 함수의 집합을 선택합니다."}, {"slug": "electron-integrals", "why": "선택한 함수에서 1전자·2전자 적분을 계산합니다."}, {"slug": "hamiltonian-elements", "why": "적분이 전자 배치 사이의 행렬원소가 되는 과정을 봅니다."}, {"slug": "h2-hamiltonian", "why": "기저와 분자가 달라지면 행렬이 어떻게 달라지는지 비교합니다."}, {"slug": "large-hamiltonian", "why": "거대한 행렬을 전부 저장하지 않고 에너지 문제를 정의합니다."}]}], "notes": [{"id": "vector", "title": "벡터(Vector)", "label": "벡터", "group": "home", "kind": "개념", "question": "여러 성분(Component)을 하나의 대상으로 다루려면?"}, {"id": "basis", "title": "기저(Basis)와 좌표(Coordinates)", "label": "기저와 좌표", "group": "home", "kind": "개념", "question": "같은 벡터를 다른 숫자로 적을 수 있을까?"}, {"id": "inner-product", "title": "내적(Inner Product)과 길이", "label": "내적과 길이", "group": "home", "kind": "개념", "question": "두 벡터가 얼마나 같은 방향을 향할까?"}, {"id": "matrix", "title": "행렬(Matrix)과 선형변환(Linear Transformation)", "label": "행렬과 선형변환", "group": "home", "kind": "개념", "question": "벡터를 일관된 규칙으로 바꾸려면?"}, {"id": "symmetric", "title": "대칭 행렬(Symmetric Matrix)", "label": "대칭 행렬", "group": "home", "kind": "개념", "question": "행과 열을 바꿔도 같은 행렬은 왜 특별할까?"}, {"id": "eigen", "title": "고유벡터(Eigenvector)와 고유값(Eigenvalue)", "label": "고유벡터와 고유값", "group": "home", "kind": "개념", "question": "변환해도 같은 직선 위에 남는 벡터가 있을까?"}, {"id": "diagonalization", "title": "대각화(Diagonalization)", "label": "대각화", "group": "home", "kind": "개념", "question": "기준을 바꾸면 행렬 계산이 단순해질까?"}, {"id": "diagonalization-coordinates", "title": "대각화와 좌표축 바꾸기", "label": "대각화와 좌표축 바꾸기", "group": "home", "kind": "개념", "question": "같은 행렬을 다른 기저로 보면 무엇이 달라질까?"}, {"id": "power", "title": "멱법(Power Method)과 반복", "label": "멱법과 반복", "group": "home", "kind": "개념", "question": "행렬을 계속 곱하면 어떤 성분(Component)이 남을까?"}, {"id": "subspace", "title": "부분공간(Subspace)과 투영", "label": "부분공간과 투영", "group": "home", "kind": "개념", "question": "큰 공간의 일부만으로 근사하려면?"}, {"id": "krylov", "title": "크릴로프 공간(Krylov Subspace)과 랑초스(Lanczos Algorithm)", "label": "크릴로프 공간과 랑초스", "group": "home", "kind": "개념", "question": "반복 계산의 중간 결과도 활용할 수 있을까?"}, {"id": "hamiltonian", "title": "해밀토니안(Hamiltonian)과 에너지", "label": "해밀토니안과 에너지", "group": "quantum-chemistry", "kind": "개념", "question": "행렬에서 에너지와 양자 상태를 어떻게 읽을까?"}, {"id": "quantum-state", "title": "양자 상태(Quantum State)와 파동함수(Wavefunction)", "label": "양자 상태와 파동함수", "group": "quantum-chemistry", "kind": "개념", "question": "좌표가 달라져도 같은 양자 상태일 수 있을까?"}, {"id": "born-rule", "title": "확률 진폭(Probability Amplitude)과 보른 규칙(Born Rule)", "label": "확률 진폭과 보른 규칙", "group": "quantum-chemistry", "kind": "개념", "question": "음수나 복소수인 진폭이 어떻게 확률이 될까?"}, {"id": "superposition", "title": "중첩(Superposition)과 상대 위상(Relative Phase)", "label": "중첩과 상대 위상", "group": "quantum-chemistry", "kind": "개념", "question": "확률은 같은데, 다른 측정에서 결과가 달라질 수 있을까?"}, {"id": "observable", "title": "관측량(Observable)과 기댓값(Expectation Value)", "label": "관측량과 기댓값", "group": "quantum-chemistry", "kind": "개념", "question": "평균 에너지가 2라면, 한 번 측정해도 2가 나올까?"}, {"id": "schrodinger", "title": "슈뢰딩거 방정식(Schrödinger Equation)", "label": "슈뢰딩거 방정식", "group": "quantum-chemistry", "kind": "개념", "question": "고유값과 고유벡터를 구하면, 왜 원자의 에너지와 상태를 알 수 있을까?"}, {"id": "born-oppenheimer", "title": "보른–오펜하이머 근사(Born–Oppenheimer Approximation)", "label": "보른–오펜하이머 근사", "group": "quantum-chemistry", "kind": "개념", "question": "왜 핵의 위치를 고정하고 전자 문제부터 풀까?"}, {"id": "orbital", "title": "오비탈(Orbital)", "label": "오비탈", "group": "quantum-chemistry", "kind": "개념", "question": "오비탈은 전자가 도는 길일까?"}, {"id": "electron-spin", "title": "전자 스핀(Electron Spin)", "label": "전자 스핀", "group": "quantum-chemistry", "kind": "개념", "question": "측정축을 돌리면 스핀의 크기도 바뀔까?"}, {"id": "pauli", "title": "파울리 배타 원리(Pauli Exclusion Principle)", "label": "파울리 배타 원리", "group": "quantum-chemistry", "kind": "개념", "question": "같은 오비탈에 전자를 둘 넣어도 될까?"}, {"id": "slater-determinant", "title": "슬레이터 행렬식(Slater Determinant)", "label": "슬레이터 행렬식", "group": "quantum-chemistry", "kind": "개념", "question": "전자 둘의 이름을 바꾸면 왜 부호가 바뀔까?"}, {"id": "electronic-configuration", "title": "전자 배치(Electronic Configuration)", "label": "전자 배치", "group": "quantum-chemistry", "kind": "개념", "question": "같은 공간 오비탈 점유가 같은 다전자 상태를 뜻할까?"}, {"id": "molecular-orbital", "title": "분자 오비탈(Molecular Orbital)", "label": "분자 오비탈", "group": "quantum-chemistry", "kind": "개념", "question": "원자 중심 함수 둘을 더하고 빼면 무엇이 달라질까?"}, {"id": "basis-set", "title": "기저 집합(Basis Set)", "label": "기저 집합", "group": "quantum-chemistry", "kind": "개념", "question": "기저 함수가 부족하면 어떤 오차가 남을까?"}, {"id": "sto-3g", "title": "STO-3G와 기저 집합의 선택", "label": "STO-3G와 기저 집합의 선택", "group": "quantum-chemistry", "kind": "개념", "question": "STO-3G는 무엇이고, 다른 기저를 쓰면 무엇이 달라질까?"}, {"id": "basis-orbital-energies", "title": "기저 집합과 오비탈 에너지(Orbital Energy)", "label": "기저 집합과 오비탈 에너지", "group": "quantum-chemistry", "kind": "응용", "question": "같은 H₂인데 기저를 바꾸면 왜 준위 수와 위치가 달라질까?"}, {"id": "electron-integrals", "title": "전자 적분(Electron Integrals)", "label": "전자 적분", "group": "quantum-chemistry", "kind": "개념", "question": "오비탈로부터 에너지 계산에 필요한 숫자를 어떻게 만들까?"}, {"id": "hamiltonian-elements", "title": "해밀토니안 행렬원소(Hamiltonian Matrix Elements)", "label": "해밀토니안 행렬원소", "group": "quantum-chemistry", "kind": "개념", "question": "오비탈 적분은 어떻게 전자 배치 사이의 행렬이 될까?"}, {"id": "variational-principle", "title": "변분 원리(Variational Principle)", "label": "변분 원리", "group": "quantum-chemistry", "kind": "개념", "question": "어떤 상태의 에너지를 낮추면 정확한 바닥상태에 가까워질까?"}, {"id": "hartree-fock", "title": "하트리–폭(Hartree–Fock)와 SCF", "label": "하트리–폭와 SCF", "group": "quantum-chemistry", "kind": "개념", "question": "전자 밀도가 방정식을 바꾸는데, 어떻게 해를 찾을까?"}, {"id": "electron-correlation", "title": "전자 상관(Electron Correlation)", "label": "전자 상관", "group": "quantum-chemistry", "kind": "개념", "question": "하나의 행렬식으로 놓치는 에너지는 어디에서 올까?"}, {"id": "configuration-interaction", "title": "구성 상호작용(Configuration Interaction)", "label": "구성 상호작용", "group": "quantum-chemistry", "kind": "개념", "question": "행렬식을 더하면 상태와 에너지는 어떻게 달라질까?"}, {"id": "active-space", "title": "활성 공간(Active Space)", "label": "활성 공간", "group": "quantum-chemistry", "kind": "개념", "question": "어떤 전자와 오비탈을 자세히 계산할까?"}, {"id": "potential-energy", "title": "퍼텐셜 에너지 곡선(Potential Energy Curve)", "label": "퍼텐셜 에너지 곡선", "group": "quantum-chemistry", "kind": "개념", "question": "결합 길이와 에너지 곡선에서 무엇을 읽을까?"}, {"id": "two-level-system", "title": "두 상태 계(Two-Level System)", "label": "두 상태 계", "group": "quantum-computing", "kind": "개념", "question": "두 상태만으로 문제를 표현한다는 것은 무엇일까?"}, {"id": "qubit", "title": "큐빗(Qubit)", "label": "큐빗", "group": "quantum-computing", "kind": "개념", "question": "기준 상태는 둘인데 가능한 상태는 왜 더 많을까?"}, {"id": "computational-basis", "title": "계산 기저(Computational Basis)와 상태 벡터", "label": "계산 기저와 상태 벡터", "group": "quantum-computing", "kind": "개념", "question": "왜 0 상태는 영벡터가 아니라 첫째 좌표가 1인 벡터일까?"}, {"id": "quantum-gate", "title": "양자 게이트(Quantum Gate)", "label": "양자 게이트", "group": "quantum-computing", "kind": "개념", "question": "행렬을 곱해서 양자 상태를 어떻게 바꿀까?"}, {"id": "rotation-gate", "title": "회전 게이트(Rotation Gate)와 블로흐 구", "label": "회전 게이트와 블로흐 구", "group": "quantum-computing", "kind": "개념", "question": "회전각을 바꾸면 무엇이 달라질까?"}, {"id": "measurement-basis", "title": "측정 기저(Measurement Basis)", "label": "측정 기저", "group": "quantum-computing", "kind": "개념", "question": "같은 상태인데, 무엇을 측정하느냐에 따라 결과가 달라질까?"}, {"id": "energy-measurement", "title": "계산 기저 측정과 에너지 측정(Energy Measurement)", "label": "계산 기저 측정과 에너지 측정", "group": "quantum-computing", "kind": "개념", "question": "0·1을 읽는 것과 에너지를 읽는 것은 어떻게 다를까?"}, {"id": "tensor-product", "title": "텐서곱(Tensor Product)과 여러 큐빗", "label": "텐서곱과 여러 큐빗", "group": "quantum-computing", "kind": "개념", "question": "큐빗 두 개의 계수는 어떻게 네 개가 될까?"}, {"id": "entanglement", "title": "얽힘(Entanglement)", "label": "얽힘", "group": "quantum-computing", "kind": "개념", "question": "전체 상태를 각 큐빗의 상태로 나눌 수 있을까?"}, {"id": "fermion-qubit", "title": "전자 상태를 큐빗으로 옮기기(Fermion-to-Qubit Mapping)", "label": "전자 상태를 큐빗으로 옮기기", "group": "quantum-computing", "kind": "개념", "question": "전자 두 개인 수소 분자에 왜 큐빗 네 개를 쓰기도 할까?"}, {"id": "energy-expectation", "title": "평균 에너지와 기댓값(Expectation Value)", "label": "평균 에너지와 기댓값", "group": "vqe", "kind": "개념", "question": "한 번의 측정값과 평균 에너지는 어떻게 다를까?"}, {"id": "ansatz", "title": "안사츠(Ansatz)", "label": "안사츠", "group": "vqe", "kind": "개념", "question": "어떤 상태들을 후보로 찾아볼까?"}, {"id": "parameterized-circuit", "title": "매개변수화 양자회로(Parameterized Quantum Circuit)", "label": "매개변수화 양자회로", "group": "vqe", "kind": "개념", "question": "회전각 하나로 양자 상태를 어떻게 바꿀까?"}, {"id": "pauli-decomposition", "title": "파울리 분해(Pauli Decomposition)", "label": "파울리 분해", "group": "vqe", "kind": "개념", "question": "에너지를 양자컴퓨터에서 측정하기 쉬운 항으로 나누려면?"}, {"id": "measurement-shots", "title": "반복 측정(Shots)과 표본 오차(Sampling Error)", "label": "반복 측정과 표본 오차", "group": "vqe", "kind": "개념", "question": "같은 상태를 준비했는데 왜 에너지 추정값이 달라질까?"}, {"id": "classical-optimization", "title": "고전 최적화(Classical Optimization)", "label": "고전 최적화", "group": "vqe", "kind": "개념", "question": "다음 회로 각도는 어떻게 선택할까?"}, {"id": "vqe-algorithm", "title": "VQE 전체 알고리즘", "label": "VQE 전체 알고리즘", "group": "vqe", "kind": "개념", "question": "상태 준비와 에너지 측정이 어떻게 바닥상태 탐색으로 이어질까?"}, {"id": "vqe-hydrogen", "title": "VQE로 수소 분자 계산하기", "label": "VQE로 수소 분자 계산하기", "group": "vqe", "kind": "응용", "question": "실제 분자의 에너지도 회전각을 바꿔 가며 낮출 수 있을까?"}, {"id": "occupation-bitstrings", "title": "점유수 표현(Occupation-number Representation)과 비트열", "label": "점유수 표현과 비트열", "group": "sqd", "kind": "개념", "question": "비트열 0101을 어떻게 전자 배치로 읽을까?"}, {"id": "hf-preparation", "title": "하트리–폭 기준 상태(Hartree–Fock Reference State) 준비", "label": "하트리–폭 기준 상태 준비", "group": "sqd", "kind": "개념", "question": "전자 배치를 큐빗에 기록하려면 어떤 게이트를 누를까?"}, {"id": "excitation-state", "title": "전자 들뜸(Excitation)과 중첩 상태 준비", "label": "전자 들뜸과 중첩 상태 준비", "group": "sqd", "kind": "개념", "question": "하나의 전자 배치에서 여러 배치의 중첩 상태를 어떻게 준비할까?"}, {"id": "sqd-state-circuit", "title": "상태 준비 회로(State Preparation Circuit) 읽기", "label": "상태 준비 회로 읽기", "group": "sqd", "kind": "개념", "question": "X·CNOT·회전 게이트를 지나며 전자 배치의 진폭이 어떻게 달라질까?"}, {"id": "sqd-sampling", "title": "측정 표본(Sample)과 전자 배치", "label": "측정 표본과 전자 배치", "group": "sqd", "kind": "개념", "question": "회로를 한 번 실행하면 무엇을 얻고, 반복하면 무엇을 알 수 있을까?"}, {"id": "sqd-subspace", "title": "표본에서 부분공간 대각화(Subspace Diagonalization)로", "label": "표본에서 부분공간 대각화로", "group": "sqd", "kind": "개념", "question": "양자 컴퓨터가 준 비트열로 어떻게 에너지와 상태를 구할까?"}, {"id": "h2-hamiltonian", "title": "기저와 분자로 비교하는 해밀토니안(Hamiltonian)", "label": "기저와 분자로 비교하는 해밀토니안", "group": "quantum-chemistry", "kind": "응용", "question": "기저와 분자를 바꾸면 해밀토니안 행렬은 어떻게 달라질까?"}, {"id": "h2-state-energy", "title": "H₂의 두 배치와 에너지", "label": "H₂의 두 배치와 에너지", "group": "quantum-chemistry", "kind": "응용", "question": "배치의 계수와 상대 부호가 H₂의 에너지를 어떻게 바꿀까?"}, {"id": "large-hamiltonian", "title": "큰 분자의 해밀토니안: 적분에서 VQE·SQD까지", "label": "큰 분자의 해밀토니안: 적분에서 VQE·SQD까지", "group": "quantum-chemistry", "kind": "개념", "question": "거대한 행렬을 전부 만들지 않고도에너지 문제를 정의할 수 있을까요?"}, {"id": "hamiltonian-size", "title": "적분 수와 상태 공간의 크기", "label": "적분 수와 상태 공간의 크기", "group": "quantum-chemistry", "kind": "개념", "question": "적분은 계산할 수 있는데 왜 많은 전자의 상태는 어려울까?"}], "edges": [{"from": "vector", "to": "basis", "type": "prerequisite"}, {"from": "vector", "to": "inner-product", "type": "prerequisite"}, {"from": "vector", "to": "matrix", "type": "prerequisite"}, {"from": "basis", "to": "matrix", "type": "prerequisite"}, {"from": "matrix", "to": "symmetric", "type": "prerequisite"}, {"from": "inner-product", "to": "symmetric", "type": "prerequisite"}, {"from": "matrix", "to": "eigen", "type": "prerequisite"}, {"from": "basis", "to": "diagonalization", "type": "prerequisite"}, {"from": "eigen", "to": "diagonalization", "type": "prerequisite"}, {"from": "diagonalization", "to": "diagonalization-coordinates", "type": "prerequisite"}, {"from": "eigen", "to": "power", "type": "prerequisite"}, {"from": "inner-product", "to": "power", "type": "prerequisite"}, {"from": "basis", "to": "subspace", "type": "prerequisite"}, {"from": "inner-product", "to": "subspace", "type": "prerequisite"}, {"from": "power", "to": "krylov", "type": "prerequisite"}, {"from": "subspace", "to": "krylov", "type": "prerequisite"}, {"from": "vector", "to": "hamiltonian", "type": "prerequisite"}, {"from": "eigen", "to": "hamiltonian", "type": "prerequisite"}, {"from": "vector", "to": "quantum-state", "type": "prerequisite"}, {"from": "basis", "to": "quantum-state", "type": "prerequisite"}, {"from": "quantum-state", "to": "born-rule", "type": "prerequisite"}, {"from": "inner-product", "to": "born-rule", "type": "prerequisite"}, {"from": "quantum-state", "to": "superposition", "type": "prerequisite"}, {"from": "born-rule", "to": "superposition", "type": "prerequisite"}, {"from": "quantum-state", "to": "observable", "type": "prerequisite"}, {"from": "born-rule", "to": "observable", "type": "prerequisite"}, {"from": "eigen", "to": "schrodinger", "type": "prerequisite"}, {"from": "quantum-state", "to": "schrodinger", "type": "prerequisite"}, {"from": "schrodinger", "to": "born-oppenheimer", "type": "prerequisite"}, {"from": "hamiltonian", "to": "born-oppenheimer", "type": "prerequisite"}, {"from": "quantum-state", "to": "orbital", "type": "prerequisite"}, {"from": "born-rule", "to": "orbital", "type": "prerequisite"}, {"from": "quantum-state", "to": "electron-spin", "type": "prerequisite"}, {"from": "observable", "to": "electron-spin", "type": "prerequisite"}, {"from": "orbital", "to": "pauli", "type": "prerequisite"}, {"from": "electron-spin", "to": "pauli", "type": "prerequisite"}, {"from": "electronic-configuration", "to": "slater-determinant", "type": "prerequisite"}, {"from": "pauli", "to": "slater-determinant", "type": "prerequisite"}, {"from": "orbital", "to": "electronic-configuration", "type": "prerequisite"}, {"from": "electron-spin", "to": "electronic-configuration", "type": "prerequisite"}, {"from": "orbital", "to": "molecular-orbital", "type": "prerequisite"}, {"from": "basis-set", "to": "molecular-orbital", "type": "prerequisite"}, {"from": "basis", "to": "basis-set", "type": "prerequisite"}, {"from": "orbital", "to": "basis-set", "type": "prerequisite"}, {"from": "basis-set", "to": "sto-3g", "type": "prerequisite"}, {"from": "sto-3g", "to": "basis-orbital-energies", "type": "prerequisite"}, {"from": "molecular-orbital", "to": "electron-integrals", "type": "prerequisite"}, {"from": "electron-integrals", "to": "hamiltonian-elements", "type": "prerequisite"}, {"from": "hamiltonian-size", "to": "variational-principle", "type": "prerequisite"}, {"from": "variational-principle", "to": "hartree-fock", "type": "prerequisite"}, {"from": "hartree-fock", "to": "electron-correlation", "type": "prerequisite"}, {"from": "slater-determinant", "to": "electron-correlation", "type": "prerequisite"}, {"from": "slater-determinant", "to": "configuration-interaction", "type": "prerequisite"}, {"from": "hamiltonian-elements", "to": "configuration-interaction", "type": "prerequisite"}, {"from": "electronic-configuration", "to": "active-space", "type": "prerequisite"}, {"from": "configuration-interaction", "to": "active-space", "type": "prerequisite"}, {"from": "born-oppenheimer", "to": "potential-energy", "type": "prerequisite"}, {"from": "hamiltonian", "to": "potential-energy", "type": "prerequisite"}, {"from": "two-level-system", "to": "qubit", "type": "prerequisite"}, {"from": "qubit", "to": "computational-basis", "type": "prerequisite"}, {"from": "computational-basis", "to": "quantum-gate", "type": "prerequisite"}, {"from": "quantum-gate", "to": "rotation-gate", "type": "prerequisite"}, {"from": "rotation-gate", "to": "measurement-basis", "type": "prerequisite"}, {"from": "measurement-basis", "to": "energy-measurement", "type": "prerequisite"}, {"from": "energy-measurement", "to": "tensor-product", "type": "prerequisite"}, {"from": "tensor-product", "to": "entanglement", "type": "prerequisite"}, {"from": "electronic-configuration", "to": "fermion-qubit", "type": "prerequisite"}, {"from": "slater-determinant", "to": "fermion-qubit", "type": "prerequisite"}, {"from": "energy-expectation", "to": "ansatz", "type": "prerequisite"}, {"from": "ansatz", "to": "parameterized-circuit", "type": "prerequisite"}, {"from": "parameterized-circuit", "to": "pauli-decomposition", "type": "prerequisite"}, {"from": "pauli-decomposition", "to": "measurement-shots", "type": "prerequisite"}, {"from": "measurement-shots", "to": "classical-optimization", "type": "prerequisite"}, {"from": "classical-optimization", "to": "vqe-algorithm", "type": "prerequisite"}, {"from": "vqe-algorithm", "to": "vqe-hydrogen", "type": "prerequisite"}, {"from": "occupation-bitstrings", "to": "hf-preparation", "type": "prerequisite"}, {"from": "hf-preparation", "to": "excitation-state", "type": "prerequisite"}, {"from": "excitation-state", "to": "sqd-state-circuit", "type": "prerequisite"}, {"from": "sqd-state-circuit", "to": "sqd-sampling", "type": "prerequisite"}, {"from": "sqd-sampling", "to": "sqd-subspace", "type": "prerequisite"}, {"from": "hamiltonian-elements", "to": "h2-hamiltonian", "type": "prerequisite"}, {"from": "h2-hamiltonian", "to": "h2-state-energy", "type": "prerequisite"}, {"from": "h2-state-energy", "to": "large-hamiltonian", "type": "prerequisite"}, {"from": "large-hamiltonian", "to": "hamiltonian-size", "type": "prerequisite"}, {"from": "basis", "to": "inner-product", "type": "related"}, {"from": "inner-product", "to": "matrix", "type": "related"}, {"from": "matrix", "to": "subspace", "type": "related"}, {"from": "symmetric", "to": "eigen", "type": "related"}, {"from": "symmetric", "to": "diagonalization", "type": "related"}, {"from": "symmetric", "to": "krylov", "type": "related"}, {"from": "diagonalization", "to": "hamiltonian", "type": "related"}, {"from": "diagonalization-coordinates", "to": "basis", "type": "related"}, {"from": "diagonalization-coordinates", "to": "hamiltonian", "type": "related"}, {"from": "power", "to": "subspace", "type": "related"}, {"from": "power", "to": "diagonalization", "type": "related"}, {"from": "subspace", "to": "hamiltonian", "type": "related"}, {"from": "krylov", "to": "hamiltonian", "type": "related"}, {"from": "hamiltonian", "to": "h2-hamiltonian", "type": "application"}, {"from": "hamiltonian", "to": "schrodinger", "type": "related"}, {"from": "hamiltonian", "to": "energy-expectation", "type": "related"}, {"from": "quantum-state", "to": "computational-basis", "type": "related"}, {"from": "born-rule", "to": "hamiltonian", "type": "related"}, {"from": "superposition", "to": "observable", "type": "related"}, {"from": "superposition", "to": "basis", "type": "related"}, {"from": "superposition", "to": "schrodinger", "type": "related"}, {"from": "observable", "to": "hamiltonian", "type": "related"}, {"from": "observable", "to": "eigen", "type": "related"}, {"from": "schrodinger", "to": "diagonalization", "type": "related"}, {"from": "born-oppenheimer", "to": "orbital", "type": "related"}, {"from": "born-oppenheimer", "to": "molecular-orbital", "type": "related"}, {"from": "orbital", "to": "electron-spin", "type": "related"}, {"from": "electron-spin", "to": "born-rule", "type": "related"}, {"from": "pauli", "to": "electronic-configuration", "type": "related"}, {"from": "pauli", "to": "hartree-fock", "type": "related"}, {"from": "slater-determinant", "to": "basis-set", "type": "related"}, {"from": "slater-determinant", "to": "matrix", "type": "related"}, {"from": "slater-determinant", "to": "hartree-fock", "type": "related"}, {"from": "electronic-configuration", "to": "configuration-interaction", "type": "related"}, {"from": "molecular-orbital", "to": "superposition", "type": "related"}, {"from": "molecular-orbital", "to": "electronic-configuration", "type": "related"}, {"from": "basis-set", "to": "inner-product", "type": "related"}, {"from": "sto-3g", "to": "vqe-hydrogen", "type": "application"}, {"from": "basis-orbital-energies", "to": "hartree-fock", "type": "related"}, {"from": "basis-orbital-energies", "to": "potential-energy", "type": "related"}, {"from": "electron-integrals", "to": "orbital", "type": "related"}, {"from": "electron-integrals", "to": "basis-set", "type": "related"}, {"from": "hamiltonian-elements", "to": "large-hamiltonian", "type": "related"}, {"from": "variational-principle", "to": "parameterized-circuit", "type": "related"}, {"from": "variational-principle", "to": "energy-expectation", "type": "related"}, {"from": "hartree-fock", "to": "electron-integrals", "type": "related"}, {"from": "electron-correlation", "to": "configuration-interaction", "type": "related"}, {"from": "electron-correlation", "to": "variational-principle", "type": "related"}, {"from": "electron-correlation", "to": "active-space", "type": "related"}, {"from": "configuration-interaction", "to": "variational-principle", "type": "related"}, {"from": "active-space", "to": "potential-energy", "type": "related"}, {"from": "active-space", "to": "molecular-orbital", "type": "related"}, {"from": "potential-energy", "to": "variational-principle", "type": "related"}, {"from": "two-level-system", "to": "schrodinger", "type": "related"}, {"from": "two-level-system", "to": "subspace", "type": "related"}, {"from": "qubit", "to": "superposition", "type": "related"}, {"from": "qubit", "to": "measurement-basis", "type": "related"}, {"from": "computational-basis", "to": "born-rule", "type": "related"}, {"from": "computational-basis", "to": "energy-measurement", "type": "related"}, {"from": "quantum-gate", "to": "measurement-basis", "type": "related"}, {"from": "rotation-gate", "to": "parameterized-circuit", "type": "related"}, {"from": "measurement-basis", "to": "computational-basis", "type": "related"}, {"from": "measurement-basis", "to": "born-rule", "type": "related"}, {"from": "energy-measurement", "to": "rotation-gate", "type": "related"}, {"from": "energy-measurement", "to": "energy-expectation", "type": "related"}, {"from": "tensor-product", "to": "computational-basis", "type": "related"}, {"from": "tensor-product", "to": "qubit", "type": "related"}, {"from": "entanglement", "to": "fermion-qubit", "type": "related"}, {"from": "entanglement", "to": "measurement-basis", "type": "related"}, {"from": "entanglement", "to": "superposition", "type": "related"}, {"from": "fermion-qubit", "to": "basis-set", "type": "related"}, {"from": "fermion-qubit", "to": "computational-basis", "type": "related"}, {"from": "energy-expectation", "to": "pauli-decomposition", "type": "related"}, {"from": "ansatz", "to": "variational-principle", "type": "related"}, {"from": "ansatz", "to": "classical-optimization", "type": "related"}, {"from": "parameterized-circuit", "to": "superposition", "type": "related"}, {"from": "parameterized-circuit", "to": "vqe-algorithm", "type": "related"}, {"from": "classical-optimization", "to": "energy-expectation", "type": "related"}, {"from": "vqe-algorithm", "to": "variational-principle", "type": "related"}, {"from": "vqe-algorithm", "to": "pauli-decomposition", "type": "related"}, {"from": "vqe-hydrogen", "to": "pauli-decomposition", "type": "related"}, {"from": "vqe-hydrogen", "to": "fermion-qubit", "type": "related"}, {"from": "occupation-bitstrings", "to": "electron-spin", "type": "related"}, {"from": "occupation-bitstrings", "to": "slater-determinant", "type": "related"}, {"from": "hf-preparation", "to": "hartree-fock", "type": "related"}, {"from": "hf-preparation", "to": "quantum-gate", "type": "related"}, {"from": "excitation-state", "to": "superposition", "type": "related"}, {"from": "excitation-state", "to": "born-rule", "type": "related"}, {"from": "sqd-state-circuit", "to": "quantum-gate", "type": "related"}, {"from": "sqd-state-circuit", "to": "rotation-gate", "type": "related"}, {"from": "sqd-sampling", "to": "born-rule", "type": "related"}, {"from": "sqd-sampling", "to": "measurement-shots", "type": "related"}, {"from": "sqd-subspace", "to": "large-hamiltonian", "type": "related"}, {"from": "sqd-subspace", "to": "hamiltonian-elements", "type": "related"}, {"from": "sqd-subspace", "to": "vqe-algorithm", "type": "related"}, {"from": "h2-hamiltonian", "to": "large-hamiltonian", "type": "related"}, {"from": "h2-state-energy", "to": "vqe-hydrogen", "type": "application"}, {"from": "h2-state-energy", "to": "superposition", "type": "related"}, {"from": "large-hamiltonian", "to": "pauli-decomposition", "type": "related"}, {"from": "hamiltonian-size", "to": "active-space", "type": "related"}, {"from": "hamiltonian-size", "to": "sqd-subspace", "type": "related"}]}</script>
+<script>/* Local relationship explorer. Positions are deterministic; no network or physics engine. */
+(function () {
+  'use strict';
+  const app = document.querySelector('#relations-app');
+  if (!app) return;
+  const data = JSON.parse(document.getElementById('rg-data').textContent);
+  const notes = new Map(data.notes.map(n => [n.id, n]));
+  const groups = new Map(data.groups.map(g => [g.id, g]));
+  const paths = new Map(data.paths.map(p => [p.id, p]));
+  const bundled = !!document.querySelector('[data-page]');
+  const $ = id => document.getElementById(id);
+  const stage = $('rg-stage'), svg = $('rg-fig'), nodeLayer = $('rg-nodes');
+  const inspector = $('rg-inspector'), input = $('rg-search'), results = $('rg-results');
+  const kinds = {prerequisite: '선수 개념', application: '응용', related: '함께 읽기'};
+  let pendingNote = null, composing = false, frame = 0, canSaveURL = true;
+
+  function element(tag, cls, text) {
+    const node = document.createElement(tag);
+    if (cls) node.className = cls;
+    if (text) node.textContent = text;
+    return node;
+  }
+  function button(text, action, cls = '') {
+    const b = element('button', cls, text);
+    b.type = 'button'; b.addEventListener('click', action);
+    return b;
+  }
+  function link(slug, text, cls = '') {
+    const a = element('a', cls, text);
+    a.href = bundled ? '#' + slug : slug === 'home' ? 'concepts.html' : 'concept-' + slug + '.html';
+    return a;
+  }
+  function active() { return !app.closest('[data-page]')?.hidden; }
+  function readState() {
+    const p = new URL(location.href).searchParams;
+    const view = ['overview', 'note', 'path'].includes(p.get('graph-view')) ? p.get('graph-view') : 'overview';
+    const path = paths.has(p.get('graph-path')) ? p.get('graph-path') : data.paths[0].id;
+    let note = notes.has(p.get('graph-note')) ? p.get('graph-note') : 'hamiltonian';
+    if (view === 'path' && !paths.get(path).steps.some(s => s.slug === note)) note = paths.get(path).steps[0].slug;
+    return {view, path, note,
+      group: groups.has(p.get('graph-group')) ? p.get('graph-group') : null,
+      filter: Object.hasOwn(kinds, p.get('graph-filter')) ? p.get('graph-filter') : 'all'};
+  }
+  let state = readState();
+  function remember() {
+    if (!active() || !canSaveURL) return;
+    const url = new URL(location.href);
+    for (const key of ['view', 'note', 'group', 'filter', 'path']) url.searchParams.delete('graph-' + key);
+    url.searchParams.set('graph-view', state.view);
+    if (state.view === 'overview' && state.group) url.searchParams.set('graph-group', state.group);
+    if (state.view !== 'overview') url.searchParams.set('graph-note', state.note);
+    if (state.view === 'note' && state.filter !== 'all') url.searchParams.set('graph-filter', state.filter);
+    if (state.view === 'path') url.searchParams.set('graph-path', state.path);
+    // Some embedded HTML previews disallow rewriting their opaque URL. Keep
+    // the explorer usable in memory when that optional persistence is denied.
+    try { history.replaceState(history.state, '', url); }
+    catch (error) { if (error.name === 'SecurityError') canSaveURL = false; else throw error; }
+  }
+  function connections(id) {
+    return data.edges.filter(e => e.from === id || e.to === id)
+      .filter(e => state.filter === 'all' || e.type === state.filter)
+      .map(e => ({edge: e, note: notes.get(e.from === id ? e.to : e.from)}))
+      .sort((a, b) => Object.keys(kinds).indexOf(a.edge.type) - Object.keys(kinds).indexOf(b.edge.type)
+        || a.note.label.localeCompare(b.note.label, 'ko'));
+  }
+  function relationLabel(edge, center) {
+    if (edge.type === 'prerequisite') return edge.to === center ? '먼저 이해하기' : '이 개념을 바탕으로';
+    if (edge.type === 'application') return edge.from === center ? '응용해서 보기' : '응용의 바탕';
+    return '함께 읽기';
+  }
+  function closeSearch() { $('rg-search-pop').hidden = true; }
+  function chooseNote(id) {
+    state.note = id; state.view = 'note'; state.filter = 'all';
+    input.value = ''; closeSearch();
+    render(true);
+    nodeLayer.querySelector('[data-rg-key="' + id + '"]')?.focus({preventScroll: true});
+  }
+  function sizeStage(height) {
+    stage.style.height = height + 'px';
+    svg.setAttribute('viewBox', '0 0 ' + stage.clientWidth + ' ' + height);
+    svg.replaceChildren(); nodeLayer.replaceChildren();
+    const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+    for (const kind of ['prerequisite', 'application', 'overview', 'path']) {
+      const marker = document.createElementNS(svg.namespaceURI, 'marker');
+      for (const [k,v] of Object.entries({id:'rg-arrow-' + kind, viewBox:'0 0 10 10', refX:9, refY:5, markerWidth:6, markerHeight:6, orient:'auto-start-reverse'})) marker.setAttribute(k,v);
+      const triangle = document.createElementNS(svg.namespaceURI, 'path');
+      triangle.setAttribute('d', 'M 0 0 L 10 5 L 0 10 z');
+      triangle.setAttribute('class', 'rg-arrow rg-' + kind);
+      marker.append(triangle); defs.append(marker);
+    }
+    svg.append(defs);
+  }
+  function line(d, kind, id, reversed = false, dim = false) {
+    const p = document.createElementNS(svg.namespaceURI, 'path');
+    p.setAttribute('d', d);
+    p.setAttribute('class', 'rg-edge rg-' + kind + (dim ? ' is-dim' : ''));
+    if (id) p.dataset.rgEdge = id;
+    if (kind !== 'related') p.setAttribute(reversed ? 'marker-start' : 'marker-end', 'url(#rg-arrow-' + kind + ')');
+    svg.append(p);
+  }
+  function graphNode({id, title, badge, group, x, y, w, h, selected, action, footer}) {
+    const b = button('', action, 'rg-node' + (selected ? ' is-selected' : ''));
+    b.dataset.rgKey = id;
+    b.style.cssText = `left:${x}px;top:${y}px;width:${w}px;height:${h}px;--rg-color:var(--${groups.get(group)?.color || 'accent'});`;
+    b.setAttribute('aria-pressed', String(!!selected));
+    b.setAttribute('aria-label', title + ' · ' + badge);
+    b.append(element('span', 'rg-node-badge', badge), element('strong', '', title));
+    if (footer) b.append(element('span', 'rg-node-footer', footer));
+    nodeLayer.append(b);
+  }
+  function panelHeading(kicker, title, summary) {
+    inspector.replaceChildren(element('p', 'rg-kicker', kicker));
+    const h = element('h2', '', title); h.id = 'rg-detail-title'; h.tabIndex = -1;
+    inspector.append(h, element('p', 'rg-summary', summary));
+  }
+  function noteRow(note, badge, action, reason) {
+    const b = button('', action, 'rg-note-row'); b.dataset.rgNote = note.id;
+    b.append(element('small', '', badge), element('strong', '', note.title));
+    if (reason) b.append(element('span', '', reason));
+    return b;
+  }
+  function overview() {
+    const width = stage.clientWidth, narrow = width < 620;
+    const w = narrow ? Math.min(160, (width - 32) / 2) : (width - 106) / 3;
+    const h = narrow ? 126 : 130;
+    const positions = narrow ? [
+      [(width-w)/2, 16], [8, 206], [width-w-8, 206], [8, 410], [width-w-8, 410],
+    ] : [[12, 140], [(width-w)/2, 30], [(width-w)/2, 270], [width-w-12, 30], [width-w-12, 270]];
+    sizeStage(narrow ? 560 : 434);
+    const box = new Map(data.groups.map((g, i) => [g.id, {x:positions[i][0], y:positions[i][1]}]));
+    for (const edge of data.overview) {
+      const a = box.get(edge.from), b = box.get(edge.to);
+      if (narrow) {
+        const sx = a.x+w/2, sy = a.y+h+3, tx = b.x+w/2, ty = b.y-5;
+        line(`M${sx},${sy} C${sx},${(sy+ty)/2} ${tx},${(sy+ty)/2} ${tx},${ty}`, 'overview', null, false,
+          state.group && edge.from !== state.group && edge.to !== state.group);
+      } else {
+        const sx=a.x+w+3, sy=a.y+h/2, tx=b.x-5, ty=b.y+h/2;
+        line(`M${sx},${sy} C${(sx+tx)/2},${sy} ${(sx+tx)/2},${ty} ${tx},${ty}`, 'overview', null, false,
+          state.group && edge.from !== state.group && edge.to !== state.group);
+      }
+    }
+    data.groups.forEach((g,i) => graphNode({id:g.id, title:g.title, badge:String(i+1).padStart(2,'0') + ' · ' + g.notes.length + '개 노트',
+      group:g.id, x:positions[i][0], y:positions[i][1], w, h, selected:state.group === g.id,
+      footer:'노트 펼치기 →', action:() => {
+        state.group = g.id; render();
+        if (window.innerWidth < 900) inspector.scrollIntoView({block:'nearest'});
+        $('rg-detail-title').focus({preventScroll:true});
+      }}));
+    $('rg-heading').textContent = '분야 사이의 연결';
+    $('rg-count').textContent = data.groups.length + '개 분야 · ' + notes.size + '개 노트';
+    $('rg-help').textContent = '분야를 누르면 노트 목록이 펼쳐집니다. 선은 분야 사이의 대표 연결입니다.';
+    $('rg-legend').textContent = '화살표 → 배운 개념을 이어서 활용하는 방향';
+    if (state.group) {
+      const g = groups.get(state.group);
+      panelHeading(g.notes.length + '개 노트', g.title, g.summary);
+      inspector.append(link(g.id, '이 분야의 학습 지도 열기 →', 'rg-map-link'));
+      const list = element('div', 'rg-note-list');
+      g.notes.forEach((id,i) => list.append(noteRow(notes.get(id), String(i+1).padStart(2,'0'), () => chooseNote(id))));
+      inspector.append(list);
+    } else {
+      panelHeading('전체에서 하나의 개념으로', '어디서부터 볼까요?', '분야를 펼치거나, 아래 개념에서 연결을 따라가 보세요.');
+      const list = element('div', 'rg-note-list');
+      for (const id of ['quantum-state', 'hamiltonian', 'vqe-algorithm', 'sqd-state-circuit']) {
+        const n = notes.get(id);
+        list.append(noteRow(n, groups.get(n.group).title, () => chooseNote(id), n.question));
+      }
+      inspector.append(list);
+    }
+  }
+  function focusGraph() {
+    const center = notes.get(state.note), neighbors = connections(state.note);
+    const width = stage.clientWidth, narrow = width < 550;
+    const h = 102, w = narrow ? width-44 : (width-78)/2;
+    const cw = Math.min(280,width-32), cx=(width-cw)/2, cy=18, ch=104;
+    const rows = narrow ? neighbors.length : Math.ceil(neighbors.length/2);
+    sizeStage(Math.max(288, 180+rows*(h+18)));
+    graphNode({id:center.id, title:center.label, badge:'선택한 노트 · '+groups.get(center.group).title,
+      group:center.group, x:cx,y:cy,w:cw,h:ch,selected:true,action:() => {
+        inspector.scrollIntoView({block:'nearest'}); $('rg-detail-title').focus({preventScroll:true});
+      }});
+    neighbors.forEach(({edge,note},i) => {
+      const left = i%2 === 0;
+      const x = narrow ? 34 : left ? 12 : width-w-12;
+      const y = 170 + (narrow ? i : Math.floor(i/2))*(h+18);
+      const sy=cy+ch+3, ty=y+h/2;
+      const d = narrow ? `M${width/2},${sy} C${width/2},${sy+20} 16,${sy+20} 16,${sy+38} V${ty} H${x-4}`
+        : `M${width/2},${sy} V${ty-12} Q${width/2},${ty} ${width/2+(left?-12:12)},${ty} H${left?x+w+4:x-4}`;
+      line(d,edge.type,note.id,edge.to===center.id);
+      graphNode({id:note.id,title:note.label,badge:relationLabel(edge,center.id),group:note.group,
+        x,y,w,h,selected:false,action:() => chooseNote(note.id),footer:groups.get(note.group).title});
+    });
+    if (!neighbors.length) {
+      const empty = element('p','rg-empty','이 종류로 등록된 연결은 없습니다. 다른 연결 종류를 선택해 보세요.');
+      nodeLayer.append(empty);
+    }
+    $('rg-heading').textContent = center.label + '의 연결';
+    $('rg-count').textContent = neighbors.length + '개 연결';
+    $('rg-help').textContent = '이웃 노트를 누르면 그 노트가 중심이 됩니다. 아래로 스크롤하면 나머지 연결을 볼 수 있습니다.';
+    $('rg-legend').replaceChildren();
+    for (const [kind,label] of Object.entries(kinds)) {
+      const item=element('span','rg-legend-item');
+      item.append(element('i','rg-line-key rg-'+kind),element('span','',label+(kind==='related'?'':' →')));
+      $('rg-legend').append(item);
+    }
+    panelHeading(groups.get(center.group).title+' · '+center.kind, center.title, center.question);
+    inspector.append(link(center.id,'노트 열기 →','rg-open-note'));
+    const list=element('div','rg-note-list');
+    neighbors.forEach(({edge,note}) => list.append(noteRow(note,relationLabel(edge,center.id),() => chooseNote(note.id))));
+    inspector.append(element('h3','','연결된 노트'),list);
+    if (!neighbors.length) inspector.append(element('p','rg-summary','선택한 종류의 연결이 없습니다.'));
+  }
+  function pathGraph() {
+    const path=paths.get(state.path), width=stage.clientWidth, w=width-64, h=96;
+    sizeStage(20+path.steps.length*132);
+    path.steps.forEach((step,i) => {
+      const note=notes.get(step.slug), y=16+i*132;
+      if(i) line(`M${width/2},${y-34} V${y-5}`,'path',null);
+      graphNode({id:note.id,title:note.label,badge:`${i+1} / ${path.steps.length} · ${groups.get(note.group).title}`,
+        group:note.group,x:32,y,w,h,selected:state.note===note.id,action:() => {
+          state.note=note.id; render();
+          if(window.innerWidth<900) inspector.scrollIntoView({block:'nearest'});
+          $('rg-detail-title').focus({preventScroll:true});
+        }});
+    });
+    const note=notes.get(state.note), step=path.steps.find(s=>s.slug===state.note);
+    $('rg-heading').textContent=path.title;
+    $('rg-count').textContent=path.steps.length+'개 노트';
+    $('rg-help').textContent=path.summary;
+    $('rg-legend').textContent='번호 → 이 목표를 위한 추천 읽기 순서';
+    panelHeading('이 단계에서 알아볼 것',note.title,step.why);
+    inspector.append(element('p','rg-summary',note.question),link(note.id,'노트 열기 →','rg-open-note'));
+    inspector.append(button('이 노트의 다른 연결 보기',()=>chooseNote(note.id),'rg-secondary'));
+    const list=element('ol','rg-path-list');
+    path.steps.forEach(s=>{
+      const li=element('li',''); li.append(link(s.slug,notes.get(s.slug).label)); list.append(li);
+    });
+    inspector.append(element('h3','','이 경로의 노트'),list);
+  }
+  function render(resetScroll = false) {
+    if (!active() || stage.clientWidth < 1) return;
+    const focused = document.activeElement?.dataset.rgKey;
+    const scroll = $('rg-viewport').scrollTop;
+    app.querySelectorAll('[data-rg-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.rgView===state.view)));
+    app.querySelectorAll('[data-rg-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.rgFilter===state.filter)));
+    app.querySelectorAll('[data-rg-path]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.rgPath===state.path)));
+    $('rg-filters').hidden=state.view!=='note'; $('rg-paths').hidden=state.view!=='path';
+    ({overview,note:focusGraph,path:pathGraph})[state.view]();
+    remember();
+    $('rg-viewport').scrollTop=resetScroll?0:scroll;
+    if(focused) nodeLayer.querySelector('[data-rg-key="'+focused+'"]')?.focus({preventScroll:true});
+    $('rg-live').textContent=$('rg-heading').textContent+' · '+$('rg-count').textContent;
+  }
+  function schedule() { cancelAnimationFrame(frame); frame=requestAnimationFrame(()=>render()); }
+  app.querySelectorAll('[data-rg-view]').forEach(b=>b.addEventListener('click',()=>{
+    state.view=b.dataset.rgView;
+    if(state.view==='path'&&!paths.get(state.path).steps.some(s=>s.slug===state.note)) state.note=paths.get(state.path).steps[0].slug;
+    closeSearch(); render(true);
+  }));
+  app.querySelectorAll('[data-rg-filter]').forEach(b=>b.addEventListener('click',()=>{
+    state.filter=b.dataset.rgFilter; render(true);
+  }));
+  data.paths.forEach(path=>{
+    const b=button(path.title,()=>{state.path=path.id;state.note=path.steps[0].slug;render(true);});
+    b.dataset.rgPath=path.id; b.setAttribute('aria-pressed',String(state.path===path.id)); $('rg-paths').append(b);
+  });
+  function normalize(text) {
+    return text.normalize('NFKC').toLowerCase().replace(/큐비트/g,'큐빗').replace(/백터/g,'벡터')
+      .replace(/슈레딩거|슈뢰덴거/g,'슈뢰딩거').replace(/[^\p{L}\p{N}]/gu,'');
+  }
+  function search() {
+    const query=normalize(input.value); results.replaceChildren();
+    if(!query){closeSearch();return;}
+    const found=data.notes.filter(n=>normalize(n.title+' '+n.id).includes(query));
+    $('rg-search-pop').hidden=false;
+    $('rg-search-status').textContent=found.length ? found.length+'개 결과'+(found.length>8?' · 상위 8개 표시':'') : '일치하는 노트가 없습니다. 더 짧은 이름으로 찾아보세요.';
+    found.slice(0,8).forEach(n=>{
+      const li=element('li','');
+      li.append(noteRow(n,groups.get(n.group).title,()=>chooseNote(n.id))); results.append(li);
+    });
+  }
+  input.addEventListener('input',()=>{if(!composing)search();});
+  input.addEventListener('focus',()=>{if(input.value&&!composing)search();});
+  input.addEventListener('compositionstart',()=>{composing=true;});
+  input.addEventListener('compositionend',()=>{composing=false;search();});
+  input.addEventListener('keydown',e=>{
+    if(composing||e.isComposing||e.keyCode===229)return;
+    const first=results.querySelector('button');
+    if(e.key==='ArrowDown'&&first){e.preventDefault();first.focus();}
+    if(e.key==='Enter'&&first){e.preventDefault();first.click();}
+    if(e.key==='Escape'){closeSearch();input.focus();}
+  });
+  results.addEventListener('keydown',e=>{
+    const all=Array.from(results.querySelectorAll('button')),i=all.indexOf(document.activeElement);
+    if(e.key==='Escape'){closeSearch();input.focus();return;}
+    if(!['ArrowDown','ArrowUp'].includes(e.key)||i<0)return;
+    e.preventDefault();
+    if(e.key==='ArrowUp'&&i===0)input.focus();
+    else all[Math.max(0,Math.min(all.length-1,i+(e.key==='ArrowDown'?1:-1)))].focus();
+  });
+  document.addEventListener('click',e=>{
+    if(!e.target.closest('.rg-search'))closeSearch();
+    const a=e.target.closest('a[data-rg-focus], #reader-relations-open');
+    if(!a||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+    const id=a.dataset.rgFocus || document.querySelector('[data-page]:not([hidden])')?.dataset.page;
+    if(notes.has(id)) {
+      state.note=id;state.view='note';state.filter='all';
+      if(active())render(true); else pendingNote=id;
+    }
+  });
+  function highlight(id) { svg.querySelectorAll('[data-rg-edge]').forEach(e=>e.classList.toggle('is-highlighted',e.dataset.rgEdge===id)); }
+  nodeLayer.addEventListener('pointerover',e=>highlight(e.target.closest('[data-rg-key]')?.dataset.rgKey));
+  nodeLayer.addEventListener('pointerleave',()=>highlight(null));
+  nodeLayer.addEventListener('focusin',e=>highlight(e.target.closest('[data-rg-key]')?.dataset.rgKey));
+  nodeLayer.addEventListener('focusout',()=>highlight(null));
+  window.addEventListener('hashchange',()=>{
+    closeSearch();
+    // The reader router runs in the same hashchange; wait until its visibility update.
+    requestAnimationFrame(()=>{
+      if(!active())return;
+      if(pendingNote){state.note=pendingNote;state.view='note';state.filter='all';pendingNote=null;}
+      else if(canSaveURL) state=readState();
+      render(true);
+    });
+  });
+  window.addEventListener('resize',schedule);
+  if(typeof ResizeObserver==='function')new ResizeObserver(schedule).observe(stage);
+  schedule();
+})();
+</script>
+</main></body></html>

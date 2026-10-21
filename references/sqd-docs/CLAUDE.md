@@ -66,7 +66,7 @@ IBM 공식 노트북 두 개(Quickstart, SQD 튜토리얼). 00-quickstart.html�
 ## 양자화학 개념 지도
 `docs/concept-quantum-chemistry.html`은 지도 소스다. 첫 학습 묶음은 `quantum-state` → `born-rule` → `superposition` → `observable` → 기존 `hamiltonian` → `schrodinger` 순서다. 후속 16개 노트는 `born-oppenheimer`부터 `potential-energy`까지 핵·전자 분리, 다전자 상태, 적분과 행렬원소, 근사 계산과 화학적 해석의 네 묶음으로 연결한다. 지도에서는 기존 노트와 같은 제목·핵심 질문 카드로 표시하고, 네 주제 묶음을 유지한다. 새 주제를 추가할 때 실제 페이지가 준비된 링크만 제공한다.
 
-`python3 tools/build_concepts.py`는 동일한 전체 개념 노트를 포함하는 독립 HTML 세 개를 생성한다. `docs/concepts.html`은 수학 지도로, `docs/quantum-chemistry.html`은 양자화학 지도로 시작한다. 둘 다 CSS·스크립트·관련 개념을 포함하므로 단일 파일 미리보기에서 링크가 동작한다. 공유할 때는 소스 페이지 대신 이 생성 파일을 사용한다. 지도 선택 버튼이 동적으로 만드는 링크도 단일 파일에서는 해시 경로를 사용해야 한다.
+`python3 tools/build_concepts.py`는 동일한 전체 개념 노트를 포함하는 독립 HTML 네 개를 생성한다. `docs/concepts.html`은 수학 지도로, `docs/quantum-chemistry.html`은 양자화학 지도로, `docs/learning-maps.html`은 전체 지도 목록으로, `docs/relations.html`은 개념 관계도로 시작한다. 모두 CSS·스크립트·관련 개념을 포함하므로 단일 파일 미리보기에서 링크가 동작한다. 공유할 때는 소스 페이지 대신 이 생성 파일을 사용한다. 지도 선택 버튼이 동적으로 만드는 링크도 단일 파일에서는 해시 경로를 사용해야 한다.
 
 양자화학 예시는 기저·정규화·측정 관측량과 단위를 밝힌다. 정규직교 기저의 확률 진폭과 오비탈 전개 계수를 구별하며, 에너지 기댓값과 한 번의 측정 결과를 구별한다. 기댓값의 반복 측정은 동일한 상태를 매번 새로 준비하는 상황으로 설명한다. 전역 위상·상대 위상·기저 표현 변경은 서로 다른 조작임을 표시한다. 정상상태도 파동함수의 전역 위상은 시간에 따라 변한다.
 
@@ -174,3 +174,26 @@ node tools/check_html.js --narrow
 교환법칙으로 연결하지 않는다. `교환(Exchange)`과 `교환 법칙(Commutativity)`,
 `생성 연산자(Creation Operator)`와 `생성(Span)`을 구별한다. 다의적인 ‘교환’과
 ‘생성’은 저자가 영어를 명시한 경우에만 자동 설명을 붙인다.
+
+## 개념 관계도
+
+`docs/relations.html`은 전체 분야·노트 연결·목표별 학습 경로를 제공하는 독립 리더다.
+모든 리더의 `#relations`에서도 같은 화면을 연다. 메인 카드와 노트 하단의 관계도
+링크, 상단 관계도 링크가 이 화면으로 이어지며 노트에서 열면 해당 노트를 중심으로 표시한다.
+
+`build_concepts.py`는 먼저 `build_relations.py`로 `concept-relations.html`을 생성한다.
+페이지 구조는 `tools/relations-page.html`, 동작·스타일은 `assets/note-relations.js`와
+`assets/note-relations.css`에서 수정한다. `assets/relation-map.json`은 분야 소개·대표
+연결·목표별 경로를 관리한다. 63개 노트의 소속과 실제 연결은 기존 `note-catalog.json`에서
+가져온다. 관계도 때문에 선수 개념을 추정하거나 읽기 순서를 필수 의존 관계로 바꾸지 않는다.
+명시한 선수 관계를 우선하고, 응용·함께 읽기 관계를 별도로 표시한다.
+
+노드와 선은 화면 폭에 맞춰 JS로 그린다. 노드는 키보드·터치가 가능한 기본 버튼이며,
+관련 노트 목록에서도 같은 연결을 읽을 수 있다. 다수의 연결은 그림 안에서 세로 스크롤한다.
+선택한 보기·노트·필터·경로는 URL의 `graph-*` 매개변수에 보존해 새로고침과 뒤로 가기를 지원한다.
+CDN·외부 그래프 서비스·저장소 요청 없이 모든 노트로 이동할 수 있어야 한다.
+
+변경 후 `node tools/check_relations.cjs`로 모든 노트의 연결, 관계 종류, 세 학습 경로,
+문맥 링크, 검색·키보드·IME·터치, 모바일 폭과 노드 겹침을 확인한다. 공통 구조·검색·리더
+탐색을 바꾸면 기존 `check_note_structure.py`, `check_search.cjs`, `check_quantum_concepts.cjs`도 실행한다.
+게시 도구는 `relations.html`을 기존 진입점과 함께 복사하며 메인은 계속 학습 지도 목록이다.

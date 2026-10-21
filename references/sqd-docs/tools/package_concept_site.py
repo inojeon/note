@@ -35,14 +35,14 @@ def main():
     parser.add_argument('--output', required=True, type=Path)
     output = parser.parse_args().output.resolve()
     files = {}
-    for filename in ['learning-maps.html', 'quantum-chemistry.html', 'concepts.html']:
+    for filename in ['learning-maps.html', 'quantum-chemistry.html', 'concepts.html', 'relations.html']:
         source = DOCS / filename
         if not source.exists():
             parser.error(f'Missing {source}; run tools/build_concepts.py first.')
         body = source.read_text()
         reader = Reader()
         reader.feed(body)
-        if not {'learning-maps', 'home', 'quantum-chemistry', 'quantum-computing', 'vqe', 'hamiltonian'} <= reader.pages:
+        if not {'learning-maps', 'home', 'quantum-chemistry', 'quantum-computing', 'vqe', 'hamiltonian', 'relations'} <= reader.pages:
             parser.error(f'{filename} is not a complete concept reader.')
         broken = [href for href in reader.links if href != '#reader-content'
                   and (not href.startswith('#') or href[1:] not in reader.pages)]

@@ -187,6 +187,9 @@ def main():
             href = 'concepts.html' if target == 'home' else f'concept-{target}.html'
             cards += f'<li><a href="{href}">{label}</a></li>'
         cards += '</ul>'
+        cards += (f'<a class="note-graph-link" data-rg-focus="{slug}" '
+                  f'href="concept-relations.html?graph-view=note&amp;graph-note={slug}">'
+                  '이 노트의 관계도 보기 →</a>')
         others = [s for s in info['other_links'] if s not in chosen and s not in prerequisites and s not in {slug, map_slug, 'learning-maps'}]
         if others:
             cards += '<details class="note-other-links"><summary>다른 연결 보기</summary><ul>' + ''.join(

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>개념 관계도 · 개념 노트</title><link rel="stylesheet" href="assets/concepts.css"><link rel="stylesheet" href="assets/note-relations.css"></head>
+<body><a class="skip" href="#content">본문으로 건너뛰기</a><main id="content">
+<nav class="docnav"><a href="concept-learning-maps.html">← 전체 학습 지도</a></nav>
+<p class="eyebrow">개념 노트 · 연결을 따라 이해하기</p>
+<h1>개념 관계도</h1>
+<p class="lead">큰 그림에서 시작해, 궁금한 개념의 이웃을 만나보세요.</p>
+<div class="relations-app" id="relations-app">
+  <div class="rg-toolbar">
+    <div class="rg-modes" role="group" aria-label="관계도 보기 방식">
+      <button type="button" data-rg-view="overview" aria-pressed="true">전체 분야</button>
+      <button type="button" data-rg-view="note" aria-pressed="false">노트 연결</button>
+      <button type="button" data-rg-view="path" aria-pressed="false">학습 경로</button>
+    </div>
+    <div class="rg-search">
+      <label for="rg-search">관계도에서 노트 찾기</label>
+      <input id="rg-search" type="search" placeholder="예: 해밀토니안, qubit, STO-3G" autocomplete="off" spellcheck="false" aria-controls="rg-results">
+      <div class="rg-search-pop" id="rg-search-pop" hidden>
+        <p id="rg-search-status" role="status"></p>
+        <ul id="rg-results" aria-label="관계도 검색 결과"></ul>
+      </div>
+    </div>
+  </div>
+  <div class="rg-filters" id="rg-filters" role="group" aria-label="연결 종류" hidden>
+    <button type="button" data-rg-filter="all" aria-pressed="true">전체 연결</button>
+    <button type="button" data-rg-filter="prerequisite" aria-pressed="false">선수 개념</button>
+    <button type="button" data-rg-filter="application" aria-pressed="false">응용</button>
+    <button type="button" data-rg-filter="related" aria-pressed="false">함께 읽기</button>
+  </div>
+  <div class="rg-paths" id="rg-paths" role="group" aria-label="학습 목표" hidden></div>
+  <div class="rg-layout">
+    <section class="rg-canvas-card" aria-labelledby="rg-heading">
+      <div class="rg-canvas-header"><h2 id="rg-heading">전체 분야</h2><span class="rg-count" id="rg-count"></span></div>
+      <p class="rg-help" id="rg-help">분야를 누르면 그 안의 노트를 볼 수 있습니다.</p>
+      <div id="rg-viewport" class="rg-viewport" tabindex="0" aria-label="관계 그림. 노트가 많으면 위아래로 스크롤하세요.">
+        <div id="rg-stage" class="rg-stage"><svg id="rg-fig" aria-hidden="true"></svg><div id="rg-nodes"></div></div>
+      </div>
+      <div class="rg-legend" id="rg-legend" aria-label="연결선 읽는 법"></div>
+      <p id="rg-live" class="rg-sr-only" role="status" aria-live="polite"></p>
+    </section>
+    <aside class="rg-inspector" id="rg-inspector" aria-labelledby="rg-detail-title" tabindex="-1"></aside>
+  </div>
+  <p class="rg-footnote">선수 개념은 노트에 표시한 준비 지식입니다. ‘함께 읽기’는 순서를 강제하지 않는 연결이며, 학습 경로는 목표에 맞춘 추천 순서입니다.</p>
+</div>
+<noscript><p>관계도를 조작하려면 자바스크립트가 필요합니다. <a href="concept-learning-maps.html">학습 지도 목록</a>에서도 모든 노트를 읽을 수 있습니다.</p></noscript>
+<script id="rg-data" type="application/json">__GRAPH_DATA__</script>
+<script>__GRAPH_RUNTIME__</script>
+</main></body></html>

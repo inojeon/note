@@ -31,7 +31,7 @@ def reading_text(node, expanded=False):
 def main():
     catalog = json.loads((DOCS / 'assets/note-catalog.json').read_text())
     sources = {p.stem.removeprefix('concept-'): read(p) for p in DOCS.glob('concept-*.html')}
-    assert set(catalog['notes']) == set(sources) - MAPS
+    assert set(catalog['notes']) == set(sources) - MAPS - {'relations'}
     targets = {'concepts.html', 'quantum-chemistry.html', 'learning-maps.html'} | {f'concept-{s}.html' for s in sources}
     results = []
     for slug, info in catalog['notes'].items():
@@ -56,7 +56,7 @@ def main():
                 if href.startswith('#'):
                     assert href[1:] in ids, (slug, href)
                 else:
-                    assert href.split('#')[0] in targets, (slug, href)
+                    assert href.split('#')[0].split('?')[0] in targets, (slug, href)
         visible = len(' '.join(reading_text(page).split()))
         expanded = len(' '.join(reading_text(page, True).split()))
         assert visible <= 2200, (slug, 'Visible text exceeds the 2,200-character budget', visible)
