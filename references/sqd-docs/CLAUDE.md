@@ -5,7 +5,8 @@
 ## 문서 지도 (읽는 순서)
 | 파일 | 역할 |
 |---|---|
-| docs/index.html | 문서 모음 (카드, 순서표, 관통 숫자표) |
+| docs/index.html | 허브: 본문 문서와 개념 노트 전체 목록, 읽음·이해 표시 (생성물, 아래 "허브" 절) |
+| docs/index-main.html | 본문 문서 모음 (카드, 순서표, 관통 숫자표) |
 | docs/background-atoms.html | 배경: 주기율표·원자 (1~18번 인터랙티브) |
 | docs/intro.html | 입문: H₂로 SQD 열 단계, 코드 없음, 3D 궤도 |
 | docs/prep-math.html | 준비: 장난감 행렬 [[2,1],[1,2]], 기댓값·분산, 퀴즈 |
@@ -13,7 +14,7 @@
 | docs/00-quickstart.html | 공식 Quickstart 셀 단위 해설 (N₂ STO-3G, 난수 비트열) |
 | docs/01-pyscf.html → 06-sqd-guide.html | 데이터 흐름 순: PySCF → JW → UCJ → 회로 → 샘플링 → SQD 본체 |
 
-순서: 배경 → 입문 → 준비 → 수학, 그리고 0 → 1 → … → 6. 각 문서 위·아래 `.docnav`에 이전/다음 링크가 있다. 문서를 추가하면 index.html 카드, 양옆 문서의 docnav, docs/links.json을 함께 고친다.
+순서: 배경 → 입문 → 준비 → 수학, 그리고 0 → 1 → … → 6. 각 문서 위·아래 `.docnav`에 이전/다음 링크가 있다. 문서를 추가하면 index-main.html 카드, 양옆 문서의 docnav, docs/links.json, `tools/build_hub.py`의 `MAIN_DOCS`를 함께 고친다.
 
 ## 절대 규칙
 1. **숫자는 계산해서 넣는다.** 문서의 모든 수치는 scripts/의 스크립트가 data/*.json으로 만든 값이다. 숫자를 바꾸려면 스크립트 → `python scripts/run_all.py` → JSON 확인 → HTML 순서로. 설명용 가상값을 쓰면 캡션에 "설명용"이라고 밝힌다.
@@ -21,13 +22,16 @@
 3. **반응형.** 모든 SVG 그림은 JS로 그리고, `narrow()`(max-width 600px)일 때 360폭 세로 레이아웃으로 다시 그린다(`mq.addEventListener('change', drawAll)`). 고정 SVG를 직접 쓰지 않는다. 페이지 폭은 `min-width:0`과 `overflow-x:hidden`으로 보호되어 있다.
 4. **그림은 서로 격리.** `drawAll`은 함수마다 try/catch, 3D(three.js)는 drawAll 뒤에 별도 try/catch. WebGL이 없어도 나머지가 동작해야 한다.
 5. **id는 문서 안에서 유일.** 절 제목 id와 입력 id가 겹쳐 슬라이더가 NaN이 된 적이 있다. 그림 SVG id는 `-fig`로 끝낸다(검사 도구가 빈 그림을 찾을 때 쓴다).
-6. **스타일.** shared/base.css의 토큰(--ink, --accent, --alpha(↑/α 주황), --beta(↓/β 청록), --n(파랑))만 쓴다. 다크 모드는 토큰으로 자동. 글꼴 IBM Plex Sans KR / Mono. three.js는 `https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js` 고정.
+6. **스타일.** shared/base.css의 토큰(--ink, --accent, --alpha(↑/α 주황), --beta(↓/β 청록), --n(파랑))만 쓴다. 다크 모드는 토큰으로 자동. 글꼴 IBM Plex Sans KR / Mono. three.js는 `https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js` 고정이며 `integrity`(SRI 해시)·`crossorigin`을 함께 단다. 해시는 `tools/package_concept_site.py`의 `THREE_SRI`와 같아야 게시 검사를 통과한다.
 7. **비트열 규약** [β 왼쪽 | α 오른쪽], 각 절반은 궤도 번호 큰 쪽이 왼쪽. 문서 전체에서 일관.
 
 ## 작업 후 확인
 ```bash
 node tools/check_html.js            # 스크립트 오류, 중복 id, 빈 그림
 node tools/check_html.js --narrow   # 폰 레이아웃 경로
+tools/build_all.sh                  # 생성 순서대로 모든 페이지를 다시 만든다 (CI와 같은 순서)
+tools/check_all.sh --no-browser     # 유닛 테스트, 노트 구조, 허브 최신성, 계산 데이터, 가짜 DOM
+tools/check_all.sh                  # 위 + 브라우저 검사 전부 (PLAYWRIGHT_MODULE, CHROMIUM_PATH 필요)
 python -m http.server -d docs 8000  # 브라우저 확인 (데스크톱 + 개발자도구 모바일 뷰)
 ```
 
@@ -89,7 +93,7 @@ H₂ 예제는 `scripts/vqe_h2.py`로 생성한 `data/vqe_h2.json`을 사용하�
 `energy-expectation` 실험은 일반 기댓값의 뜻을 먼저 설명한 뒤 한 큐빗 예제로 좁힌다. 고정 입력 |0⟩, Ry(θ), 준비된 열벡터 c, Hc, 내적을 순서대로 표시한다. `node tools/check_bridge_concepts.cjs`는 독립 복소 내적·텐서곱·행렬 연산과 두 화면 폭의 모든 펼친 수식을 검증한다. 설정은 기존 Playwright 검사와 같고 BRIDGE_SCREENSHOT_DIR로 화면을 저장한다. 용어 설명창에서 분자 대칭은 `molecular-symmetry`, 전자 좌표 교환은 대수적 교환법칙과 구별하며, 첫 등장에 들어가는 영어 병기로 복합 용어가 분리되지 않는지 확인한다.
 
 ## 전체 학습 지도 메인
-`docs/concept-learning-maps.html`은 수학·양자화학·큐빗/회로/측정·VQE·SQD 다섯 지도를 연결하는 메인 소스다. `build_concepts.py`는 이 지도로 시작하는 독립 파일 `docs/learning-maps.html`도 생성한다. 모든 리더 위쪽에 `#learning-maps`로 돌아가는 링크를 제공한다. `package_concept_site.py`는 이를 게시용 `index.html`로 복사하며 기존 `concepts.html`과 `quantum-chemistry.html` 진입점과 해시 링크를 보존한다. 새 지도 추가 시 메인 카드도 갱신한다.
+`docs/concept-learning-maps.html`은 수학·양자화학·큐빗/회로/측정·VQE·SQD 다섯 지도를 연결하는 메인 소스다. `build_concepts.py`는 이 지도로 시작하는 독립 파일 `docs/learning-maps.html`도 생성한다. 모든 리더 위쪽에 `#learning-maps`로 돌아가는 링크를 제공한다. 게시 사이트의 첫 화면은 허브(`index.html`)이고, 이 지도는 리더 안의 메인으로 남는다. 옛 게시 주소의 `/#slug`는 허브가 `learning-maps.html#slug`로 넘긴다. 기존 `concepts.html`과 `quantum-chemistry.html` 진입점과 해시 링크도 그대로 게시한다. 새 지도 추가 시 메인 카드도 갱신한다.
 
 ## 실험의 선택 버튼
 `assets/concept-choices.js`는 실험의 단일 선택 메뉴를 `aria-pressed` 버튼 묶음으로 보여준다. 숨겨진 select의 값과 input/change 이벤트는 기존 수치 계산과 공유하며 초기화 버튼 뒤에도 선택 표시를 동기화한다. 선택 항목에 용어 설명 버튼을 중첩하지 않도록 enrich에서 select/option은 제외한다. 단독 소스에는 defer 스크립트를 포함하고 단일 파일 리더에는 build가 내장한다. 선택 메뉴를 추가할 때도 이 스크립트를 포함한다. 수치 검사는 `tools/choose_option.cjs`를 통해 실제 버튼을 누른다.
@@ -154,7 +158,7 @@ SQD 상태 준비 회로 그림은 적용된 게이트를 누적해서 표시하
 - `large-hamiltonian` → `hamiltonian-size`: 적분·배치 수와 메모리 규모 실험.
 
 생성 순서: 필요한 데이터/실험 삽입 도구 → `python tools/remodel_notes.py` →
-`python tools/enrich_concepts.py` → `python tools/build_concepts.py`.
+`python tools/enrich_concepts.py` → `python tools/build_concepts.py` → `python tools/build_hub.py`. `tools/build_all.sh`가 이 순서 전체를 실행한다.
 `remodel_notes.py`를 다시 실행해도 본문을 재분할하지 않고 안내·카드만 갱신한다.
 
 공통 확인:
@@ -196,4 +200,16 @@ CDN·외부 그래프 서비스·저장소 요청 없이 모든 노트로 이동
 변경 후 `node tools/check_relations.cjs`로 모든 노트의 연결, 관계 종류, 세 학습 경로,
 문맥 링크, 검색·키보드·IME·터치, 모바일 폭과 노드 겹침을 확인한다. 공통 구조·검색·리더
 탐색을 바꾸면 기존 `check_note_structure.py`, `check_search.cjs`, `check_quantum_concepts.cjs`도 실행한다.
-게시 도구는 `relations.html`을 기존 진입점과 함께 복사하며 메인은 계속 학습 지도 목록이다.
+게시 도구는 `relations.html`을 다른 리더와 함께 복사한다. 게시 사이트의 첫 화면은 허브이고, 리더 안의 메인은 계속 학습 지도 목록이다.
+
+## 허브 (docs/index.html)
+`docs/index.html`은 본문 문서와 개념 노트를 읽는 순서대로 보여 주는 생성 페이지이며 게시 사이트의 첫 화면이다. 손으로 고치지 않는다. `python tools/build_hub.py`가 `tools/hub-page.html` 틀에 `assets/concepts.css`·`assets/hub.css`·`assets/progress.js`·`assets/hub.js`를 내장해 만든다. 허브는 자기 데이터를 갖지 않는다. 노트와 순서·종류·핵심 질문은 `note-catalog.json`, 노선 이름·설명·색은 `relation-map.json`(관계도와 같은 값), 제목은 각 페이지의 `<h1>`, 본문 문서의 설명은 `<h1>`의 `<br>` 뒤 부제에서 가져온다. 본문 문서의 순서와 번호 표지는 `build_hub.py`의 `MAIN_DOCS`가 정한다. `docs/`에 목록 밖 본문 HTML이 생기거나 목록의 파일이 없으면 빌드가 멈춘다. 새 개념 노트는 목록 파일에 등록하면 허브에 저절로 들어간다. 빌드는 `build_concepts.py` 다음에 하고 `python tools/build_hub.py --check`로 최신인지 확인한다.
+
+읽음·이해 표시는 브라우저 저장소에만 둔다. 키는 문서마다 `sqd-progress:v1:<id>` = `read`|`understood`(없으면 아직)이고, `sqd-progress:v1-last`는 마지막으로 표시한 문서(다음 추천의 기준), `sqd-progress:v1-opened`는 허브에서 마지막으로 연 문서("방금 연 문서" 확인)다. 다른 기기로 옮기는 진행 링크는 `index.html#map=v1` 뒤에 `.r<id>`(읽음), `.u<id>`(이해), `.l<id>`(마지막 표시)를 잇고 끝에 `.e<읽음·이해 항목 수>`를 붙인다(예: `#map=v1.rvector.ubasis.lbasis.e2`). 끝 항목이 없거나 수가 맞지 않으면 잘린 링크로 보고 거절한다. 가져오기 전에 미리보기를 보여 주고 합치기·그대로 바꾸기·되돌리기를 제공하며, 표시가 없는 링크로는 바꾸지 않는다. 가져오기는 값 쓰기를 먼저, 지우기를 나중에 하고 중간에 실패하면 이미 쓴 키를 되돌린다. 문서 id(노트 슬러그와 본문 파일 이름)는 이 링크와 저장 키에 쓰이므로 바꾸지 않는다. 허브 해시는 `map=`, `line=<지도 id>`처럼 `키=값`만 쓴다. `=`이 없는 해시가 리더 슬러그이면 쿼리(`?graph-*`)를 유지한 채 `learning-maps.html#<슬러그>`로 넘긴다(옛 게시 사이트의 `/#slug` 주소와 저장된 관계도 보기 보존). 저장소에 쓸 수 없게 되면(사생활 보호 모드, 용량 초과) 이미 저장된 표시는 계속 읽고, 새 표시는 그 탭에만 남기며 안내를 띄운다. 링크나 저장소에서 읽은 id는 프로토타입 없는 객체로만 조회한다.
+
+첫 그리기가 `hub.js` 실행보다 먼저 일어나도 화면이 움직이지 않게, 머리 스크립트가 펼칠 노선(마지막 표시 문서의 노선)을 `data-hub-open`으로 정하고 `build_hub.py`가 노선별 접기 CSS를 만든다. 재방문자의 카드 자리는 미리 비워 두며, `hub.js`가 끝나면 `hub-painted`가 붙는다(3초 뒤에는 무조건). 허브는 외부 요청이 없고 웹 글꼴도 받지 않는다(리더와 같은 글꼴 스택). 자바스크립트가 꺼져도 목록과 링크는 보인다. 스크립트는 `[data-hub]`가 없으면 바로 끝나므로 `check_html.js`의 가짜 DOM을 통과한다. `node tools/check_hub.cjs`가 표시·저장·추천·찾기(한글 조합 포함)·거르기·진행 링크 왕복과 오류·저장소 없음과 쓰기 실패·두 탭 동기화·뒤로 가기 캐시·옛 해시·360px 잘림·느린 기기의 첫 화면 이동량·다크 모드·키보드·자바스크립트 끔과 게시 묶음의 링크를 검사한다. `tools/test_progress.cjs`는 브라우저 없이 진행 링크 형식과 저장소 동작을, `tools/test_hub_and_package.py`는 생성 규칙·패키징 규칙·`check_all.sh` 자체를 검사한다.
+
+## 게시 묶음
+`python tools/package_concept_site.py --output <빈 폴더>`는 허브(`index.html`), 리더 네 개, 본문 모음(`index-main.html`)과 본문 문서 11편을 복사한다. 리더 사본의 상단 바에만 허브로 가는 "학습 허브" 링크(와 그 스타일)를 더한다. 저장소의 리더는 단일 파일과 claude.ai로도 공유되어 옆에 허브가 없으므로 그대로 둔다. 검사 규칙은 두 벌이다. 리더와 허브는 외부 요청이 없어야 하고, 리더 안 링크는 `#페이지`와 허브 링크만 허용한다. 본문 문서는 Google Fonts(`fonts.googleapis.com`, `fonts.gstatic.com`)와 `intro`·`prep-math`·`math`의 cdnjs three.js만 허용한다. 모든 상대 링크는 묶음 안의 파일을, 리더로 가는 링크는 그 리더에 있는 페이지를 가리켜야 한다.
+
+`.github/workflows/concept-pages.yml`은 main으로의 push와 모든 PR에서 `tools/build_all.sh`로 다시 생성해 커밋된 파일과 같은지(바뀐 파일과 새 파일 모두) 확인하고 위 검사를 실행한다. 게시는 Actions의 수동 실행(workflow_dispatch)으로만 하며, 게시 묶음은 제3자 설치 전에 만들어 올린다. 첫 게시 전에 저장소 Settings → Pages의 Source를 GitHub Actions로 바꿔야 한다.
