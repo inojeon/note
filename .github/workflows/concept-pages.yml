@@ -1,41 +1,83 @@
-name: Publish concept notes
+name: Concept notes
 
-# Publishing is explicit: commits and pull requests do not deploy this site.
+# validate runs on pushes to main and on every pull request. Publishing stays explicit:
+# only a manual "Run workflow" (workflow_dispatch) reaches the deploy job.
 on:
+  push:
+    branches: [main]
+  pull_request:
   workflow_dispatch:
 
 permissions:
   contents: read
 
+# A newer push or PR update cancels the run it supersedes. Manual runs have their own
+# group per event, so no push can replace a queued deployment.
 concurrency:
-  group: concept-pages
-  cancel-in-progress: false
+  group: concept-pages-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name != 'workflow_dispatch' }}
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  validate:
+    # Pinned: ubuntu-latest moved to 26.04, where Playwright 1.58 cannot install Chromium's
+    # dependencies. Move both together when upgrading Playwright.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: references/sqd-docs
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Build and validate self-contained readers
-        working-directory: references/sqd-docs
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Rebuild every generated page
+        run: tools/build_all.sh
+      - name: Committed pages match the build
         run: |
-          python3 tools/build_bo_molecule.py
-          python3 tools/build_vqe_hydrogen.py
-          python3 tools/enrich_concepts.py
-          python3 tools/build_concepts.py
-          node tools/check_html.js docs/concepts.html docs/quantum-chemistry.html
-          node tools/check_html.js docs/concepts.html docs/quantum-chemistry.html --narrow
-          python3 tools/package_concept_site.py --output "$RUNNER_TEMP/concept-site"
+          git diff --exit-code --stat -- .
+          changed=$(git status --porcelain -- .)
+          if [ -n "$changed" ]; then echo "$changed"; echo "::error::the build created or removed files"; exit 1; fi
+      - name: Unit, structure, freshness, data and fake-DOM checks
+        run: tools/check_all.sh --no-browser
+      # Packaged before any third-party install below, so nothing downloaded can alter it.
+      # deploy still waits for this whole job, browser checks included.
+      - name: Package the site
+        if: github.event_name == 'workflow_dispatch'
+        run: python3 tools/package_concept_site.py --output "$RUNNER_TEMP/concept-site"
       - uses: actions/upload-pages-artifact@v3
+        if: github.event_name == 'workflow_dispatch'
         with:
           path: ${{ runner.temp }}/concept-site
+      - uses: actions/cache@v4
+        if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-1.58.2-${{ runner.os }}
+      - name: Browser checks
+        if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+        timeout-minutes: 45
+        run: |
+          npm init -y > /dev/null
+          npm install --no-audit --no-fund playwright@1.58.2
+          npx playwright install --with-deps chromium
+          # Korean text metrics close to what readers see (the default runner fonts are CJK fallbacks).
+          sudo apt-get install -y -q fonts-noto-cjk > /dev/null
+          export PLAYWRIGHT_MODULE="$PWD/node_modules/playwright"
+          export CHROMIUM_PATH="$(node -e "console.log(require(process.env.PLAYWRIGHT_MODULE).chromium.executablePath())")"
+          tools/check_all.sh --browser-only
 
   deploy:
-    needs: build
+    needs: validate
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    # One Pages site: deployments from any branch queue behind each other.
+    concurrency:
+      group: concept-pages-deploy
+      cancel-in-progress: false
     permissions:
       pages: write
       id-token: write
@@ -43,6 +85,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Publish the concept reader
+      - name: Publish the site
         id: deployment
         uses: actions/deploy-pages@v4
