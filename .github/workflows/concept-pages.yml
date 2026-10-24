@@ -19,7 +19,9 @@ concurrency:
 
 jobs:
   validate:
-    runs-on: ubuntu-latest
+    # Pinned: ubuntu-latest moved to 26.04, where Playwright 1.58 cannot install Chromium's
+    # dependencies. Move both together when upgrading Playwright.
+    runs-on: ubuntu-24.04
     timeout-minutes: 60
     defaults:
       run:
