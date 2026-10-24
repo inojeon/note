@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SQD 학습 허브 · 전체 목록</title>
+<meta name="description" content="SQD 학습 허브. 본문 문서 11편과 개념 노트 63편을 읽는 순서대로 찾고, 읽은 문서를 표시합니다.">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#F3F5F7;--panel:#FFFFFF;--ink:#1E2A38;--ink2:#5B6878;--line:#D5DBE3;
+  --alpha:#C8731F;--alpha-soft:#F6E3CF;--beta:#1F7A8C;--beta-soft:#D4EAEE;
+  --accent:#2F4F8A;--code:#EEF1F5;--warn:#B23A48;--n:#3B5BA5;--nsoft:#D7E0F5;--active:#BFE6D6;--frozen:#E2E5EA}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161B22;--panel:#1F2630;--ink:#E6EAF0;--ink2:#9AA6B5;--line:#344050;
+  --alpha:#E4954A;--alpha-soft:#4A3420;--beta:#5FB8C9;--beta-soft:#183A42;--accent:#8FB0F0;--code:#111620;--warn:#E07A86;--n:#7F9BE0;--nsoft:#243352;--active:#1F4A3C;--frozen:#2A313B}}
+:root[data-theme="dark"]{--bg:#161B22;--panel:#1F2630;--ink:#E6EAF0;--ink2:#9AA6B5;--line:#344050;
+  --alpha:#E4954A;--alpha-soft:#4A3420;--beta:#5FB8C9;--beta-soft:#183A42;--accent:#8FB0F0;--code:#111620;--warn:#E07A86;--n:#7F9BE0;--nsoft:#243352;--active:#1F4A3C;--frozen:#2A313B}
+
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.85 "IBM Plex Sans KR",system-ui,sans-serif;word-break:keep-all}main{max-width:760px;margin:auto;padding:32px 24px 64px;min-width:0}a{color:var(--accent);text-underline-offset:4px}h1{font-size:clamp(1.8rem,5vw,2.5rem);line-height:1.3;margin:12px 0 20px}h2{font-size:1.15rem;margin:28px 0 8px}p{margin:10px 0;overflow-wrap:anywhere}.eyebrow,small,.meta{color:var(--ink2);font-size:.85rem}.lead{font-size:1.2rem}.box,figure,details{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;margin:20px 0}figure{margin:20px 0}figcaption{font-size:.85rem;color:var(--ink2)}summary{cursor:pointer;font-weight:600}.formula{font-family:"IBM Plex Mono",monospace;overflow-wrap:anywhere}.docnav{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:14px}.bottom{margin-top:32px;border-top:1px solid var(--line);border-bottom:0;padding-top:16px}.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;list-style:none;padding:0}.cards a{display:block;background:var(--panel);border:1px solid var(--line);padding:16px;border-radius:12px;text-decoration:none;height:100%}.cards span{display:block;color:var(--ink2);font-size:.9rem}input{accent-color:var(--accent);max-width:100%}label{display:block;margin:10px 0}svg{width:100%;height:auto;display:block}a:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:4px}.backlinks{border-left:3px solid var(--beta);padding-left:16px}.skip{position:absolute;left:-9999px}.skip:focus{position:static}html,body{max-width:100%;overflow-x:hidden}@media(max-width:600px){main{padding:20px 16px 40px}.cards{grid-template-columns:1fr}h2{margin-top:24px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+
+.math-array{display:inline-flex;align-items:center;vertical-align:middle;position:relative;padding:3px 9px;margin:3px 4px;font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;line-height:1.35;white-space:nowrap;color:var(--ink)}.math-array:before,.math-array:after{content:"";position:absolute;top:0;bottom:0;width:5px;border:1.5px solid currentColor}.math-array:before{left:0;border-right:0}.math-array:after{right:0;border-left:0}.math-cells{display:table}.math-row{display:table-row}.math-row>span{display:table-cell;text-align:center;padding:1px 5px}.vector-readout{display:grid;grid-template-columns:1fr 1fr;gap:12px}.vector-readout>div{background:var(--code);border-radius:8px;padding:12px}.vector-readout>div>span:first-child{display:block;color:var(--ink2);font-size:.85rem}.vector-readout strong{font:600 1.5rem/2 ui-monospace,monospace}.formula{line-height:2.3}
+
+.column-one{color:var(--n)}.column-two{color:var(--beta)}.column-one .math-array{color:var(--n)}.column-two .math-array{color:var(--beta)}.matrix-output{color:var(--alpha)}.matrix-key{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.matrix-key p{font-size:.9rem}.matrix-presets{display:flex;gap:8px;flex-wrap:wrap}.matrix-presets button{background:var(--panel);border:1px solid var(--line);border-radius:8px;color:var(--ink);font:inherit;font-size:.85rem;padding:8px 10px;cursor:pointer}.matrix-presets button[aria-pressed="true"]{border-color:var(--accent);background:var(--nsoft)}.matrix-presets button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.matrix-inputs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}.matrix-inputs label{font-size:.85rem;margin:0}.matrix-inputs input{display:block;width:100%;margin:10px 0}.matrix-inputs output{font:600 1rem ui-monospace,monospace}.matrix-equation{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;border-block:1px solid var(--line);padding:16px 0;margin-bottom:10px}.matrix-equation>div{text-align:center}.matrix-equation small{display:block}.matrix-sum{display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap}.matrix-explanation{border-left:3px solid var(--accent);padding-left:12px;font-size:.95rem}@media(max-width:600px){.matrix-equation{gap:8px}.matrix-equation>div:nth-of-type(2){flex-basis:100%}.matrix-presets button{flex:1 1 42%}.matrix-lab{padding:14px 10px}}
+
+.concept-definition{border-left:3px solid var(--accent);background:var(--panel);padding:14px 18px;margin:24px 0}.concept-definition h2{margin:0 0 8px}.concept-definition p{margin:0}
+
+.term-trigger{font:inherit;color:var(--accent);background:transparent;border:0;border-bottom:1px dashed currentColor;padding:0;cursor:help;text-align:inherit;line-height:inherit;display:inline;touch-action:manipulation}.term-trigger:hover,.term-trigger[aria-expanded="true"]{background:var(--nsoft)}.term-trigger:focus-visible{outline:2px solid var(--accent);outline-offset:3px}.term-hint{font-size:.8rem;color:var(--ink2);margin-bottom:12px!important}.term-popover{position:fixed;inset:auto;margin:0;box-sizing:border-box;max-width:calc(100vw - 32px);max-height:calc(100dvh - 32px);overflow:auto;padding:18px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--ink);box-shadow:0 8px 28px color-mix(in srgb,var(--ink) 18%,transparent);font-size:.9rem;line-height:1.7;overflow-wrap:anywhere;word-break:keep-all}.term-popover strong,.term-popover>span{display:block}.term-popover strong{margin-bottom:10px;color:var(--accent)}.term-formula{white-space:pre-line;background:var(--code);font-family:ui-monospace,monospace;padding:10px;margin:12px 0;border-radius:6px}.term-note{color:var(--ink2);font-size:.85rem}
+
+.diagonal-fixed{display:flex;align-items:center;flex-wrap:wrap;gap:10px}.diagonal-fixed>span:last-child{font-size:.85rem;color:var(--ink2)}.diagonal-presets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}.diagonal-presets button{background:var(--panel);border:1px solid var(--line);border-radius:8px;color:var(--ink);font:inherit;font-size:.85rem;padding:8px 10px;cursor:pointer}.diagonal-presets button[aria-pressed="true"]{border-color:var(--accent);background:var(--nsoft)}.diagonal-presets button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.diagonal-lab label{display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:.9rem}.diagonal-lab output{font:600 1rem ui-monospace,monospace;min-width:4ch}.diagonal-lab input{flex:1;min-width:100px}.diagonal-matrix{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:24px;font-size:1.15rem}.diagonal-off{color:var(--alpha)}.diagonal-aligned .diagonal-off{color:var(--beta);background:var(--beta-soft)}#diagonal-status{border-left:3px solid var(--beta);padding-left:12px;font-size:.9rem;min-height:3.4em}.diagonal-working{padding:12px}.diagonal-calculation{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}.diagonal-calculation>div{background:var(--code);padding:12px;border-radius:8px}.diagonal-calculation strong,.diagonal-calculation>div>span{display:block;font-size:.85rem}#diagonal-check{font-size:.85rem;color:var(--ink2)}@media(max-width:600px){.diagonal-presets button{flex:1 1 100%}.diagonal-lab figure{padding:14px 10px}.diagonal-calculation{grid-template-columns:1fr}}
+
+.factor-equation{display:flex;align-items:stretch;gap:6px;margin:20px 0}.factor-card{flex:1;min-width:0;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);padding:12px 6px;font:inherit;cursor:pointer;text-align:center}.factor-card>strong,.factor-card>span:last-child{display:block}.factor-card>strong{font:600 1.3rem ui-monospace,monospace}.factor-card>span:last-child{font-size:.75rem;line-height:1.5;margin-top:8px}.factor-card .math-array{font-size:1rem;margin:10px 0}.factor-card[aria-pressed="true"]{border-color:var(--accent);background:var(--nsoft)}.factor-operator{display:flex;align-items:center;color:var(--ink2)}.factor-description{border-left:3px solid var(--accent);padding:14px;background:var(--panel);font-size:.9rem}.factor-description p:last-child{margin-bottom:0}.factor-reading{font-size:.9rem;margin:20px 0}.factor-steps{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.factor-steps button{font:inherit;font-size:.85rem;border:1px solid var(--line);border-radius:6px;padding:8px;background:var(--panel);color:var(--ink);cursor:pointer}.factor-steps button[aria-pressed="true"]{background:var(--nsoft);border-color:var(--accent)}.factor-card:focus-visible,.factor-steps button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.factor-product{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}#factor-multiplication p{font-size:.9rem}@media(max-width:600px){.factor-equation{flex-wrap:wrap;justify-content:center}.factor-card{flex:0 1 calc(50% - 18px)}.factor-operator:nth-of-type(4){display:none}.factor-product{gap:2px}.factor-product .math-array{margin:3px 0;font-size:.9rem}}
+@media(max-width:600px){.factor-equation{flex-direction:column;align-items:stretch}.factor-card{flex:auto;display:grid;grid-template-columns:40px minmax(0,1fr) minmax(0,1fr);align-items:center;gap:8px;padding:10px}.factor-card>span:last-child{margin:0}.factor-operator{align-self:center}.factor-operator:nth-of-type(4){display:flex}}
+
+.power-presets,.power-step-controls{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}:is(.power-presets,.power-step-controls) button{font:inherit;font-size:.85rem;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--panel);color:var(--ink);cursor:pointer}:is(.power-presets,.power-step-controls) button[aria-pressed="true"]{border-color:var(--accent);background:var(--nsoft)}:is(.power-presets,.power-step-controls) button:disabled{opacity:.5;cursor:default}:is(.power-presets,.power-step-controls) button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.power-lab label{display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:.9rem}.power-lab input{flex:1;min-width:100px}.power-lab output{min-width:4ch;font:600 1rem ui-monospace,monospace}#power-message{border-left:3px solid var(--accent);padding-left:12px;font-size:.9rem}.power-readouts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0}.power-readouts>div,.power-step-grid>div{background:var(--code);padding:12px;border-radius:8px}.power-readouts small,.power-step-grid small{display:block;color:var(--ink2)}.power-readouts strong{font:600 1.5rem/2 ui-monospace,monospace}.power-step-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:16px 0}.power-step-grid .math-array{font-size:.85rem}.power-step-detail p,#power-component-values p{font-size:.9rem}@media(max-width:600px){.power-presets button{flex:1 1 42%}.power-readouts{grid-template-columns:1fr}.power-step-grid{grid-template-columns:1fr}.power-lab figure{padding:14px 10px}}
+
+.math-fraction{display:inline-flex;flex-direction:column;align-items:stretch;text-align:center;vertical-align:middle;line-height:1.5;margin:4px 6px;font-family:ui-monospace,monospace}.math-fraction>span:first-child{border-bottom:1.5px solid currentColor;padding:1px 6px}.math-fraction>span:last-child{padding:1px 6px}.power-recurrence{display:flex;justify-content:center;align-items:center;gap:6px;font:1.4rem ui-monospace,monospace;margin:8px 0 20px}.power-math-line{display:flex;gap:12px 24px;align-items:center;flex-wrap:wrap;margin:16px 0;font-family:ui-monospace,monospace}.power-math-line>span{display:inline-flex;align-items:center;flex-wrap:wrap;gap:4px}.power-formula-example h3{font-size:1rem;margin:24px 0 8px}.power-formula-example p{font-size:.9rem}
+
+.subspace-presets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}.subspace-presets button{font:inherit;font-size:.85rem;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--panel);color:var(--ink);cursor:pointer}.subspace-presets button[aria-pressed="true"]{border-color:var(--accent);background:var(--nsoft)}.subspace-presets button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.subspace-inputs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}.subspace-inputs label{font-size:.85rem}.subspace-inputs input{display:block;width:100%;margin:8px 0}.subspace-lab output{font:600 .95rem ui-monospace,monospace}.subspace-tilt,#subspace-nearest label{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:.9rem}.subspace-tilt input,#subspace-nearest input{flex:1;min-width:100px}.subspace-readouts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:20px 0}.subspace-readouts>div{background:var(--code);padding:10px 4px;border-radius:8px;text-align:center}.subspace-readouts small{display:block;color:var(--ink2);font-size:.8rem}.subspace-readouts .math-array{font-size:.9rem}.subspace-equation{display:flex;align-items:center;flex-wrap:wrap;gap:12px}.subspace-equation>span{display:inline-flex;align-items:center}#subspace-status{border-left:3px solid var(--beta);padding-left:12px;font-size:.9rem}.subspace-calculation p,#subspace-nearest p{font-size:.9rem}@media(max-width:600px){.subspace-lab figure{padding:14px 10px}.subspace-presets button{flex:1 1 42%}.subspace-readouts .math-array{font-size:.75rem}.subspace-readouts .math-row>span{padding:1px 2px}.subspace-readouts small{font-size:.7rem}}
+
+.term-example{display:block;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}.term-example>b{display:block;color:var(--beta);font-size:.85rem;margin-bottom:6px}.term-example>span{display:block}.term-example-math{display:flex!important;align-items:center;flex-wrap:wrap;gap:4px;margin-top:10px;padding:10px 6px;background:var(--code);border-radius:6px;font-size:.85rem}.term-example-math .math-array{margin:3px 1px;font-size:.9rem}.example-equation-text{overflow-wrap:anywhere;min-width:0}.term-example-math .math-row>span{padding:1px 4px}
+
+.krylov-fixed{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.krylov-fixed>span:last-child{font-size:.85rem;color:var(--ink2)}.krylov-presets,.krylov-controls{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}:is(.krylov-presets,.krylov-controls) button{font:inherit;font-size:.85rem;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--panel);color:var(--ink);cursor:pointer}.krylov-presets button[aria-pressed="true"]{border-color:var(--accent);background:var(--nsoft)}.krylov-controls button:disabled{opacity:.5;cursor:default}:is(.krylov-presets,.krylov-controls) button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.krylov-lab label{display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:.9rem}.krylov-lab input{flex:1;min-width:80px}.krylov-lab output{font:600 1rem ui-monospace,monospace}#krylov-start-value{display:flex;align-items:center;gap:10px;font-size:.9rem}#krylov-message,.krylov-estimate{border-left:3px solid var(--beta);padding-left:12px;font-size:.9rem}.krylov-matrices{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}.krylov-matrices>div{background:var(--code);padding:12px;border-radius:8px;text-align:center;overflow-x:auto}.krylov-matrices strong,.krylov-matrices small{display:block;font-size:.8rem}.krylov-matrices .math-array{font-size:.9rem;margin:14px 0}.krylov-far{color:var(--ink2);background:var(--frozen)}.krylov-raw-values,.krylov-recurrence-values{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:14px 0}.krylov-raw-values>div,.krylov-recurrence-values>span{display:flex;align-items:center;font-size:.9rem}#krylov-recurrence p{font-size:.9rem}@media(max-width:600px){.krylov-lab figure{padding:14px 10px}.krylov-presets button{flex:1 1 100%}.krylov-matrices{grid-template-columns:1fr}}
+
+.hamiltonian-presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}:is(.hamiltonian-presets) button,#hamiltonian-use-ground{font:inherit;font-size:.85rem;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--panel);color:var(--ink);cursor:pointer}.hamiltonian-presets button[aria-pressed="true"]{border-color:var(--accent);background:var(--nsoft)}:is(.hamiltonian-presets) button:focus-visible,#hamiltonian-use-ground:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.hamiltonian-inputs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}.hamiltonian-inputs label{font-size:.85rem}.hamiltonian-inputs input{display:block;width:100%;margin:10px 0}.hamiltonian-lab output{font:600 .9rem ui-monospace,monospace}.hamiltonian-matrix{display:flex;justify-content:center;align-items:center;gap:10px;margin:24px 0 4px}.hamiltonian-ground{display:grid;grid-template-columns:1fr 1.5fr;gap:12px;margin:18px 0}.hamiltonian-ground>div{padding:12px;background:var(--code);border-radius:8px}.hamiltonian-ground strong{display:block;font-size:.8rem}.hamiltonian-ground p{font-size:.8rem}.hamiltonian-probability-bar{display:flex;height:20px;border-radius:4px;overflow:hidden;margin:18px 0}.hamiltonian-probability-bar span:first-child{background:var(--n)}.hamiltonian-probability-bar span:last-child{background:var(--beta)}#hamiltonian-status{border-left:3px solid var(--accent);padding-left:12px;font-size:.9rem}.hamiltonian-eigencheck{display:flex;align-items:center;flex-wrap:wrap;gap:14px}.hamiltonian-eigencheck>span{display:inline-flex;align-items:center;font-size:.9rem}#hamiltonian-calculation p,#hamiltonian-expectation p{font-size:.9rem}@media(max-width:600px){.hamiltonian-lab figure{padding:14px 10px}.hamiltonian-presets button{flex:1 1 42%}.hamiltonian-inputs{grid-template-columns:1fr}.hamiltonian-inputs label{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.hamiltonian-inputs input{flex:1;min-width:80px}.hamiltonian-ground{grid-template-columns:1fr}}
+
+.hamiltonian-chemistry details p{font-size:.9rem}.hamiltonian-chemical-values{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}.hamiltonian-chemical-values>div{background:var(--code);border-radius:8px;padding:12px}.hamiltonian-chemical-values>div:nth-child(3){grid-column:1/-1}.hamiltonian-chemical-values strong,.hamiltonian-chemical-values span{display:block;font-size:.8rem}.hamiltonian-chemical-values .chemical-number{font:600 1.05rem/1.7 ui-monospace,monospace;color:var(--accent);margin:8px 0}.hamiltonian-chemical-values p,.hamiltonian-coupling-note p{font-size:.85rem}.chemical-mixing-result{grid-column:1/-1;border-left:3px solid var(--beta);padding-left:12px;margin:4px 0}@media(max-width:600px){.hamiltonian-chemical-values{grid-template-columns:1fr}}
+
+/* Quantum chemistry: shared short-note experiments and learning map. */
+.qc-route-panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;margin:26px 0}
+.qc-route-panel h2{margin:0 0 14px}.qc-presets{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.qc-presets button{background:var(--panel);border:1px solid var(--line);border-radius:8px;color:var(--ink);font:inherit;font-size:.85rem;line-height:1.5;padding:10px 12px;min-height:44px;cursor:pointer}
+.qc-presets button[aria-pressed="true"]{border-color:var(--accent);background:var(--nsoft)}
+.qc-presets button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.qc-presets button:disabled{opacity:.5;cursor:default}
+.qc-route-result>p{font-size:.9rem;color:var(--ink2)}.qc-route{display:flex;flex-wrap:wrap;gap:8px 22px;padding:0;list-style:none;counter-reset:qc-route}
+.qc-route li{counter-increment:qc-route;position:relative;font-size:.9rem}.qc-route li:before{content:counter(qc-route) ". ";color:var(--ink2);font-variant-numeric:tabular-nums}
+.qc-step{font:500 .8rem ui-monospace,monospace;display:inline-block;color:var(--beta);border:1px solid var(--line);border-radius:5px;margin-right:8px;padding:4px 7px;vertical-align:middle}
+.qc-concept-cards a{border-top:3px solid var(--beta);transition:border-color .15s,background-color .15s}.qc-concept-cards a:hover{background:var(--code);border-color:var(--accent)}
+.qc-concept-cards small{display:block;font-size:.75rem;margin-bottom:8px}.qc-concept-cards strong{display:block;font-size:.98rem;line-height:1.65}.qc-concept-cards span{margin-top:8px}
+.qc-lab{min-width:0}.qc-lab figure{min-width:0}.qc-lab svg{max-width:100%}.qc-lab figcaption{margin-top:10px}
+.qc-controls{display:grid;gap:12px;margin:16px 0}.qc-controls label{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:0;font-size:.9rem}
+.qc-controls input[type="range"]{flex:1;min-width:100px;min-height:32px}.qc-controls output{font:600 .95rem ui-monospace,monospace;min-width:5ch}
+.qc-readouts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.qc-readouts>div{background:var(--code);border-radius:8px;padding:12px;min-width:0;overflow-wrap:anywhere}.qc-readouts strong,.qc-readouts small{display:block}.qc-readouts strong{font-size:.9rem}
+.qc-readouts output{display:block;font:600 1.1rem/1.8 ui-monospace,monospace}.qc-readouts .math-array{font-size:1rem}
+.qc-equation{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;padding:14px 0;min-width:0;overflow-wrap:anywhere}.qc-equation>div{text-align:center;min-width:0}.qc-equation small{display:block}
+.qc-status{border-left:3px solid var(--beta);padding-left:12px;font-size:.9rem}.qc-note{color:var(--ink2);font-size:.85rem}.qc-lab details{padding:14px}.qc-lab details p{font-size:.9rem}
+@media(max-width:600px){.qc-route-panel{padding:16px 12px}.qc-presets button{flex:1 1 42%}.qc-route-panel .qc-presets button{flex-basis:100%}.qc-lab figure{padding:14px 10px}.qc-readouts{grid-template-columns:1fr}.qc-lab .math-array{font-size:.9rem}.qc-lab .math-row>span{padding:1px 4px}}
+
+/* KaTeX supplies the visual HTML and accessible MathML. */
+.math-tex{display:inline-block;max-width:100%;vertical-align:middle}.katex{font-size:1.08em}
+.formula .katex,.term-formula .katex{font-size:1.1em}.math-array .katex{font-size:1em}
+.katex-array{padding:0}.katex-array:before,.katex-array:after{display:none}.katex-array>.math-cells{display:none}.math-tex .katex{white-space:nowrap}
+.state-notation{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;margin:22px 0}.state-notation h2{margin-top:0}
+.state-equation{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:18px;margin:22px 0;min-width:0}.state-equation .katex{font-size:1.3em;max-width:100%}
+.state-expansion{display:grid;gap:12px;margin:20px 0}.state-expansion>div{padding:12px;background:var(--code);border-radius:8px;min-width:0}.state-expansion small{display:block;margin-bottom:10px}.state-expansion .katex{font-size:1.15em}
+@media(max-width:600px){.state-notation{padding:14px 12px}.state-equation .katex{font-size:1.12em}.state-expansion .katex{font-size:1.02em}}
+
+/* Shared entry point for every learning map and standalone reader. */
+.reader-home-nav{max-width:760px;margin:auto;padding:20px 24px 0;font-size:.9rem}
+.reader-home-nav a{display:inline-block;padding:8px 0}
+.learning-map-cards a{display:flex;flex-direction:column;gap:10px}
+.learning-map-cards a:hover{border-color:var(--accent)}
+.learning-map-cards strong{font-size:1.15rem;line-height:1.5}
+.learning-map-cards .map-step{color:var(--accent);font-size:.8rem;font-weight:600}
+.learning-map-cards .map-topics{font-size:.8rem;padding-top:8px;border-top:1px solid var(--line)}
+.learning-map-cards .map-action{color:var(--accent);font-weight:600;margin-top:auto}
+@media(max-width:600px){.reader-home-nav{padding:12px 16px 0}}
+
+/* Visible choices with touch targets and an explicit selected state. */
+select[hidden]{display:none!important}
+.choice-buttons{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 18px;min-width:0;max-width:100%}
+.choice-buttons button{font:inherit;line-height:1.5;color:var(--ink);background:var(--panel);border:2px solid var(--line);border-radius:9px;padding:10px 14px;min-height:44px;max-width:100%;white-space:normal;overflow-wrap:anywhere;cursor:pointer}
+.choice-buttons button:hover{border-color:var(--accent)}
+.choice-buttons button[aria-pressed="true"]{border-color:var(--accent);background:var(--nsoft);color:var(--ink);box-shadow:inset 0 -3px 0 var(--accent);font-weight:700}
+.choice-buttons button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.choice-buttons button:disabled{opacity:.5;cursor:not-allowed}
+
+/* Search is bundled with the notes and makes no network requests. */
+.reader-home-nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
+#reader-search-open,#reader-search-close{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:8px;min-height:44px;padding:8px 14px;cursor:pointer}
+#reader-search{color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:16px;width:min(640px,calc(100% - 24px));max-height:85vh;max-height:85dvh;padding:20px;overflow:hidden}
+#reader-search[open]{display:flex;flex-direction:column}
+#reader-search::backdrop{background:#0009}
+.search-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.search-heading h2{margin:0;font-size:1.2rem}
+#reader-search label{font-size:.9rem;margin:12px 0 6px}
+#reader-search-input{font:inherit;width:100%;min-height:48px;border:1px solid var(--line);border-radius:8px;padding:10px;background:var(--bg);color:var(--ink)}
+#reader-search-status,.search-help{font-size:.8rem;color:var(--ink2);margin:10px 0}
+#reader-search-results{list-style:none;padding:0;margin:0;overflow-y:auto;overscroll-behavior:contain;min-height:0}
+#reader-search-results li+li{border-top:1px solid var(--line)}
+#reader-search-results a{display:block;padding:12px 8px;text-decoration:none;overflow-wrap:anywhere;border-radius:6px}
+#reader-search-results a:hover,#reader-search-results a:focus-visible{background:var(--code);outline-offset:-3px}
+#reader-search-results strong,#reader-search-results span{display:block}
+#reader-search-results span{font-size:.85rem;color:var(--ink2);margin-top:4px}
+#reader-search button:focus-visible,#reader-search-open:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media(max-width:600px){#reader-search{padding:14px}.search-help{font-size:.75rem}}
+
+/* One question, one main example, and a small number of explained connections. */
+.note-header{margin:24px 0 30px}
+.note-header h1{margin-bottom:14px}
+.note-header .lead{font-size:1.15rem;line-height:1.65;margin-bottom:16px}
+.note-prerequisites{font-size:.82rem;color:var(--ink2);line-height:1.8}
+.note-section{margin:32px 0;min-width:0}
+.note-section>h2{font-size:1.04rem;letter-spacing:.01em;color:var(--accent);padding-bottom:10px;border-bottom:1px solid var(--line);margin:0 0 18px}
+.note-section h3{font-size:1.02rem;line-height:1.65;margin:22px 0 10px}
+.note-core .concept-definition{border:0;border-left:3px solid var(--beta);border-radius:0;background:transparent;padding:2px 0 2px 16px;margin:18px 0}
+.note-core .concept-definition p+p{margin-top:12px}
+.note-guide{padding:13px 16px;background:var(--nsoft);border-radius:10px;line-height:1.7;font-size:.9rem;margin-bottom:20px}
+.note-guide strong{display:block;color:var(--accent);font-size:.8rem;margin-bottom:5px}
+.note-example>section{margin-top:16px}
+.note-example>section>h3:first-child{margin-top:0}
+.note-recap>details{font-size:.93rem}
+.note-check{border-color:var(--beta);background:var(--panel)}
+.note-check summary{font-weight:600;line-height:1.7}
+.note-check p{border-top:1px solid var(--line);padding-top:12px;margin-top:14px}
+.note-relation-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.note-relation-cards li:first-child{grid-column:1/-1}
+.note-relation-cards a{padding:16px 18px;border-left:3px solid var(--beta)}
+.note-relation-cards a:hover{border-color:var(--accent);background:var(--code)}
+.note-relation-cards small,.note-relation-cards strong{display:block}
+.note-relation-cards small{color:var(--beta);font-size:.76rem;font-weight:650;margin-bottom:6px}
+.note-relation-cards strong{font-size:1rem;line-height:1.65}
+.note-relation-cards span{font-size:.85rem;line-height:1.7;margin-top:8px}
+.note-other-links{background:transparent;border:0;padding:4px 0;font-size:.85rem}
+.note-other-links ul{padding-left:22px}.note-other-links li{margin:8px 0}
+[data-note-layout]>.docnav{font-size:.83rem}
+[data-note-layout]>.docnav.bottom a{padding:8px 0;max-width:48%}
+.note-map-intro{font-size:.9rem;color:var(--ink2)}
+.note-kind{color:var(--beta);font-size:.75rem}
+@media(max-width:600px){
+ .note-header{margin:18px 0 24px}
+ .note-section{margin:28px 0}
+ .note-relation-cards{grid-template-columns:1fr}
+ .note-guide{padding:12px 14px}
+ .note-recap>details{padding:14px}
+ [data-note-layout]>.docnav.bottom{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ [data-note-layout]>.docnav.bottom a{max-width:none}
+}
+
+/* Hub page (docs/index.html). Tokens come from concepts.css; this file defines no color.
+   Each route uses its map color from assets/relation-map.json through --route. */
+/* concepts.css sets html,body{overflow-x:hidden}, which turns body into a scroll container and
+   silently disables position:sticky. clip still blocks sideways scrolling without that effect. */
+body{overflow-x:clip}
+html{scroll-padding-top:72px}
+main.hub{max-width:1180px}
+.hub [hidden]{display:none!important}
+.hub label{margin:0}
+.hub-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.hub-layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;column-gap:56px;align-items:start}
+.hub-head{grid-column:1;grid-row:1;min-width:0}
+.hub-tools{grid-column:2;grid-row:1 / span 2;display:grid;grid-template-columns:minmax(0,1fr);gap:22px;min-width:0;padding-top:4px}
+.hub-tools > *{min-width:0}
+.hub-list{grid-column:1;grid-row:2;min-width:0;outline:none}
+.hub-list:focus-visible{outline:2px solid var(--accent);outline-offset:6px}
+.hub-head .docnav{justify-content:flex-start;gap:6px 20px;font-size:.9rem}
+.hub-head h1{margin-bottom:10px}
+.hub-head .lead{font-size:1.06rem;color:var(--ink2);margin:0 0 20px;max-width:46em;text-wrap:pretty}
+.hub-noscript{margin:0 0 16px;font-size:.9rem;color:var(--ink2)}
+
+/* The card: start, opened-but-unmarked prompt, next recommendation, progress. */
+.hub-next{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:16px 28px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:0 0 12px;outline:none}
+.hub-next:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.hub-next-main{display:flex;flex-direction:column;gap:14px;min-width:0;flex:1 1 360px}
+.hub-next-main > div{display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0}
+.hub-next small{font-size:.78rem;color:var(--ink2);font-weight:600}
+.hub-cta{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 16px;border-radius:10px;background:var(--accent);color:var(--bg);font-weight:650;text-decoration:none;line-height:1.4;max-width:100%;box-sizing:border-box}
+.hub-cta::after{content:"→";content:"→" / "";flex:none}
+.hub-cta:hover{text-decoration:underline}
+.hub-cta:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.hub-next-q{margin:0;font-size:.9rem;color:var(--ink2);line-height:1.6}
+.hub-alt{margin:0;font-size:.9rem;color:var(--ink2)}
+.hub-alt a{font-weight:600}
+.hub-alt span{white-space:nowrap}
+.hub-opened p{margin:0;font-size:1rem}
+.hub-progress{flex:0 1 auto;font-size:.85rem;color:var(--ink2);font-variant-numeric:tabular-nums}
+.hub-progress p{margin:0}
+.hub-progress p:first-child{color:var(--ink);font-weight:600}
+.hub-notice{background:var(--code);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:0 0 12px;font-size:.9rem}
+.hub-notice p{margin:0 0 10px}
+p.hub-notice{margin:0 0 12px}
+.hub-actions{display:flex;flex-wrap:wrap;gap:8px}
+.hub-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 16px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit;font-size:.9rem;font-weight:600;cursor:pointer;touch-action:manipulation}
+.hub-btn.primary{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.hub-btn:focus-visible,.hub-routes button:focus-visible,.hub-search input:focus-visible,.hub-move summary:focus-visible,.hub-filters summary:focus-visible,.hub-fold:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.hub-move{margin:0 0 12px;padding:0;border:0;border-radius:0;background:none;box-shadow:none;font-size:.9rem}
+.hub-move summary{min-height:36px;display:inline-flex;align-items:center;color:var(--accent);font-weight:600}
+.hub-move summary::after,.hub-filters > summary::after{content:"▾";content:"▾" / "";margin-left:8px;font-size:.85rem}
+.hub-move[open] summary::after,.hub-filters[open] > summary::after{content:"▴";content:"▴" / ""}
+.hub-move[open]{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:6px 16px 14px}
+.hub-move p{color:var(--ink2);margin:8px 0 10px;line-height:1.7}
+#hub-copied{margin:8px 0 0}
+#hub-copied:empty{display:none}
+#hub-link{box-sizing:border-box;width:100%;margin-top:8px;font:.78rem "IBM Plex Mono",ui-monospace,monospace;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink)}
+
+/* Tools: search, routes and the mark filter. */
+.hub-label{display:block;font-size:.78rem;color:var(--ink2);margin:0 0 6px;font-weight:600;padding:0}
+.hub-search input{box-sizing:border-box;width:100%;min-height:46px;font:inherit;font-size:1rem;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+#hub-count{margin:6px 0 0;font-size:.78rem;color:var(--ink2);font-variant-numeric:tabular-nums}
+#hub-count:empty{display:none}
+.hub-filters{margin:0;padding:0;border:0;background:none;box-shadow:none}
+.hub-filters > summary{display:none}
+.hub-filters[open] > :not(summary){margin-bottom:20px}
+.hub-routes{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.hub-routes button{display:flex;align-items:center;gap:10px;width:100%;min-height:40px;padding:4px 10px;border:1px solid transparent;border-radius:8px;background:none;color:var(--ink);font:inherit;font-size:.9rem;text-align:left;cursor:pointer;white-space:nowrap}
+.hub-routes button::before{content:"";flex:none;width:10px;height:10px;border-radius:50%;background:var(--route)}
+.hub-routes button:hover{background:var(--panel)}
+.hub-routes button[aria-pressed="true"]{background:var(--panel);border-color:var(--route);font-weight:650}
+.hub-routes [data-chip-progress],.hub-routes [data-chip-total]{margin-left:auto;padding-left:8px;font:500 .78rem "IBM Plex Mono",ui-monospace,monospace;color:var(--ink2);font-variant-numeric:tabular-nums}
+.hub-status{border:0;margin:0;padding:0;min-width:0}
+.hub-status legend{float:none;padding:0}
+.hub-seg{display:grid;grid-template-columns:auto repeat(3,1fr);border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel)}
+.hub-seg label,.hub-mark label{position:relative;display:block}
+.hub-seg label + label span{border-left:1px solid var(--line)}
+.hub-seg input,.hub-mark input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.hub-seg span{display:flex;align-items:center;justify-content:center;gap:6px;min-height:40px;padding:0 10px;font-size:.85rem;color:var(--ink2);cursor:pointer;white-space:nowrap}
+.hub-seg input:checked + span{background:var(--nsoft);color:var(--ink);font-weight:650;box-shadow:inset 0 0 0 2px var(--accent)}
+.hub-seg input:disabled + span{opacity:.45;cursor:not-allowed}
+.hub-seg input:focus-visible + span,.hub-mark input:focus-visible + span{outline:2px solid var(--accent);outline-offset:-4px}
+.hub-glyph{display:inline-block;flex:none;box-sizing:border-box;width:12px;height:12px;border-radius:50%;border:2px solid currentColor}
+.hub-glyph.read{background:linear-gradient(90deg,currentColor 50%,transparent 50%)}
+.hub-glyph.understood{background:currentColor}
+.hub-legend{display:flex;flex-wrap:wrap;align-items:center;gap:4px 16px;margin:28px 0;font-size:.85rem;color:var(--ink2)}
+.hub-legend > span{display:inline-flex;align-items:center;gap:6px}
+.hub-legend-note{flex-basis:100%}
+
+/* Routes and stations. */
+.hub-line{margin:0 0 36px}
+.hub-line-head{position:sticky;top:0;z-index:2;background:var(--bg);display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 16px;border-bottom:2px solid var(--route);padding:10px 0 8px}
+.hub-line-head h2{margin:0;font-size:1.22rem;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;color:var(--ink)}
+.hub-line-head h2 small{font-weight:400;font-size:.85rem}
+.hub-line-num{font:600 .85rem "IBM Plex Mono",ui-monospace,monospace;color:var(--ink2);letter-spacing:.04em}
+.hub-line-meta{margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px;font-size:.85rem;color:var(--ink2);font-variant-numeric:tabular-nums}
+.hub-line[data-complete] [data-line-progress]{color:var(--ink);font-weight:650}
+.hub-line[data-complete] [data-line-progress]::before{content:"●";content:"●" / "";color:var(--route);margin-right:6px}
+.hub-fold{min-height:32px;padding:0 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);font:inherit;font-size:.85rem;cursor:pointer}
+.hub-line-summary{margin:10px 0 2px;font-size:.9rem;color:var(--ink2);line-height:1.7;max-width:62ch}
+.hub-stations{list-style:none;margin:0;padding:0}
+.hub-station{position:relative;display:grid;grid-template-columns:24px 2.6em minmax(0,1fr) auto;column-gap:10px;align-items:start;padding:12px 0;border-bottom:1px solid var(--line)}
+.hub-station::before{content:"";position:absolute;left:10px;top:25px;bottom:-25px;width:3px;border-radius:2px;background:var(--route);opacity:.5}
+.hub-station:last-child::before,.hub[data-filtered] .hub-station::before{display:none}
+.hub-dot{position:relative;z-index:1;box-sizing:border-box;width:16px;height:16px;margin:5px 0 0 4px;border-radius:50%;border:3px solid var(--route);background:var(--panel)}
+.hub-station[data-state="read"] .hub-dot{background:linear-gradient(90deg,var(--route) 50%,var(--panel) 50%)}
+.hub-station[data-state="understood"] .hub-dot{background:var(--route)}
+.hub-num{font:600 .78rem/2 "IBM Plex Mono",ui-monospace,monospace;color:var(--ink2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.hub-text{min-width:0;position:relative}
+.hub-title{font-weight:650;color:var(--ink);text-decoration:none;line-height:1.55}
+.hub-title:hover,.hub-title:focus-visible{text-decoration:underline}
+/* The whole title-and-question block opens the document, not just the title text. */
+.hub-title::after{content:"";position:absolute;inset:0}
+.hub-kind{display:inline-block;margin-left:8px;padding:0 6px;border:1px solid var(--line);border-radius:6px;font-size:.78rem;line-height:1.6;color:var(--ink2);vertical-align:2px}
+.hub-q{margin:2px 0 0;font-size:.9rem;line-height:1.65;color:var(--ink2)}
+.hub-mark{border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:2px 0 0;padding:0;display:flex;min-width:0;background:var(--panel);align-self:start}
+.hub-mark legend{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.hub-mark label + label span{border-left:1px solid var(--line)}
+.hub-mark span{display:flex;align-items:center;justify-content:center;gap:5px;min-width:52px;min-height:34px;padding:0 9px;font-size:.78rem;color:var(--ink2);cursor:pointer;touch-action:manipulation;white-space:nowrap}
+.hub-mark input:checked + span{color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink2)}
+.hub-mark input[value="read"]:checked + span,.hub-mark input[value="understood"]:checked + span{font-weight:650;background:color-mix(in srgb,var(--route) 14%,var(--panel));box-shadow:inset 0 0 0 2px var(--route)}
+.hub-mark input:checked + span .hub-glyph{color:var(--route)}
+#hub-empty{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;margin:0 0 24px}
+#hub-empty p{margin:0 0 12px}
+#hub-empty small{display:block;margin-top:12px}
+
+/* Without JavaScript the list stays: no marks, filters or folding. */
+html:not(.hub-js) .hub-tools,html:not(.hub-js) .hub-mark,html:not(.hub-js) .hub-legend,html:not(.hub-js) .hub-fold{display:none}
+html:not(.hub-js) .hub-layout{grid-template-columns:minmax(0,1fr)}
+/* Before hub.js paints, match what it will show so nothing jumps: returning learners never
+   see the first-visit card and get room for their card, phones keep the filters folded, and
+   build_hub.py folds every route but the one the head script chose (data-hub-open). */
+.hub-returning:not(.hub-painted) [data-start]{display:none}
+.hub-returning:not(.hub-painted) [data-resume]{display:flex!important;visibility:hidden}
+.hub-returning:not(.hub-painted) #hub-summary,.hub-returning:not(.hub-painted) .hub-move{display:block!important;visibility:hidden}
+@media(max-width:900px){html.hub-js:not(.hub-painted) .hub-filters > :not(summary){display:none}}
+
+@media(max-width:900px){
+  .hub-layout{grid-template-columns:minmax(0,1fr)}
+  .hub-head,.hub-tools,.hub-list{grid-column:1;grid-row:auto}
+  .hub-tools{position:static;gap:14px;margin-top:8px;padding-top:0}
+  .hub-routes{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 6px;scrollbar-width:thin}
+  .hub-routes li{flex:none}
+  .hub-routes button{width:auto;border-color:var(--line);background:var(--panel)}
+  .hub-filters > summary{display:flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:.9rem}
+  .hub-filters > summary [data-filter-summary]{margin-left:auto;color:var(--ink2);font-weight:400}
+  .hub-filters[open] > summary{margin-bottom:14px}
+  .hub-filters[open] > :not(summary){margin-bottom:14px}
+  .hub-legend{margin-top:20px}
+}
+@media(max-width:600px){
+  .hub-next{padding:14px}
+  .hub-station{grid-template-columns:24px 2.4em minmax(0,1fr)}
+  .hub-mark{grid-column:3;margin-top:10px}
+  .hub-mark label{flex:1}
+  .hub-mark span{min-height:44px}
+  .hub-line-head{position:static}
+  .hub-line-head h2{font-size:1.12rem}
+  .hub-expand{display:none}
+}
+/* Touch screens get 44px targets at every width. */
+@media(pointer:coarse){
+  .hub-mark span,.hub-seg span,.hub-routes button,.hub-fold,.hub-move summary{min-height:44px}
+  .hub-line-meta a{display:inline-flex;align-items:center;min-height:44px}
+}
+/* The tools stay in view on wide, tall screens only (the panel is about 530px tall). */
+@media(min-width:901px) and (min-height:600px){.hub-tools{position:sticky;top:24px}}
+@media(hover:hover){
+  .hub-btn:hover,.hub-fold:hover{border-color:var(--accent)}
+  .hub-seg input:not(:checked):not(:disabled) + span:hover,.hub-mark input:not(:checked) + span:hover{background:var(--code)}
+}
+/* Windows high contrast drops shadows and backgrounds: keep the selection and the glyphs. */
+@media(forced-colors:active){
+  .hub-seg input:checked + span,.hub-mark input:checked + span{outline:2px solid Highlight;outline-offset:-4px}
+  .hub-glyph,.hub-dot{forced-color-adjust:none}
+}
+
+html[data-hub-open="home"]:not(.hub-painted) .hub-line:not([data-line="home"]) .hub-stations{display:none}html[data-hub-open="quantum-chemistry"]:not(.hub-painted) .hub-line:not([data-line="quantum-chemistry"]) .hub-stations{display:none}html[data-hub-open="quantum-computing"]:not(.hub-painted) .hub-line:not([data-line="quantum-computing"]) .hub-stations{display:none}html[data-hub-open="vqe"]:not(.hub-painted) .hub-line:not([data-line="vqe"]) .hub-stations{display:none}html[data-hub-open="sqd"]:not(.hub-painted) .hub-line:not([data-line="sqd"]) .hub-stations{display:none}html[data-hub-open="main-docs"]:not(.hub-painted) .hub-line:not([data-line="main-docs"]) .hub-stations{display:none}</style>
+<script>/* Self-check marks for the SQD learning pages (the hub now, the readers later).
+   Storage: one localStorage key per page, "sqd-progress:v1:<id>" = "read" | "understood".
+   A missing key means "not yet". "sqd-progress:v1-last" is the page marked last and
+   "sqd-progress:v1-opened" the page opened last; neither starts with the per-page prefix.
+   Transfer string: "v1" followed by ".<letter><id>" entries (r = read, u = understood,
+   l = the page marked last) and a final ".e<N>" giving the number of r/u entries, e.g.
+   "v1.rvector.ubasis.lbasis.e2". The end entry makes a link cut short by a chat app or a
+   copy read as broken instead of as a smaller, valid set of marks. Page ids match
+   [a-z0-9-]+ and never change, so adding or reordering pages never changes how a string reads.
+   When storage cannot be written (private mode, quota, blocked site data) the marks already
+   stored stay readable and new marks live in a per-tab overlay; persistent() turns false. */
+(function (global) {
+  'use strict';
+  var KEY = 'sqd-progress:v1:', LAST = 'sqd-progress:v1-last', OPENED = 'sqd-progress:v1-opened', MAX = 4096;
+  var LETTER = { read: 'r', understood: 'u' }, STATE = { r: 'read', u: 'understood' };
+  var RANK = { notyet: 0, read: 1, understood: 2 };
+  var overlay = Object.create(null), listeners = [], store = null, writable = false;
+  try { store = global.localStorage; store.getItem(KEY); } catch (e) { store = null; }
+  if (store) {
+    try { store.setItem('sqd-progress:probe', '1'); store.removeItem('sqd-progress:probe'); writable = true; }
+    catch (e) { writable = false; }
+  }
+
+  function valid(state) { return state === 'read' || state === 'understood'; }
+  function raw(key) {
+    if (key in overlay) return overlay[key];
+    if (store) { try { return store.getItem(key); } catch (e) { return null; } }
+    return null;
+  }
+  /* Returns true when stored. After the first failed write every later write stays in the
+     overlay, so this tab keeps one consistent view instead of half-written storage. */
+  function write(key, value) {
+    if (store && writable) {
+      try { if (value === null) store.removeItem(key); else store.setItem(key, value); return true; }
+      catch (e) { writable = false; }
+    }
+    overlay[key] = value;
+    return false;
+  }
+  function emit(id) { listeners.forEach(function (cb) { try { cb(id); } catch (e) {} }); }
+  function get(id) { var v = raw(KEY + id); return valid(v) ? v : 'notyet'; }
+  /* Returns true when the mark was stored, false when it lives only in memory. */
+  function set(id, state) {
+    var ok = write(KEY + id, valid(state) ? state : null);
+    write(LAST, id);
+    emit(id);
+    return ok;
+  }
+  /* Remember the page opened last; it does not change any mark or the page marked last. */
+  function touch(id) { write(OPENED, id); }
+  function snapshot(ids) {
+    var states = {};
+    ids.forEach(function (id) { var s = get(id); if (s !== 'notyet') states[id] = s; });
+    return { states: states, last: raw(LAST) };
+  }
+  /* mode "merge" keeps the higher mark of each page; "replace" makes ids match states exactly.
+     Marks are stored before removals. If storage fails partway, the keys already stored are
+     put back, so a failed import never leaves storage half replaced; this tab then shows the
+     whole result from its overlay. Removals come last, so even a put-back that fails can only
+     leave a mark raised, never lost. Returns true when everything was stored. */
+  function load(states, ids, mode, last) {
+    var plan = [], stored = [], ok = true;
+    ids.forEach(function (id) {
+      var incoming = valid(states[id]) ? states[id] : 'notyet';
+      if (mode === 'merge' && RANK[incoming] <= RANK[get(id)]) return;
+      plan.push([KEY + id, incoming === 'notyet' ? null : incoming]);
+    });
+    plan.sort(function (a, b) { return (a[1] === null) - (b[1] === null); });
+    if (last !== undefined) plan.push([LAST, last]);
+    plan.forEach(function (step) {
+      var key = step[0], value = step[1], before = raw(key);
+      if (ok && write(key, value)) { stored.push([key, before, value]); return; }
+      if (ok) {
+        ok = false;
+        stored.forEach(function (done) {
+          try { if (done[1] === null) store.removeItem(done[0]); else store.setItem(done[0], done[1]); } catch (e) {}
+          overlay[done[0]] = done[2];
+        });
+      }
+      overlay[key] = value;
+    });
+    emit(null);
+    return ok;
+  }
+  function last() { return raw(LAST); }
+  function opened() { return raw(OPENED); }
+  function encode(ids) {
+    var entries = ids.filter(function (id) { return get(id) !== 'notyet'; })
+      .map(function (id) { return LETTER[get(id)] + id; });
+    var count = entries.length;
+    if (ids.indexOf(raw(LAST)) >= 0) entries.push('l' + raw(LAST));
+    return ['v1'].concat(entries, 'e' + count).join('.');
+  }
+  /* {states, skipped, counts, last} or {error: 'length' | 'format' | 'version'}. Unknown ids are skipped. */
+  function decode(text, ids) {
+    text = String(text == null ? '' : text).trim();
+    if (text.length > MAX) return { error: 'length' };
+    var m = /^v(\d+)(?:\.|$)/.exec(text);
+    if (!m) return { error: 'format' };
+    if (Number(m[1]) > 1) return { error: 'version' };
+    if (m[1] !== '1') return { error: 'format' };
+    var known = Object.create(null), states = Object.create(null), skipped = 0, counts = { read: 0, understood: 0 }, lastId;
+    ids.forEach(function (id) { known[id] = true; });
+    var parts = text.split('.').slice(1).filter(Boolean), end = /^e(\d+)$/.exec(parts.pop() || '');
+    if (!end) return { error: 'format' };
+    var marks = parts.filter(function (part) { return part.charAt(0) !== 'l'; }).length;
+    if (Number(end[1]) !== marks) return { error: 'format' };
+    for (var i = 0; i < parts.length; i++) {
+      var e = /^([rul])([a-z0-9-]+)$/.exec(parts[i]);
+      if (!e) return { error: 'format' };
+      if (!known[e[2]]) { if (e[1] !== 'l') skipped++; continue; }
+      if (e[1] === 'l') lastId = e[2]; else states[e[2]] = STATE[e[1]];
+    }
+    Object.keys(states).forEach(function (id) { counts[states[id]]++; });
+    return { states: states, skipped: skipped, counts: counts, last: lastId };
+  }
+  /* True when any page carries a mark (read before the body is parsed, see build_hub.py). */
+  function hasMarks() {
+    for (var key in overlay) if (key.indexOf(KEY) === 0 && valid(overlay[key])) return true;
+    if (!store) return false;
+    try {
+      for (var i = 0; i < store.length; i++) {
+        var k = store.key(i);
+        if (k && k.indexOf(KEY) === 0 && valid(store.getItem(k))) return true;
+      }
+    } catch (e) {}
+    return false;
+  }
+  /* Listeners get a page id (that page changed), null (anything may have changed) or ''
+     (only the page marked last changed). Changes from other tabs arrive one storage event
+     per key, so they are gathered and delivered once per task: an import of 74 marks in
+     another tab costs one repaint here, not 74. */
+  function onChange(cb) { listeners.push(cb); }
+  var pending = null;
+  function flush() {
+    var ids = pending; pending = null;
+    if (ids.all || ids.list.length > 8) emit(null);
+    else if (!ids.list.length) emit('');
+    else ids.list.forEach(emit);
+  }
+  if (global.addEventListener) {
+    global.addEventListener('storage', function (event) {
+      var key = event.key;
+      if (key && key.indexOf(KEY) !== 0 && key !== LAST) return;
+      if (!pending) { pending = { all: false, list: [] }; setTimeout(flush, 0); }
+      if (!key) pending.all = true;
+      else if (key.indexOf(KEY) === 0 && pending.list.indexOf(key.slice(KEY.length)) < 0) pending.list.push(key.slice(KEY.length));
+    });
+  }
+  global.SQDProgress = {
+    get: get, set: set, touch: touch, snapshot: snapshot, load: load, last: last, opened: opened, hasMarks: hasMarks,
+    encode: encode, decode: decode, onChange: onChange, persistent: function () { return !!store && writable; }
+  };
+})(typeof window !== 'undefined' ? window : this);
+</script>
+<script>(function(){var d=document.documentElement;if(!d||!d.classList)return;d.classList.add('hub-js');var open="home",routes={"vector":"home","basis":"home","inner-product":"home","matrix":"home","symmetric":"home","eigen":"home","diagonalization":"home","diagonalization-coordinates":"home","power":"home","subspace":"home","krylov":"home","quantum-state":"quantum-chemistry","born-rule":"quantum-chemistry","superposition":"quantum-chemistry","observable":"quantum-chemistry","hamiltonian":"quantum-chemistry","schrodinger":"quantum-chemistry","born-oppenheimer":"quantum-chemistry","orbital":"quantum-chemistry","electron-spin":"quantum-chemistry","pauli":"quantum-chemistry","electronic-configuration":"quantum-chemistry","slater-determinant":"quantum-chemistry","basis-set":"quantum-chemistry","sto-3g":"quantum-chemistry","basis-orbital-energies":"quantum-chemistry","molecular-orbital":"quantum-chemistry","electron-integrals":"quantum-chemistry","hamiltonian-elements":"quantum-chemistry","h2-hamiltonian":"quantum-chemistry","h2-state-energy":"quantum-chemistry","large-hamiltonian":"quantum-chemistry","hamiltonian-size":"quantum-chemistry","variational-principle":"quantum-chemistry","hartree-fock":"quantum-chemistry","electron-correlation":"quantum-chemistry","configuration-interaction":"quantum-chemistry","active-space":"quantum-chemistry","potential-energy":"quantum-chemistry","two-level-system":"quantum-computing","qubit":"quantum-computing","computational-basis":"quantum-computing","quantum-gate":"quantum-computing","rotation-gate":"quantum-computing","measurement-basis":"quantum-computing","energy-measurement":"quantum-computing","tensor-product":"quantum-computing","entanglement":"quantum-computing","fermion-qubit":"quantum-computing","energy-expectation":"vqe","ansatz":"vqe","parameterized-circuit":"vqe","pauli-decomposition":"vqe","measurement-shots":"vqe","classical-optimization":"vqe","vqe-algorithm":"vqe","vqe-hydrogen":"vqe","occupation-bitstrings":"sqd","hf-preparation":"sqd","excitation-state":"sqd","sqd-state-circuit":"sqd","sqd-sampling":"sqd","sqd-subspace":"sqd","background-atoms":"main-docs","intro":"main-docs","prep-math":"main-docs","math":"main-docs","00-quickstart":"main-docs","01-pyscf":"main-docs","02-jordan-wigner":"main-docs","03-ucj-inside":"main-docs","04-circuit":"main-docs","05-sampling":"main-docs","06-sqd-guide":"main-docs"};try{if(window.SQDProgress.hasMarks()){d.classList.add('hub-returning');var last=SQDProgress.last();if(Object.prototype.hasOwnProperty.call(routes,last))open=routes[last]}}catch(e){}d.setAttribute('data-hub-open',open);setTimeout(function(){d.classList.add('hub-painted')},3000);try{var h=location.hash.slice(1);if(h&&h.indexOf('=')<0&&["active-space", "ansatz", "basis", "basis-orbital-energies", "basis-set", "born-oppenheimer", "born-rule", "classical-optimization", "computational-basis", "configuration-interaction", "diagonalization", "diagonalization-coordinates", "eigen", "electron-correlation", "electron-integrals", "electron-spin", "electronic-configuration", "energy-expectation", "energy-measurement", "entanglement", "excitation-state", "fermion-qubit", "h2-hamiltonian", "h2-state-energy", "hamiltonian", "hamiltonian-elements", "hamiltonian-size", "hartree-fock", "hf-preparation", "home", "inner-product", "krylov", "large-hamiltonian", "learning-maps", "matrix", "measurement-basis", "measurement-shots", "molecular-orbital", "observable", "occupation-bitstrings", "orbital", "parameterized-circuit", "pauli", "pauli-decomposition", "potential-energy", "power", "quantum-chemistry", "quantum-computing", "quantum-gate", "quantum-state", "qubit", "relations", "rotation-gate", "schrodinger", "slater-determinant", "sqd", "sqd-linear-algebra", "sqd-sampling", "sqd-state-circuit", "sqd-subspace", "sto-3g", "subspace", "superposition", "symmetric", "tensor-product", "two-level-system", "variational-principle", "vector", "vqe", "vqe-algorithm", "vqe-hydrogen"].indexOf(h)>=0)location.replace('learning-maps.html'+location.search+'#'+h)}catch(e){}})();</script>
+</head><body><a class="skip" href="#hub-list">목록으로 건너뛰기</a>
+<main class="hub" data-hub>
+<div class="hub-layout">
+<header class="hub-head">
+<nav class="docnav" aria-label="다른 입구"><a href="learning-maps.html">학습 지도 모음</a><a href="learning-maps.html#relations">개념 관계도</a><a href="index-main.html">본문 문서 모음</a></nav>
+<p class="eyebrow">본문 문서 11편 · 개념 노트 63편</p>
+<h1>SQD 학습 허브</h1>
+<p class="lead">양자컴퓨터와 보통 컴퓨터가 함께 분자의 에너지를 구하는 방법, SQD<span class="hub-expand" lang="en">(Sample&#8209;based Quantum Diagonalization)</span>&#8288;를 처음부터 배웁니다.</p>
+<noscript><p class="hub-noscript">자바스크립트가 꺼져 있어 읽음 표시와 찾기는 쓸 수 없어요. 아래 목록의 링크는 그대로 열 수 있습니다.</p></noscript>
+<div class="hub-next" id="hub-next" tabindex="-1">
+<div class="hub-next-main">
+<div class="hub-opened" data-opened hidden><small>방금 연 문서</small><p><strong data-opened-title></strong> 읽었나요?</p><div class="hub-actions"><button type="button" class="hub-btn" data-quick="read"><i class="hub-glyph read" aria-hidden="true"></i>읽음</button><button type="button" class="hub-btn" data-quick="understood"><i class="hub-glyph understood" aria-hidden="true"></i>이해</button></div></div>
+<div data-start><small>처음이라면 이야기로 시작</small><a class="hub-cta" href="intro.html" data-open="intro">SQD, 처음부터 읽기</a><p class="hub-next-q">행렬을 몰라도 읽는 양자 화학 계산 이야기</p></div>
+<p class="hub-alt" data-start>개념부터 차근차근 읽으려면 <a href="learning-maps.html#vector" data-open="vector">벡터(Vector)</a> <span>선형대수 · 01</span></p>
+<div data-resume hidden><small data-label>다음 추천</small><a class="hub-cta" href="learning-maps.html#vector" data-open="vector">벡터(Vector)</a><p class="hub-next-q"><span data-where></span> · <span data-q></span></p></div>
+<div data-done hidden><small>모든 문서에 ‘이해’를 표시했어요</small><a class="hub-cta" href="learning-maps.html#relations">개념 관계도에서 다른 연결 찾기</a></div>
+</div>
+<div class="hub-progress" id="hub-summary" hidden><p data-route-progress>&nbsp;</p><p data-all-progress>&nbsp;</p></div>
+</div>
+<details class="hub-move" hidden><summary>다른 기기로 옮기기</summary><p>표시는 이 브라우저에만 저장됩니다. 진행 링크를 복사해 다른 기기에서 열면 같은 표시를 가져올 수 있어요. 오래 방문하지 않은 사이트의 저장 내용을 지우는 브라우저(사파리 등)도 있으니 링크를 메모에 보관해 두세요.</p><button type="button" class="hub-btn" id="hub-copy">진행 링크 복사</button><p id="hub-copied" aria-live="polite"></p><input id="hub-link" type="text" readonly hidden aria-label="진행 링크"></details>
+<p class="hub-notice" id="hub-note" hidden></p>
+<div class="hub-notice" id="hub-offer" role="region" aria-label="받은 진행 링크" hidden><p data-offer-text></p><div class="hub-actions"><button type="button" class="hub-btn primary" data-merge>합치기</button><button type="button" class="hub-btn" data-replace>그대로 바꾸기</button><button type="button" class="hub-btn" data-decline>그만두기</button></div></div>
+<div class="hub-notice" id="hub-undo" hidden><p data-undo-text></p><button type="button" class="hub-btn" data-undo>되돌리기</button></div>
+<p class="hub-sr" id="hub-live" role="status" aria-live="polite"></p>
+</header>
+<aside class="hub-tools" aria-label="찾기와 거르기">
+<div class="hub-search"><label class="hub-label" for="hub-q">제목·질문으로 찾기</label><input id="hub-q" type="search" placeholder="예: 고유값, qubit, 해밀토니안" autocomplete="off" spellcheck="false" aria-describedby="hub-count"><p id="hub-count"></p></div>
+<details class="hub-filters" open><summary>거르기 <span data-filter-summary>전체</span></summary>
+<div><p class="hub-label" id="hub-routes-label">노선</p><ul class="hub-routes" aria-labelledby="hub-routes-label"><li><button type="button" data-line-filter="all" aria-pressed="true" style="--route:var(--ink2)">전체 <span data-chip-total>74</span></button></li><li><button type="button" data-line-filter="home" aria-pressed="false" style="--route:var(--n)">선형대수 <span data-chip-progress aria-hidden="true">11</span><span class="hub-sr" data-chip-sr>11편</span></button></li><li><button type="button" data-line-filter="quantum-chemistry" aria-pressed="false" style="--route:var(--beta)">양자화학 <span data-chip-progress aria-hidden="true">28</span><span class="hub-sr" data-chip-sr>28편</span></button></li><li><button type="button" data-line-filter="quantum-computing" aria-pressed="false" style="--route:var(--alpha)">큐빗·회로·측정 <span data-chip-progress aria-hidden="true">10</span><span class="hub-sr" data-chip-sr>10편</span></button></li><li><button type="button" data-line-filter="vqe" aria-pressed="false" style="--route:var(--accent)">VQE <span data-chip-progress aria-hidden="true">8</span><span class="hub-sr" data-chip-sr>8편</span></button></li><li><button type="button" data-line-filter="sqd" aria-pressed="false" style="--route:var(--beta)">SQD <span data-chip-progress aria-hidden="true">6</span><span class="hub-sr" data-chip-sr>6편</span></button></li><li><button type="button" data-line-filter="main-docs" aria-pressed="false" style="--route:var(--ink2)">본문 문서 <span data-chip-progress aria-hidden="true">11</span><span class="hub-sr" data-chip-sr>11편</span></button></li></ul></div>
+<fieldset class="hub-status"><legend class="hub-label">표시</legend><div class="hub-seg"><label><input type="radio" name="hub-status" value="all" checked><span>전체</span></label><label><input type="radio" name="hub-status" value="notyet"><span><i class="hub-glyph" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="hub-status" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="hub-status" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></div></fieldset>
+</details>
+</aside>
+<div class="hub-list" id="hub-list" tabindex="-1">
+<p class="hub-legend"><span><i class="hub-glyph" aria-hidden="true"></i>아직</span><span><i class="hub-glyph read" aria-hidden="true"></i>읽음: 한 번 읽었어요</span><span><i class="hub-glyph understood" aria-hidden="true"></i>이해: 스스로 설명할 수 있어요</span><span class="hub-legend-note">노선 안의 순서는 추천이에요. 필요한 곳부터 읽어도 됩니다.</span></p>
+<div id="hub-empty" hidden><p><span data-term>이 조건에 맞는 </span>문서가 없어요.</p><button type="button" class="hub-btn" data-reset>조건 지우기</button><small>본문 내용까지 찾으려면 <a href="learning-maps.html">개념 노트 리더</a>의 ‘노트 검색’을 쓰세요.</small></div>
+<section class="hub-line" data-line="home" data-name="선형대수" style="--route:var(--n)" aria-labelledby="line-home"><div class="hub-line-head"><h2 id="line-home"><span class="hub-line-num">01</span>선형대수<small>상태를 표현하는 수학</small></h2><p class="hub-line-meta"><span data-line-progress>11편</span><button type="button" class="hub-fold" aria-expanded="true" aria-controls="stations-home">접기</button><a href="learning-maps.html#home">지도 열기</a></p></div><p class="hub-line-summary">벡터와 기저에서 출발해 고유값과 작은 부분공간의 계산으로 이어집니다.</p><ol class="hub-stations" id="stations-home"><li class="hub-station" data-id="vector" data-line="home" data-num="01" data-state="notyet" data-search="벡터(Vector) 여러 성분(Component)을 하나의 대상으로 다루려면? 선형대수 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">01</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#vector" data-open="vector">벡터(Vector)</a><p class="hub-q">여러 성분(Component)을 하나의 대상으로 다루려면?</p></div><fieldset class="hub-mark"><legend>벡터(Vector) 표시</legend><label><input type="radio" name="m-vector" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-vector" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-vector" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="basis" data-line="home" data-num="02" data-state="notyet" data-search="기저(Basis)와 좌표(Coordinates) 같은 벡터를 다른 숫자로 적을 수 있을까? 선형대수 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">02</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#basis" data-open="basis">기저(Basis)와 좌표(Coordinates)</a><p class="hub-q">같은 벡터를 다른 숫자로 적을 수 있을까?</p></div><fieldset class="hub-mark"><legend>기저(Basis)와 좌표(Coordinates) 표시</legend><label><input type="radio" name="m-basis" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-basis" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-basis" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="inner-product" data-line="home" data-num="03" data-state="notyet" data-search="내적(Inner Product)과 길이 두 벡터가 얼마나 같은 방향을 향할까? 선형대수 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">03</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#inner-product" data-open="inner-product">내적(Inner Product)과 길이</a><p class="hub-q">두 벡터가 얼마나 같은 방향을 향할까?</p></div><fieldset class="hub-mark"><legend>내적(Inner Product)과 길이 표시</legend><label><input type="radio" name="m-inner-product" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-inner-product" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-inner-product" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="matrix" data-line="home" data-num="04" data-state="notyet" data-search="행렬(Matrix)과 선형변환(Linear Transformation) 벡터를 일관된 규칙으로 바꾸려면? 선형대수 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">04</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#matrix" data-open="matrix">행렬(Matrix)과 선형변환(Linear Transformation)</a><p class="hub-q">벡터를 일관된 규칙으로 바꾸려면?</p></div><fieldset class="hub-mark"><legend>행렬(Matrix)과 선형변환(Linear Transformation) 표시</legend><label><input type="radio" name="m-matrix" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-matrix" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-matrix" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="symmetric" data-line="home" data-num="05" data-state="notyet" data-search="대칭 행렬(Symmetric Matrix) 행과 열을 바꿔도 같은 행렬은 왜 특별할까? 선형대수 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">05</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#symmetric" data-open="symmetric">대칭 행렬(Symmetric Matrix)</a><p class="hub-q">행과 열을 바꿔도 같은 행렬은 왜 특별할까?</p></div><fieldset class="hub-mark"><legend>대칭 행렬(Symmetric Matrix) 표시</legend><label><input type="radio" name="m-symmetric" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-symmetric" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-symmetric" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="eigen" data-line="home" data-num="06" data-state="notyet" data-search="고유벡터(Eigenvector)와 고유값(Eigenvalue) 변환해도 같은 직선 위에 남는 벡터가 있을까? 선형대수 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">06</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#eigen" data-open="eigen">고유벡터(Eigenvector)와 고유값(Eigenvalue)</a><p class="hub-q">변환해도 같은 직선 위에 남는 벡터가 있을까?</p></div><fieldset class="hub-mark"><legend>고유벡터(Eigenvector)와 고유값(Eigenvalue) 표시</legend><label><input type="radio" name="m-eigen" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-eigen" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-eigen" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="diagonalization" data-line="home" data-num="07" data-state="notyet" data-search="대각화(Diagonalization) 기준을 바꾸면 행렬 계산이 단순해질까? 선형대수 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">07</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#diagonalization" data-open="diagonalization">대각화(Diagonalization)</a><p class="hub-q">기준을 바꾸면 행렬 계산이 단순해질까?</p></div><fieldset class="hub-mark"><legend>대각화(Diagonalization) 표시</legend><label><input type="radio" name="m-diagonalization" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-diagonalization" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-diagonalization" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="diagonalization-coordinates" data-line="home" data-num="08" data-state="notyet" data-search="대각화와 좌표축 바꾸기 같은 행렬을 다른 기저로 보면 무엇이 달라질까? 선형대수 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">08</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#diagonalization-coordinates" data-open="diagonalization-coordinates">대각화와 좌표축 바꾸기</a><p class="hub-q">같은 행렬을 다른 기저로 보면 무엇이 달라질까?</p></div><fieldset class="hub-mark"><legend>대각화와 좌표축 바꾸기 표시</legend><label><input type="radio" name="m-diagonalization-coordinates" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-diagonalization-coordinates" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-diagonalization-coordinates" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="power" data-line="home" data-num="09" data-state="notyet" data-search="멱법(Power Method)과 반복 행렬을 계속 곱하면 어떤 성분(Component)이 남을까? 선형대수 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">09</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#power" data-open="power">멱법(Power Method)과 반복</a><p class="hub-q">행렬을 계속 곱하면 어떤 성분(Component)이 남을까?</p></div><fieldset class="hub-mark"><legend>멱법(Power Method)과 반복 표시</legend><label><input type="radio" name="m-power" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-power" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-power" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="subspace" data-line="home" data-num="10" data-state="notyet" data-search="부분공간(Subspace)과 투영 큰 공간의 일부만으로 근사하려면? 선형대수 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">10</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#subspace" data-open="subspace">부분공간(Subspace)과 투영</a><p class="hub-q">큰 공간의 일부만으로 근사하려면?</p></div><fieldset class="hub-mark"><legend>부분공간(Subspace)과 투영 표시</legend><label><input type="radio" name="m-subspace" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-subspace" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-subspace" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="krylov" data-line="home" data-num="11" data-state="notyet" data-search="크릴로프 공간(Krylov Subspace)과 랑초스(Lanczos Algorithm) 반복 계산의 중간 결과도 활용할 수 있을까? 선형대수 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">11</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#krylov" data-open="krylov">크릴로프 공간(Krylov Subspace)과 랑초스(Lanczos Algorithm)</a><p class="hub-q">반복 계산의 중간 결과도 활용할 수 있을까?</p></div><fieldset class="hub-mark"><legend>크릴로프 공간(Krylov Subspace)과 랑초스(Lanczos Algorithm) 표시</legend><label><input type="radio" name="m-krylov" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-krylov" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-krylov" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li></ol></section><section class="hub-line" data-line="quantum-chemistry" data-name="양자화학" style="--route:var(--beta)" aria-labelledby="line-quantum-chemistry"><div class="hub-line-head"><h2 id="line-quantum-chemistry"><span class="hub-line-num">02</span>양자화학<small>상태에서 분자의 에너지로</small></h2><p class="hub-line-meta"><span data-line-progress>28편</span><button type="button" class="hub-fold" aria-expanded="true" aria-controls="stations-quantum-chemistry">접기</button><a href="learning-maps.html#quantum-chemistry">지도 열기</a></p></div><p class="hub-line-summary">양자 상태와 해밀토니안으로 원자·분자의 전자 구조를 설명합니다.</p><ol class="hub-stations" id="stations-quantum-chemistry"><li class="hub-station" data-id="quantum-state" data-line="quantum-chemistry" data-num="01" data-state="notyet" data-search="양자 상태(Quantum State)와 파동함수(Wavefunction) 좌표가 달라져도 같은 양자 상태일 수 있을까? 양자화학 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">01</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#quantum-state" data-open="quantum-state">양자 상태(Quantum State)와 파동함수(Wavefunction)</a><p class="hub-q">좌표가 달라져도 같은 양자 상태일 수 있을까?</p></div><fieldset class="hub-mark"><legend>양자 상태(Quantum State)와 파동함수(Wavefunction) 표시</legend><label><input type="radio" name="m-quantum-state" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-quantum-state" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-quantum-state" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="born-rule" data-line="quantum-chemistry" data-num="02" data-state="notyet" data-search="확률 진폭(Probability Amplitude)과 보른 규칙(Born Rule) 음수나 복소수인 진폭이 어떻게 확률이 될까? 양자화학 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">02</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#born-rule" data-open="born-rule">확률 진폭(Probability Amplitude)과 보른 규칙(Born Rule)</a><p class="hub-q">음수나 복소수인 진폭이 어떻게 확률이 될까?</p></div><fieldset class="hub-mark"><legend>확률 진폭(Probability Amplitude)과 보른 규칙(Born Rule) 표시</legend><label><input type="radio" name="m-born-rule" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-born-rule" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-born-rule" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="superposition" data-line="quantum-chemistry" data-num="03" data-state="notyet" data-search="중첩(Superposition)과 상대 위상(Relative Phase) 확률은 같은데, 다른 측정에서 결과가 달라질 수 있을까? 양자화학 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">03</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#superposition" data-open="superposition">중첩(Superposition)과 상대 위상(Relative Phase)</a><p class="hub-q">확률은 같은데, 다른 측정에서 결과가 달라질 수 있을까?</p></div><fieldset class="hub-mark"><legend>중첩(Superposition)과 상대 위상(Relative Phase) 표시</legend><label><input type="radio" name="m-superposition" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-superposition" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-superposition" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="observable" data-line="quantum-chemistry" data-num="04" data-state="notyet" data-search="관측량(Observable)과 기댓값(Expectation Value) 평균 에너지가 2라면, 한 번 측정해도 2가 나올까? 양자화학 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">04</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#observable" data-open="observable">관측량(Observable)과 기댓값(Expectation Value)</a><p class="hub-q">평균 에너지가 2라면, 한 번 측정해도 2가 나올까?</p></div><fieldset class="hub-mark"><legend>관측량(Observable)과 기댓값(Expectation Value) 표시</legend><label><input type="radio" name="m-observable" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-observable" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-observable" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="hamiltonian" data-line="quantum-chemistry" data-num="05" data-state="notyet" data-search="해밀토니안(Hamiltonian)과 에너지 행렬에서 에너지와 양자 상태를 어떻게 읽을까? 양자화학 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">05</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#hamiltonian" data-open="hamiltonian">해밀토니안(Hamiltonian)과 에너지</a><p class="hub-q">행렬에서 에너지와 양자 상태를 어떻게 읽을까?</p></div><fieldset class="hub-mark"><legend>해밀토니안(Hamiltonian)과 에너지 표시</legend><label><input type="radio" name="m-hamiltonian" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-hamiltonian" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-hamiltonian" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="schrodinger" data-line="quantum-chemistry" data-num="06" data-state="notyet" data-search="슈뢰딩거 방정식(Schrödinger Equation) 고유값과 고유벡터를 구하면, 왜 원자의 에너지와 상태를 알 수 있을까? 양자화학 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">06</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#schrodinger" data-open="schrodinger">슈뢰딩거 방정식(Schrödinger Equation)</a><p class="hub-q">고유값과 고유벡터를 구하면, 왜 원자의 에너지와 상태를 알 수 있을까?</p></div><fieldset class="hub-mark"><legend>슈뢰딩거 방정식(Schrödinger Equation) 표시</legend><label><input type="radio" name="m-schrodinger" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-schrodinger" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-schrodinger" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="born-oppenheimer" data-line="quantum-chemistry" data-num="07" data-state="notyet" data-search="보른–오펜하이머 근사(Born–Oppenheimer Approximation) 왜 핵의 위치를 고정하고 전자 문제부터 풀까? 양자화학 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">07</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#born-oppenheimer" data-open="born-oppenheimer">보른–오펜하이머 근사(Born–Oppenheimer Approximation)</a><p class="hub-q">왜 핵의 위치를 고정하고 전자 문제부터 풀까?</p></div><fieldset class="hub-mark"><legend>보른–오펜하이머 근사(Born–Oppenheimer Approximation) 표시</legend><label><input type="radio" name="m-born-oppenheimer" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-born-oppenheimer" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-born-oppenheimer" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="orbital" data-line="quantum-chemistry" data-num="08" data-state="notyet" data-search="오비탈(Orbital) 오비탈은 전자가 도는 길일까? 양자화학 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">08</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#orbital" data-open="orbital">오비탈(Orbital)</a><p class="hub-q">오비탈은 전자가 도는 길일까?</p></div><fieldset class="hub-mark"><legend>오비탈(Orbital) 표시</legend><label><input type="radio" name="m-orbital" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-orbital" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-orbital" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="electron-spin" data-line="quantum-chemistry" data-num="09" data-state="notyet" data-search="전자 스핀(Electron Spin) 측정축을 돌리면 스핀의 크기도 바뀔까? 양자화학 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">09</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#electron-spin" data-open="electron-spin">전자 스핀(Electron Spin)</a><p class="hub-q">측정축을 돌리면 스핀의 크기도 바뀔까?</p></div><fieldset class="hub-mark"><legend>전자 스핀(Electron Spin) 표시</legend><label><input type="radio" name="m-electron-spin" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-electron-spin" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-electron-spin" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="pauli" data-line="quantum-chemistry" data-num="10" data-state="notyet" data-search="파울리 배타 원리(Pauli Exclusion Principle) 같은 오비탈에 전자를 둘 넣어도 될까? 양자화학 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">10</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#pauli" data-open="pauli">파울리 배타 원리(Pauli Exclusion Principle)</a><p class="hub-q">같은 오비탈에 전자를 둘 넣어도 될까?</p></div><fieldset class="hub-mark"><legend>파울리 배타 원리(Pauli Exclusion Principle) 표시</legend><label><input type="radio" name="m-pauli" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-pauli" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-pauli" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="electronic-configuration" data-line="quantum-chemistry" data-num="11" data-state="notyet" data-search="전자 배치(Electronic Configuration) 같은 공간 오비탈 점유가 같은 다전자 상태를 뜻할까? 양자화학 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">11</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#electronic-configuration" data-open="electronic-configuration">전자 배치(Electronic Configuration)</a><p class="hub-q">같은 공간 오비탈 점유가 같은 다전자 상태를 뜻할까?</p></div><fieldset class="hub-mark"><legend>전자 배치(Electronic Configuration) 표시</legend><label><input type="radio" name="m-electronic-configuration" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-electronic-configuration" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-electronic-configuration" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="slater-determinant" data-line="quantum-chemistry" data-num="12" data-state="notyet" data-search="슬레이터 행렬식(Slater Determinant) 전자 둘의 이름을 바꾸면 왜 부호가 바뀔까? 양자화학 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">12</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#slater-determinant" data-open="slater-determinant">슬레이터 행렬식(Slater Determinant)</a><p class="hub-q">전자 둘의 이름을 바꾸면 왜 부호가 바뀔까?</p></div><fieldset class="hub-mark"><legend>슬레이터 행렬식(Slater Determinant) 표시</legend><label><input type="radio" name="m-slater-determinant" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-slater-determinant" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-slater-determinant" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="basis-set" data-line="quantum-chemistry" data-num="13" data-state="notyet" data-search="기저 집합(Basis Set) 기저 함수가 부족하면 어떤 오차가 남을까? 양자화학 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">13</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#basis-set" data-open="basis-set">기저 집합(Basis Set)</a><p class="hub-q">기저 함수가 부족하면 어떤 오차가 남을까?</p></div><fieldset class="hub-mark"><legend>기저 집합(Basis Set) 표시</legend><label><input type="radio" name="m-basis-set" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-basis-set" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-basis-set" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="sto-3g" data-line="quantum-chemistry" data-num="14" data-state="notyet" data-search="STO-3G와 기저 집합의 선택 STO-3G는 무엇이고, 다른 기저를 쓰면 무엇이 달라질까? 양자화학 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">14</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#sto-3g" data-open="sto-3g">STO-3G와 기저 집합의 선택</a><p class="hub-q">STO-3G는 무엇이고, 다른 기저를 쓰면 무엇이 달라질까?</p></div><fieldset class="hub-mark"><legend>STO-3G와 기저 집합의 선택 표시</legend><label><input type="radio" name="m-sto-3g" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-sto-3g" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-sto-3g" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="basis-orbital-energies" data-line="quantum-chemistry" data-num="15" data-state="notyet" data-search="기저 집합과 오비탈 에너지(Orbital Energy) 같은 H₂인데 기저를 바꾸면 왜 준위 수와 위치가 달라질까? 양자화학 응용"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">15</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#basis-orbital-energies" data-open="basis-orbital-energies">기저 집합과 오비탈 에너지(Orbital Energy)</a><span class="hub-kind">응용</span><p class="hub-q">같은 H₂인데 기저를 바꾸면 왜 준위 수와 위치가 달라질까?</p></div><fieldset class="hub-mark"><legend>기저 집합과 오비탈 에너지(Orbital Energy) 표시</legend><label><input type="radio" name="m-basis-orbital-energies" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-basis-orbital-energies" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-basis-orbital-energies" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="molecular-orbital" data-line="quantum-chemistry" data-num="16" data-state="notyet" data-search="분자 오비탈(Molecular Orbital) 원자 중심 함수 둘을 더하고 빼면 무엇이 달라질까? 양자화학 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">16</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#molecular-orbital" data-open="molecular-orbital">분자 오비탈(Molecular Orbital)</a><p class="hub-q">원자 중심 함수 둘을 더하고 빼면 무엇이 달라질까?</p></div><fieldset class="hub-mark"><legend>분자 오비탈(Molecular Orbital) 표시</legend><label><input type="radio" name="m-molecular-orbital" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-molecular-orbital" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-molecular-orbital" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="electron-integrals" data-line="quantum-chemistry" data-num="17" data-state="notyet" data-search="전자 적분(Electron Integrals) 오비탈로부터 에너지 계산에 필요한 숫자를 어떻게 만들까? 양자화학 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">17</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#electron-integrals" data-open="electron-integrals">전자 적분(Electron Integrals)</a><p class="hub-q">오비탈로부터 에너지 계산에 필요한 숫자를 어떻게 만들까?</p></div><fieldset class="hub-mark"><legend>전자 적분(Electron Integrals) 표시</legend><label><input type="radio" name="m-electron-integrals" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-electron-integrals" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-electron-integrals" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="hamiltonian-elements" data-line="quantum-chemistry" data-num="18" data-state="notyet" data-search="해밀토니안 행렬원소(Hamiltonian Matrix Elements) 오비탈 적분은 어떻게 전자 배치 사이의 행렬이 될까? 양자화학 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">18</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#hamiltonian-elements" data-open="hamiltonian-elements">해밀토니안 행렬원소(Hamiltonian Matrix Elements)</a><p class="hub-q">오비탈 적분은 어떻게 전자 배치 사이의 행렬이 될까?</p></div><fieldset class="hub-mark"><legend>해밀토니안 행렬원소(Hamiltonian Matrix Elements) 표시</legend><label><input type="radio" name="m-hamiltonian-elements" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-hamiltonian-elements" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-hamiltonian-elements" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="h2-hamiltonian" data-line="quantum-chemistry" data-num="19" data-state="notyet" data-search="기저와 분자로 비교하는 해밀토니안(Hamiltonian) 기저와 분자를 바꾸면 해밀토니안 행렬은 어떻게 달라질까? 양자화학 응용"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">19</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#h2-hamiltonian" data-open="h2-hamiltonian">기저와 분자로 비교하는 해밀토니안(Hamiltonian)</a><span class="hub-kind">응용</span><p class="hub-q">기저와 분자를 바꾸면 해밀토니안 행렬은 어떻게 달라질까?</p></div><fieldset class="hub-mark"><legend>기저와 분자로 비교하는 해밀토니안(Hamiltonian) 표시</legend><label><input type="radio" name="m-h2-hamiltonian" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-h2-hamiltonian" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-h2-hamiltonian" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="h2-state-energy" data-line="quantum-chemistry" data-num="20" data-state="notyet" data-search="H₂의 두 배치와 에너지 배치의 계수와 상대 부호가 H₂의 에너지를 어떻게 바꿀까? 양자화학 응용"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">20</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#h2-state-energy" data-open="h2-state-energy">H₂의 두 배치와 에너지</a><span class="hub-kind">응용</span><p class="hub-q">배치의 계수와 상대 부호가 H₂의 에너지를 어떻게 바꿀까?</p></div><fieldset class="hub-mark"><legend>H₂의 두 배치와 에너지 표시</legend><label><input type="radio" name="m-h2-state-energy" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-h2-state-energy" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-h2-state-energy" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="large-hamiltonian" data-line="quantum-chemistry" data-num="21" data-state="notyet" data-search="큰 분자의 해밀토니안: 적분에서 VQE·SQD까지 거대한 행렬을 전부 만들지 않고도에너지 문제를 정의할 수 있을까요? 양자화학 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">21</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#large-hamiltonian" data-open="large-hamiltonian">큰 분자의 해밀토니안: 적분에서 VQE·SQD까지</a><p class="hub-q">거대한 행렬을 전부 만들지 않고도에너지 문제를 정의할 수 있을까요?</p></div><fieldset class="hub-mark"><legend>큰 분자의 해밀토니안: 적분에서 VQE·SQD까지 표시</legend><label><input type="radio" name="m-large-hamiltonian" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-large-hamiltonian" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-large-hamiltonian" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="hamiltonian-size" data-line="quantum-chemistry" data-num="22" data-state="notyet" data-search="적분 수와 상태 공간의 크기 적분은 계산할 수 있는데 왜 많은 전자의 상태는 어려울까? 양자화학 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">22</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#hamiltonian-size" data-open="hamiltonian-size">적분 수와 상태 공간의 크기</a><p class="hub-q">적분은 계산할 수 있는데 왜 많은 전자의 상태는 어려울까?</p></div><fieldset class="hub-mark"><legend>적분 수와 상태 공간의 크기 표시</legend><label><input type="radio" name="m-hamiltonian-size" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-hamiltonian-size" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-hamiltonian-size" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="variational-principle" data-line="quantum-chemistry" data-num="23" data-state="notyet" data-search="변분 원리(Variational Principle) 어떤 상태의 에너지를 낮추면 정확한 바닥상태에 가까워질까? 양자화학 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">23</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#variational-principle" data-open="variational-principle">변분 원리(Variational Principle)</a><p class="hub-q">어떤 상태의 에너지를 낮추면 정확한 바닥상태에 가까워질까?</p></div><fieldset class="hub-mark"><legend>변분 원리(Variational Principle) 표시</legend><label><input type="radio" name="m-variational-principle" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-variational-principle" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-variational-principle" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="hartree-fock" data-line="quantum-chemistry" data-num="24" data-state="notyet" data-search="하트리–폭(Hartree–Fock)와 SCF 전자 밀도가 방정식을 바꾸는데, 어떻게 해를 찾을까? 양자화학 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">24</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#hartree-fock" data-open="hartree-fock">하트리–폭(Hartree–Fock)와 SCF</a><p class="hub-q">전자 밀도가 방정식을 바꾸는데, 어떻게 해를 찾을까?</p></div><fieldset class="hub-mark"><legend>하트리–폭(Hartree–Fock)와 SCF 표시</legend><label><input type="radio" name="m-hartree-fock" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-hartree-fock" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-hartree-fock" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="electron-correlation" data-line="quantum-chemistry" data-num="25" data-state="notyet" data-search="전자 상관(Electron Correlation) 하나의 행렬식으로 놓치는 에너지는 어디에서 올까? 양자화학 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">25</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#electron-correlation" data-open="electron-correlation">전자 상관(Electron Correlation)</a><p class="hub-q">하나의 행렬식으로 놓치는 에너지는 어디에서 올까?</p></div><fieldset class="hub-mark"><legend>전자 상관(Electron Correlation) 표시</legend><label><input type="radio" name="m-electron-correlation" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-electron-correlation" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-electron-correlation" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="configuration-interaction" data-line="quantum-chemistry" data-num="26" data-state="notyet" data-search="구성 상호작용(Configuration Interaction) 행렬식을 더하면 상태와 에너지는 어떻게 달라질까? 양자화학 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">26</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#configuration-interaction" data-open="configuration-interaction">구성 상호작용(Configuration Interaction)</a><p class="hub-q">행렬식을 더하면 상태와 에너지는 어떻게 달라질까?</p></div><fieldset class="hub-mark"><legend>구성 상호작용(Configuration Interaction) 표시</legend><label><input type="radio" name="m-configuration-interaction" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-configuration-interaction" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-configuration-interaction" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="active-space" data-line="quantum-chemistry" data-num="27" data-state="notyet" data-search="활성 공간(Active Space) 어떤 전자와 오비탈을 자세히 계산할까? 양자화학 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">27</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#active-space" data-open="active-space">활성 공간(Active Space)</a><p class="hub-q">어떤 전자와 오비탈을 자세히 계산할까?</p></div><fieldset class="hub-mark"><legend>활성 공간(Active Space) 표시</legend><label><input type="radio" name="m-active-space" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-active-space" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-active-space" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="potential-energy" data-line="quantum-chemistry" data-num="28" data-state="notyet" data-search="퍼텐셜 에너지 곡선(Potential Energy Curve) 결합 길이와 에너지 곡선에서 무엇을 읽을까? 양자화학 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">28</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#potential-energy" data-open="potential-energy">퍼텐셜 에너지 곡선(Potential Energy Curve)</a><p class="hub-q">결합 길이와 에너지 곡선에서 무엇을 읽을까?</p></div><fieldset class="hub-mark"><legend>퍼텐셜 에너지 곡선(Potential Energy Curve) 표시</legend><label><input type="radio" name="m-potential-energy" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-potential-energy" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-potential-energy" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li></ol></section><section class="hub-line" data-line="quantum-computing" data-name="큐빗·회로·측정" style="--route:var(--alpha)" aria-labelledby="line-quantum-computing"><div class="hub-line-head"><h2 id="line-quantum-computing"><span class="hub-line-num">03</span>큐빗·회로·측정<small>양자컴퓨터의 언어</small></h2><p class="hub-line-meta"><span data-line-progress>10편</span><button type="button" class="hub-fold" aria-expanded="true" aria-controls="stations-quantum-computing">접기</button><a href="learning-maps.html#quantum-computing">지도 열기</a></p></div><p class="hub-line-summary">상태를 큐빗으로 표현하고 회로로 준비한 뒤, 측정 결과를 읽습니다.</p><ol class="hub-stations" id="stations-quantum-computing"><li class="hub-station" data-id="two-level-system" data-line="quantum-computing" data-num="01" data-state="notyet" data-search="두 상태 계(Two-Level System) 두 상태만으로 문제를 표현한다는 것은 무엇일까? 큐빗·회로·측정 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">01</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#two-level-system" data-open="two-level-system">두 상태 계(Two-Level System)</a><p class="hub-q">두 상태만으로 문제를 표현한다는 것은 무엇일까?</p></div><fieldset class="hub-mark"><legend>두 상태 계(Two-Level System) 표시</legend><label><input type="radio" name="m-two-level-system" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-two-level-system" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-two-level-system" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="qubit" data-line="quantum-computing" data-num="02" data-state="notyet" data-search="큐빗(Qubit) 기준 상태는 둘인데 가능한 상태는 왜 더 많을까? 큐빗·회로·측정 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">02</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#qubit" data-open="qubit">큐빗(Qubit)</a><p class="hub-q">기준 상태는 둘인데 가능한 상태는 왜 더 많을까?</p></div><fieldset class="hub-mark"><legend>큐빗(Qubit) 표시</legend><label><input type="radio" name="m-qubit" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-qubit" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-qubit" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="computational-basis" data-line="quantum-computing" data-num="03" data-state="notyet" data-search="계산 기저(Computational Basis)와 상태 벡터 왜 0 상태는 영벡터가 아니라 첫째 좌표가 1인 벡터일까? 큐빗·회로·측정 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">03</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#computational-basis" data-open="computational-basis">계산 기저(Computational Basis)와 상태 벡터</a><p class="hub-q">왜 0 상태는 영벡터가 아니라 첫째 좌표가 1인 벡터일까?</p></div><fieldset class="hub-mark"><legend>계산 기저(Computational Basis)와 상태 벡터 표시</legend><label><input type="radio" name="m-computational-basis" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-computational-basis" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-computational-basis" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="quantum-gate" data-line="quantum-computing" data-num="04" data-state="notyet" data-search="양자 게이트(Quantum Gate) 행렬을 곱해서 양자 상태를 어떻게 바꿀까? 큐빗·회로·측정 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">04</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#quantum-gate" data-open="quantum-gate">양자 게이트(Quantum Gate)</a><p class="hub-q">행렬을 곱해서 양자 상태를 어떻게 바꿀까?</p></div><fieldset class="hub-mark"><legend>양자 게이트(Quantum Gate) 표시</legend><label><input type="radio" name="m-quantum-gate" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-quantum-gate" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-quantum-gate" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="rotation-gate" data-line="quantum-computing" data-num="05" data-state="notyet" data-search="회전 게이트(Rotation Gate)와 블로흐 구 회전각을 바꾸면 무엇이 달라질까? 큐빗·회로·측정 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">05</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#rotation-gate" data-open="rotation-gate">회전 게이트(Rotation Gate)와 블로흐 구</a><p class="hub-q">회전각을 바꾸면 무엇이 달라질까?</p></div><fieldset class="hub-mark"><legend>회전 게이트(Rotation Gate)와 블로흐 구 표시</legend><label><input type="radio" name="m-rotation-gate" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-rotation-gate" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-rotation-gate" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="measurement-basis" data-line="quantum-computing" data-num="06" data-state="notyet" data-search="측정 기저(Measurement Basis) 같은 상태인데, 무엇을 측정하느냐에 따라 결과가 달라질까? 큐빗·회로·측정 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">06</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#measurement-basis" data-open="measurement-basis">측정 기저(Measurement Basis)</a><p class="hub-q">같은 상태인데, 무엇을 측정하느냐에 따라 결과가 달라질까?</p></div><fieldset class="hub-mark"><legend>측정 기저(Measurement Basis) 표시</legend><label><input type="radio" name="m-measurement-basis" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-measurement-basis" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-measurement-basis" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="energy-measurement" data-line="quantum-computing" data-num="07" data-state="notyet" data-search="계산 기저 측정과 에너지 측정(Energy Measurement) 0·1을 읽는 것과 에너지를 읽는 것은 어떻게 다를까? 큐빗·회로·측정 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">07</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#energy-measurement" data-open="energy-measurement">계산 기저 측정과 에너지 측정(Energy Measurement)</a><p class="hub-q">0·1을 읽는 것과 에너지를 읽는 것은 어떻게 다를까?</p></div><fieldset class="hub-mark"><legend>계산 기저 측정과 에너지 측정(Energy Measurement) 표시</legend><label><input type="radio" name="m-energy-measurement" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-energy-measurement" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-energy-measurement" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="tensor-product" data-line="quantum-computing" data-num="08" data-state="notyet" data-search="텐서곱(Tensor Product)과 여러 큐빗 큐빗 두 개의 계수는 어떻게 네 개가 될까? 큐빗·회로·측정 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">08</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#tensor-product" data-open="tensor-product">텐서곱(Tensor Product)과 여러 큐빗</a><p class="hub-q">큐빗 두 개의 계수는 어떻게 네 개가 될까?</p></div><fieldset class="hub-mark"><legend>텐서곱(Tensor Product)과 여러 큐빗 표시</legend><label><input type="radio" name="m-tensor-product" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-tensor-product" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-tensor-product" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="entanglement" data-line="quantum-computing" data-num="09" data-state="notyet" data-search="얽힘(Entanglement) 전체 상태를 각 큐빗의 상태로 나눌 수 있을까? 큐빗·회로·측정 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">09</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#entanglement" data-open="entanglement">얽힘(Entanglement)</a><p class="hub-q">전체 상태를 각 큐빗의 상태로 나눌 수 있을까?</p></div><fieldset class="hub-mark"><legend>얽힘(Entanglement) 표시</legend><label><input type="radio" name="m-entanglement" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-entanglement" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-entanglement" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="fermion-qubit" data-line="quantum-computing" data-num="10" data-state="notyet" data-search="전자 상태를 큐빗으로 옮기기(Fermion-to-Qubit Mapping) 전자 두 개인 수소 분자에 왜 큐빗 네 개를 쓰기도 할까? 큐빗·회로·측정 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">10</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#fermion-qubit" data-open="fermion-qubit">전자 상태를 큐빗으로 옮기기(Fermion-to-Qubit Mapping)</a><p class="hub-q">전자 두 개인 수소 분자에 왜 큐빗 네 개를 쓰기도 할까?</p></div><fieldset class="hub-mark"><legend>전자 상태를 큐빗으로 옮기기(Fermion-to-Qubit Mapping) 표시</legend><label><input type="radio" name="m-fermion-qubit" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-fermion-qubit" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-fermion-qubit" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li></ol></section><section class="hub-line" data-line="vqe" data-name="VQE" style="--route:var(--accent)" aria-labelledby="line-vqe"><div class="hub-line-head"><h2 id="line-vqe"><span class="hub-line-num">04</span>VQE<small>에너지를 낮추는 반복</small></h2><p class="hub-line-meta"><span data-line-progress>8편</span><button type="button" class="hub-fold" aria-expanded="true" aria-controls="stations-vqe">접기</button><a href="learning-maps.html#vqe">지도 열기</a></p></div><p class="hub-line-summary">준비한 상태의 평균 에너지를 측정하고 회로의 매개변수를 조절합니다.</p><ol class="hub-stations" id="stations-vqe"><li class="hub-station" data-id="energy-expectation" data-line="vqe" data-num="01" data-state="notyet" data-search="평균 에너지와 기댓값(Expectation Value) 한 번의 측정값과 평균 에너지는 어떻게 다를까? VQE 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">01</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#energy-expectation" data-open="energy-expectation">평균 에너지와 기댓값(Expectation Value)</a><p class="hub-q">한 번의 측정값과 평균 에너지는 어떻게 다를까?</p></div><fieldset class="hub-mark"><legend>평균 에너지와 기댓값(Expectation Value) 표시</legend><label><input type="radio" name="m-energy-expectation" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-energy-expectation" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-energy-expectation" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="ansatz" data-line="vqe" data-num="02" data-state="notyet" data-search="안사츠(Ansatz) 어떤 상태들을 후보로 찾아볼까? VQE 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">02</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#ansatz" data-open="ansatz">안사츠(Ansatz)</a><p class="hub-q">어떤 상태들을 후보로 찾아볼까?</p></div><fieldset class="hub-mark"><legend>안사츠(Ansatz) 표시</legend><label><input type="radio" name="m-ansatz" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-ansatz" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-ansatz" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="parameterized-circuit" data-line="vqe" data-num="03" data-state="notyet" data-search="매개변수화 양자회로(Parameterized Quantum Circuit) 회전각 하나로 양자 상태를 어떻게 바꿀까? VQE 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">03</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#parameterized-circuit" data-open="parameterized-circuit">매개변수화 양자회로(Parameterized Quantum Circuit)</a><p class="hub-q">회전각 하나로 양자 상태를 어떻게 바꿀까?</p></div><fieldset class="hub-mark"><legend>매개변수화 양자회로(Parameterized Quantum Circuit) 표시</legend><label><input type="radio" name="m-parameterized-circuit" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-parameterized-circuit" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-parameterized-circuit" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="pauli-decomposition" data-line="vqe" data-num="04" data-state="notyet" data-search="파울리 분해(Pauli Decomposition) 에너지를 양자컴퓨터에서 측정하기 쉬운 항으로 나누려면? VQE 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">04</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#pauli-decomposition" data-open="pauli-decomposition">파울리 분해(Pauli Decomposition)</a><p class="hub-q">에너지를 양자컴퓨터에서 측정하기 쉬운 항으로 나누려면?</p></div><fieldset class="hub-mark"><legend>파울리 분해(Pauli Decomposition) 표시</legend><label><input type="radio" name="m-pauli-decomposition" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-pauli-decomposition" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-pauli-decomposition" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="measurement-shots" data-line="vqe" data-num="05" data-state="notyet" data-search="반복 측정(Shots)과 표본 오차(Sampling Error) 같은 상태를 준비했는데 왜 에너지 추정값이 달라질까? VQE 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">05</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#measurement-shots" data-open="measurement-shots">반복 측정(Shots)과 표본 오차(Sampling Error)</a><p class="hub-q">같은 상태를 준비했는데 왜 에너지 추정값이 달라질까?</p></div><fieldset class="hub-mark"><legend>반복 측정(Shots)과 표본 오차(Sampling Error) 표시</legend><label><input type="radio" name="m-measurement-shots" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-measurement-shots" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-measurement-shots" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="classical-optimization" data-line="vqe" data-num="06" data-state="notyet" data-search="고전 최적화(Classical Optimization) 다음 회로 각도는 어떻게 선택할까? VQE 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">06</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#classical-optimization" data-open="classical-optimization">고전 최적화(Classical Optimization)</a><p class="hub-q">다음 회로 각도는 어떻게 선택할까?</p></div><fieldset class="hub-mark"><legend>고전 최적화(Classical Optimization) 표시</legend><label><input type="radio" name="m-classical-optimization" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-classical-optimization" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-classical-optimization" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="vqe-algorithm" data-line="vqe" data-num="07" data-state="notyet" data-search="VQE 전체 알고리즘 상태 준비와 에너지 측정이 어떻게 바닥상태 탐색으로 이어질까? VQE 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">07</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#vqe-algorithm" data-open="vqe-algorithm">VQE 전체 알고리즘</a><p class="hub-q">상태 준비와 에너지 측정이 어떻게 바닥상태 탐색으로 이어질까?</p></div><fieldset class="hub-mark"><legend>VQE 전체 알고리즘 표시</legend><label><input type="radio" name="m-vqe-algorithm" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-vqe-algorithm" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-vqe-algorithm" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="vqe-hydrogen" data-line="vqe" data-num="08" data-state="notyet" data-search="VQE로 수소 분자 계산하기 실제 분자의 에너지도 회전각을 바꿔 가며 낮출 수 있을까? VQE 응용"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">08</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#vqe-hydrogen" data-open="vqe-hydrogen">VQE로 수소 분자 계산하기</a><span class="hub-kind">응용</span><p class="hub-q">실제 분자의 에너지도 회전각을 바꿔 가며 낮출 수 있을까?</p></div><fieldset class="hub-mark"><legend>VQE로 수소 분자 계산하기 표시</legend><label><input type="radio" name="m-vqe-hydrogen" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-vqe-hydrogen" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-vqe-hydrogen" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li></ol></section><section class="hub-line" data-line="sqd" data-name="SQD" style="--route:var(--beta)" aria-labelledby="line-sqd"><div class="hub-line-head"><h2 id="line-sqd"><span class="hub-line-num">05</span>SQD<small>표본에서 부분공간으로</small></h2><p class="hub-line-meta"><span data-line-progress>6편</span><button type="button" class="hub-fold" aria-expanded="true" aria-controls="stations-sqd">접기</button><a href="learning-maps.html#sqd">지도 열기</a></p></div><p class="hub-line-summary">회로에서 얻은 전자 배치로 부분공간을 만들고 고전 컴퓨터에서 대각화합니다.</p><ol class="hub-stations" id="stations-sqd"><li class="hub-station" data-id="occupation-bitstrings" data-line="sqd" data-num="01" data-state="notyet" data-search="점유수 표현(Occupation-number Representation)과 비트열 비트열 0101을 어떻게 전자 배치로 읽을까? SQD 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">01</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#occupation-bitstrings" data-open="occupation-bitstrings">점유수 표현(Occupation-number Representation)과 비트열</a><p class="hub-q">비트열 0101을 어떻게 전자 배치로 읽을까?</p></div><fieldset class="hub-mark"><legend>점유수 표현(Occupation-number Representation)과 비트열 표시</legend><label><input type="radio" name="m-occupation-bitstrings" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-occupation-bitstrings" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-occupation-bitstrings" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="hf-preparation" data-line="sqd" data-num="02" data-state="notyet" data-search="하트리–폭 기준 상태(Hartree–Fock Reference State) 준비 전자 배치를 큐빗에 기록하려면 어떤 게이트를 누를까? SQD 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">02</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#hf-preparation" data-open="hf-preparation">하트리–폭 기준 상태(Hartree–Fock Reference State) 준비</a><p class="hub-q">전자 배치를 큐빗에 기록하려면 어떤 게이트를 누를까?</p></div><fieldset class="hub-mark"><legend>하트리–폭 기준 상태(Hartree–Fock Reference State) 준비 표시</legend><label><input type="radio" name="m-hf-preparation" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-hf-preparation" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-hf-preparation" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="excitation-state" data-line="sqd" data-num="03" data-state="notyet" data-search="전자 들뜸(Excitation)과 중첩 상태 준비 하나의 전자 배치에서 여러 배치의 중첩 상태를 어떻게 준비할까? SQD 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">03</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#excitation-state" data-open="excitation-state">전자 들뜸(Excitation)과 중첩 상태 준비</a><p class="hub-q">하나의 전자 배치에서 여러 배치의 중첩 상태를 어떻게 준비할까?</p></div><fieldset class="hub-mark"><legend>전자 들뜸(Excitation)과 중첩 상태 준비 표시</legend><label><input type="radio" name="m-excitation-state" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-excitation-state" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-excitation-state" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="sqd-state-circuit" data-line="sqd" data-num="04" data-state="notyet" data-search="상태 준비 회로(State Preparation Circuit) 읽기 X·CNOT·회전 게이트를 지나며 전자 배치의 진폭이 어떻게 달라질까? SQD 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">04</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#sqd-state-circuit" data-open="sqd-state-circuit">상태 준비 회로(State Preparation Circuit) 읽기</a><p class="hub-q">X·CNOT·회전 게이트를 지나며 전자 배치의 진폭이 어떻게 달라질까?</p></div><fieldset class="hub-mark"><legend>상태 준비 회로(State Preparation Circuit) 읽기 표시</legend><label><input type="radio" name="m-sqd-state-circuit" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-sqd-state-circuit" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-sqd-state-circuit" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="sqd-sampling" data-line="sqd" data-num="05" data-state="notyet" data-search="측정 표본(Sample)과 전자 배치 회로를 한 번 실행하면 무엇을 얻고, 반복하면 무엇을 알 수 있을까? SQD 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">05</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#sqd-sampling" data-open="sqd-sampling">측정 표본(Sample)과 전자 배치</a><p class="hub-q">회로를 한 번 실행하면 무엇을 얻고, 반복하면 무엇을 알 수 있을까?</p></div><fieldset class="hub-mark"><legend>측정 표본(Sample)과 전자 배치 표시</legend><label><input type="radio" name="m-sqd-sampling" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-sqd-sampling" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-sqd-sampling" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="sqd-subspace" data-line="sqd" data-num="06" data-state="notyet" data-search="표본에서 부분공간 대각화(Subspace Diagonalization)로 양자 컴퓨터가 준 비트열로 어떻게 에너지와 상태를 구할까? SQD 개념"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">06</span><div class="hub-text"><a class="hub-title" href="learning-maps.html#sqd-subspace" data-open="sqd-subspace">표본에서 부분공간 대각화(Subspace Diagonalization)로</a><p class="hub-q">양자 컴퓨터가 준 비트열로 어떻게 에너지와 상태를 구할까?</p></div><fieldset class="hub-mark"><legend>표본에서 부분공간 대각화(Subspace Diagonalization)로 표시</legend><label><input type="radio" name="m-sqd-subspace" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-sqd-subspace" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-sqd-subspace" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li></ol></section><section class="hub-line" data-line="main-docs" data-name="본문 문서" style="--route:var(--ink2)" aria-labelledby="line-main-docs"><div class="hub-line-head"><h2 id="line-main-docs">본문 문서<small>배경·입문에서 SQD 코드 해설까지</small></h2><p class="hub-line-meta"><span data-line-progress>11편</span><button type="button" class="hub-fold" aria-expanded="true" aria-controls="stations-main-docs">접기</button><a href="index-main.html">본문 모음 열기</a></p></div><p class="hub-line-summary">개념 노트보다 긴 글입니다. 수식 없는 입문부터 공식 예제의 코드 해설까지 이어집니다.</p><ol class="hub-stations" id="stations-main-docs"><li class="hub-station" data-id="background-atoms" data-line="main-docs" data-num="배경" data-state="notyet" data-search="주기율표와 원자, 계산에 필요한 만큼만 양자 화학 알고리즘을 읽기 위한 배경 본문 문서 본문"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">배경</span><div class="hub-text"><a class="hub-title" href="background-atoms.html" data-open="background-atoms">주기율표와 원자, 계산에 필요한 만큼만</a><p class="hub-q">양자 화학 알고리즘을 읽기 위한 배경</p></div><fieldset class="hub-mark"><legend>주기율표와 원자, 계산에 필요한 만큼만 표시</legend><label><input type="radio" name="m-background-atoms" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-background-atoms" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-background-atoms" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="intro" data-line="main-docs" data-num="입문" data-state="notyet" data-search="SQD, 처음부터 행렬을 몰라도 읽는 양자 화학 계산 이야기 본문 문서 본문"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">입문</span><div class="hub-text"><a class="hub-title" href="intro.html" data-open="intro">SQD, 처음부터</a><p class="hub-q">행렬을 몰라도 읽는 양자 화학 계산 이야기</p></div><fieldset class="hub-mark"><legend>SQD, 처음부터 표시</legend><label><input type="radio" name="m-intro" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-intro" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-intro" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="prep-math" data-line="main-docs" data-num="준비" data-state="notyet" data-search="수학 문서 읽기 전에 벡터·행렬·확률, 작은 숫자로 미리 만져 보기 본문 문서 본문"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">준비</span><div class="hub-text"><a class="hub-title" href="prep-math.html" data-open="prep-math">수학 문서 읽기 전에</a><p class="hub-q">벡터·행렬·확률, 작은 숫자로 미리 만져 보기</p></div><fieldset class="hub-mark"><legend>수학 문서 읽기 전에 표시</legend><label><input type="radio" name="m-prep-math" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-prep-math" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-prep-math" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="math" data-line="main-docs" data-num="수학" data-state="notyet" data-search="대각화와 샘플링, 수학으로 SQD의 두 기둥을 식으로 세우기 본문 문서 본문"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">수학</span><div class="hub-text"><a class="hub-title" href="math.html" data-open="math">대각화와 샘플링, 수학으로</a><p class="hub-q">SQD의 두 기둥을 식으로 세우기</p></div><fieldset class="hub-mark"><legend>대각화와 샘플링, 수학으로 표시</legend><label><input type="radio" name="m-math" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-math" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-math" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="00-quickstart" data-line="main-docs" data-num="0" data-state="notyet" data-search="SQD 퀵스타트 따라가기 공식 Quickstart를 한 줄씩 풀어 읽기 본문 문서 본문"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">0</span><div class="hub-text"><a class="hub-title" href="00-quickstart.html" data-open="00-quickstart">SQD 퀵스타트 따라가기</a><p class="hub-q">공식 Quickstart를 한 줄씩 풀어 읽기</p></div><fieldset class="hub-mark"><legend>SQD 퀵스타트 따라가기 표시</legend><label><input type="radio" name="m-00-quickstart" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-00-quickstart" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-00-quickstart" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="01-pyscf" data-line="main-docs" data-num="1" data-state="notyet" data-search="PySCF로 SQD 입력 만들기 질소 분자 N₂ 예제 본문 문서 본문"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">1</span><div class="hub-text"><a class="hub-title" href="01-pyscf.html" data-open="01-pyscf">PySCF로 SQD 입력 만들기</a><p class="hub-q">질소 분자 N₂ 예제</p></div><fieldset class="hub-mark"><legend>PySCF로 SQD 입력 만들기 표시</legend><label><input type="radio" name="m-01-pyscf" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-01-pyscf" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-01-pyscf" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="02-jordan-wigner" data-line="main-docs" data-num="2" data-state="notyet" data-search="궤도를 큐비트로 Jordan–Wigner 변환 본문 문서 본문"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">2</span><div class="hub-text"><a class="hub-title" href="02-jordan-wigner.html" data-open="02-jordan-wigner">궤도를 큐비트로</a><p class="hub-q">Jordan–Wigner 변환</p></div><fieldset class="hub-mark"><legend>궤도를 큐비트로 표시</legend><label><input type="radio" name="m-02-jordan-wigner" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-02-jordan-wigner" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-02-jordan-wigner" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="03-ucj-inside" data-line="main-docs" data-num="3" data-state="notyet" data-search="UCJ 회로 안쪽 층의 구조, 각도의 출처, 최적화 본문 문서 본문"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">3</span><div class="hub-text"><a class="hub-title" href="03-ucj-inside.html" data-open="03-ucj-inside">UCJ 회로 안쪽</a><p class="hub-q">층의 구조, 각도의 출처, 최적화</p></div><fieldset class="hub-mark"><legend>UCJ 회로 안쪽 표시</legend><label><input type="radio" name="m-03-ucj-inside" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-03-ucj-inside" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-03-ucj-inside" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="04-circuit" data-line="main-docs" data-num="4" data-state="notyet" data-search="양자 회로: 근사 바닥상태 만들기 hcore·eri에서 양자 상태까지 본문 문서 본문"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">4</span><div class="hub-text"><a class="hub-title" href="04-circuit.html" data-open="04-circuit">양자 회로: 근사 바닥상태 만들기</a><p class="hub-q">hcore·eri에서 양자 상태까지</p></div><fieldset class="hub-mark"><legend>양자 회로: 근사 바닥상태 만들기 표시</legend><label><input type="radio" name="m-04-circuit" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-04-circuit" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-04-circuit" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="05-sampling" data-line="main-docs" data-num="5" data-state="notyet" data-search="샘플링: 비트열 얻기 양자 상태에서 bit_array까지 본문 문서 본문"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">5</span><div class="hub-text"><a class="hub-title" href="05-sampling.html" data-open="05-sampling">샘플링: 비트열 얻기</a><p class="hub-q">양자 상태에서 bit_array까지</p></div><fieldset class="hub-mark"><legend>샘플링: 비트열 얻기 표시</legend><label><input type="radio" name="m-05-sampling" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-05-sampling" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-05-sampling" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li><li class="hub-station" data-id="06-sqd-guide" data-line="main-docs" data-num="6" data-state="notyet" data-search="SQD 이해하기 Sample-based Quantum Diagonalization 본문 문서 본문"><span class="hub-dot" aria-hidden="true"></span><span class="hub-num">6</span><div class="hub-text"><a class="hub-title" href="06-sqd-guide.html" data-open="06-sqd-guide">SQD 이해하기</a><p class="hub-q">Sample-based Quantum Diagonalization</p></div><fieldset class="hub-mark"><legend>SQD 이해하기 표시</legend><label><input type="radio" name="m-06-sqd-guide" value="notyet" checked><span><i class="hub-glyph notyet" aria-hidden="true"></i>아직</span></label><label><input type="radio" name="m-06-sqd-guide" value="read"><span><i class="hub-glyph read" aria-hidden="true"></i>읽음</span></label><label><input type="radio" name="m-06-sqd-guide" value="understood"><span><i class="hub-glyph understood" aria-hidden="true"></i>이해</span></label></fieldset></li></ol></section>
+</div>
+</div>
+</main>
+<script>/* Hub page behaviour: marks, the next-document card, folding routes, search, filters and
+   the transfer link. Runs after progress.js. The page is complete without it (every row is
+   a plain link and every route is open); this script adds marks and filtering. It exits at
+   once when [data-hub] is missing, which is what the fake DOM in tools/check_html.js returns. */
+(function () {
+  'use strict';
+  var root = document.querySelector('[data-hub]'), P = window.SQDProgress;
+  if (!root || !P) return;
+  var $ = function (sel) { return root.querySelector(sel); };
+  var all = function (sel, from) { return [].slice.call((from || root).querySelectorAll(sel)); };
+  var rows = all('.hub-station'), sections = all('.hub-line'), chips = all('[data-line-filter]');
+  var ids = rows.map(function (r) { return r.dataset.id; });
+  var lines = sections.map(function (s) { return s.dataset.line; });
+  // Prototype-free maps: ids read from storage or a link can never resolve to Object members.
+  var byId = Object.create(null), sectionOf = Object.create(null);
+  var byLine = Object.create(null), chipOf = Object.create(null);
+  rows.forEach(function (r) {
+    byId[r.dataset.id] = r;
+    (byLine[r.dataset.line] = byLine[r.dataset.line] || []).push(r);
+    r.radios = all('input[type="radio"]', r);
+  });
+  sections.forEach(function (s) { sectionOf[s.dataset.line] = s; });
+  chips.forEach(function (c) { chipOf[c.dataset.lineFilter] = c; });
+  var statusInputs = all('input[name="hub-status"]');
+  var filter = { line: 'all', status: 'all', query: '' }, folded = {}, pending = null, undo = null, announce = 0;
+  var query = $('#hub-q'), count = $('#hub-count'), empty = $('#hub-empty'), live = $('#hub-live');
+  var note = $('#hub-note'), offer = $('#hub-offer'), undoBox = $('#hub-undo'), next = $('#hub-next');
+  var summary = $('#hub-summary'), filters = $('.hub-filters'), filterSummary = $('[data-filter-summary]'), move = $('.hub-move');
+  var narrow = window.matchMedia ? window.matchMedia('(max-width: 900px)') : null;
+  var STATUS = { all: '전체', notyet: '아직', read: '읽음', understood: '이해' };
+  var ERRORS = {
+    format: '진행 링크를 읽지 못했어요. 링크가 중간에 잘리지 않았는지 확인해 주세요.',
+    length: '진행 링크가 너무 길어요. 링크를 다시 복사해 주세요.',
+    version: '더 새로운 버전의 허브에서 만든 링크예요. 이 페이지를 새로 고친 뒤 다시 열어 주세요.'
+  };
+  var STORAGE = '이 브라우저는 표시를 저장하지 못해요. 이 탭을 닫으면 표시가 사라집니다.';
+
+  function norm(text) {
+    return String(text || '').normalize('NFKC').toLowerCase()
+      .replace(/[\s·.,:;!?'"“”‘’()\[\]{}<>\-–—_/\\|+=*&^%$#@~`]+/g, '');
+  }
+  rows.forEach(function (r) { r.searchText = norm(r.dataset.search); });
+  function say(text) { if (live) { live.textContent = ''; live.textContent = text; } }
+  function showNote(text) { if (note) { note.textContent = text; note.hidden = !text; } }
+  function storageNote() { showNote(P.persistent() ? '' : STORAGE); }
+  function hashText() {
+    var h = location.hash.slice(1);
+    try { return decodeURIComponent(h); } catch (e) { return h; }
+  }
+  function setHash(value) {
+    try { history.replaceState(null, '', location.pathname + location.search + (value ? '#' + value : '')); }
+    catch (e) { if (!value) location.hash = ''; }
+  }
+  function stationsOf(line) { return byLine[line] || []; }
+  function counts(list) {
+    var c = { notyet: 0, read: 0, understood: 0 };
+    list.forEach(function (r) { c[r.dataset.state]++; });
+    return c;
+  }
+  function pair(c) { return '이해 ' + c.understood + ' · 읽음 ' + c.read; }
+  function progress(c, total) { return c.read || c.understood ? total + '편 중 ' + pair(c) : total + '편'; }
+  function paint(row) {
+    var state = P.get(row.dataset.id);
+    row.dataset.state = state;
+    row.radios.forEach(function (input) { input.checked = input.value === state; });
+  }
+
+  /* Next document: in the route of the page marked last, the first unread page after the
+     furthest page marked there, then earlier gaps, then the following routes. Opening a
+     page never moves it, and re-marking an old page never pulls it backwards. */
+  function recommend() {
+    var lastRow = byId[P.last()] || null, start = lastRow ? lines.indexOf(lastRow.dataset.line) : 0;
+    var current = stationsOf(lines[start]);
+    var finished = current.every(function (r) { return r.dataset.state === 'understood'; });
+    for (var k = 0; k < lines.length; k++) {
+      var line = stationsOf(lines[(start + k) % lines.length]), furthest = -1;
+      line.forEach(function (r, i) { if (r.dataset.state !== 'notyet') furthest = i; });
+      var order = line.slice(furthest + 1).concat(line.slice(0, furthest + 1));
+      var unread = order.filter(function (r) { return r.dataset.state === 'notyet'; })[0];
+      if (unread) {
+        var label = k && finished ? sectionOf[lines[start]].dataset.name + ' 노선을 마쳤어요 · 다음 추천' : '다음 추천';
+        return { row: unread, label: label };
+      }
+    }
+    var review = rows.filter(function (r) { return r.dataset.state === 'read'; })[0];
+    return review ? { row: review, label: '다시 볼 문서' } : null;
+  }
+  function card(c) {
+    var marks = c.read + c.understood, opened = byId[P.opened()];
+    var box = next.querySelector('[data-opened]');
+    box.hidden = !(opened && opened.dataset.state === 'notyet');
+    // The quick marks act on the page shown here, even if another tab opens a different one.
+    box.dataset.id = box.hidden ? '' : opened.dataset.id;
+    if (!box.hidden) box.querySelector('[data-opened-title]').textContent = opened.querySelector('.hub-title').textContent;
+    all('[data-start]', next).forEach(function (el) { el.hidden = marks > 0; });
+    if (move) move.hidden = !marks;
+    var resume = next.querySelector('[data-resume]'), done = next.querySelector('[data-done]');
+    if (!marks) { resume.hidden = done.hidden = true; return; }
+    var pick = recommend();
+    done.hidden = !!pick; resume.hidden = !pick;
+    if (!pick) return;
+    var title = pick.row.querySelector('.hub-title'), a = resume.querySelector('a');
+    resume.querySelector('[data-label]').textContent = pick.label;
+    a.href = title.getAttribute('href');
+    a.dataset.open = pick.row.dataset.id;
+    a.textContent = title.textContent;
+    resume.querySelector('[data-where]').textContent = sectionOf[pick.row.dataset.line].dataset.name + ' ' + pick.row.dataset.num;
+    resume.querySelector('[data-q]').textContent = pick.row.querySelector('.hub-q').textContent;
+  }
+  function tally() {
+    sections.forEach(function (section) {
+      var list = stationsOf(section.dataset.line), c = counts(list), complete = c.understood === list.length;
+      section.querySelector('[data-line-progress]').textContent = complete ? list.length + '편 모두 이해했어요' : progress(c, list.length);
+      section.toggleAttribute('data-complete', complete);
+      var chip = chipOf[section.dataset.line];
+      if (chip) {
+        chip.querySelector('[data-chip-progress]').textContent = c.understood ? c.understood + '/' + list.length : String(list.length);
+        chip.querySelector('[data-chip-sr]').textContent = progress(c, list.length);
+      }
+    });
+    var c = counts(rows), marks = c.read + c.understood;
+    summary.hidden = !marks;
+    if (marks) {
+      var lastRow = byId[P.last()], line = lastRow ? lastRow.dataset.line : lines[0], list = stationsOf(line);
+      summary.querySelector('[data-route-progress]').textContent = sectionOf[line].dataset.name + ' ' + progress(counts(list), list.length);
+      summary.querySelector('[data-all-progress]').textContent = '전체 ' + progress(c, rows.length);
+    }
+    statusInputs.forEach(function (input) {
+      input.disabled = input.value !== 'all' && !c[input.value] && filter.status !== input.value;
+    });
+    card(c);
+  }
+
+  function filtering() { return filter.line !== 'all' || filter.status !== 'all' || !!norm(filter.query); }
+  function applyFolds() {
+    var active = filtering();
+    sections.forEach(function (section) {
+      var list = section.querySelector('.hub-stations'), button = section.querySelector('.hub-fold');
+      var closed = !active && !!folded[section.dataset.line];
+      list.hidden = closed;
+      button.hidden = active;
+      button.setAttribute('aria-expanded', String(!closed));
+      button.textContent = closed ? '펼치기' : '접기';
+    });
+  }
+  /* Re-filter only when the filter or the search changes. A row whose mark changes stays
+     where it is, so focus and screen reader position are never lost under a filter. */
+  function apply(speak) {
+    var q = norm(filter.query), shown = 0, active = filtering();
+    sections.forEach(function (section) {
+      var lineOk = filter.line === 'all' || filter.line === section.dataset.line, visible = 0;
+      stationsOf(section.dataset.line).forEach(function (r) {
+        var ok = lineOk && (filter.status === 'all' || r.dataset.state === filter.status) && (!q || r.searchText.indexOf(q) >= 0);
+        r.hidden = !ok;
+        if (ok) visible++;
+      });
+      section.hidden = !visible;
+      shown += visible;
+    });
+    root.toggleAttribute('data-filtered', active);
+    empty.hidden = shown > 0;
+    empty.querySelector('[data-term]').textContent = filter.query.trim() ? '‘' + filter.query.trim() + '’에 맞는 ' : '이 조건에 맞는 ';
+    count.textContent = active ? rows.length + '편 중 ' + shown + '편' : '';
+    chips.forEach(function (chip) { chip.setAttribute('aria-pressed', String(chip.dataset.lineFilter === filter.line)); });
+    var parts = [];
+    if (filter.line !== 'all') parts.push(sectionOf[filter.line].dataset.name);
+    if (filter.status !== 'all') parts.push(STATUS[filter.status]);
+    filterSummary.textContent = parts.length ? parts.join(' · ') : '전체';
+    applyFolds();
+    if (speak) {
+      clearTimeout(announce);
+      announce = setTimeout(function () { say(shown ? (active ? shown + '편을 보여 줍니다.' : '전체 ' + rows.length + '편을 보여 줍니다.') : '맞는 문서가 없어요.'); }, 500);
+    }
+  }
+  function reset() {
+    filter = { line: 'all', status: 'all', query: '' };
+    query.value = '';
+    statusInputs.forEach(function (i) { i.checked = i.value === 'all'; });
+    setHash('');
+    tally();
+    apply(true);
+  }
+  function refresh() { rows.forEach(paint); tally(); apply(false); }
+  function foldAround() {
+    var lastRow = byId[P.last()], pick = lastRow ? recommend() : null;
+    var open = pick ? pick.row.dataset.line : lastRow ? lastRow.dataset.line : lines[0];
+    lines.forEach(function (line) { folded[line] = line !== open; });
+  }
+
+  function clearUndo() { undo = null; undoBox.hidden = true; }
+  function offerImport(code) {
+    var result = P.decode(code, ids);
+    pending = null; offer.hidden = true; clearUndo();
+    setHash('');
+    if (result.error) { showNote(ERRORS[result.error]); say(ERRORS[result.error]); return; }
+    pending = result;
+    storageNote();
+    var mine = counts(rows);
+    var text = '받은 진행 링크에 ' + pair(result.counts) + '이 담겨 있어요.';
+    if (result.skipped) text += ' 이 목록에 없는 문서 ' + result.skipped + '편은 건너뜁니다.';
+    text += mine.read || mine.understood
+      ? ' 합치면 문서마다 더 높은 표시를 남기고, 그대로 바꾸면 지금 표시(' + pair(mine) + ')를 링크 내용으로 바꿉니다.'
+      : ' 가져오면 이 브라우저에 표시됩니다.';
+    var marks = result.counts.read + result.counts.understood;
+    if (!marks) text = '받은 진행 링크에 표시가 없어요. 가져올 것이 없습니다.';
+    offer.querySelector('[data-merge]').hidden = offer.querySelector('[data-replace]').hidden = !marks;
+    offer.querySelector('[data-offer-text]').textContent = text;
+    offer.hidden = false;
+    say('받은 진행 링크가 있어요. 합칠지, 바꿀지, 그만둘지 고를 수 있습니다.');
+  }
+  function accept(mode) {
+    if (!pending) return;
+    var before = P.snapshot(ids);
+    // load() repaints through the change listener, which also withdraws any older undo.
+    if (!P.load(pending.states, ids, mode, pending.last)) showNote(STORAGE);
+    undo = before;
+    offer.hidden = true;
+    pending = null;
+    foldAround();
+    apply(false);
+    undoBox.querySelector('[data-undo-text]').textContent = (mode === 'merge' ? '합쳤어요.' : '바꿨어요.') + ' 지금 ' + pair(counts(rows)) + '.';
+    undoBox.hidden = false;
+    say(undoBox.querySelector('[data-undo-text]').textContent);
+    next.focus();
+  }
+  function onHash() {
+    var h = hashText();
+    if (h.indexOf('map=') === 0) offerImport(h.slice(4));
+    else if (h.indexOf('line=') === 0 && lines.indexOf(h.slice(5)) >= 0) {
+      filter.line = h.slice(5); folded[filter.line] = false;
+      if (filters) filters.open = true;
+      apply(false);
+    } else if (filter.line !== 'all') { filter.line = 'all'; apply(false); }
+  }
+
+  /* The change listener below repaints; marking only stores and announces. */
+  function markRow(row, state) {
+    if (!P.set(row.dataset.id, state)) showNote(STORAGE);
+    say(row.querySelector('.hub-title').textContent + ': ' + STATUS[state]);
+  }
+  rows.forEach(function (row) {
+    row.addEventListener('change', function (event) {
+      var input = event.target;
+      if (input && input.type === 'radio') markRow(row, input.value);
+    });
+  });
+  all('[data-quick]', next).forEach(function (button) {
+    button.addEventListener('click', function () {
+      var row = byId[next.querySelector('[data-opened]').dataset.id];
+      if (!row) return;
+      markRow(row, button.dataset.quick);
+      next.focus();
+    });
+  });
+  root.addEventListener('click', function (event) {
+    var link = event.target.closest && event.target.closest('a[data-open]');
+    if (link && byId[link.dataset.open]) P.touch(link.dataset.open);
+  });
+  sections.forEach(function (section) {
+    section.querySelector('.hub-fold').addEventListener('click', function () {
+      folded[section.dataset.line] = !folded[section.dataset.line];
+      applyFolds();
+    });
+  });
+  query.addEventListener('input', function (event) {
+    if (event.isComposing) return;
+    filter.query = query.value; apply(true);
+  });
+  query.addEventListener('compositionend', function () { filter.query = query.value; apply(true); });
+  statusInputs.forEach(function (input) {
+    input.addEventListener('change', function () { filter.status = input.value; tally(); apply(true); });
+  });
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      filter.line = chip.dataset.lineFilter === filter.line ? 'all' : chip.dataset.lineFilter;
+      if (filter.line !== 'all') folded[filter.line] = false;
+      setHash(filter.line === 'all' ? '' : 'line=' + filter.line);
+      apply(true);
+    });
+  });
+  all('[data-reset]').forEach(function (b) { b.addEventListener('click', reset); });
+  offer.querySelector('[data-merge]').addEventListener('click', function () { accept('merge'); });
+  offer.querySelector('[data-replace]').addEventListener('click', function () { accept('replace'); });
+  offer.querySelector('[data-decline]').addEventListener('click', function () {
+    pending = null; offer.hidden = true; say('가져오지 않았어요.'); next.focus();
+  });
+  undoBox.querySelector('[data-undo]').addEventListener('click', function () {
+    if (!undo) return;
+    var restore = undo;
+    P.load(restore.states, ids, 'replace', restore.last);
+    clearUndo();
+    apply(false);
+    say('가져오기 전으로 되돌렸어요.');
+    next.focus();
+  });
+  var copy = $('#hub-copy'), copied = $('#hub-copied'), link = $('#hub-link');
+  copy.addEventListener('click', function () {
+    var url = location.href.split('#')[0] + '#map=' + P.encode(ids);
+    var done = '링크를 복사했어요(' + pair(counts(rows)) + '). 다른 기기에서 열면 가져올 수 있어요.';
+    function manual() {
+      link.hidden = false; link.value = url; link.focus(); link.select();
+      copied.textContent = '아래 링크를 길게 누르거나 선택해서 복사해 주세요.';
+    }
+    try {
+      navigator.clipboard.writeText(url).then(function () { link.hidden = true; copied.textContent = done; }, manual);
+    } catch (e) { manual(); }
+  });
+  /* On phones the filters fold into one line; on wide screens they stay open. The 900px
+     query only says when to look again: the summary's own CSS display decides, so the
+     filters can never be folded while hub.css hides the summary that would reopen them. */
+  function fold() {
+    if (!filters) return;
+    var wide = getComputedStyle(filters.querySelector('summary')).display === 'none';
+    filters.open = wide || filtering();
+  }
+  if (narrow && narrow.addEventListener) narrow.addEventListener('change', fold);
+  /* Any later mark, here or in another tab, makes the import undo unsafe, so it is withdrawn. */
+  P.onChange(function (id) {
+    if (id === '') { tally(); return; }
+    if (id && byId[id]) paint(byId[id]); else rows.forEach(paint);
+    clearUndo();
+    tally();
+  });
+  window.addEventListener('hashchange', onHash);
+  /* Coming back with the browser's back button may restore this page from memory. */
+  window.addEventListener('pageshow', function (event) { if (event.persisted) refresh(); });
+
+  storageNote();
+  rows.forEach(paint);
+  foldAround();
+  fold();
+  tally();
+  apply(false);
+  onHash();
+  document.documentElement.classList.add('hub-painted');
+})();
+</script>
+</body></html>
