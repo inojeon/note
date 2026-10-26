@@ -1,0 +1,25 @@
+<div class="learning-lab">
+  <p class="lp-question">두 계수로 목표점 (3, 2) 만들기</p>
+  <p class="lp-fixed">u = (1, 0) · v = (1, 1)</p>
+  <div class="lp-controls">
+    <label for="coefficient-a"><span>u에 곱할 수 a <output data-a-value for="coefficient-a">1</output></span><input id="coefficient-a" data-input="a" type="range" min="-3" max="3" step="0.5" value="1"></label>
+    <label for="coefficient-b"><span>v에 곱할 수 b <output data-b-value for="coefficient-b">1</output></span><input id="coefficient-b" data-input="b" type="range" min="-3" max="3" step="0.5" value="1"></label>
+  </div>
+  <div class="lp-buttons" role="group" aria-label="조합 예시">
+    <button type="button" data-example="negative">음수도 써 보기</button>
+    <button type="button" data-example="zero">u만 써 보기</button>
+  </div>
+  <svg class="lp-plane" data-plane aria-label="두 벡터의 선형결합을 나타내는 좌표평면"></svg>
+  <div class="lp-readout" aria-live="polite" aria-atomic="true">
+    <output data-result data-result-x="2" data-result-y="1">1u + 1v = (2, 1)</output>
+    <p data-calculation>(1, 0) + (1, 1) = (2, 1)</p>
+    <p data-explanation>먼저 u 방향으로 1만큼, 이어서 v 방향으로 1만큼 이동합니다.</p>
+    <p data-goal>목표 (3, 2)까지 가로 1칸, 세로 1칸이 더 필요합니다.</p>
+  </div>
+  <p class="lp-caption">회색 실선 au에 주황 점선 bv를 이어 붙입니다. 파란 화살표가 합이고, 빈 원이 목표점입니다. 화면에서는 a와 b를 −3부터 3까지 바꿉니다.</p>
+  <details class="lp-hint" data-hint>
+    <summary>힌트: 세로 성분부터 맞추기</summary>
+    <p>u = (1, 0)은 세로 성분을 바꾸지 않습니다. v에 곱한 수 b가 결과의 세로 성분이므로, 먼저 b = 2로 맞춥니다. 이때 가로로도 2만큼 이동합니다. 목표의 가로 성분 3을 만들려면 a = 1이 더 필요합니다.</p>
+  </details>
+  <button type="button" data-reset>처음 상태로</button>
+</div>

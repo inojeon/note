@@ -13,7 +13,7 @@ function math(tex,alt){return '<span class="math-tex" data-tex="'+tex+'">'+alt+'
 function l(x){return [Math.SQRT1_2,Math.sqrt(1.5)*x,Math.sqrt(2.5)*(3*x*x-1)/2]}
 function draw(){
  const m=Number(input.value),d=[2/Math.sqrt(6),1/Math.sqrt(6),1/Math.sqrt(6)],c=m===1?[d[0]]:m===2?[1/Math.sqrt(6),1/Math.sqrt(3)]:[1/Math.sqrt(6),1/Math.sqrt(3),1/Math.sqrt(6)],err=m===1?1/3:m===2?1/6:0,norm=1-err,sum=c.reduce((s,x)=>s+x*x,0);
- el('bset-size-value').textContent=String(m);for(const [id,value] of [['bset-error',err],['bset-norm',norm],['bset-square-sum',sum]]){el(id).textContent=value.toFixed(6);el(id).setAttribute('data-value',value)}
+ el('bset-size-value').textContent=String(m);el('bset-main-error').textContent=m===1?'1/3':m===2?'1/6':'0';el('bset-main-error').dataset.value=err;el('bset-missing').textContent=['기울기와 곡률 성분을 아직 표현하지 못합니다.','곡률 성분을 아직 표현하지 못합니다.','이 목표 함수의 모든 성분을 표현합니다.'][m-1];for(const [id,value] of [['bset-error',err],['bset-norm',norm],['bset-square-sum',sum]]){el(id).textContent=value.toFixed(6);el(id).setAttribute('data-value',value)}
  const cc=m===1?'2/\\sqrt6':m===2?'1/\\sqrt6\\\\1/\\sqrt3':'1/\\sqrt6\\\\1/\\sqrt3\\\\1/\\sqrt6',ss=m===1?'1':m===2?'1&1/\\sqrt2\\\\1/\\sqrt2&1':'1&1/\\sqrt2&0\\\\1/\\sqrt2&1&0\\\\0&0&1';
  el('bset-coefficients').innerHTML=math('\\mathbf c=\\begin{bmatrix}'+cc+'\\end{bmatrix}','비직교 기저의 계수 열벡터: '+c.map(x=>x.toFixed(6)).join('; '));el('bset-overlap').innerHTML=math('S=\\begin{bmatrix}'+ss+'\\end{bmatrix}','겹침 행렬, χ1과 χ2의 겹침은 1/√2');
  document.querySelectorAll('[data-bset-size]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.bsetSize)===m)));

@@ -1,5 +1,8 @@
 {{- $catalog := partialCached "catalog.html" . "catalog" -}}{{- $notes := slice -}}{{- $experiments := slice -}}{{- $paths := slice -}}
 {{- range $catalog.notes -}}{{- $notes = $notes | append (dict "id" .File.ContentBaseName "url" .RelPermalink) -}}{{- end -}}
 {{- range where site.RegularPages "Section" "experiments" -}}{{- $experiments = $experiments | append (dict "id" .File.ContentBaseName "url" .RelPermalink) -}}{{- end -}}
-{{- range where site.RegularPages "Section" "paths" -}}{{- $paths = $paths | append (dict "id" .File.ContentBaseName "url" .RelPermalink "steps" .Params.steps) -}}{{- end -}}
+{{- range $catalog.paths -}}
+  {{- if .Params.paths -}}{{- $paths = $paths | append (dict "id" .File.ContentBaseName "url" .RelPermalink "paths" .Params.paths) -}}
+  {{- else -}}{{- $paths = $paths | append (dict "id" .File.ContentBaseName "url" .RelPermalink "steps" .Params.steps) -}}{{- end -}}
+{{- end -}}
 {{- dict "notes" $notes "experiments" $experiments "paths" $paths | jsonify -}}

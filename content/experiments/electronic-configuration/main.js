@@ -12,7 +12,7 @@ const el=id=>document.getElementById(id),mq=window.matchMedia('(max-width:600px)
 const choices=[[0,1],[0,2],[0,3],[1,2],[1,3],[2,3]],names=['aα','aβ','bα','bβ'];
 function draw(){
  const k=Number(input.value),occupied=choices[k],na=occupied.filter(i=>i<2).length,nb=2-na,ms=occupied.reduce((s,i)=>s+(i%2?-.5:.5),0),count=na===1?4:1;
- el('cfg-choice-value').textContent=(k+1)+' / 6';el('cfg-spatial').textContent=na===2?'a²':nb===2?'b²':'a¹b¹';el('cfg-count').textContent=String(count);el('cfg-count').setAttribute('data-value',count);el('cfg-ms').textContent=String(ms);el('cfg-ms').setAttribute('data-value',ms);el('cfg-determinant').textContent='D['+occupied.map(i=>names[i]).join(', ')+']';
+ const bits=names.map((_,i)=>occupied.includes(i)?1:0).join('');el('cfg-bits').textContent='점유 비트열 '+bits+' · 전자 수 2 · Mₛ = (Nα − Nβ)/2 = '+ms;el('cfg-bits').dataset.bits=bits;el('cfg-choice-value').textContent=(k+1)+' / 6';el('cfg-spatial').textContent=na===2?'a²':nb===2?'b²':'a¹b¹';el('cfg-count').textContent=String(count);el('cfg-count').setAttribute('data-value',count);el('cfg-ms').textContent=String(ms);el('cfg-ms').setAttribute('data-value',ms);el('cfg-determinant').textContent='D['+occupied.map(i=>names[i]).join(', ')+']';
  document.querySelectorAll('[data-cfg-choice]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.cfgChoice)===k)));
  const w=mq.matches?360:600,h=mq.matches?290:190,plot=el('cfg-occupancy-fig');plot.setAttribute('viewBox','0 0 '+w+' '+h);
  let svg='<title>공간 배치 '+el('cfg-spatial').textContent+', 점유 '+occupied.map(i=>names[i]).join(', ')+'</title><g font-family="system-ui,sans-serif" fill="var(--ink)">';

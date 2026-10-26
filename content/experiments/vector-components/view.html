@@ -1,0 +1,20 @@
+<div class="learning-lab">
+  <p class="lp-question">시작 위치와 이동량</p>
+  <div class="lp-controls">
+    <label for="component-x"><span>가로 성분 x <output data-x-value for="component-x">3</output></span><input id="component-x" data-input="x" type="range" min="-4" max="4" step="1" value="3"></label>
+    <label for="component-y"><span>세로 성분 y <output data-y-value for="component-y">2</output></span><input id="component-y" data-input="y" type="range" min="-4" max="4" step="1" value="2"></label>
+  </div>
+  <div class="lp-buttons" role="group" aria-label="화살표 시작점">
+    <button type="button" data-tail="origin" aria-pressed="true">원점에서 시작</button>
+    <button type="button" data-tail="shifted" aria-pressed="false">시작점 옮기기</button>
+  </div>
+  <svg class="lp-plane" data-plane aria-label="가로와 세로 이동량을 나타내는 좌표평면"></svg>
+  <div class="lp-readout" aria-live="polite" aria-atomic="true">
+    <output data-result data-result-x="3" data-result-y="2">이동량 (3, 2)</output>
+    <p data-position>시작점 (0, 0) → 끝점 (3, 2)</p>
+    <p data-calculation>가로: 3 − 0 = 3 · 세로: 2 − 0 = 2</p>
+    <p data-explanation>오른쪽으로 3칸, 위로 2칸 이동합니다.</p>
+  </div>
+  <p class="lp-caption" data-legend>격자 한 칸은 가로와 세로 모두 1입니다. 점선은 가로 이동 다음에 세로 이동을 한 경로입니다.</p>
+  <button type="button" data-reset>처음 상태로</button>
+</div>

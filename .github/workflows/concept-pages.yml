@@ -48,6 +48,7 @@ jobs:
 
       - name: Reject invalid authoring inputs and verify the two generated sites
         run: |
+          python3 tests/check_curriculum.py 2>&1 | tee test-results/curriculum.log
           python3 tests/build_contract.py 2>&1 | tee test-results/build-contract.log
           node tests/lifecycle.mjs 2>&1 | tee test-results/lifecycle.log
           python3 tests/check_structure.py --site .cache/site-root --base-path / 2>&1 | tee test-results/structure-root.log

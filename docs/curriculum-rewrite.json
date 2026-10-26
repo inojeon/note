@@ -1,0 +1,1794 @@
+{
+  "version": 1,
+  "updated": "2026-10-26",
+  "baseline_notes": [
+    "vector",
+    "vector-operations",
+    "linear-combination",
+    "span",
+    "subspace"
+  ],
+  "status_definitions": {
+    "planned": "재작성 전. 기존 원본은 계속 열람 가능.",
+    "authoring": "작성·검사 중.",
+    "ready-for-review": "내용 검토·자동 검사·직접 조작 후 사용자 검토 대기.",
+    "reviewed": "사용자 피드백을 반영하고 해당 차수를 마침."
+  },
+  "review_policy": "첫 기저와 좌표 경로를 사용자가 승인했다. 나머지 분야는 같은 구조로 이어 작성하라는 요청에 따라 검증을 마친 후 한꺼번에 로컬 검토본으로 제공한다. 공개 배포는 별도 요청 시 수행한다.",
+  "first_review_path": "basis-and-coordinates",
+  "paths": [
+    {
+      "id": "basis-and-coordinates",
+      "title": "기저와 좌표",
+      "group": "mathematics",
+      "steps": [
+        "linear-independence",
+        "basis",
+        "dimension",
+        "inner-product"
+      ]
+    },
+    {
+      "id": "matrices-and-eigenvectors",
+      "title": "행렬과 고유벡터",
+      "group": "mathematics",
+      "steps": [
+        "matrix",
+        "eigen",
+        "diagonalization",
+        "diagonalization-coordinates"
+      ]
+    },
+    {
+      "id": "quantum-math",
+      "title": "양자 상태를 읽는 수학",
+      "group": "mathematics",
+      "steps": [
+        "probability",
+        "functions-and-density",
+        "angles-and-rotation",
+        "complex-numbers",
+        "complex-inner-product",
+        "symmetric"
+      ]
+    },
+    {
+      "id": "subspace-approximation",
+      "title": "작은 공간에서 근사하기",
+      "group": "mathematics",
+      "steps": [
+        "orthogonal-projection",
+        "power",
+        "krylov"
+      ]
+    },
+    {
+      "id": "quantum-states-and-measurement",
+      "title": "상태와 측정",
+      "group": "quantum-chemistry",
+      "steps": [
+        "quantum-state",
+        "born-rule",
+        "superposition",
+        "observable",
+        "hamiltonian",
+        "schrodinger"
+      ]
+    },
+    {
+      "id": "atoms-and-electron-configurations",
+      "title": "원자와 전자 배치",
+      "group": "quantum-chemistry",
+      "steps": [
+        "background-atoms",
+        "born-oppenheimer",
+        "orbital",
+        "electron-spin",
+        "pauli",
+        "electronic-configuration",
+        "slater-determinant"
+      ]
+    },
+    {
+      "id": "molecular-basis-and-hamiltonian",
+      "title": "분자의 기저와 해밀토니안",
+      "group": "quantum-chemistry",
+      "steps": [
+        "basis-set",
+        "sto-3g",
+        "molecular-orbital",
+        "electron-integrals",
+        "hamiltonian-elements",
+        "h2-hamiltonian"
+      ]
+    },
+    {
+      "id": "energy-approximations",
+      "title": "에너지를 근사하는 방법",
+      "group": "quantum-chemistry",
+      "steps": [
+        "h2-state-energy",
+        "variational-principle",
+        "hartree-fock",
+        "basis-orbital-energies",
+        "electron-correlation"
+      ]
+    },
+    {
+      "id": "large-spaces-and-energy-curves",
+      "title": "큰 배치 공간과 에너지 곡선",
+      "group": "quantum-chemistry",
+      "steps": [
+        "configuration-interaction",
+        "hamiltonian-size",
+        "active-space",
+        "potential-energy",
+        "large-hamiltonian"
+      ]
+    },
+    {
+      "id": "single-qubit",
+      "title": "큐빗 하나의 상태와 조작",
+      "group": "quantum-computing",
+      "steps": [
+        "two-level-system",
+        "qubit",
+        "computational-basis",
+        "quantum-gate",
+        "rotation-gate",
+        "measurement-basis"
+      ]
+    },
+    {
+      "id": "multiple-qubits-and-energy",
+      "title": "여러 큐빗과 에너지 측정",
+      "group": "quantum-computing",
+      "steps": [
+        "tensor-product",
+        "entanglement",
+        "energy-measurement"
+      ]
+    },
+    {
+      "id": "vqe-circuits",
+      "title": "에너지를 계산하는 회로",
+      "group": "vqe",
+      "steps": [
+        "energy-expectation",
+        "ansatz",
+        "parameterized-circuit",
+        "pauli-decomposition"
+      ]
+    },
+    {
+      "id": "vqe-measurement-and-optimization",
+      "title": "측정과 최적화",
+      "group": "vqe",
+      "steps": [
+        "measurement-shots",
+        "classical-optimization",
+        "vqe-algorithm",
+        "vqe-hydrogen"
+      ]
+    },
+    {
+      "id": "sqd",
+      "title": "표본으로 부분공간 만들기",
+      "group": null,
+      "steps": [
+        "occupation-bitstrings",
+        "fermion-qubit",
+        "hf-preparation",
+        "excitation-state",
+        "sqd-state-circuit",
+        "sqd-sampling",
+        "sqd-subspace"
+      ]
+    },
+    {
+      "id": "sqd-workflow",
+      "title": "분자 계산부터 SQD까지",
+      "group": null,
+      "steps": [
+        "00-quickstart",
+        "01-pyscf",
+        "02-jordan-wigner",
+        "03-ucj-inside",
+        "04-circuit",
+        "05-sampling",
+        "06-sqd-guide"
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "id": "linear-independence",
+      "origin": "new",
+      "destination": "basis-and-coordinates",
+      "purpose": "벡터 하나를 제거해도 생성공간이 같은지로 중복과 독립을 구별한다.",
+      "prerequisites": [
+        "subspace",
+        "linear-combination"
+      ],
+      "experiments": {
+        "existing": [],
+        "target": [
+          "linear-independence"
+        ],
+        "improvement": "u=(1,0), v=(2,0), w=(0,1), 영벡터를 추가·제거해 공간과 독립성 비교."
+      },
+      "status": "reviewed"
+    },
+    {
+      "id": "basis",
+      "origin": "existing",
+      "destination": "basis-and-coordinates",
+      "purpose": "같은 (3,2)를 두 기저의 계수로 나타내고 좌표의 유일성을 설명한다.",
+      "prerequisites": [
+        "linear-independence",
+        "linear-combination"
+      ],
+      "experiments": {
+        "existing": [
+          "basis"
+        ],
+        "target": [
+          "basis-coordinates",
+          "basis"
+        ],
+        "improvement": "표준 기저의 (3,2)와 기울어진 기저의 (1,2)를 비교. 공선인 두 벡터는 기저가 아님을 표시."
+      },
+      "status": "reviewed"
+    },
+    {
+      "id": "dimension",
+      "origin": "new",
+      "destination": "basis-and-coordinates",
+      "purpose": "성분 개수와 독립적인 기준의 개수를 구별한다.",
+      "prerequisites": [
+        "basis",
+        "subspace"
+      ],
+      "experiments": {
+        "existing": [],
+        "target": [
+          "dimension-explorer"
+        ],
+        "improvement": "3성분을 가진 직선·평면·전체 공간·영벡터만 있는 공간을 비교. 카메라를 바꿔도 차원과 좌표 유지."
+      },
+      "status": "reviewed"
+    },
+    {
+      "id": "inner-product",
+      "origin": "existing",
+      "destination": "basis-and-coordinates",
+      "purpose": "실수 두 성분의 곱과 합으로 길이·직교·정규화를 계산한다.",
+      "prerequisites": [
+        "basis",
+        "vector-operations"
+      ],
+      "experiments": {
+        "existing": [
+          "inner-product"
+        ],
+        "target": [
+          "inner-product-components",
+          "inner-product"
+        ],
+        "improvement": "각 성분의 곱을 펼쳐 합산. 같은 방향·수직·반대 방향·영벡터와 정규화 비교."
+      },
+      "status": "reviewed"
+    },
+    {
+      "id": "matrix",
+      "origin": "existing",
+      "destination": "matrices-and-eigenvectors",
+      "purpose": "행렬의 열이 기준 벡터를 어디로 보내는지로 행렬 곱을 설명한다.",
+      "prerequisites": [
+        "vector",
+        "basis"
+      ],
+      "experiments": {
+        "existing": [
+          "matrix"
+        ],
+        "target": [
+          "matrix"
+        ],
+        "improvement": "입력 성분과 두 열의 배수를 나눠 표시하고 합친 출력 비교."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "eigen",
+      "origin": "existing",
+      "destination": "matrices-and-eigenvectors",
+      "purpose": "행렬을 곱해도 같은 직선에 남는 방향과 배수를 찾는다.",
+      "prerequisites": [
+        "matrix"
+      ],
+      "experiments": {
+        "existing": [
+          "eigen"
+        ],
+        "target": [
+          "eigen"
+        ],
+        "improvement": "알려진 두 고유방향과 일반 방향에 같은 행렬을 적용. 영벡터는 고유벡터에서 제외."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "diagonalization",
+      "origin": "existing",
+      "destination": "matrices-and-eigenvectors",
+      "purpose": "고유벡터를 기준으로 바꾸면 좌표별 배율만 남는 이유를 설명한다.",
+      "prerequisites": [
+        "basis",
+        "eigen"
+      ],
+      "experiments": {
+        "existing": [
+          "diagonalization"
+        ],
+        "target": [
+          "diagonalization"
+        ],
+        "improvement": "원래 좌표에서의 곱과 고유기저에서의 배율 계산을 같은 벡터로 비교."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "diagonalization-coordinates",
+      "origin": "existing",
+      "destination": "matrices-and-eigenvectors",
+      "purpose": "기준 변경과 벡터의 실제 변환을 구별하고 왕복 좌표 변환을 계산한다.",
+      "prerequisites": [
+        "diagonalization"
+      ],
+      "experiments": {
+        "existing": [
+          "diagonalization-coordinates"
+        ],
+        "target": [
+          "diagonalization-coordinates"
+        ],
+        "improvement": "기준 변경→배율→원래 기준의 세 단계를 표시. 왕복 후 같은 벡터 확인."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "probability",
+      "origin": "new",
+      "destination": "quantum-math",
+      "purpose": "확률 합과 확률로 가중한 평균을 분수로 계산한다.",
+      "prerequisites": [],
+      "experiments": {
+        "existing": [],
+        "target": [
+          "probability"
+        ],
+        "improvement": "결과 1·3, 확률 1/4·3/4의 평균 2.5. 한 번의 결과와 평균 구별."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "functions-and-density",
+      "origin": "new",
+      "destination": "quantum-math",
+      "purpose": "함숫값과 작은 구간에 누적된 양을 구별한다.",
+      "prerequisites": [
+        "probability"
+      ],
+      "experiments": {
+        "existing": [],
+        "target": [
+          "functions-and-density"
+        ],
+        "improvement": "같은 밀도 그래프에서 구간 폭과 위치를 바꿔 영역의 양 비교. 점의 밀도는 점의 확률이 아님."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "angles-and-rotation",
+      "origin": "new",
+      "destination": "quantum-math",
+      "purpose": "도·라디안과 원 위 좌표로 사인·코사인의 뜻을 연결한다.",
+      "prerequisites": [
+        "inner-product"
+      ],
+      "experiments": {
+        "existing": [],
+        "target": [
+          "angles-and-rotation"
+        ],
+        "improvement": "0·90·180도와 중간 각도에서 좌표 비교. 각도 단위를 바꿔도 같은 방향 유지."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "complex-numbers",
+      "origin": "new",
+      "destination": "quantum-math",
+      "purpose": "복소수의 두 성분·켤레·절댓값을 평면에서 계산한다.",
+      "prerequisites": [
+        "angles-and-rotation"
+      ],
+      "experiments": {
+        "existing": [],
+        "target": [
+          "complex-numbers"
+        ],
+        "improvement": "3+4i의 절댓값 제곱 25, i를 곱한 90도 회전, 켤레 반사 비교."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "complex-inner-product",
+      "origin": "new",
+      "destination": "quantum-math",
+      "purpose": "켤레를 써야 길이 제곱이 음수가 되지 않는 이유를 작은 예로 설명한다.",
+      "prerequisites": [
+        "complex-numbers",
+        "inner-product"
+      ],
+      "experiments": {
+        "existing": [],
+        "target": [
+          "complex-inner-product"
+        ],
+        "improvement": "(1,i)의 자기 내적 2와 정규화 후 1. 켤레 없는 계산과 비교하고 영벡터 예외 표시."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "symmetric",
+      "origin": "existing",
+      "destination": "quantum-math",
+      "purpose": "실수 대칭에서 복소 에르미트 행렬로 확장하고 실수 고유값과 연결한다.",
+      "prerequisites": [
+        "matrix",
+        "inner-product",
+        "complex-inner-product"
+      ],
+      "experiments": {
+        "existing": [
+          "symmetric"
+        ],
+        "target": [
+          "symmetric"
+        ],
+        "improvement": "마주 보는 원소를 함께 변경. 켤레 대칭과 고유값·직교성 비교."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "orthogonal-projection",
+      "origin": "existing",
+      "destination": "subspace-approximation",
+      "purpose": "가장 가까운 벡터와 남은 수직 오차를 구별한다.",
+      "prerequisites": [
+        "subspace",
+        "basis",
+        "inner-product",
+        "matrix"
+      ],
+      "experiments": {
+        "existing": [
+          "subspace"
+        ],
+        "target": [
+          "subspace"
+        ],
+        "improvement": "목표와 투영점·잔차를 함께 표시. 기저 벡터의 배율을 바꿔도 같은 공간의 투영 유지."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "power",
+      "origin": "existing",
+      "destination": "subspace-approximation",
+      "purpose": "반복 적용과 정규화가 어떤 고유방향을 키우는지 설명한다.",
+      "prerequisites": [
+        "eigen",
+        "inner-product"
+      ],
+      "experiments": {
+        "existing": [
+          "power"
+        ],
+        "target": [
+          "power"
+        ],
+        "improvement": "초기 겹침과 고유값 크기를 바꾸며 수렴·예외 비교. 최솟값 알고리즘과 구별."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "krylov",
+      "origin": "existing",
+      "destination": "subspace-approximation",
+      "purpose": "반복 벡터들을 버리지 않고 작은 공간으로 묶는 이유를 설명한다.",
+      "prerequisites": [
+        "power",
+        "orthogonal-projection"
+      ],
+      "experiments": {
+        "existing": [
+          "krylov"
+        ],
+        "target": [
+          "krylov"
+        ],
+        "improvement": "벡터 추가 전후 공간 크기·잔차·근사값 비교. 선형 종속일 때 공간이 늘지 않음."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "quantum-state",
+      "origin": "existing",
+      "destination": "quantum-states-and-measurement",
+      "purpose": "두 성분의 진폭과 상태 표기를 연결하고 정규화를 설명한다.",
+      "prerequisites": [
+        "inner-product",
+        "basis"
+      ],
+      "experiments": {
+        "existing": [
+          "quantum-state"
+        ],
+        "target": [
+          "quantum-state"
+        ],
+        "improvement": "(3/5,4/5)의 진폭 제곱을 한 항씩 표시해 9/25+16/25=1 확인."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "born-rule",
+      "origin": "existing",
+      "destination": "quantum-states-and-measurement",
+      "purpose": "진폭에서 한 번의 측정 결과 확률을 구한다.",
+      "prerequisites": [
+        "quantum-state",
+        "probability"
+      ],
+      "experiments": {
+        "existing": [
+          "born-rule"
+        ],
+        "target": [
+          "born-rule"
+        ],
+        "improvement": "동일 상태에서 이론 확률과 반복 측정 빈도를 나란히 표시."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "superposition",
+      "origin": "existing",
+      "destination": "quantum-states-and-measurement",
+      "purpose": "같은 확률이어도 상대 부호·위상이 다른 상태를 구별한다.",
+      "prerequisites": [
+        "born-rule",
+        "complex-numbers"
+      ],
+      "experiments": {
+        "existing": [
+          "superposition"
+        ],
+        "target": [
+          "superposition"
+        ],
+        "improvement": "부호만 바꾸어 원래 기저 확률은 같고 다른 기저 결과는 달라짐을 비교."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "observable",
+      "origin": "existing",
+      "destination": "quantum-states-and-measurement",
+      "purpose": "측정 가능한 결과와 그 결과의 평균을 구별한다.",
+      "prerequisites": [
+        "born-rule",
+        "eigen",
+        "symmetric"
+      ],
+      "experiments": {
+        "existing": [
+          "observable"
+        ],
+        "target": [
+          "observable"
+        ],
+        "improvement": "결과 1·3의 측정과 평균을 분리해 표시. 상태·측정 기저를 바꿔 비교."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "hamiltonian",
+      "origin": "existing",
+      "destination": "quantum-states-and-measurement",
+      "purpose": "작은 에너지 행렬의 대각·결합 원소와 에너지 고유값을 연결한다.",
+      "prerequisites": [
+        "observable",
+        "matrix"
+      ],
+      "experiments": {
+        "existing": [
+          "hamiltonian"
+        ],
+        "target": [
+          "hamiltonian"
+        ],
+        "improvement": "대각을 고정하고 결합만 변경. 입력 상태의 기대값과 고유값을 구별."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "schrodinger",
+      "origin": "existing",
+      "destination": "quantum-states-and-measurement",
+      "purpose": "상태와 에너지를 연결하는 방정식을 작은 행렬의 계산으로 읽는다.",
+      "prerequisites": [
+        "hamiltonian",
+        "superposition"
+      ],
+      "experiments": {
+        "existing": [
+          "schrodinger"
+        ],
+        "target": [
+          "schrodinger"
+        ],
+        "improvement": "정지 상태의 Hc=Ec 확인과 상태 변화 예를 분리. 미분식은 선택 심화."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "background-atoms",
+      "origin": "existing",
+      "destination": "atoms-and-electron-configurations",
+      "purpose": "원자·이온·분자의 전자 수를 핵 전하와 분자 전하로 계산한다.",
+      "prerequisites": [],
+      "experiments": {
+        "existing": [
+          "electronic-configuration",
+          "atomic-shells"
+        ],
+        "target": [
+          "atom-electron-count",
+          "atomic-shells"
+        ],
+        "improvement": "원자 번호·원자 수·전하를 바꾸며 전자 수=핵 전하 합−분자 전하 표시."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "born-oppenheimer",
+      "origin": "existing",
+      "destination": "atoms-and-electron-configurations",
+      "purpose": "핵 위치를 고정한 전자 문제와 거리별 총 에너지 계산을 구별한다.",
+      "prerequisites": [
+        "background-atoms",
+        "schrodinger"
+      ],
+      "experiments": {
+        "existing": [
+          "born-oppenheimer"
+        ],
+        "target": [
+          "born-oppenheimer"
+        ],
+        "improvement": "같은 저장 조건의 거리 두 점에서 전자 에너지+핵 반발을 비교. 비단열 모형은 선택 확장."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "orbital",
+      "origin": "existing",
+      "destination": "atoms-and-electron-configurations",
+      "purpose": "한 전자 함수의 부호와 확률 밀도를 구별한다.",
+      "prerequisites": [
+        "born-rule",
+        "functions-and-density"
+      ],
+      "experiments": {
+        "existing": [
+          "orbital",
+          "orbital-volume"
+        ],
+        "target": [
+          "orbital",
+          "orbital-volume"
+        ],
+        "improvement": "부호 그림과 제곱한 밀도를 비교. 영역 선택으로 확률을 표시."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "electron-spin",
+      "origin": "existing",
+      "destination": "atoms-and-electron-configurations",
+      "purpose": "공간 오비탈과 두 스핀 상태를 구별한다.",
+      "prerequisites": [
+        "observable",
+        "angles-and-rotation"
+      ],
+      "experiments": {
+        "existing": [
+          "electron-spin"
+        ],
+        "target": [
+          "electron-spin"
+        ],
+        "improvement": "같은 공간 상태에서 스핀 측정 기준·확률 비교. 고전 자전으로 표현하지 않음."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "pauli",
+      "origin": "existing",
+      "destination": "atoms-and-electron-configurations",
+      "purpose": "같은 스핀 오비탈을 두 전자가 점유할 수 없는 조건을 설명한다.",
+      "prerequisites": [
+        "orbital",
+        "electron-spin"
+      ],
+      "experiments": {
+        "existing": [
+          "pauli"
+        ],
+        "target": [
+          "pauli"
+        ],
+        "improvement": "전자 배치 조작과 동일 상태 중복의 상쇄를 연결."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "electronic-configuration",
+      "origin": "existing",
+      "destination": "atoms-and-electron-configurations",
+      "purpose": "전자 수와 허용 점유 조건에 맞는 배치를 만든다.",
+      "prerequisites": [
+        "pauli",
+        "electron-spin"
+      ],
+      "experiments": {
+        "existing": [
+          "electronic-configuration"
+        ],
+        "target": [
+          "electronic-configuration"
+        ],
+        "improvement": "오비탈·스핀 칸에 전자를 놓고 전자 수와 중복 점유 조건 확인."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "slater-determinant",
+      "origin": "existing",
+      "destination": "atoms-and-electron-configurations",
+      "purpose": "두 전자 교환에 따른 부호와 같은 상태에서의 상쇄를 설명한다.",
+      "prerequisites": [
+        "electronic-configuration",
+        "pauli"
+      ],
+      "experiments": {
+        "existing": [
+          "slater-determinant"
+        ],
+        "target": [
+          "slater-determinant"
+        ],
+        "improvement": "두 항을 펼쳐 전자 교환·중복 오비탈 비교. 일반 N전자식은 심화."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "basis-set",
+      "origin": "existing",
+      "destination": "molecular-basis-and-hamiltonian",
+      "purpose": "함수를 기준으로 더해 목표 함수를 근사하는 방법을 설명한다.",
+      "prerequisites": [
+        "basis",
+        "orbital"
+      ],
+      "experiments": {
+        "existing": [
+          "basis-set"
+        ],
+        "target": [
+          "basis-set"
+        ],
+        "improvement": "기저 함수를 하나씩 추가해 근사와 잔차 비교. 겹침 행렬은 확장."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "sto-3g",
+      "origin": "existing",
+      "destination": "molecular-basis-and-hamiltonian",
+      "purpose": "여러 Gaussian 함수로 한 원자 궤도 모양을 근사하는 뜻을 설명한다.",
+      "prerequisites": [
+        "basis-set"
+      ],
+      "experiments": {
+        "existing": [
+          "sto-3g"
+        ],
+        "target": [
+          "sto-3g"
+        ],
+        "improvement": "각 항과 합·목표 곡선을 비교. 숫자 3의 의미와 공간 오비탈 수를 구별."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "molecular-orbital",
+      "origin": "existing",
+      "destination": "molecular-basis-and-hamiltonian",
+      "purpose": "원자 함수의 합과 차로 분자 오비탈의 마디를 설명한다.",
+      "prerequisites": [
+        "orbital",
+        "basis-set"
+      ],
+      "experiments": {
+        "existing": [
+          "molecular-orbital"
+        ],
+        "target": [
+          "molecular-orbital"
+        ],
+        "improvement": "두 함수의 합·차와 상대 부호를 비교하고 제곱한 밀도를 별도 표시."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "electron-integrals",
+      "origin": "existing",
+      "destination": "molecular-basis-and-hamiltonian",
+      "purpose": "작은 구간의 기여를 합해 적분과 상호작용 항을 읽는다.",
+      "prerequisites": [
+        "molecular-orbital"
+      ],
+      "experiments": {
+        "existing": [
+          "electron-integrals"
+        ],
+        "target": [
+          "electron-integrals"
+        ],
+        "improvement": "구간별 기여와 누적 합을 비교. 첨자 관례·단위·상수 구별."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "hamiltonian-elements",
+      "origin": "existing",
+      "destination": "molecular-basis-and-hamiltonian",
+      "purpose": "두 전자 배치 사이의 행렬원소가 어떤 항에서 오는지 추적한다.",
+      "prerequisites": [
+        "electron-integrals"
+      ],
+      "experiments": {
+        "existing": [
+          "hamiltonian-elements"
+        ],
+        "target": [
+          "hamiltonian-elements"
+        ],
+        "improvement": "행·열 배치를 선택해 달라진 점유와 기여 항 표시."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "h2-hamiltonian",
+      "origin": "existing",
+      "destination": "molecular-basis-and-hamiltonian",
+      "purpose": "H₂ 네 배치를 행·열에 대응시키고 에너지 행렬을 읽는다.",
+      "prerequisites": [
+        "hamiltonian-elements"
+      ],
+      "experiments": {
+        "existing": [
+          "h2-hamiltonian"
+        ],
+        "target": [
+          "h2-hamiltonian"
+        ],
+        "improvement": "배치별 행·열 강조. 핵 반발 포함 여부와 실제 저장 조건 명시."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "h2-state-energy",
+      "origin": "existing",
+      "destination": "energy-approximations",
+      "purpose": "진폭 부호와 교차항이 H₂ 에너지에 미치는 영향을 계산한다.",
+      "prerequisites": [
+        "h2-hamiltonian"
+      ],
+      "experiments": {
+        "existing": [
+          "h2-state-energy"
+        ],
+        "target": [
+          "h2-state-energy"
+        ],
+        "improvement": "대각 두 항+교차항을 더하기. 같은 확률·반대 부호의 상태 비교."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "variational-principle",
+      "origin": "existing",
+      "destination": "energy-approximations",
+      "purpose": "같은 해밀토니안에서 시험 상태의 최소 에너지가 갖는 의미를 설명한다.",
+      "prerequisites": [
+        "h2-state-energy"
+      ],
+      "experiments": {
+        "existing": [
+          "variational-principle"
+        ],
+        "target": [
+          "variational-principle"
+        ],
+        "improvement": "상태를 바꾸며 기대값과 최저 고유값 비교. 모형·조건 고정."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "hartree-fock",
+      "origin": "existing",
+      "destination": "energy-approximations",
+      "purpose": "입력 전자 밀도로 만든 문제를 풀어 다시 밀도를 갱신하는 과정을 설명한다.",
+      "prerequisites": [
+        "variational-principle"
+      ],
+      "experiments": {
+        "existing": [
+          "hartree-fock"
+        ],
+        "target": [
+          "hartree-fock"
+        ],
+        "improvement": "한 번의 입력·출력 밀도와 수렴 이력 비교. 수렴과 정확성 구별."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "basis-orbital-energies",
+      "origin": "existing",
+      "destination": "energy-approximations",
+      "purpose": "오비탈 에너지와 전체 분자 에너지의 차이를 설명한다.",
+      "prerequisites": [
+        "hartree-fock",
+        "sto-3g"
+      ],
+      "experiments": {
+        "existing": [
+          "basis-orbital-energies"
+        ],
+        "target": [
+          "basis-orbital-energies"
+        ],
+        "improvement": "오비탈 에너지 선과 총 에너지 계산을 다른 패널로 비교."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "electron-correlation",
+      "origin": "existing",
+      "destination": "energy-approximations",
+      "purpose": "단일 배치의 제약을 풀 때 생기는 에너지·점유 변화를 설명한다.",
+      "prerequisites": [
+        "hartree-fock",
+        "slater-determinant"
+      ],
+      "experiments": {
+        "existing": [
+          "electron-correlation"
+        ],
+        "target": [
+          "electron-correlation"
+        ],
+        "improvement": "HF와 다중 배치를 같은 조건에서 비교. 기저 오차와 상관 오차 분리."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "configuration-interaction",
+      "origin": "existing",
+      "destination": "large-spaces-and-energy-curves",
+      "purpose": "허용 배치를 더해 상태를 표현하고 계수를 함께 구하는 방법을 설명한다.",
+      "prerequisites": [
+        "slater-determinant",
+        "hamiltonian-elements"
+      ],
+      "experiments": {
+        "existing": [
+          "configuration-interaction"
+        ],
+        "target": [
+          "configuration-interaction"
+        ],
+        "improvement": "중첩된 배치 공간을 늘리며 최소 에너지 비교. 같은 H에서 비증가 확인."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "hamiltonian-size",
+      "origin": "existing",
+      "destination": "large-spaces-and-energy-curves",
+      "purpose": "전자 수·오비탈 수로 허용 배치를 직접 세고 크기 증가를 설명한다.",
+      "prerequisites": [
+        "configuration-interaction",
+        "sto-3g"
+      ],
+      "experiments": {
+        "existing": [
+          "hamiltonian-size"
+        ],
+        "target": [
+          "hamiltonian-size"
+        ],
+        "improvement": "작은 사례 열거 후 조합 수 비교. 행렬 저장량과 벡터 크기 구별."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "active-space",
+      "origin": "existing",
+      "destination": "large-spaces-and-energy-curves",
+      "purpose": "고정·활성·외부 오비탈이 허용 점유와 비용을 어떻게 바꾸는지 설명한다.",
+      "prerequisites": [
+        "electronic-configuration",
+        "configuration-interaction"
+      ],
+      "experiments": {
+        "existing": [
+          "active-space"
+        ],
+        "target": [
+          "active-space"
+        ],
+        "improvement": "오비탈 분류와 전자 수·배치 수 변화, 고정 에너지 상수 합산 확인."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "potential-energy",
+      "origin": "existing",
+      "destination": "large-spaces-and-energy-curves",
+      "purpose": "핵 사이 거리와 에너지 곡선으로 안정 거리와 힘 방향을 설명한다.",
+      "prerequisites": [
+        "born-oppenheimer",
+        "hamiltonian"
+      ],
+      "experiments": {
+        "existing": [
+          "potential-energy"
+        ],
+        "target": [
+          "potential-energy"
+        ],
+        "improvement": "거리 두 점의 에너지와 평형점 비교. 기울기·곡률 공식은 선택 확장."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "large-hamiltonian",
+      "origin": "existing",
+      "destination": "large-spaces-and-energy-curves",
+      "purpose": "큰 행렬 전체를 저장하는 계산과 반복·부분공간 계산의 비용을 구별한다.",
+      "prerequisites": [
+        "hamiltonian-size",
+        "active-space"
+      ],
+      "experiments": {
+        "existing": [
+          "large-hamiltonian"
+        ],
+        "target": [
+          "large-hamiltonian"
+        ],
+        "improvement": "공간 크기와 근사 오차·연산량 비교. 다른 근사 조건을 혼합하지 않음."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "two-level-system",
+      "origin": "existing",
+      "destination": "single-qubit",
+      "purpose": "두 상태만 사용하는 모형에서 상태와 측정 결과를 구별한다.",
+      "prerequisites": [
+        "quantum-state",
+        "subspace"
+      ],
+      "experiments": {
+        "existing": [
+          "two-level-system"
+        ],
+        "target": [
+          "two-level-system"
+        ],
+        "improvement": "두 계수·확률·결과를 한 예로 연결. 모형의 적용 범위 표시."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "qubit",
+      "origin": "existing",
+      "destination": "single-qubit",
+      "purpose": "큐빗 상태를 두 복소 진폭으로 읽고 영벡터와 구별한다.",
+      "prerequisites": [
+        "two-level-system"
+      ],
+      "experiments": {
+        "existing": [
+          "qubit"
+        ],
+        "target": [
+          "qubit"
+        ],
+        "improvement": "0 상태는 (1,0), ± 상태의 서로 다른 기저 측정 비교."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "computational-basis",
+      "origin": "existing",
+      "destination": "single-qubit",
+      "purpose": "상태의 숫자를 어떤 순서의 기준에 대응시키는지 설명한다.",
+      "prerequisites": [
+        "qubit"
+      ],
+      "experiments": {
+        "existing": [
+          "computational-basis"
+        ],
+        "target": [
+          "computational-basis"
+        ],
+        "improvement": "기준 상태·계수·제곱·확률을 한 줄씩 연결."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "quantum-gate",
+      "origin": "existing",
+      "destination": "single-qubit",
+      "purpose": "게이트를 상태에 적용하는 행렬 계산을 설명한다.",
+      "prerequisites": [
+        "computational-basis",
+        "matrix"
+      ],
+      "experiments": {
+        "existing": [
+          "quantum-gate"
+        ],
+        "target": [
+          "quantum-gate"
+        ],
+        "improvement": "입력·행렬·출력의 곱을 표시. X²=I, H²=I와 길이 보존 확인."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "rotation-gate",
+      "origin": "existing",
+      "destination": "single-qubit",
+      "purpose": "회로 각도와 진폭의 반각을 구별한다.",
+      "prerequisites": [
+        "quantum-gate"
+      ],
+      "experiments": {
+        "existing": [
+          "rotation-gate"
+        ],
+        "target": [
+          "rotation-gate"
+        ],
+        "improvement": "0·90·180도에서 상태와 확률 비교. 카메라 변경은 수치에 영향 없음."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "measurement-basis",
+      "origin": "existing",
+      "destination": "single-qubit",
+      "purpose": "같은 상태를 다른 기준으로 측정할 때 확률이 바뀌는 이유를 설명한다.",
+      "prerequisites": [
+        "born-rule",
+        "quantum-gate"
+      ],
+      "experiments": {
+        "existing": [
+          "measurement-basis"
+        ],
+        "target": [
+          "measurement-basis"
+        ],
+        "improvement": "± 상태에서 Z 확률 동일, X 결과 반대. 상태 변경과 측정 기준 변경 분리."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "tensor-product",
+      "origin": "existing",
+      "destination": "multiple-qubits-and-energy",
+      "purpose": "두 상태의 조합 표로 네 성분을 만든다.",
+      "prerequisites": [
+        "computational-basis"
+      ],
+      "experiments": {
+        "existing": [
+          "tensor-product"
+        ],
+        "target": [
+          "tensor-product"
+        ],
+        "improvement": "2×2 조합 표를 펼치고 |+>|0>에서 00·10만 남는지 확인."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "entanglement",
+      "origin": "existing",
+      "destination": "multiple-qubits-and-energy",
+      "purpose": "분리된 상태와 얽힌 상태를 여러 측정 기준으로 구별한다.",
+      "prerequisites": [
+        "tensor-product"
+      ],
+      "experiments": {
+        "existing": [
+          "entanglement"
+        ],
+        "target": [
+          "entanglement"
+        ],
+        "improvement": "Bell 상태와 고전 혼합의 Z·X 결과를 비교. 주변 확률 합 1 확인."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "energy-measurement",
+      "origin": "existing",
+      "destination": "multiple-qubits-and-energy",
+      "purpose": "여러 측정 결과를 모아 에너지 평균을 계산한다.",
+      "prerequisites": [
+        "measurement-basis",
+        "hamiltonian"
+      ],
+      "experiments": {
+        "existing": [
+          "energy-measurement"
+        ],
+        "target": [
+          "energy-measurement"
+        ],
+        "improvement": "상태·측정 설정·각 평균의 기여를 나누어 합산."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "energy-expectation",
+      "origin": "existing",
+      "destination": "vqe-circuits",
+      "purpose": "작은 상태의 계수와 해밀토니안으로 에너지 기대값을 계산한다.",
+      "prerequisites": [
+        "hamiltonian",
+        "born-rule"
+      ],
+      "experiments": {
+        "existing": [
+          "energy-expectation"
+        ],
+        "target": [
+          "energy-expectation"
+        ],
+        "improvement": "회로 각도 θ·진폭 θ/2 통일. H=[[.8,−.5],[−.5,1.2]]의 θ=0,.8 / 90,.5 확인."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "ansatz",
+      "origin": "existing",
+      "destination": "vqe-circuits",
+      "purpose": "허용한 회로가 만들 수 있는 상태와 최저 에너지의 한계를 설명한다.",
+      "prerequisites": [
+        "energy-expectation"
+      ],
+      "experiments": {
+        "existing": [
+          "ansatz"
+        ],
+        "target": [
+          "ansatz"
+        ],
+        "improvement": "같은 실수 회로에서 허용 각도 범위만 제한해 도달 가능한 최솟값 비교."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "parameterized-circuit",
+      "origin": "existing",
+      "destination": "vqe-circuits",
+      "purpose": "회로 매개변수가 게이트·상태·에너지로 이어지는 순서를 설명한다.",
+      "prerequisites": [
+        "ansatz",
+        "rotation-gate"
+      ],
+      "experiments": {
+        "existing": [
+          "parameterized-circuit"
+        ],
+        "target": [
+          "parameterized-circuit"
+        ],
+        "improvement": "매개변수 하나를 바꾸며 중간 상태와 출력 변화 비교."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "pauli-decomposition",
+      "origin": "existing",
+      "destination": "vqe-circuits",
+      "purpose": "해밀토니안을 측정 가능한 항들의 합으로 나누는 이유를 설명한다.",
+      "prerequisites": [
+        "energy-expectation",
+        "tensor-product"
+      ],
+      "experiments": {
+        "existing": [
+          "pauli-decomposition"
+        ],
+        "target": [
+          "pauli-decomposition"
+        ],
+        "improvement": "X·Z 항의 평균→계수 곱→합을 같은 모형으로 표시."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "measurement-shots",
+      "origin": "existing",
+      "destination": "vqe-measurement-and-optimization",
+      "purpose": "유한 측정의 빈도와 표본 오차를 구별한다.",
+      "prerequisites": [
+        "pauli-decomposition"
+      ],
+      "experiments": {
+        "existing": [
+          "measurement-shots"
+        ],
+        "target": [
+          "measurement-shots"
+        ],
+        "improvement": "동일 조건 재측정, 각 항 ±횟수 합=N·총 샷 수 확인. 이론 오차와 실현 오차 구별."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "classical-optimization",
+      "origin": "existing",
+      "destination": "vqe-measurement-and-optimization",
+      "purpose": "두 후보 에너지를 비교해 다음 매개변수를 고르는 과정을 설명한다.",
+      "prerequisites": [
+        "energy-expectation",
+        "measurement-shots"
+      ],
+      "experiments": {
+        "existing": [
+          "classical-optimization"
+        ],
+        "target": [
+          "classical-optimization"
+        ],
+        "improvement": "한 번의 후보·평가·갱신과 반복 이력 비교. 미분식은 선택 확장."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "vqe-algorithm",
+      "origin": "existing",
+      "destination": "vqe-measurement-and-optimization",
+      "purpose": "상태 준비·측정·최적화의 반복과 종료 조건을 연결한다.",
+      "prerequisites": [
+        "classical-optimization",
+        "parameterized-circuit"
+      ],
+      "experiments": {
+        "existing": [
+          "vqe-algorithm"
+        ],
+        "target": [
+          "vqe-algorithm"
+        ],
+        "improvement": "한 회차를 단계별 진행하고 정확한 값·표본 값·최선 값 구별."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "vqe-hydrogen",
+      "origin": "existing",
+      "destination": "vqe-measurement-and-optimization",
+      "purpose": "H₂의 같은 계산 조건에서 VQE 결과와 기준 에너지를 비교한다.",
+      "prerequisites": [
+        "vqe-algorithm",
+        "h2-hamiltonian"
+      ],
+      "experiments": {
+        "existing": [
+          "vqe-hydrogen"
+        ],
+        "target": [
+          "vqe-hydrogen"
+        ],
+        "improvement": "거리·각도별 저장 자료를 조건과 함께 비교. 임의 모형 수치와 분리."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "occupation-bitstrings",
+      "origin": "existing",
+      "destination": "sqd",
+      "purpose": "비트 자리와 스핀 오비탈 점유를 대응시키고 허용 배치를 센다.",
+      "prerequisites": [
+        "electronic-configuration"
+      ],
+      "experiments": {
+        "existing": [
+          "occupation-bitstrings"
+        ],
+        "target": [
+          "occupation-bitstrings"
+        ],
+        "improvement": "0101·1010·1001·0110 네 배치를 모두 표시. 비트 순서와 전자 수 확인."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "fermion-qubit",
+      "origin": "existing",
+      "destination": "sqd",
+      "purpose": "전자 연산을 큐빗 연산으로 옮길 때 순서와 부호가 필요한 이유를 설명한다.",
+      "prerequisites": [
+        "occupation-bitstrings",
+        "slater-determinant"
+      ],
+      "experiments": {
+        "existing": [
+          "fermion-qubit"
+        ],
+        "target": [
+          "fermion-qubit"
+        ],
+        "improvement": "작은 점유 상태에서 연산 순서에 따른 부호 비교."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "hf-preparation",
+      "origin": "existing",
+      "destination": "sqd",
+      "purpose": "X 게이트로 정해진 HF 점유 비트열을 준비한다.",
+      "prerequisites": [
+        "occupation-bitstrings",
+        "quantum-gate"
+      ],
+      "experiments": {
+        "existing": [
+          "hf-preparation"
+        ],
+        "target": [
+          "hf-preparation"
+        ],
+        "improvement": "각 게이트 적용 전후 상태·점유·비트 순서를 연결."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "excitation-state",
+      "origin": "existing",
+      "destination": "sqd",
+      "purpose": "전자를 옮기는 상태 준비와 두 배치의 중첩을 구별한다.",
+      "prerequisites": [
+        "hf-preparation"
+      ],
+      "experiments": {
+        "existing": [
+          "excitation-state"
+        ],
+        "target": [
+          "excitation-state"
+        ],
+        "improvement": "입력 배치·각도·출력 진폭을 단계별 비교."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "sqd-state-circuit",
+      "origin": "existing",
+      "destination": "sqd",
+      "purpose": "SQD 표본을 만드는 회로의 중간 상태와 최종 허용 배치를 읽는다.",
+      "prerequisites": [
+        "excitation-state",
+        "quantum-gate"
+      ],
+      "experiments": {
+        "existing": [
+          "sqd-state-circuit"
+        ],
+        "target": [
+          "sqd-state-circuit"
+        ],
+        "improvement": "CNOT 단계별 전자 수 변화를 숨기지 않음. 최종 0101/1010 지지 확인."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "sqd-sampling",
+      "origin": "existing",
+      "destination": "sqd",
+      "purpose": "반복 측정에서 배치를 발견하는 과정과 빈도의 한계를 설명한다.",
+      "prerequisites": [
+        "sqd-state-circuit"
+      ],
+      "experiments": {
+        "existing": [
+          "sqd-sampling"
+        ],
+        "target": [
+          "sqd-sampling"
+        ],
+        "improvement": "이론 75:25와 유한 횟수 비교. 고유 배치·중복 표본·전자 수 검사 구별."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "sqd-subspace",
+      "origin": "existing",
+      "destination": "sqd",
+      "purpose": "발견된 배치로 작은 행렬을 만들고 계수를 다시 구하는 과정을 설명한다.",
+      "prerequisites": [
+        "sqd-sampling",
+        "diagonalization"
+      ],
+      "experiments": {
+        "existing": [
+          "sqd-subspace"
+        ],
+        "target": [
+          "sqd-subspace"
+        ],
+        "improvement": "99:1과 50:50에서 같은 선택 공간·에너지. 최종 계수와 빈도 구별."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "00-quickstart",
+      "origin": "existing",
+      "destination": "sqd-workflow",
+      "purpose": "한 계산의 입력·출력·조건을 먼저 읽고 전체 실습 흐름을 파악한다.",
+      "prerequisites": [
+        "sqd-subspace",
+        "active-space"
+      ],
+      "experiments": {
+        "existing": [
+          "sqd-subspace",
+          "quickstart-results"
+        ],
+        "target": [
+          "sqd-subspace",
+          "quickstart-results"
+        ],
+        "improvement": "N₂ STO-3G 1.09768Å 기록과 이후 cc-pVDZ 기록을 구별."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "01-pyscf",
+      "origin": "existing",
+      "destination": "sqd-workflow",
+      "purpose": "분자 입력으로 얻은 오비탈·적분·상수를 실제 출력에서 구별한다.",
+      "prerequisites": [
+        "00-quickstart"
+      ],
+      "experiments": {
+        "existing": [
+          "active-space",
+          "n2-preparation"
+        ],
+        "target": [
+          "active-space",
+          "n2-preparation"
+        ],
+        "improvement": "핵 반발·동결 내각 상수와 전자 에너지를 분리. ecore 한 번만 합산."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "02-jordan-wigner",
+      "origin": "existing",
+      "destination": "sqd-workflow",
+      "purpose": "실제 오비탈·비트 순서를 고정하고 변환된 연산자를 확인한다.",
+      "prerequisites": [
+        "01-pyscf"
+      ],
+      "experiments": {
+        "existing": [
+          "fermion-qubit",
+          "jordan-wigner-parity"
+        ],
+        "target": [
+          "fermion-qubit",
+          "jordan-wigner-parity"
+        ],
+        "improvement": "작은 비트열과 연산 결과·부호를 대조."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "03-ucj-inside",
+      "origin": "existing",
+      "destination": "sqd-workflow",
+      "purpose": "UCJ 구성 요소가 상태를 바꾸는 순서를 코드와 연결한다.",
+      "prerequisites": [
+        "02-jordan-wigner"
+      ],
+      "experiments": {
+        "existing": [
+          "parameterized-circuit",
+          "ucj-layers"
+        ],
+        "target": [
+          "parameterized-circuit",
+          "ucj-layers"
+        ],
+        "improvement": "초기값과 최적화값을 구별해 단계별 상태 비교."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "04-circuit",
+      "origin": "existing",
+      "destination": "sqd-workflow",
+      "purpose": "상태 준비 코드를 회로의 각 조작과 대응시킨다.",
+      "prerequisites": [
+        "03-ucj-inside"
+      ],
+      "experiments": {
+        "existing": [
+          "sqd-state-circuit",
+          "ucj-layers"
+        ],
+        "target": [
+          "sqd-state-circuit",
+          "ucj-layers"
+        ],
+        "improvement": "입력·회로 한 블록·출력·전자 수 조건을 나누어 확인."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "05-sampling",
+      "origin": "existing",
+      "destination": "sqd-workflow",
+      "purpose": "저장된 샷에서 배치와 전자 수 검사 결과를 읽는다.",
+      "prerequisites": [
+        "04-circuit"
+      ],
+      "experiments": {
+        "existing": [
+          "sqd-sampling",
+          "discovery-probability",
+          "sampling-noise"
+        ],
+        "target": [
+          "sqd-sampling",
+          "discovery-probability",
+          "sampling-noise"
+        ],
+        "improvement": "원본 횟수·필터·복구·고유 배치 수를 구별하고 출처 보존."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "06-sqd-guide",
+      "origin": "existing",
+      "destination": "sqd-workflow",
+      "purpose": "표본 처리부터 부분공간 대각화까지 한 실행 결과를 해석한다.",
+      "prerequisites": [
+        "05-sampling"
+      ],
+      "experiments": {
+        "existing": [
+          "sqd-subspace",
+          "configuration-recovery",
+          "sqd-iterations"
+        ],
+        "target": [
+          "sqd-subspace",
+          "configuration-recovery",
+          "sqd-iterations"
+        ],
+        "improvement": "입력 배치·계산 공간·기준 에너지·수렴 이력과 종료 조건 비교."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "prep-math",
+      "origin": "existing",
+      "destination": "support",
+      "purpose": "SQD에서 쓰는 계산을 선수 노트와 연결해 복습한다.",
+      "prerequisites": [
+        "basis",
+        "inner-product",
+        "measurement-shots"
+      ],
+      "experiments": {
+        "existing": [
+          "vector-direction",
+          "shot-statistics",
+          "measurement-shots"
+        ],
+        "target": [
+          "vector-direction",
+          "shot-statistics",
+          "measurement-shots"
+        ],
+        "improvement": "벡터·행렬·평균·샷 오차를 대표 계산으로 복습. 첫 입문 설명을 대신하지 않음."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "math",
+      "origin": "existing",
+      "destination": "support",
+      "purpose": "부분공간 근사와 표본 발견 확률이 에너지 오차와 어떻게 연결되는지 설명한다.",
+      "prerequisites": [
+        "krylov",
+        "sqd-subspace",
+        "measurement-shots"
+      ],
+      "experiments": {
+        "existing": [
+          "diagonalization",
+          "n2-convergence"
+        ],
+        "target": [
+          "diagonalization",
+          "n2-convergence"
+        ],
+        "improvement": "포함 관계가 있는 공간 확대와 표본별 다른 공간을 구별. 저장 N₂ 조건 명시."
+      },
+      "status": "ready-for-review"
+    },
+    {
+      "id": "intro",
+      "origin": "existing",
+      "destination": "support",
+      "purpose": "H₂ 실제 수치로 배치·행렬·표본 선택·대각화를 연결한다.",
+      "prerequisites": [
+        "h2-hamiltonian",
+        "sqd-subspace"
+      ],
+      "experiments": {
+        "existing": [
+          "sqd-subspace"
+        ],
+        "target": [
+          "h2-state-energy",
+          "sqd-subspace"
+        ],
+        "improvement": "실제 H₂ 네 배치와 설명용 2×2 모형을 분리해 전체 흐름 비교."
+      },
+      "status": "ready-for-review"
+    }
+  ]
+}

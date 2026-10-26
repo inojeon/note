@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 300" role="img" aria-labelledby="title desc">
+<title id="title">오른쪽 3칸, 위로 2칸의 이동</title>
+<desc id="desc">원점에서 오른쪽으로 3칸, 위로 2칸 간 점까지 파란 화살표가 이어집니다. 회색 점선은 가로와 세로 이동량을 표시합니다. 한 칸의 길이는 두 축에서 같습니다.</desc>
+<rect width="420" height="300" rx="12" fill="#f8fafc"/>
+<g stroke="#e2e8f0" stroke-width="1">
+<path d="M70 55V245M120 55V245M170 55V245M220 55V245M270 55V245M320 55V245M50 70H340M50 120H340M50 170H340M50 220H340"/>
+</g>
+<path d="M50 220H345M70 245V45" fill="none" stroke="#475569" stroke-width="1.5"/>
+<path d="M70 220H220V120" fill="none" stroke="#475569" stroke-width="2.5" stroke-dasharray="7 6"/>
+<path d="M70 220L220 120" stroke="#2563eb" stroke-width="4" fill="none"/>
+<path d="M220 120L205 123L213 135Z" fill="#2563eb"/>
+<circle cx="70" cy="220" r="4" fill="#334155"/>
+<g font-family="system-ui,-apple-system,sans-serif" fill="#334155" font-size="17">
+<text x="48" y="240">0</text><text x="116" y="240">1</text><text x="166" y="240">2</text><text x="216" y="240">3</text>
+<text x="50" y="176">1</text><text x="50" y="126">2</text>
+<text x="345" y="226">가로</text><text x="55" y="32">세로</text>
+</g>
+<g font-family="system-ui,-apple-system,sans-serif" font-size="20">
+<text x="228" y="110" fill="#2563eb">(3, 2)</text>
+<text x="100" y="278" fill="#334155">오른쪽 3칸</text>
+<text x="238" y="174" fill="#334155">위로 2칸</text>
+</g>
+</svg>

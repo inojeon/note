@@ -18,9 +18,32 @@
     {{- if ne . $source.File.ContentBaseName -}}{{- $backlinks.Add . (slice $source) -}}{{- end -}}
   {{- end -}}
 {{- end -}}
-{{- range where site.RegularPages "Section" "paths" -}}
-  {{- $path := . -}}{{- if or (not .Params.title) (not .Params.summary) (not .Params.steps) -}}{{- errorf "%s: 학습 경로에는 title, summary, params.steps가 필요합니다" .File.Path -}}{{- end -}}
-  {{- if ne (len .Params.steps) (len (.Params.steps | uniq)) -}}{{- errorf "%s: 학습 경로에 중복 노트 ID가 있습니다" .File.Path -}}{{- end -}}
-  {{- range .Params.steps -}}{{- if not (site.GetPage (printf "/notes/%s" .)) -}}{{- errorf "%s: 없는 학습 경로 노트 %s" $path.File.Path . -}}{{- end -}}{{- end -}}
+{{- $paths := sort (where site.RegularPages "Section" "paths") "Weight" -}}
+{{- $parents := newScratch -}}
+{{- $leafPaths := slice -}}
+{{- range $paths -}}
+  {{- $path := . -}}
+  {{- if or (not .Params.title) (not .Params.summary) -}}{{- errorf "%s: 학습 경로에는 title, summary가 필요합니다" .File.Path -}}{{- end -}}
+  {{- $hasSteps := isset .Params "steps" -}}{{- $hasPaths := isset .Params "paths" -}}
+  {{- if eq $hasSteps $hasPaths -}}{{- errorf "%s: params.steps와 params.paths 중 하나만 작성해야 합니다" .File.Path -}}{{- end -}}
+  {{- if $hasPaths -}}
+    {{- if not .Params.paths -}}{{- errorf "%s: params.paths는 비어 있을 수 없습니다" .File.Path -}}{{- end -}}
+    {{- if ne (len .Params.paths) (len (.Params.paths | uniq)) -}}{{- errorf "%s: 경로 묶음에 중복 경로 ID가 있습니다" .File.Path -}}{{- end -}}
+    {{- range .Params.paths -}}
+      {{- $childID := . -}}
+      {{- with site.GetPage (printf "/paths/%s" $childID) -}}
+        {{- if isset .Params "paths" -}}{{- errorf "%s: 경로 묶음 안에 다른 경로 묶음을 넣을 수 없습니다 (%s)" $path.File.Path $childID -}}{{- end -}}
+        {{- with $parents.Get $childID -}}{{- if ne .File.ContentBaseName $path.File.ContentBaseName -}}{{- errorf "%s: 학습 경로 %s는 둘 이상의 묶음에 속할 수 없습니다" $path.File.Path $childID -}}{{- end -}}{{- end -}}
+        {{- $parents.Set $childID $path -}}
+      {{- else -}}{{- errorf "%s: 없는 하위 학습 경로 %s" $path.File.Path $childID -}}{{- end -}}
+    {{- end -}}
+  {{- else if $hasSteps -}}
+    {{- if not .Params.steps -}}{{- errorf "%s: params.steps는 비어 있을 수 없습니다" .File.Path -}}{{- end -}}
+    {{- if ne (len .Params.steps) (len (.Params.steps | uniq)) -}}{{- errorf "%s: 학습 경로에 중복 노트 ID가 있습니다" .File.Path -}}{{- end -}}
+    {{- range .Params.steps -}}{{- if not (site.GetPage (printf "/notes/%s" .)) -}}{{- errorf "%s: 없는 학습 경로 노트 %s" $path.File.Path . -}}{{- end -}}{{- end -}}
+    {{- $leafPaths = $leafPaths | append . -}}
+  {{- end -}}
 {{- end -}}
-{{- return (dict "notes" $notes "backlinks" $backlinks.Values) -}}
+{{- $topPaths := slice -}}
+{{- range $paths -}}{{- if not ($parents.Get .File.ContentBaseName) -}}{{- $topPaths = $topPaths | append . -}}{{- end -}}{{- end -}}
+{{- return (dict "notes" $notes "backlinks" $backlinks.Values "paths" $paths "leafPaths" $leafPaths "topPaths" $topPaths "pathParents" $parents.Values) -}}

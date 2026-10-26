@@ -1,0 +1,10 @@
+<section class="qc-lab" aria-labelledby="atom-count-title">
+<h3 id="atom-count-title">핵은 그대로 두고 전자 수 계산하기</h3>
+<p class="qc-note">핵의 양성자 수 합에서 전체 전하를 뺍니다. 아래 점은 개수 표시이며 실제 원자 구조나 전자 위치를 그린 것이 아닙니다.</p>
+<div class="qc-controls"><label for="count-species">원자 또는 분자<select id="count-species"><option value="H">H · 수소 원자</option><option value="He">He · 헬륨 원자</option><option value="N">N · 질소 원자</option><option value="H2">H₂ · 수소 분자</option><option value="N2" selected>N₂ · 질소 분자</option><option value="H2O">H₂O · 물</option><option value="OH">OH · 산소와 수소</option></select></label><label for="count-charge">전체 전하 q (기본 전하량 단위)<input id="count-charge" type="range" min="-2" max="2" step="1" value="0"><output id="count-charge-value"></output></label></div>
+<div class="qc-presets"><button type="button" data-count-example="N2,0">N₂ · 중성</button><button type="button" data-count-example="H2,1">H₂⁺ · 전자 하나</button><button type="button" data-count-example="H2O,0">H₂O · 중성</button><button type="button" data-count-example="OH,-1">OH⁻ · 전자 하나 추가</button></div>
+<p id="count-calculation" class="qc-equation" aria-live="polite"></p>
+<svg id="count-figure" role="img" aria-label="핵의 양성자 수 합과 전자 개수"></svg>
+<div class="qc-readouts"><div><small>양성자 수 합</small><output id="count-protons"></output></div><div><small>전자 수</small><output id="count-electrons"></output></div></div>
+<p class="qc-status" id="count-status" aria-live="polite"></p><button type="button" data-reset>처음 상태로</button>
+</section>

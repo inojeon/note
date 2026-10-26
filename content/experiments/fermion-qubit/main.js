@@ -17,9 +17,9 @@ if(n!==2)el('vm-status').textContent='전자 수가 '+n+'개이므로 중성 H�
 el('vm-status').dataset.two=String(n===2);el('vm-status').dataset.spin=String(a===1&&b===1);
 el('vm-dimension').textContent='이 범위의 독립적인 기저 상태: '+basis.length+'개';el('vm-dimension').dataset.dimension=basis.length;
 el('vm-basis-list').replaceChildren();basis.forEach(s=>{const li=document.createElement('li');li.textContent=s.slice(0,2)+' | '+s.slice(2);li.setAttribute('aria-current',String(s===bits));el('vm-basis-list').appendChild(li);});
-el('vm-membership').textContent=allowed(bits,mode)?'현재 선택한 배치는 이 범위에 포함됩니다.':'현재 선택한 배치는 이 범위에 포함되지 않습니다.';
+const target=Number(el('vm-create').value),bitIndex=3-target,prior=bits.slice(4-target),occupied=sum(prior),sign=occupied%2?-1:1,blocked=bits[bitIndex]==='1';el('vm-parity').textContent='p='+target+'보다 작은 번호의 점유 '+occupied+'개 → '+(occupied%2?'홀수 · − 부호':'짝수 · + 부호');el('vm-created').textContent=blocked?'생성 불가: 이미 점유한 스핀 오비탈 → 영벡터 0':(sign<0?'−':'+')+'|'+bits.slice(0,bitIndex)+'1'+bits.slice(bitIndex+1)+'⟩';el('vm-created').dataset.sign=blocked?0:sign;el('vm-created').dataset.bits=blocked?'':bits.slice(0,bitIndex)+'1'+bits.slice(bitIndex+1);el('vm-create').dataset.priorCount=occupied;el('vm-membership').textContent=allowed(bits,mode)?'현재 선택한 배치는 이 범위에 포함됩니다.':'현재 선택한 배치는 이 범위에 포함되지 않습니다.';
 }
-ids.forEach(id=>el(id).addEventListener('change',draw));el('vm-sector').addEventListener('change',draw);
+el('vm-create').addEventListener('change',draw);ids.forEach(id=>el(id).addEventListener('change',draw));el('vm-sector').addEventListener('change',draw);
 [['vm-preset-g','0101'],['vm-preset-u','1010'],['vm-preset-empty','0000']].forEach(([id,bits])=>el(id).addEventListener('click',()=>{ids.forEach((id,i)=>el(id).checked=bits[i]==='1');draw();}));draw();
 })();
  addReset(root,context.signal);

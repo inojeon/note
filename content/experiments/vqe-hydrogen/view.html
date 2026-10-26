@@ -5,8 +5,8 @@
 <p aria-live="polite" id="vh-status"></p>
 <div class="vh-equation"><span class="math-tex" data-tex="|\psi\rangle=|g^2\rangle" id="vh-state">ψ = |g²〉</span></div>
 <div class="vh-equation"><span class="math-tex" data-tex="H=c_I I+c_X X+c_Z Z" id="vh-hamiltonian">H = cI I + cX X + cZ Z</span></div>
-<svg aria-label="회전각에 따른 에너지 곡선과 현재 상태" id="vh-energy-fig" role="img"></svg>
+<table><caption>현재 두 전자 배치</caption><thead><tr><th>배치</th><th>진폭</th><th>측정 확률</th></tr></thead><tbody id="vh-populations"></tbody></table><p id="vh-cross"></p><p id="vh-conditions"></p><svg aria-label="회전각에 따른 에너지 곡선과 현재 상태" id="vh-energy-fig" role="img"></svg>
 <dl class="vh-metrics"><div><dt>현재 평균 에너지 (Ha)</dt><dd id="vh-energy"></dd></div><div><dt>FCI 바닥 에너지 (Ha)</dt><dd id="vh-exact"></dd></div><div><dt>FCI와 차이 (mHa)</dt><dd id="vh-error"></dd></div><div><dt>HF 에너지 (Ha)</dt><dd id="vh-hf"></dd></div></dl>
-<p>그래프의 점은 현재 상태의 <strong>평균 에너지</strong>입니다. 파란 실선의 최저점이 이 기저(Basis) 안에서의 바닥 에너지입니다. 여기서는 측정 잡음 없이 기댓값(Expectation Value)을 계산하므로 작은 차이까지 비교할 수 있습니다.</p>
-<p class="formula"><span class="math-tex" data-tex="E(\theta)=c_I+c_X\sin\theta+c_Z\cos\theta">E(θ) = cI + cX sin θ + cZ cos θ</span></p><p>항등 연산자의 평균은 1, X의 평균은 sin θ, Z의 평균은 cos θ입니다. 파울리 분해(Pauli Decomposition)에서 배운 항별 평균을 더하면 분자의 에너지가 됩니다.</p></section>
+<p>그래프의 점은 현재 상태의 <strong>평균 에너지</strong>입니다. 파란 실선의 최저점이 이 기저 안에서의 바닥 에너지입니다. 여기서는 측정 잡음 없이 기댓값을 계산하므로 작은 차이까지 비교할 수 있습니다.</p>
+<p class="formula"><span class="math-tex" data-tex="E(\theta)=c_I+c_X\sin\theta+c_Z\cos\theta">E(θ) = cI + cX sin θ + cZ cos θ</span></p><p>항등 연산자의 평균은 1, X의 평균은 sin θ, Z의 평균은 cos θ입니다. 파울리 분해에서 배운 항별 평균을 더하면 분자의 에너지가 됩니다.</p></section>
 <span id="vh-data" hidden></span>

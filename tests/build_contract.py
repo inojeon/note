@@ -28,6 +28,16 @@ with tempfile.TemporaryDirectory(prefix='learning-note-contract-') as temporary:
     reader = source / 'content/notes/contract-reader/index.md'
     reader.write_text(reader.read_text() + '\n[Preview](../contract-owner/)\n')
 
+    def path_source(params):
+        return f'---\ntitle: "Path contract"\nsummary: "Fixture"\nparams:\n{params}\n---\n\n## Fixture\nA path contract fixture.\n'
+
+    leaf = source / 'content/paths/contract-leaf/index.md'
+    group = source / 'content/paths/contract-group/index.md'
+    for page in (leaf, group):
+        page.parent.mkdir()
+    leaf.write_text(path_source('  steps: [vector]'))
+    group.write_text(path_source('  paths: [contract-leaf]'))
+
     def build():
         return subprocess.run([hugo, '--source', str(source), '--cacheDir', str(source / 'cache'), '--destination', str(source / 'output'), '--baseURL', 'https://example.org/note/', '--minify'], capture_output=True, text=True)
 
@@ -58,6 +68,36 @@ with tempfile.TemporaryDirectory(prefix='learning-note-contract-') as temporary:
         output = result.stdout + result.stderr
         assert result.returncode != 0 and expected in output, f'{name}: expected build error {expected}\n{output}'
         print(f'PASS: {name}')
+
+    path_cases = [
+        ('missing path kind', leaf, '  unused: true', '중 하나만'),
+        ('empty note order', leaf, '  steps: []', 'params.steps는 비어'),
+        ('empty path group', group, '  paths: []', 'params.paths는 비어'),
+        ('both path kinds', group, '  steps: [vector]\n  paths: [contract-leaf]', '중 하나만'),
+        ('both path keys with empty steps', group, '  steps: []\n  paths: [contract-leaf]', '중 하나만'),
+        ('duplicate note order', leaf, '  steps: [vector, vector]', '중복 노트 ID'),
+        ('missing path note', leaf, '  steps: [missing-note]', '없는 학습 경로 노트'),
+        ('duplicate group child', group, '  paths: [contract-leaf, contract-leaf]', '중복 경로 ID'),
+        ('missing group child', group, '  paths: [missing-path]', '없는 하위 학습 경로'),
+        ('nested path group', group, '  paths: [mathematics]', '다른 경로 묶음'),
+    ]
+    for name, page, params, expected in path_cases:
+        original = page.read_text()
+        page.write_text(path_source(params))
+        result = build()
+        page.write_text(original)
+        output = result.stdout + result.stderr
+        assert result.returncode != 0 and expected in output, f'{name}: expected build error {expected}\n{output}'
+        print(f'PASS: {name}')
+
+    second_group = source / 'content/paths/contract-second-group'
+    second_group.mkdir()
+    (second_group / 'index.md').write_text(path_source('  paths: [contract-leaf]'))
+    result = build()
+    shutil.rmtree(second_group)
+    output = result.stdout + result.stderr
+    assert result.returncode != 0 and '둘 이상의 묶음' in output, output
+    print('PASS: a short path cannot belong to multiple groups')
 
     note = source / 'content/notes/contract-check'
     note.mkdir()

@@ -16,7 +16,7 @@ function draw(){
  let markup='<title>H2 RHF · 기저별 오비탈 에너지</title><text x="'+left+'" y="16" fill="var(--ink2)" font-size="12">오비탈 에너지 (Eh)</text>';
  const ticks=range==='low'?[-.5,0,.5,1,1.5]:[-1,0,1,2,3,4,5];
  for(const t of ticks)markup+='<line x1="'+left+'" y1="'+y(t)+'" x2="'+(w-right)+'" y2="'+y(t)+'" stroke="var(--line)"'+(t===0?' stroke-dasharray="4 4"':'')+'/><text x="'+(left-7)+'" y="'+(y(t)+4)+'" text-anchor="end" fill="var(--ink2)" font-size="11">'+t.toFixed(1)+'</text>';
- const counts=[];
+ const counts=[];el('sto-energy-comparison').innerHTML=rows.map(row=>{const sum=row.orbital_energies_hartree.reduce((s,e,j)=>s+e*row.occupations[j],0);return '<tr data-basis-energy="'+row.basis+'" data-orbital-sum="'+sum+'" data-total="'+row.total_energy_hartree+'"><th>'+names[row.basis]+'</th><td>'+sum.toFixed(6)+'</td><td>'+row.total_energy_hartree.toFixed(6)+'</td></tr>'}).join('');
  rows.forEach((row,i)=>{
   const cx=left+width*(i+.5);let shown=0,groups=[];
   row.orbital_energies_hartree.forEach((e,j)=>{if(e<emin||e>emax)return;shown++;const previous=groups.at(-1);if(previous&&Math.abs(previous.e-e)<1e-7)previous.ids.push(j);else groups.push({e,ids:[j],occupied:row.occupations[j]>0});});

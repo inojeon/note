@@ -1,15 +1,22 @@
 ---
-weight: 20
-title: "양자 상태에서 분자 에너지까지"
-summary: "확률과 상태, 오비탈과 전자 배치, 해밀토니안과 근사 계산을 차례로 연결합니다."
-params:
-  steps: ["quantum-state", "born-rule", "superposition", "observable", "hamiltonian", "schrodinger", "born-oppenheimer", "orbital", "electron-spin", "pauli", "electronic-configuration", "slater-determinant", "basis-set", "sto-3g", "basis-orbital-energies", "molecular-orbital", "electron-integrals", "hamiltonian-elements", "h2-hamiltonian", "h2-state-energy", "large-hamiltonian", "hamiltonian-size", "variational-principle", "hartree-fock", "electron-correlation", "configuration-interaction", "active-space", "potential-energy"]
+{
+  "weight": 20,
+  "title": "양자 상태에서 분자 에너지까지",
+  "summary": "상태와 측정에서 출발해 원자·전자 배치·분자 해밀토니안과 에너지 근사를 배웁니다.",
+  "params": {
+    "paths": [
+      "quantum-states-and-measurement",
+      "atoms-and-electron-configurations",
+      "molecular-basis-and-hamiltonian",
+      "energy-approximations",
+      "large-spaces-and-energy-curves"
+    ]
+  }
+}
 ---
 
-## 이 경로에서 연결할 질문
+## 짧은 경로를 순서대로 읽기
 
-상태 벡터에서 측정 확률을 읽고, 허용 에너지를 고유값 문제로 바꾸는 것부터 시작합니다. 다음에는 원자·분자 오비탈을 유한한 기저로 표현하고 여러 전자가 점유한 배치로 에너지 행렬을 만듭니다.
+상태와 측정에서 출발해 원자·전자 배치·분자 해밀토니안과 에너지 근사를 배웁니다. 각 경로는 하나의 계산 흐름을 다루는 3~7편으로 구성했습니다. 처음 읽을 때는 아래 순서를 따르고, 복습할 때는 필요한 경로부터 열 수 있습니다.
 
-H₂의 작은 행렬을 이해한 뒤 큰 분자에서 생기는 비용을 살펴봅니다. 마지막에는 HF·전자 상관·CI·활성 공간이 각각 무엇을 근사하는지 구별하고 거리별 에너지 곡선을 읽습니다.
-
-벡터·내적·고유값이 낯설면 먼저 [선형대수 경로](../linear-algebra/)를 읽으세요. 계산 결과를 볼 때는 기저, 전자 수, 스핀 조건, 핵 반발 포함 여부와 에너지 단위를 함께 확인합니다.
+실험의 조작값은 본문 예제와 연결되어 있습니다. 예측한 결과와 화면의 값이 다르면 바로 아래 계산을 따라가며 차이를 확인할 수 있습니다. 확인 문제의 풀이는 펼쳐 볼 수 있습니다.

@@ -50,6 +50,9 @@ Windows에서는 [Hugo 0.168.0 공식 릴리스](https://github.com/gohugoio/hug
 - [개발 안내](docs/development.md): 렌더링 구조, 선택적 자동 검사, 배포
 - [개편 검증 기록](docs/implementation-report.md): 구현 범위와 실제 검사 결과
 - [수동 공개 안내](docs/deployment.md): GitHub Pages 배포와 이전 버전 복원
+- [벡터에서 부분공간까지 재작성 계획](docs/learning-path-redesign.md): 노트 수준, 다섯 편의 순서, 내용·실험 검토 기록
+- [전체 경로 재작성](docs/curriculum-rewrite.md): 전체 85편의 노트·16개 읽기 경로와 4개 묶음, 작성 기준·대응표·검토 기록
+- [프로젝트 스킬](docs/project-skills.md): 필요한 스킬만 복사한 기록과 사용 범위
 
 ## HTML 만들기
 

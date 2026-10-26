@@ -10,7 +10,7 @@ const el=id=>document.getElementById(id),mq=window.matchMedia('(max-width:600px)
 function column(values){return '<span class="math-array" role="math" aria-label="열벡터: '+values.join('; ')+'"><span class="math-cells" aria-hidden="true">'+values.map(v=>'<span class="math-row"><span>'+v+'</span></span>').join('')+'</span></span>'}
 function draw(){
 const p=Number(input.value)/100,mean=3-2*p,variance=4*p*(1-p);el('obs-p-value').textContent=(p*100).toFixed(0)+'%';
-el('obs-state').innerHTML=column([Math.sqrt(p).toFixed(3),Math.sqrt(1-p).toFixed(3)]);el('obs-mean').textContent=mean.toFixed(2)+'u';el('obs-variance').textContent=variance.toFixed(2)+'u²';
+el('obs-calculation').textContent='평균: '+p.toFixed(2)+' × 1u + '+(1-p).toFixed(2)+' × 3u = '+mean.toFixed(2)+'u. 한 번의 가능한 값은 1u, 3u입니다.';el('obs-mean').dataset.value=mean;el('obs-variance').dataset.value=variance;el('obs-state').innerHTML=column([Math.sqrt(p).toFixed(3),Math.sqrt(1-p).toFixed(3)]);el('obs-mean').textContent=mean.toFixed(2)+'u';el('obs-variance').textContent=variance.toFixed(2)+'u²';
 document.querySelectorAll('[data-obs-p]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.obsP)===p*100)));
 const w=mq.matches?360:600,h=mq.matches?310:300,left=55,right=w-35,baseline=205,top=45,energyX=e=>left+(e-.5)/3*(right-left),plot=el('obs-distribution-fig');plot.setAttribute('viewBox','0 0 '+w+' '+h);
 let svg='<title>에너지 측정: 1u는 '+(p*100).toFixed(0)+'%, 3u는 '+((1-p)*100).toFixed(0)+'%, 평균 '+mean.toFixed(2)+'u</title><g font-family="system-ui,sans-serif" fill="var(--ink)" font-size="14">';

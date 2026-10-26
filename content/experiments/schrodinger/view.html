@@ -1,13 +1,15 @@
 <section aria-labelledby="sch-lab-title" class="qc-lab"><h3 id="sch-lab-title">직접 확인하기 · 어떤 상태가 고유상태일까?</h3>
-<p>아래는 해밀토니안 노트의 설명용 두 상태 모형입니다. <strong>먼저 ‘바닥 고유상태’와 ‘들뜬 고유상태(Excited State)’를 눌러 보세요.</strong> 둘 다 Hc와 Ec가 일치하지만, 에너지 값은 다릅니다. 그다음 슬라이더를 움직여 두 벡터가 어긋나는 모습을 확인하세요.</p>
-<p>c는 파동함수를 선택한 기저에서 표현한 계수 벡터입니다. 실선은 H를 적용한 결과, 점선은 c에 평균 에너지를 곱한 결과입니다. 두 결과의 차이를 잔차(Residual)라고 하며, 차이가 0이면 고유상태입니다.</p>
+<p>아래는 해밀토니안 노트의 설명용 두 상태 모형입니다. <strong>먼저 ‘바닥 고유상태’와 ‘들뜬 고유상태’를 눌러 보세요.</strong> 둘 다 Hc와 Ec가 일치하지만, 에너지 값은 다릅니다. 그다음 슬라이더를 움직여 두 벡터가 어긋나는 모습을 확인하세요.</p>
+<p>c는 파동함수를 선택한 기저에서 표현한 계수 벡터입니다. 실선은 H를 적용한 결과, 점선은 c에 평균 에너지를 곱한 결과입니다. 두 결과의 차이를 잔차라고 하며, 차이가 0이면 고유상태입니다.</p>
 <figure><div aria-label="시험할 상태 선택" class="qc-presets" role="group"><button aria-pressed="true" id="sch-trial" type="button">기저 상태 θ = 0°</button><button aria-pressed="false" id="sch-ground" type="button">바닥 고유상태</button><button aria-pressed="false" id="sch-excited" type="button">들뜬 고유상태</button></div>
 <div class="qc-controls"><label for="sch-angle">상태 각도 θ <input id="sch-angle" max="90" min="-90" step="any" type="range" value="0"/><output for="sch-angle" id="sch-angle-value">0°</output></label></div>
 <p class="qc-note" id="sch-selected"></p>
 <div aria-label="고정된 해밀토니안" class="qc-equation" id="sch-h"></div>
-<div class="qc-readouts"><div><strong>시험 상태 c</strong><div id="sch-c"></div></div><div><strong>H를 작용시킨 Hc</strong><div id="sch-hc"></div></div><div><strong>평균 에너지로 늘린 E(c)c</strong><div id="sch-ec"></div></div><div><strong>잔차(Residual) r = Hc − E(c)c</strong><div id="sch-r"></div></div></div>
+<div class="qc-readouts"><div><strong>시험 상태 c</strong><div id="sch-c"></div></div><div><strong>H를 작용시킨 Hc</strong><div id="sch-hc"></div></div><div><strong>평균 에너지로 늘린 E(c)c</strong><div id="sch-ec"></div></div><div><strong>잔차 r = Hc − E(c)c</strong><div id="sch-r"></div></div></div>
 <p class="qc-equation">E(c) = cᵀHc = <output for="sch-angle" id="sch-energy"></output> · ‖r‖ = <output for="sch-angle" id="sch-residual"></output></p>
 <svg aria-label="같은 원점에서 그린 Hc와 E(c)c 및 두 끝점 사이의 잔차" id="sch-vectors-fig" role="img"></svg>
 <p aria-live="polite" class="qc-status" id="sch-status"></p>
-<figcaption>실선은 Hc, 점선은 E(c)c입니다. 두 끝점을 잇는 화살표가 잔차 r입니다. 두 벡터(Vector)의 축은 같은 임의 에너지 단위이며, 상태 c 자체의 그림은 아닙니다. 행렬·벡터 성분(Component)과 에너지는 소수 네 자리로 반올림하지만, 잔차 크기는 반올림 전 값으로 계산합니다. 고유상태 버튼도 반올림 전 각도를 사용합니다.</figcaption>
-</figure><p>‖r‖ = 0이면 Hc = E(c)c이므로 에너지 고유상태입니다. 이 모형의 두 고유에너지는 <span id="sch-spectrum"></span>입니다. <strong>평균 에너지 E(c)를 최소화하면 바닥상태(Ground State)</strong>를 찾지만, <strong>잔차를 0으로 만드는 상태에는 들뜬상태(Excited State)도</strong> 포함됩니다.</p></section>
+<figcaption>실선은 Hc, 점선은 E(c)c입니다. 두 끝점을 잇는 화살표가 잔차 r입니다. 두 벡터의 축은 같은 임의 에너지 단위이며, 상태 c 자체의 그림은 아닙니다. 행렬·벡터 성분과 에너지는 소수 네 자리로 반올림하지만, 잔차 크기는 반올림 전 값으로 계산합니다. 고유상태 버튼도 반올림 전 각도를 사용합니다.</figcaption>
+</figure><p>‖r‖ = 0이면 Hc = E(c)c이므로 에너지 고유상태입니다. 이 모형의 두 고유에너지는 <span id="sch-spectrum"></span>입니다. <strong>평균 에너지 E(c)를 최소화하면 바닥상태</strong>를 찾지만, <strong>잔차를 0으로 만드는 상태에는 들뜬상태도</strong> 포함됩니다.</p></section>
+
+<p class="qc-status" id="sch-residual-calculation" aria-live="polite"></p>

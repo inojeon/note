@@ -1,25 +1,19 @@
 ---
 {
   "weight": 40,
-  "title": "VQE: 상태를 준비하고 에너지를 낮추기",
-  "summary": "기대값, 안사츠, 측정 오차, 최적화를 H₂ 예제로 연결합니다.",
+  "title": "변분 양자 고유값 계산",
+  "summary": "회로로 에너지를 계산하고 측정과 고전 최적화를 반복합니다.",
   "params": {
-    "steps": [
-      "energy-expectation",
-      "ansatz",
-      "parameterized-circuit",
-      "pauli-decomposition",
-      "measurement-shots",
-      "classical-optimization",
-      "vqe-algorithm",
-      "vqe-hydrogen"
+    "paths": [
+      "vqe-circuits",
+      "vqe-measurement-and-optimization"
     ]
   }
 }
 ---
 
-## 이 경로에서 배우는 것
+## 짧은 경로를 순서대로 읽기
 
-기대값, 안사츠, 측정 오차, 최적화를 H₂ 예제로 연결합니다.
+회로로 에너지를 계산하고 측정과 고전 최적화를 반복합니다. 각 경로는 하나의 계산 흐름을 다루는 3~7편으로 구성했습니다. 처음 읽을 때는 아래 순서를 따르고, 복습할 때는 필요한 경로부터 열 수 있습니다.
 
-앞 노트의 질문을 이해했다면 다음 단계로 이동합니다. 계산 실습의 값은 분자·기저·활성 공간·에너지 상수가 같은 조건에서 비교하세요.
+실험의 조작값은 본문 예제와 연결되어 있습니다. 예측한 결과와 화면의 값이 다르면 바로 아래 계산을 따라가며 차이를 확인할 수 있습니다. 확인 문제의 풀이는 펼쳐 볼 수 있습니다.

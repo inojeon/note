@@ -108,11 +108,11 @@ function draw(){
  index=Math.max(0,Math.min(samples.length-1,Number(slider.value)));const p=samples[index];
  get('boh2-distance-value').textContent=p.r_angstrom.toFixed(2)+' Å';
  get('boh2-electronic').textContent=p.energy_electronic_hartree.toFixed(6);get('boh2-nuclear').textContent=p.energy_nuclear_hartree.toFixed(6);get('boh2-total').textContent=p.energy_total_hartree.toFixed(6);
- get('boh2-status').textContent='R = '+p.r_angstrom.toFixed(2)+' Å에 핵을 고정한 전자 계산입니다. '+(index===data.minimum_index?'지금은 계산한 거리들 중 합계 에너지가 가장 낮습니다.':'거리를 바꾸면 핵 배치와 그에 대응하는 전자 상태가 함께 바뀝니다.');
+ get('boh2-sum').textContent='전자'+' '+p.energy_electronic_hartree.toFixed(6)+' + 핵 반발 '+p.energy_nuclear_hartree.toFixed(6)+' = '+p.energy_total_hartree.toFixed(6)+' Ha · 전체 전자 수 2';get('boh2-status').textContent='R = '+p.r_angstrom.toFixed(2)+' Å에 핵을 고정한 전자 계산입니다. '+(index===data.minimum_index?'지금은 계산한 거리들 중 합계 에너지가 가장 낮습니다.':'거리를 바꾸면 핵 배치와 그에 대응하는 전자 상태가 함께 바뀝니다.');
  curve();slice();schedule();
 }
 slider.addEventListener('input',draw);
-get('boh2-minimum').addEventListener('click',()=>{slider.value=String(data.minimum_index);draw();});
+get('boh2-short').addEventListener('click',()=>{slider.value='0';draw();});get('boh2-long').addEventListener('click',()=>{slider.value=String(samples.length-1);draw();});get('boh2-minimum').addEventListener('click',()=>{slider.value=String(data.minimum_index);draw();});
 get('boh2-reset').addEventListener('click',()=>{slider.value=String(data.default_index);draw();});
 ['boh2-show-electronic','boh2-show-nuclear'].forEach(id=>get(id).addEventListener('change',curve));
 get('boh2-density').addEventListener('change',()=>{if(!get('boh2-density').checked)get('boh2-slice-panel').open=true;schedule();});

@@ -1,0 +1,31 @@
+<div class="learning-lab">
+  <p class="lp-question">몇 개의 수를 서로 독립적으로 정할 수 있을까</p>
+  <div class="lp-buttons" role="group" aria-label="살펴볼 공간">
+    <button type="button" data-space="line" aria-pressed="true">x축</button>
+    <button type="button" data-space="plane" aria-pressed="false">xy평면</button>
+    <button type="button" data-space="space" aria-pressed="false">공간 전체</button>
+    <button type="button" data-space="zero" aria-pressed="false">영벡터만 있는 공간 {0}</button>
+  </div>
+  <div class="lp-controls lp-three-controls">
+    <label for="point-x"><span>x <output data-x-value for="point-x">1</output></span><input id="point-x" data-input="x" type="range" min="-2" max="2" step="0.5" value="1"></label>
+    <label for="point-y"><span>y <output data-y-value for="point-y">0</output></span><input id="point-y" data-input="y" type="range" min="-2" max="2" step="0.5" value="1" disabled></label>
+    <label for="point-z"><span>z <output data-z-value for="point-z">0</output></span><input id="point-z" data-input="z" type="range" min="-2" max="2" step="0.5" value="1" disabled></label>
+  </div>
+  <p class="lp-caption" data-constraint>y와 z는 0으로 고정됩니다.</p>
+  <svg class="lp-plane dimension-scene" data-plane viewBox="0 0 460 460" role="img" aria-label="3차원 좌표 속 x축과 벡터"></svg>
+  <div class="lp-readout" aria-live="polite" aria-atomic="true">
+    <output data-result>p = (1, 0, 0) · x축의 차원: 1</output>
+    <p data-formula>p = x(1, 0, 0)</p>
+    <p data-reason>세 성분으로 적지만 x 하나만 자유롭게 정합니다.</p>
+  </div>
+  <details class="lp-hint" data-camera-panel>
+    <summary>시점 바꾸기 — 수치와 차원은 그대로</summary>
+    <div class="lp-controls">
+      <label for="camera-yaw"><span>바라보는 방향 (도) <output data-yaw-value for="camera-yaw">35</output></span><input id="camera-yaw" data-input="yaw" type="range" min="20" max="160" step="1" value="35"></label>
+      <label for="camera-elevation"><span>위에서 내려다보는 정도 (도) <output data-elevation-value for="camera-elevation">30</output></span><input id="camera-elevation" data-input="elevation" type="range" min="20" max="70" step="1" value="30"></label>
+    </div>
+    <p>세 축의 길이는 공간에서 같은 단위를 사용합니다. 화면에 투영하면 보는 방향에 따라 짧게 보일 수 있습니다.</p>
+  </details>
+  <p class="lp-caption">파란 화살표는 현재 벡터 p입니다. 점선 상자와 옅은 면은 무한한 공간의 일부를 표시합니다. 그림을 돌려도 공간 자체가 바뀌는 것은 아닙니다.</p>
+  <button type="button" data-reset>처음 상태로</button>
+</div>

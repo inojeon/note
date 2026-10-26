@@ -17,7 +17,7 @@ const c=[Math.cos(angle),Math.sin(angle)],hc=[.8*c[0]-.5*c[1],-.5*c[0]+1.2*c[1]]
 get('angle-value').textContent=(angle*180/Math.PI).toFixed(3)+'°';
 get('selected').textContent=selection==='ground'?'바닥 고유상태 · 표시 각도는 근삿값이며 내부 계산은 반올림 전 각도입니다.':selection==='excited'?'들뜬 고유상태 · 표시 각도는 근삿값이며 내부 계산은 반올림 전 각도입니다.':'슬라이더로 고른 시험 상태입니다.';
 get('h').innerHTML='H = '+matrix([[.8,-.5],[-.5,1.2]]);vector('c',c);vector('hc',hc);vector('ec',ec);vector('r',r);
-get('energy').textContent=f(energy);get('residual').textContent=norm===0?'0':norm<.00001?norm.toExponential(2):f(norm);
+get('residual-calculation').textContent='잔차의 길이 제곱: ('+f(r[0])+')² + ('+f(r[1])+')² ≈ '+f(norm*norm)+'. 정규화된 이 상태의 에너지 분산과 같습니다.';get('energy').dataset.value=energy;get('residual').dataset.value=norm;get('energy').textContent=f(energy);get('residual').textContent=norm===0?'0':norm<.00001?norm.toExponential(2):f(norm);
 get('spectrum').textContent=f(low)+' (바닥), '+f(high)+' (들뜬)';
 get('status').textContent=norm<1e-12?'두 벡터가 일치합니다. 계산 정밀도 안에서 Hc = E(c)c를 만족하는 에너지 고유상태입니다.':'두 끝점이 다릅니다. E(c)는 평균 에너지이지만, 이 상태는 에너지가 확정된 고유상태가 아닙니다.';
 for(const id of ['trial','ground','excited'])get(id).setAttribute('aria-pressed',String(selection===id));

@@ -1,0 +1,25 @@
+<div class="learning-lab" data-foundation="span">
+  <p class="lp-question">계수를 바꿀 때 도착할 수 있는 곳</p>
+  <label class="lp-select" for="span-set">사용할 벡터
+    <select id="span-set" data-set>
+      <option value="one">벡터 하나</option>
+      <option value="collinear">같은 직선 위의 두 벡터</option>
+      <option value="plane">평면을 만드는 두 벡터</option>
+      <option value="zero">영벡터만</option>
+    </select>
+  </label>
+  <p class="lp-fixed" data-vectors>u = (1, 0)</p>
+  <div class="lp-controls">
+    <label for="span-a"><span>u에 곱할 수 a <output data-a-value for="span-a">1</output></span><input id="span-a" data-input="a" type="range" min="-2" max="2" step="0.5" value="1"></label>
+    <label for="span-b" data-b-control hidden><span>v에 곱할 수 b <output data-b-value for="span-b">1</output></span><input id="span-b" data-input="b" type="range" min="-2" max="2" step="0.5" value="1"></label>
+  </div>
+  <label class="lp-toggle"><input type="checkbox" data-samples> <span>몇 가지 결과 점 표시</span></label>
+  <svg class="lp-plane" data-plane aria-label="벡터의 생성공간과 현재 선형결합 결과"></svg>
+  <div class="lp-readout" aria-live="polite" aria-atomic="true">
+    <output data-result data-result-x="1" data-result-y="0">1u = (1, 0)</output>
+    <p data-calculation>1 × (1, 0) = (1, 0)</p>
+    <p data-kind>모든 실수 a를 쓰면 x축 전체를 만듭니다.</p>
+  </div>
+  <p class="lp-caption" data-scope>작은 점은 유한한 예시입니다. 굵은 점선과 옅은 면은 생성공간 중 화면에 보이는 부분이며, 직선과 평면은 화면 밖으로 이어집니다.</p>
+  <button type="button" data-reset>처음 상태로</button>
+</div>

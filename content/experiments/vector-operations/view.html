@@ -1,0 +1,31 @@
+<div class="learning-lab">
+  <p class="lp-question" data-question>두 이동을 더하는 순서</p>
+  <div class="lp-buttons" role="group" aria-label="벡터 연산 선택">
+    <button type="button" data-mode="addition" aria-pressed="true">더하기</button>
+    <button type="button" data-mode="scaling" aria-pressed="false">수 곱하기</button>
+  </div>
+  <div data-addition-controls>
+    <p class="lp-fixed">u = (2, 1) · v = (−1, 2)</p>
+    <div class="lp-buttons" role="group" aria-label="더하는 순서">
+      <button type="button" data-order="uv" aria-pressed="true">u 다음 v</button>
+      <button type="button" data-order="vu" aria-pressed="false">v 다음 u</button>
+    </div>
+  </div>
+  <div class="lp-controls" data-scaling-controls hidden>
+    <label for="scalar-k"><span>u에 곱할 수 k <output data-k-value for="scalar-k">1</output></span><input id="scalar-k" data-input="k" type="range" min="-2" max="2" step="0.5" value="1"></label>
+  </div>
+  <div class="lp-buttons" data-scaling-examples role="group" aria-label="수를 곱하는 예시" hidden>
+    <button type="button" data-scalar="0.5">절반: 0.5u</button>
+    <button type="button" data-scalar="-1">반대: −u</button>
+    <button type="button" data-scalar="0">제자리: 0u</button>
+    <button type="button" data-scalar="2">두 배: 2u</button>
+  </div>
+  <svg class="lp-plane" data-plane aria-label="벡터 연산을 나타내는 좌표평면"></svg>
+  <div class="lp-readout" aria-live="polite" aria-atomic="true">
+    <output data-result data-result-x="1" data-result-y="3">u + v = (1, 3)</output>
+    <p data-calculation>가로: 2 + (−1) = 1 · 세로: 1 + 2 = 3</p>
+    <p data-explanation>u의 끝에 v의 시작을 이어 붙입니다. 처음부터 마지막까지의 이동이 합입니다.</p>
+  </div>
+  <p class="lp-caption" data-legend>회색 실선은 u, 주황 점선은 v입니다. 파란 화살표는 두 이동을 합한 결과입니다.</p>
+  <button type="button" data-reset>처음 상태로</button>
+</div>

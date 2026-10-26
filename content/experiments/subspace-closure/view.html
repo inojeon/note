@@ -1,0 +1,33 @@
+<div class="learning-lab" data-foundation="subspace">
+  <p class="lp-question">집합 안에서 계산한 결과와 집합의 경계</p>
+  <label class="lp-select" for="closure-set">집합
+    <select id="closure-set" data-set>
+      <option value="line">원점을 지나는 직선 y = x</option>
+      <option value="shifted">옮겨진 직선 y = x + 1</option>
+      <option value="segment">x축의 짧은 선분 −1 ≤ x ≤ 1</option>
+      <option value="axes">두 좌표축의 합집합</option>
+      <option value="zero">영벡터만</option>
+      <option value="plane">평면 전체</option>
+    </select>
+  </label>
+  <div class="lp-buttons" role="group" aria-label="집합에서 확인할 연산">
+    <button type="button" data-mode="addition" aria-pressed="true">더하기</button>
+    <button type="button" data-mode="scaling" aria-pressed="false">수 곱하기</button>
+  </div>
+  <p class="lp-fixed" data-input-rule>p = (t, t) · q = (s, s)</p>
+  <div class="lp-controls">
+    <label for="closure-t"><span>p를 정할 수 t <output data-t-value for="closure-t">1</output></span><input id="closure-t" data-input="t" type="range" min="-2" max="2" step="0.25" value="1"></label>
+    <label for="closure-s" data-s-control><span>q를 정할 수 s <output data-s-value for="closure-s">2</output></span><input id="closure-s" data-input="s" type="range" min="-2" max="2" step="0.25" value="2"></label>
+    <label for="closure-k" data-k-control hidden><span>p에 곱할 수 c <output data-k-value for="closure-k">2</output></span><input id="closure-k" data-input="k" type="range" min="-2" max="2" step="0.5" value="2"></label>
+  </div>
+  <svg class="lp-plane" data-plane aria-label="집합 안의 벡터와 연산 결과"></svg>
+  <div class="lp-readout" aria-live="polite" aria-atomic="true">
+    <output data-result data-result-x="3" data-result-y="3">p + q = (3, 3)</output>
+    <p data-calculation>(1, 1) + (2, 2) = (3, 3)</p>
+    <p data-membership>입력 두 벡터와 결과가 모두 집합 안에 있습니다.</p>
+    <p data-zero>영벡터 (0, 0): 포함</p>
+  </div>
+  <p class="lp-proof" data-proof>y = x 위의 두 벡터를 더하거나 수를 곱해도 두 성분이 항상 같으므로 이 직선은 부분공간입니다.</p>
+  <p class="lp-caption">굵은 점선·옅은 면·원점의 테두리는 선택한 집합입니다. p, q는 처음부터 집합 안에서 고릅니다. 파란 화살표가 결과이며, 집합 밖이면 끝점에 ×를 표시합니다. 직선과 평면은 화면 밖으로 이어집니다. 몇 번의 성공만으로 닫힘이 증명되지는 않습니다.</p>
+  <button type="button" data-reset>처음 상태로</button>
+</div>

@@ -12,7 +12,7 @@ const el=id=>document.getElementById(id),mq=window.matchMedia('(max-width:600px)
 const gaussian=(x,center)=>Math.pow(Math.PI,-.25)*Math.exp(-(x-center)*(x-center)/2);
 function draw(){
  const R=Number(distance.value),S=Math.exp(-R*R/4),N=1/Math.sqrt(2*(1+mode*S)),bSign=rephase?-1:1,cb=mode*bSign*N,centerDensity=mode===1?4*N*N*gaussian(0,-R/2)**2:0;
- el('mo-distance-value').textContent=R.toFixed(1);el('mo-plus').setAttribute('aria-pressed',String(mode===1));el('mo-minus').setAttribute('aria-pressed',String(mode===-1));el('mo-rephase').setAttribute('aria-pressed',String(rephase));
+ el('mo-distance-value').textContent=R.toFixed(1);const centre=N*gaussian(0,-R/2);el('mo-centre-sum').textContent='중앙의 기여: '+centre.toFixed(4)+(mode===1?' + ':' − ')+centre.toFixed(4)+' = '+(mode===1?2*centre:0).toFixed(4)+' (진폭). 이를 제곱하면 아래 밀도입니다.';el('mo-plus').setAttribute('aria-pressed',String(mode===1));el('mo-minus').setAttribute('aria-pressed',String(mode===-1));el('mo-rephase').setAttribute('aria-pressed',String(rephase));
  el('mo-overlap').textContent=(bSign*S).toFixed(6).replace('-','−');el('mo-overlap').setAttribute('data-value',bSign*S);el('mo-central-density').textContent=centerDensity.toFixed(6);el('mo-central-density').setAttribute('data-value',centerDensity);el('mo-norm').textContent='1.000000';el('mo-norm').setAttribute('data-value',1);el('mo-expansion').setAttribute('data-coefficient-a',N);el('mo-expansion').setAttribute('data-coefficient-b',cb);
  const basis=rephase?'\\chi_B^\\prime':'\\chi_B',formula='\\psi_'+(mode===1?'+':'-')+'\\approx '+N.toFixed(4)+'\\chi_A'+(cb<0?'-':'+')+Math.abs(cb).toFixed(4)+basis;el('mo-expansion').innerHTML='<span class="math-tex" data-tex="'+formula+'">분자 오비탈 ≈ '+N.toFixed(4)+' χA '+(cb<0?'−':'+')+' '+Math.abs(cb).toFixed(4)+(rephase?' χB′':' χB')+'</span>';
  const w=mq.matches?360:600,h=mq.matches?490:450,left=45,right=w-16,domain=5.5,xp=x=>left+(x+domain)/(2*domain)*(right-left),plot=el('mo-combination-fig');plot.setAttribute('viewBox','0 0 '+w+' '+h);
@@ -23,7 +23,7 @@ function draw(){
  const ph=mq.matches?145:130;panel(40,ph,false);panel(mq.matches?280:260,ph,true);plot.innerHTML=svg+'</g>';
  el('mo-status').textContent=(mode===1?'대칭 조합은 중앙에 진폭과 밀도가 남습니다.':'반대칭 조합은 중앙에 마디가 있어 밀도가 0입니다.')+(rephase?' B 기저의 부호와 계수를 함께 바꿨으므로 실선 ψ와 밀도는 바뀌지 않습니다.':' 정규화에는 두 함수의 겹침이 들어갑니다.');
 }
-function drawAll(){try{draw()}catch(e){throw e;}}distance.addEventListener('input',drawAll);el('mo-plus').addEventListener('click',()=>{mode=1;drawAll()});el('mo-minus').addEventListener('click',()=>{mode=-1;drawAll()});el('mo-rephase').addEventListener('click',()=>{rephase=!rephase;drawAll()});mq.addEventListener('change',drawAll);drawAll();
+function drawAll(){try{draw()}catch(e){throw e;}}distance.addEventListener('input',drawAll);document.querySelectorAll('[data-mo-r]').forEach(b=>b.addEventListener('click',()=>{distance.value=b.dataset.moR;drawAll()}));el('mo-plus').addEventListener('click',()=>{mode=1;drawAll()});el('mo-minus').addEventListener('click',()=>{mode=-1;drawAll()});el('mo-rephase').addEventListener('click',()=>{rephase=!rephase;drawAll()});mq.addEventListener('change',drawAll);drawAll();
 
 })();
 

@@ -111,6 +111,8 @@ export async function mount(root, context) {
   }, { signal: context.signal });
   for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) container.addEventListener(type, () => { drag = null; }, { signal: context.signal });
   container.addEventListener('wheel', event => { event.preventDefault(); $('#zoom').value = Math.max(.7, Math.min(2, Number($('#zoom').value) - event.deltaY * .001)); render(); }, { passive: false, signal: context.signal });
+  root.querySelectorAll('[data-volume-example]').forEach(button=>button.addEventListener('click',()=>{$('#orbital').value=button.dataset.volumeExample;render();},{signal:context.signal}));
+  $('[data-volume-front]').addEventListener('click',()=>{$('#yaw').value='0';$('#pitch').value='0';render();},{signal:context.signal});
   controls(root, context.signal, render);
   return { setActive(value) { active = value; if (active) render(); }, destroy };
 }

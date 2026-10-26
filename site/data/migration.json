@@ -555,6 +555,8 @@
     {
       "source": "references/sqd-docs/docs/concept-subspace.html",
       "target": "content/notes/subspace/index.md",
+      "additional_targets": ["content/notes/orthogonal-projection/index.md"],
+      "note": "부분공간의 입문 설명은 기존 ID를 유지하고, 직교투영과 행렬 근사 내용·실험은 별도 노트에 보존한다.",
       "status": "rewritten"
     },
     {

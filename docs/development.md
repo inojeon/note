@@ -83,6 +83,8 @@ BASE_PATH=/note/ BROWSER=webkit node tests/browser.mjs
 
 브라우저 검사 자체가 임시 로컬 서버를 띄우므로 별도의 Hugo 서버를 켜지 않는다. 결과와 실패 화면은 `test-results/`에 저장된다. 다른 생성 폴더를 검사하려면 `SITE_DIR`를 지정한다. 이미 준비된 개발 런타임은 `PLAYWRIGHT_MODULE`과 `CHROMIUM_PATH`로 명시할 수 있다.
 
+미리보기를 켜 둔 채 별도의 배포 빌드를 실행할 때는 출력 폴더를 분리한다. 현재 Hugo 서버는 기본적으로 디스크의 생성 결과를 제공하므로, 다른 빌드가 같은 `public/`에 `/note/`용 HTML을 쓰면 로컬 미리보기의 자산 경로가 섞일 수 있다. 예를 들어 미리보기는 `tools/hugo server -D --destination .cache/preview`, 검사용 빌드는 `tools/hugo --minify --destination .cache/check`로 실행한다. 또는 미리보기에 `--renderToMemory`를 사용한다.
+
 빌드 계약 검사는 필수 정보·잘못된 링크·수식·JavaScript 같은 잘못된 원본이 실제로 빌드를 실패시키는지 확인한다.
 
 ```sh
@@ -90,6 +92,8 @@ python3 tests/build_contract.py
 ```
 
 `tests/experiment-semantics.mjs`는 브라우저 검사에서 사용하는 계산 의미 검사다. 벡터의 길이 유지, 에너지 합, 샷 수와 통계 오차처럼 모델의 예상 결과를 검증한다. 별도 사이트 빌드 단계로 실행하지 않는다.
+
+`python3 tests/check_curriculum.py`는 전체 재작성 대응표의 주제 누락·중복·선수 관계 순환을 확인한다. 예정 원본이 아직 없는 것은 허용하고, 검토 준비 상태로 표시한 노트에는 원본·미리보기·예정 실험·확인 문제가 실제로 있는지 확인한다. `tests/foundation-semantics.mjs`와 `tests/basis-semantics.mjs`는 각각 벡터 경로와 기저 경로의 알려진 계산·불변식·초기화를 브라우저에서 검사한다. 검사 통과로 사용자 검토 상태를 자동 승격하지 않는다.
 
 ## 변경에 맞는 검사
 
@@ -106,3 +110,14 @@ python3 tests/build_contract.py
 과거 74개 학습 원문과 계산 데이터 15개의 보존·대응을 구조 검사에서 확인한다. 새 콘텐츠와 과거 주소를 합치거나 나눌 때는 이 연결을 함께 갱신한다. 원문 추적용 메타데이터와 이관 설명을 학습 화면에 노출하지 않는다.
 
 GitHub Actions는 push·PR에서 검증하며 `workflow_dispatch` 수동 실행에서만 공개한다. 검사한 생성 결과를 배포 아티팩트로 사용한다. 공개 후 문제가 생기면 직전 정상 커밋으로 복구한 브랜치·태그를 대상으로 같은 수동 워크플로를 실행해 이전 콘텐츠와 렌더러를 다시 배포한다. 배포 설정을 바꾸는 것과 실제 공개 실행은 별도 작업이다.
+
+## 분야별 계산 회귀
+
+`tests/browser.mjs`는 다음 모듈을 같은 임시 서버에서 실행한다. 루트와 `/note/` 아래에서 동일하게 동작한다.
+
+- `math-preparation-semantics.mjs`: 확률 평균·밀도 넓이·회전 길이·복소수 켤레·정규화, JW 짝홀과 발견 확률.
+- `chemistry-state-semantics.mjs`: 상태·측정·원자·BO·오비탈·스핀·배치.
+- `chemistry-energy-semantics.mjs`: 기저·적분·H₂·HF·CI·활성 공간과 큰 행렬.
+- `quantum-path-semantics.mjs`: 큐빗·게이트·얽힘·VQE·SQD 24실험.
+
+동적 수식 검사는 실제로 KaTeX를 동적으로 사용하는 실험을 대상으로 한다. 상태를 숫자와 막대로 표시하는 큐빗·두 준위 실험은 새 계산 의미 검사에서 검증한다. 경로 검사는 모든 묶음과 짧은 경로의 순서 및 노트 이동을 확인한다.

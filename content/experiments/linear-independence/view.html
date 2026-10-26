@@ -1,0 +1,26 @@
+<div class="learning-lab">
+  <p class="lp-question">하나를 빼도 같은 공간을 만들 수 있을까</p>
+  <div class="lp-buttons" role="group" aria-label="원래 벡터 묶음">
+    <button type="button" data-set="redundant" aria-pressed="true">세 벡터 u, v, w</button>
+    <button type="button" data-set="independent" aria-pressed="false">두 방향 u, w</button>
+    <button type="button" data-set="with-zero" aria-pressed="false">u와 영벡터</button>
+  </div>
+  <fieldset class="lp-checks">
+    <legend>남길 벡터에 체크</legend>
+    <label data-choice="u"><input type="checkbox" data-keep="u" checked> u = (1, 0)</label>
+    <label data-choice="v"><input type="checkbox" data-keep="v" checked> v = (2, 0)</label>
+    <label data-choice="w"><input type="checkbox" data-keep="w" checked> w = (0, 1)</label>
+    <label data-choice="zero" hidden><input type="checkbox" data-keep="zero"> 0 = (0, 0)</label>
+  </fieldset>
+  <div class="lp-comparison">
+    <figure><figcaption>원래 묶음 <span data-original-label>평면</span></figcaption><svg class="lp-plane" data-original-plane></svg></figure>
+    <figure><figcaption>남은 묶음 <span data-remaining-label>평면</span></figcaption><svg class="lp-plane" data-plane></svg></figure>
+  </div>
+  <div class="lp-readout" aria-live="polite" aria-atomic="true">
+    <output data-result>생성공간이 같습니다.</output>
+    <p data-reason>v를 빼면 어떻게 되는지 비교합니다.</p>
+    <p data-independence></p>
+  </div>
+  <p class="lp-caption">화살표는 선택한 벡터, 옅은 영역과 굵은 선은 그 벡터들의 생성공간입니다. 직선과 평면은 그림의 테두리 밖으로 이어집니다.</p>
+  <button type="button" data-reset>처음 상태로</button>
+</div>

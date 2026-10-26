@@ -1,1 +1,10 @@
-{{ define "main" }}{{ $catalog := partialCached "catalog.html" . "catalog" }}<main id="main" class="listing-main"><nav class="breadcrumb"><a href="{{ `paths/` | relURL }}">학습 경로</a></nav><header class="note-heading"><h1>{{ .Title }}</h1><p>{{ .Params.summary }}</p></header><div class="prose">{{ .Content }}</div><ol class="learning-steps">{{ range .Params.steps }}{{ with site.GetPage (printf "/notes/%s" .) }}<li><a href="{{ .RelPermalink }}"><h2>{{ .Title }} <span>↗</span></h2><p>{{ .Params.summary }}</p></a></li>{{ end }}{{ end }}</ol></main>{{ end }}
+{{ define "main" }}{{ $catalog := partialCached "catalog.html" . "catalog" }}
+<main id="main" class="listing-main">
+<nav class="breadcrumb" aria-label="현재 위치"><a href="{{ `paths/` | relURL }}">학습 경로</a>{{ with index $catalog.pathParents .File.ContentBaseName }}<span>/</span><a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ end }}</nav>
+<header class="note-heading"><h1>{{ .Title }}</h1><p>{{ .Params.summary }}</p></header><div class="prose">{{ .Content }}</div>
+{{ if .Params.paths }}
+<ol class="learning-steps learning-paths" aria-label="묶음의 학습 경로">{{ range .Params.paths }}{{ with site.GetPage (printf "/paths/%s" .) }}<li><a href="{{ .RelPermalink }}"><h2>{{ .Title }} <span>↗</span></h2><p>{{ .Params.summary }}</p><p>{{ len .Params.steps }}개 노트</p></a></li>{{ end }}{{ end }}</ol>
+{{ else }}
+<ol class="learning-steps" aria-label="노트 읽기 순서">{{ range .Params.steps }}{{ with site.GetPage (printf "/notes/%s" .) }}<li><a href="{{ .RelPermalink }}"><h2>{{ .Title }} <span>↗</span></h2><p>{{ .Params.summary }}</p></a></li>{{ end }}{{ end }}</ol>
+{{ end }}
+</main>{{ end }}

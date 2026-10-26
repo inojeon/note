@@ -6,8 +6,8 @@ export async function mount(root, context) {
  try {
 (function(){
 'use strict';
-const get=id=>document.getElementById(id), mq=window.matchMedia('(max-width:600px)'), alpha=35*Math.PI/180;
-const fixed=[Math.cos(alpha),Math.sin(alpha)];
+const get=id=>document.getElementById(id), mq=window.matchMedia('(max-width:600px)'), alpha=Math.atan2(4,3);
+const fixed=[3/5,4/5];
 function fmt(v){return (Math.abs(v)<0.0005?0:v).toFixed(3).replace('-','−');}
 function column(v){return '<span class="math-array" role="math" aria-label="'+v.map(fmt).join('; ')+'"><span class="math-cells" aria-hidden="true">'+v.map(x=>'<span class="math-row"><span>'+fmt(x)+'</span></span>').join('')+'</span></span>';}
 function stateEquation(values,basis){
@@ -18,13 +18,13 @@ function stateEquation(values,basis){
 function draw(){
  const degrees=Number(get('qstate-angle').value),theta=degrees*Math.PI/180,c=Math.cos(theta),s=Math.sin(theta);
  const coords=[c*fixed[0]+s*fixed[1],-s*fixed[0]+c*fixed[1]];
- get('qstate-angle-value').textContent=degrees+'°';get('qstate-alpha').textContent=Math.round(alpha*180/Math.PI)+'°';
+ get('qstate-angle-value').textContent=degrees+'°';get('qstate-alpha').textContent=(alpha*180/Math.PI).toFixed(3)+'°';
  get('qstate-fixed').innerHTML=column(fixed);get('qstate-rotated').innerHTML=column(coords);
  get('qstate-expansion').innerHTML='<div><small>원래 기저 상태로 전개</small>'+stateEquation(fixed,'e')+'</div><div><small>회전한 기저 상태로 전개</small>'+stateEquation(coords,'b')+'</div><p class="qc-note">e₁, e₂는 원래 기저, b₁, b₂는 회전한 기저입니다. 표시 계수는 소수 세 자리 근삿값입니다.</p>';
  const norm=coords[0]*coords[0]+coords[1]*coords[1];
- get('qstate-norm').textContent='새 좌표의 제곱합: ('+fmt(coords[0])+')² + ('+fmt(coords[1])+')² ≈ '+norm.toFixed(6)+' (계산은 반올림 전 값 사용)';
- get('qstate-status').textContent=degrees===35?'상태와 첫 기저가 나란합니다. 새 좌표는 첫 성분 1, 둘째 성분 0입니다. 상태는 그대로입니다.':'새 좌표로 읽으면 '+fmt(coords[0])+'b₁ + ('+fmt(coords[1])+')b₂입니다. 기준과 숫자가 함께 바뀌어 같은 상태를 나타냅니다.';
- [['qstate-original',0],['qstate-aligned',35],['qstate-quarter',90]].forEach(p=>get(p[0]).setAttribute('aria-pressed',String(degrees===p[1])));
+ get('qstate-norm').dataset.norm=norm;get('qstate-rotated').dataset.first=coords[0];get('qstate-rotated').dataset.second=coords[1];get('qstate-probabilities').textContent='원래 측정 기저: 9/25 = 36%, 16/25 = 64%. 새 기저로 실제 측정한다면: '+(coords[0]**2*100).toFixed(2)+'%, '+(coords[1]**2*100).toFixed(2)+'%.';get('qstate-norm').textContent='새 좌표의 제곱합: ('+fmt(coords[0])+')² + ('+fmt(coords[1])+')² ≈ '+norm.toFixed(6)+' (계산은 반올림 전 값 사용)';
+ get('qstate-status').textContent=Math.abs(degrees-alpha*180/Math.PI)<1e-8?'상태와 첫 기저가 나란합니다. 새 좌표는 첫 성분 1, 둘째 성분 0입니다. 상태는 그대로입니다.':'새 좌표로 읽으면 '+fmt(coords[0])+'b₁ + ('+fmt(coords[1])+')b₂입니다. 기준과 숫자가 함께 바뀌어 같은 상태를 나타냅니다.';
+ [['qstate-original',0],['qstate-aligned',alpha*180/Math.PI],['qstate-quarter',90]].forEach(p=>get(p[0]).setAttribute('aria-pressed',String(degrees===p[1])));
  const narrow=mq.matches,w=narrow?300:620,h=narrow?320:340,cx=w/2,cy=narrow?170:180,r=narrow?96:116;
  const point=v=>[cx+r*v[0],cy-r*v[1]],p=point(fixed),b1=point([c,s]),b2=point([-s,c]),p1=point([coords[0]*c,coords[0]*s]);
  const line=(a,b,color,dash,width)=>'<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'" stroke="var(--'+color+')" stroke-width="'+(width||2)+'"'+(dash?' stroke-dasharray="5 4"':'')+'/>';
@@ -42,7 +42,7 @@ function draw(){
 }
 function drawAll(){try{draw();}catch(e){throw e;}}
 get('qstate-angle').addEventListener('input',drawAll);
-[['qstate-original',0],['qstate-aligned',35],['qstate-quarter',90]].forEach(p=>get(p[0]).addEventListener('click',()=>{get('qstate-angle').value=p[1];drawAll();}));
+[['qstate-original',0],['qstate-aligned',alpha*180/Math.PI],['qstate-quarter',90]].forEach(p=>get(p[0]).addEventListener('click',()=>{get('qstate-angle').value=p[1];drawAll();}));
 mq.addEventListener('change',drawAll);drawAll();
 })();
  addReset(root,context.signal);

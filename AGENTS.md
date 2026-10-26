@@ -5,7 +5,7 @@
 ## 수정할 위치
 
 - 개념 원본: `content/notes/<id>/index.md`. 관련 그림과 선택적 `preview.md`는 같은 폴더에 둔다.
-- 학습 경로: `content/paths/<id>/index.md`. `params.steps`에 노트 ID를 순서대로 적는다.
+- 학습 경로: `content/paths/<id>/index.md`. 짧은 경로는 `params.steps`에 노트 ID, 경로 묶음은 `params.paths`에 하위 경로 ID를 순서대로 적는다. 두 필드는 함께 쓰지 않는다.
 - 실험 원본: `content/experiments/<id>/`. 설명·화면·계산·데이터를 함께 관리한다.
 - 공통 화면과 실행기: `site/`. 개별 학습 내용 때문에 공통 코드에 실험 ID별 분기를 추가하지 않는다.
 - 과학 계산: `research/`. 읽기·문서 빌드와 별도의 선택 환경이다.
@@ -15,6 +15,10 @@
 ## 작성 기준
 
 먼저 `docs/note-authoring.md`를 읽는다. 실험은 `docs/experiment-authoring.md`, 용어 미리보기는 `docs/concept-preview.md`를 따른다.
+
+‘벡터에서 부분공간까지’ 다섯 편은 `docs/learning-path-redesign.md`의 학습 수준·순서를 기준으로 작성했다. 후속 재작성은 `docs/curriculum-rewrite.md`와 전체 대응표 `docs/curriculum-rewrite.json`을 따른다. 성인 초심자를 위한 설명 깊이와 차분한 문체를 유지한다. 첫 후속 경로는 선형 독립·기저와 좌표·차원·내적 네 편이다. 사용자가 첫 후속 경로의 구성을 승인하고 나머지 화학·양자컴퓨팅 분야의 작성을 요청했다. 승인된 구조로 남은 경로와 필요한 선수 노트를 이어 작성하고, 경로별 내용·실험·검증 결과를 대응표에 기록한다. 아직 작성하지 않은 노트의 빈 페이지를 만들지 않는다.
+
+이 경로의 그림·실험을 만들 때 프로젝트에 복사한 `.agents/skills/scientific-visualization/SKILL.md`를 읽고 축척·직접 라벨·접근성·출력 검토 원칙을 적용한다. 설치 기록과 적용 범위는 `docs/project-skills.md`에 있다. 스킬의 도구 예시 때문에 일반 작성 환경에 Python 과학 패키지·npm·uv를 추가하지 않는다.
 
 노트 ID는 소문자 영문·숫자·하이픈으로 된 폴더 이름이다. 제목 변경 때문에 ID를 바꾸지 않는다. 필수 메타데이터는 `title`, `summary`, `params.topics`다. 존재하는 주제 ID를 사용하고, 새 주제는 `hugo.toml`의 `params.topics`에도 이름을 등록한다. 본문 제목은 `##`부터 시작한다.
 

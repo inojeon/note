@@ -1,0 +1,27 @@
+<div class="learning-lab">
+  <p class="lp-question">가로끼리 곱하고, 세로끼리 곱해서 더하기</p>
+  <div class="lp-controls">
+    <label for="u-x"><span>u의 가로 성분 <output data-ux-value for="u-x">3</output></span><input id="u-x" data-input="ux" type="range" min="-4" max="4" step="1" value="3"></label>
+    <label for="u-y"><span>u의 세로 성분 <output data-uy-value for="u-y">4</output></span><input id="u-y" data-input="uy" type="range" min="-4" max="4" step="1" value="4"></label>
+    <label for="v-x"><span>v의 가로 성분 <output data-vx-value for="v-x">1</output></span><input id="v-x" data-input="vx" type="range" min="-4" max="4" step="1" value="1"></label>
+    <label for="v-y"><span>v의 세로 성분 <output data-vy-value for="v-y">0</output></span><input id="v-y" data-input="vy" type="range" min="-4" max="4" step="1" value="0"></label>
+  </div>
+  <div class="lp-buttons" role="group" aria-label="내적 비교 예시">
+    <button type="button" data-example="perpendicular">수직</button>
+    <button type="button" data-example="same">같은 벡터</button>
+    <button type="button" data-example="opposite">반대 벡터</button>
+    <button type="button" data-example="zero">영벡터</button>
+  </div>
+  <label class="lp-check"><input type="checkbox" data-normalize> u의 길이를 1로 — v는 그대로</label>
+  <p class="lp-caption" data-normalization>u의 길이: 5. 각 성분을 5로 나누면 길이가 1이 됩니다.</p>
+  <svg class="lp-plane" data-plane></svg>
+  <div class="lp-readout" aria-live="polite" aria-atomic="true">
+    <output data-result>내적: 3 × 1 + 4 × 0 = 3</output>
+    <div class="lp-products"><p>가로 성분의 곱 <strong data-term-x>3</strong></p><p>세로 성분의 곱 <strong data-term-y>0</strong></p></div>
+    <p data-vectors>u = (3, 4), v = (1, 0)</p>
+    <p data-length-detail>u와 자기 자신의 내적: 25 · u의 길이: 5</p>
+    <p data-explanation>가로 성분의 곱과 세로 성분의 곱을 더한 값이 3입니다.</p>
+  </div>
+  <p class="lp-caption">회색 실선은 u, 주황 점선은 v입니다. 두 벡터가 겹칠 때에도 선 모양과 라벨로 구분합니다. 정규화한 u의 성분은 소수점 아래 셋째 자리까지 표시합니다.</p>
+  <button type="button" data-reset>처음 상태로</button>
+</div>

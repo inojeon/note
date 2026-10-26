@@ -7,7 +7,7 @@ export async function mount(root, context) {
 
 (function(){
 const mq=window.matchMedia('(max-width:600px)');function narrow(){return mq.matches}
-const presets={chemical:[.8,1.2,-.5],uncoupled:[1,2,0],coupled:[1,2,.8],equal:[1,1,.8],degenerate:[1,1,0]};let groundAngle=0;
+const presets={chemical:[.8,1.2,-.5],uncoupled:[1,3,0],coupled:[1,3,1],equal:[1,1,.8],degenerate:[1,1,0]};let groundAngle=0;
 function fmt(n){return (Math.abs(n)<.00005?0:n).toFixed(4)}
 function matrix(rows){return `<span class="math-array" role="math" aria-label="${rows.map(row=>row.map(fmt).join(', ')).join('; ')}"><span class="math-cells" aria-hidden="true">${rows.map(row=>`<span class="math-row">${row.map(x=>`<span>${fmt(x)}</span>`).join('')}</span>`).join('')}</span></span>`}
 function draw(){
@@ -22,7 +22,7 @@ document.getElementById('hamiltonian-ground-vector').innerHTML=matrix([[c1],[c2]
 const p1=c1*c1,p2=c2*c2;document.getElementById('hamiltonian-probabilities').innerHTML=`<div class="hamiltonian-probability-bar" role="img" aria-label="기저 1 ${100*p1}퍼센트, 기저 2 ${100*p2}퍼센트"><span style="width:${100*p1}%"></span><span style="width:${100*p2}%"></span></div><p>기저 1: ${(100*p1).toFixed(1)}% · 기저 2: ${(100*p2).toFixed(1)}%</p>`;
 document.getElementById('hamiltonian-status').textContent=degenerate?'두 고유값이 같습니다. 바닥상태가 축퇴하여 유일한 상태 벡터를 고를 수 없습니다. 여기서는 기저 1을 한 대표로 표시합니다.':g===0?'결합이 없어서 대각 성분 a, b가 그대로 에너지 고유값입니다. 더 낮은 에너지의 기저 상태가 바닥상태입니다.':'두 상태를 연결하면 고유값은 대각 성분과 달라집니다. 낮은 고유값은 두 대각 성분 중 작은 값보다 내려가고, 바닥상태는 두 기저 상태의 조합이 됩니다.';
 const hc=[a*c1+g*c2,g*c1+b*c2];document.getElementById('hamiltonian-calculation').innerHTML=`<p>E₋ = (a+b)/2 − √(((a−b)/2)²+g²) = ${fmt(low)}<br>E₊ = (a+b)/2 + √(((a−b)/2)²+g²) = ${fmt(high)}</p><div class="hamiltonian-eigencheck"><span>Hc₀ = ${matrix(hc.map(x=>[x]))}</span><span>E₋c₀ = ${matrix([[low*c1],[low*c2]])}</span></div><p>두 결과가 같고 c₀의 길이는 1입니다. 표시값은 소수 넷째 자리까지 반올림합니다.</p>`;
-const rad=phi*Math.PI/180,u=Math.cos(rad),v=Math.sin(rad),expectation=a*u*u+b*v*v+2*g*u*v;document.getElementById('hamiltonian-expectation').innerHTML=`<div class="hamiltonian-eigencheck"><span>c = ${matrix([[u],[v]])}</span><span>⟨H⟩ = ${fmt(expectation)}</span></div><p>범위: ${fmt(low)} ≤ ⟨H⟩ ≤ ${fmt(high)}<br>현재 기댓값과 최소 에너지의 차이: ${fmt(expectation-low)}</p>`;
+const rad=phi*Math.PI/180,u=Math.cos(rad),v=Math.sin(rad),expectation=a*u*u+b*v*v+2*g*u*v;document.getElementById('hamiltonian-cross-term').textContent='대각 항 '+fmt(a*u*u)+' + '+fmt(b*v*v)+' · 교차항 '+fmt(2*g*u*v)+' → 평균 '+fmt(expectation)+'u';document.getElementById('hamiltonian-cross-term').dataset.energy=expectation;document.getElementById('hamiltonian-cross-term').dataset.low=low;document.getElementById('hamiltonian-cross-term').dataset.high=high;document.getElementById('hamiltonian-expectation').innerHTML=`<div class="hamiltonian-eigencheck"><span>c = ${matrix([[u],[v]])}</span><span>⟨H⟩ = ${fmt(expectation)}</span></div><p>범위: ${fmt(low)} ≤ ⟨H⟩ ≤ ${fmt(high)}<br>현재 기댓값과 최소 에너지의 차이: ${fmt(expectation-low)}</p>`;
 document.querySelectorAll('[data-hamiltonian-preset]').forEach(button=>button.setAttribute('aria-pressed',String(presets[button.getAttribute('data-hamiltonian-preset')].every((x,i)=>x===[a,b,g][i]))));
 const small=narrow(),W=small?360:680,H=320,T=60,B=260,sy=e=>B-(e+2.5)/8*(B-T),left=W*.25,right=W*.75;
 let z=`<text x="${left}" y="24" text-anchor="middle" fill="var(--ink)" font-size="13">기저 상태의 기댓값</text><text x="${right}" y="24" text-anchor="middle" fill="var(--ink)" font-size="13">H의 에너지 고유값</text>`;
@@ -33,7 +33,7 @@ z+=`<text x="${W/2}" y="${H-14}" text-anchor="middle" fill="var(--ink2)" font-si
 const svg=document.getElementById('hamiltonian-energy-fig');svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.innerHTML=z.replace('同じエネルギーの目盛り · 任意単位','같은 에너지 눈금 · 임의 단위');
 }
 function drawAll(){try{draw()}catch(e){throw e;}}
-for(const id of ['a','b','g','state'])document.getElementById('hamiltonian-'+id).addEventListener('input',drawAll);document.querySelectorAll('[data-hamiltonian-preset]').forEach(button=>button.addEventListener('click',()=>{const values=presets[button.getAttribute('data-hamiltonian-preset')];['a','b','g'].forEach((id,i)=>{document.getElementById('hamiltonian-'+id).value=values[i]});drawAll()}));document.getElementById('hamiltonian-use-ground').addEventListener('click',()=>{document.getElementById('hamiltonian-state').value=(Math.round(groundAngle*10)/10).toFixed(1);drawAll()});mq.addEventListener('change',drawAll);drawAll();
+for(const id of ['a','b','g','state'])document.getElementById('hamiltonian-'+id).addEventListener('input',drawAll);document.querySelectorAll('[data-hamiltonian-preset]').forEach(button=>button.addEventListener('click',()=>{const values=presets[button.getAttribute('data-hamiltonian-preset')];['a','b','g'].forEach((id,i)=>{document.getElementById('hamiltonian-'+id).value=values[i]});drawAll()}));document.querySelectorAll('[data-state-sign]').forEach(button=>button.addEventListener('click',()=>{document.getElementById('hamiltonian-state').value=button.dataset.stateSign==='plus'?45:-45;drawAll();}));document.getElementById('hamiltonian-use-ground').addEventListener('click',()=>{document.getElementById('hamiltonian-state').value=(Math.round(groundAngle*10)/10).toFixed(1);drawAll()});mq.addEventListener('change',drawAll);drawAll();
 })();
 
  addReset(root,context.signal);

@@ -1,0 +1,18 @@
+<div class="learning-lab">
+  <p class="lp-question">목표 벡터는 (3, 2)에 고정되어 있습니다</p>
+  <div class="lp-buttons" role="group" aria-label="기저 선택">
+    <button type="button" data-basis="standard" aria-pressed="true">표준 기저</button>
+    <button type="button" data-basis="tilted" aria-pressed="false">기울어진 기저</button>
+    <button type="button" data-basis="collinear" aria-pressed="false">같은 직선의 두 벡터</button>
+  </div>
+  <p class="lp-fixed" data-basis-vectors>b₁ = (1, 0), b₂ = (0, 1)</p>
+  <label class="lp-check"><input type="checkbox" data-grid> 기저에 맞춘 격자</label>
+  <svg class="lp-plane" data-plane></svg>
+  <div class="lp-readout" aria-live="polite" aria-atomic="true">
+    <output data-result>이 기저에서 v의 좌표: (3, 2)</output>
+    <p data-calculation>3 × (1, 0) + 2 × (0, 1) = (3, 2)</p>
+    <p data-explanation>기저 벡터 앞에 곱한 수가 그 기저에서의 좌표입니다.</p>
+  </div>
+  <p class="lp-caption">회색 실선은 첫 번째 이동, 주황 점선은 두 번째 이동입니다. 두 이동의 합인 파란 화살표 v는 항상 같습니다. 그림의 x·y축은 표준 좌표로 고정되어 있습니다.</p>
+  <button type="button" data-reset>처음 상태로</button>
+</div>

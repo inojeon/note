@@ -264,13 +264,32 @@ class Checker:
                     self.fail(f"Bundle URL must follow its folder ID: {record.get('url')} != {expected}")
                 self.reference(self.site / "index.html", record.get("url", ""), context=f"{section} manifest")
         note_ids = {record.get("id") for record in manifest.get("notes", [])}
-        for record in manifest.get("paths", []):
-            steps = record.get("steps", [])
-            if not steps or len(steps) != len(set(steps)):
-                self.fail(f"Learning path requires distinct ordered steps: {record.get('id')}")
-            for step in steps:
-                if step not in note_ids:
-                    self.fail(f"Learning path {record.get('id')} refers to missing note {step}")
+        paths = {record.get("id"): record for record in manifest.get("paths", [])}
+        parents: dict[str, str] = {}
+        for identifier, record in paths.items():
+            if ("steps" in record) == ("paths" in record):
+                self.fail(f"Learning path requires exactly one of steps or paths: {identifier}")
+                continue
+            key = "paths" if "paths" in record else "steps"
+            items = record[key]
+            if not isinstance(items, list) or not items or not all(isinstance(item, str) for item in items):
+                self.fail(f"Learning path requires a nonempty ordered ID list: {identifier}.{key}")
+                continue
+            if len(items) != len(set(items)):
+                self.fail(f"Learning path contains duplicate IDs: {identifier}.{key}")
+            if key == "steps":
+                for step in items:
+                    if step not in note_ids:
+                        self.fail(f"Learning path {identifier} refers to missing note {step}")
+            else:
+                for child in items:
+                    if child not in paths:
+                        self.fail(f"Learning path group {identifier} refers to missing path {child}")
+                    elif "paths" in paths[child]:
+                        self.fail(f"Learning path groups cannot contain another group: {identifier} → {child}")
+                    if child in parents and parents[child] != identifier:
+                        self.fail(f"Learning path belongs to multiple groups: {child}")
+                    parents[child] = identifier
 
     def migration(self):
         migration = self.read_json(ROOT / "site/data/migration.json")

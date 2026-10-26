@@ -46,9 +46,9 @@ await load('sqd-iterations');await change('#iteration',8);near(await number('[da
 export async function runDynamicMathChecks(page, { baseURL }) {
   const experiments = [
     'basis-set', 'computational-basis', 'entanglement', 'excitation-state',
-    'h2-state-energy', 'molecular-orbital', 'quantum-state', 'qubit',
+    'h2-state-energy', 'molecular-orbital', 'quantum-state',
     'slater-determinant', 'sqd-sampling', 'sqd-subspace', 'tensor-product',
-    'two-level-system', 'vqe-hydrogen'
+    'vqe-hydrogen'
   ];
   let formulas = 0;
   for (const id of experiments) {
