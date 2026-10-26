@@ -60,6 +60,12 @@ jobs:
       - name: Install Chromium, WebKit and Korean fonts
         working-directory: tests
         run: |
+          # Avoid slow Azure mirror downloads on hosted runners; apt still verifies signatures.
+          for mirror_list in /etc/apt/apt-mirrors*.txt; do
+            if [ -f "$mirror_list" ]; then
+              sudo sed -i 's|azure.archive.ubuntu.com|archive.ubuntu.com|g' "$mirror_list"
+            fi
+          done
           npx --no-install playwright install --with-deps chromium webkit
           sudo apt-get install --no-install-recommends -y fonts-noto-cjk
 
