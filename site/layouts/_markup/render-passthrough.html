@@ -1,0 +1,6 @@
+{{- $opts := dict "displayMode" (eq .Type "block") "output" "htmlAndMathml" -}}
+{{- with try (transform.ToMath .Inner $opts) -}}
+  {{- with .Err -}}{{- errorf "%s: 수식 오류: %s" $.Page.File.Path . -}}{{- else -}}
+    {{- if eq $.Type "block" -}}<div class="math-block">{{ .Value }}</div>{{- else -}}{{ .Value }}{{- end -}}
+  {{- end -}}
+{{- end -}}

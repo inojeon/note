@@ -1,0 +1,38 @@
+{
+ "E_CASCI": -109.03440704371032,
+ "E_CCSD": -109.03279843959294,
+ "rows": [
+  {
+   "circuit": "UCJ",
+   "n_reps": 1,
+   "n_params": 136,
+   "E_init": -108.98490805431292,
+   "err_init_mHa": 49.49898939739228,
+   "overlap2_init": 0.9575459438249481
+  },
+  {
+   "circuit": "UCJ",
+   "n_reps": 2,
+   "n_params": 272,
+   "E_init": -108.9811444900019,
+   "err_init_mHa": 53.26255370842148,
+   "overlap2_init": 0.9447136792618203
+  },
+  {
+   "circuit": "LUCJ",
+   "n_reps": 1,
+   "n_params": 73,
+   "E_init": -108.96446482603321,
+   "err_init_mHa": 69.9422176771094,
+   "overlap2_init": 0.9474170744328302
+  },
+  {
+   "circuit": "LUCJ",
+   "n_reps": 2,
+   "n_params": 146,
+   "E_init": -108.97216879334076,
+   "err_init_mHa": 62.23825036956043,
+   "overlap2_init": 0.9500957984069193
+  }
+ ]
+}

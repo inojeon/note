@@ -1,0 +1,12 @@
+<section aria-labelledby="vh-title" class="qc-lab vh-lab"><h3 id="vh-title">실험 · 같은 분자에서 상태만 조절하기</h3><p>핵 사이 거리를 고른 뒤 회전각을 움직이세요. “최적화 한 단계”는 현재 에너지의 기울기를 보고 다음 각도를 선택합니다.</p>
+<label for="vh-distance">핵 사이 거리 R <select id="vh-distance"><option value="0">0.40 Å</option><option selected="" value="1">0.74 Å</option><option value="2">1.50 Å</option><option value="3">3.00 Å</option></select></label>
+<label for="vh-angle">회전각 θ <output id="vh-angle-value">0.000°</output><input id="vh-angle" max="180" min="-180" step="0.000001" type="range" value="0"/></label>
+<div class="qc-presets vh-actions"><button id="vh-step" type="button">최적화 한 단계</button><button id="vh-run" type="button">20단계 실행</button><button id="vh-reference" type="button">FCI 정답 각도 보기</button><button id="vh-reset" type="button">HF 상태로 초기화</button></div>
+<p aria-live="polite" id="vh-status"></p>
+<div class="vh-equation"><span class="math-tex" data-tex="|\psi\rangle=|g^2\rangle" id="vh-state">ψ = |g²〉</span></div>
+<div class="vh-equation"><span class="math-tex" data-tex="H=c_I I+c_X X+c_Z Z" id="vh-hamiltonian">H = cI I + cX X + cZ Z</span></div>
+<svg aria-label="회전각에 따른 에너지 곡선과 현재 상태" id="vh-energy-fig" role="img"></svg>
+<dl class="vh-metrics"><div><dt>현재 평균 에너지 (Ha)</dt><dd id="vh-energy"></dd></div><div><dt>FCI 바닥 에너지 (Ha)</dt><dd id="vh-exact"></dd></div><div><dt>FCI와 차이 (mHa)</dt><dd id="vh-error"></dd></div><div><dt>HF 에너지 (Ha)</dt><dd id="vh-hf"></dd></div></dl>
+<p>그래프의 점은 현재 상태의 <strong>평균 에너지</strong>입니다. 파란 실선의 최저점이 이 기저(Basis) 안에서의 바닥 에너지입니다. 여기서는 측정 잡음 없이 기댓값(Expectation Value)을 계산하므로 작은 차이까지 비교할 수 있습니다.</p>
+<p class="formula"><span class="math-tex" data-tex="E(\theta)=c_I+c_X\sin\theta+c_Z\cos\theta">E(θ) = cI + cX sin θ + cZ cos θ</span></p><p>항등 연산자의 평균은 1, X의 평균은 sin θ, Z의 평균은 cos θ입니다. 파울리 분해(Pauli Decomposition)에서 배운 항별 평균을 더하면 분자의 에너지가 됩니다.</p></section>
+<span id="vh-data" hidden></span>

@@ -1,0 +1,25 @@
+{{- $page := .page -}}{{- $url := urls.Parse .destination -}}
+{{- $result := dict "url" .destination -}}
+{{- if and (not $url.IsAbs) (not (strings.HasPrefix .destination "//")) $url.Path -}}
+  {{- $path := $url.Path -}}
+  {{- $resolved := path.Join $page.Path $path -}}
+  {{- if strings.HasPrefix $path "/" -}}{{- $resolved = $path -}}{{- end -}}
+  {{- $target := site.GetPage $resolved -}}
+  {{- if $target -}}
+    {{- with $url.Fragment -}}{{- if not ($target.Fragments.Identifiers.Contains .) -}}{{- errorf "%s: 내부 링크의 섹션을 찾을 수 없습니다: %s" $page.File.Path $.destination -}}{{- end -}}{{- end -}}
+    {{- $href := $target.RelPermalink -}}
+    {{- with $url.RawQuery -}}{{- $href = printf "%s?%s" $href . -}}{{- end -}}
+    {{- with $url.Fragment -}}{{- $href = printf "%s#%s" $href . -}}{{- end -}}
+    {{- $result = dict "url" $href "page" $target -}}
+  {{- else -}}
+    {{- with $page.Resources.Get $path -}}
+      {{- $result = dict "url" .RelPermalink "resource" . -}}
+    {{- else -}}
+      {{- errorf "%s: 내부 링크/자산을 찾을 수 없습니다: %s" $page.File.Path $.destination -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if and (not $url.IsAbs) (not $url.Path) $url.Fragment -}}
+  {{- if not ($page.Fragments.Identifiers.Contains $url.Fragment) -}}{{- errorf "%s: 내부 링크의 섹션을 찾을 수 없습니다: %s" $page.File.Path $.destination -}}{{- end -}}
+{{- end -}}
+{{- return $result -}}

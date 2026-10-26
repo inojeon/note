@@ -1,0 +1,5 @@
+import { controls, fmt, chart, loadJSON } from 'experiment-shared.js';
+export async function mount(root,context){
+const $=s=>root.querySelector(s);
+const d=await loadJSON(context,'data.json');function render(){const b=d.basis_table[Number($('#basis').value)],r=d.stretch[Number($('#r').value)],i=Number($('#i').value),j=Number($('#j').value);$('[data-nao]').textContent=b.nao;$('[data-basis-energy]').textContent=b.E_HF==null?'미계산':fmt(b.E_HF,6)+' Eh';$('[data-distance]').textContent=fmt(r.r,3)+' Å';$('[data-gap]').textContent=fmt((r.E_HF-r.E_CASCI)*1000,3)+' mEh';$('[data-hcore]').textContent=fmt(d.hcore[i][j],3)+' Eh';$('[data-eri]').textContent=fmt(d.eri_00[i][j],3)+' Eh';$('[data-core]').textContent=fmt(d.ecore,6)+' Eh';chart($('[data-plot]'),[{points:d.stretch.map(x=>[x.r,x.E_HF]),point:[r.r,r.E_HF]},{points:d.stretch.map(x=>[x.r,x.E_CASCI]),point:[r.r,r.E_CASCI]}],{xmin:.9,xmax:2.4,ymin:-109.1,ymax:-108.1,xlabel:'핵 간 거리 (Å), cc-pVDZ',title:'RHF와 CASCI 활성공간 에너지'});}controls(root,context.signal,render);
+}

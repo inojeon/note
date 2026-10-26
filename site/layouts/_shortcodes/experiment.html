@@ -1,0 +1,10 @@
+{{- $id := .Get "id" -}}{{- $exp := site.GetPage (printf "/experiments/%s" $id) -}}
+{{- if not $exp -}}{{- errorf "%s: 없는 실험 ID %s" .Page.File.Path $id -}}{{- else -}}
+<section class="experiment-embed" data-experiment="{{ $id }}" data-src="{{ $exp.RelPermalink }}" aria-label="{{ $exp.Title }}">
+<header class="embed-heading"><span class="experiment-label">직접 확인하기</span><a href="{{ $exp.RelPermalink }}" target="_blank" rel="noopener" aria-label="{{ $exp.Title }} 실험 새 창으로 열기">따로 열기 ↗</a><h2>{{ $exp.Title }}</h2><p>{{ $exp.Params.summary }}</p></header>
+<div class="experiment-stage" hidden></div><p class="experiment-status" role="status">아래 설명을 먼저 읽거나 실험을 시작해 보세요.</p><button class="experiment-retry" type="button">실험 시작</button>
+{{- $prefix := printf "experiment-%s-%d-" $id .Ordinal -}}
+{{- $guide := $exp.Content | replaceRE `id="([^"]+)"` (printf `id="%s${1}"` $prefix) | replaceRE `href="#([^"]+)"` (printf `href="#%s${1}"` $prefix) -}}
+<details class="experiment-guide" open><summary>실험 안내와 대체 설명</summary><div class="prose">{{ $guide | safeHTML }}</div></details>
+</section>
+{{- end -}}

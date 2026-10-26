@@ -1,0 +1,23 @@
+import { createScope, loadJSON, addReset } from 'experiment-shared.js';
+
+export async function mount(root, context) {
+ const scope=createScope(root,context);
+ const {document,window,ResizeObserver,MutationObserver,requestAnimationFrame,cancelAnimationFrame}=scope;
+ try {
+
+(function(){
+const descriptions={
+a:'<strong>A: 원래 변환을 나타내는 행렬</strong><p>입력을 가로 2x+y, 세로 x+2y로 바꿉니다. 이 예에서는 실수 대칭 행렬이고, P·D·P⁻¹로 분해해도 변환 자체는 같습니다.</p>',
+p:'<strong>P: 고유벡터를 열로 모은 가역행렬(Invertible Matrix)</strong><p>첫째 열은 성분이 1, 1인 고유벡터이며 고유값은 3입니다. 둘째 열은 성분이 1, −1인 고유벡터이며 고유값은 1입니다. 두 열이 선형 독립이므로 역행렬이 존재합니다.</p><p>행렬식(Determinant)은 1×(−1) − 1×1 = −2 ≠ 0입니다. P는 고유벡터 좌표를 원래 좌표로 바꿉니다.</p>',
+d:'<strong>D: 고유값을 담은 대각행렬(Diagonal Matrix)</strong><p>대각선 밖 성분은 모두 0입니다. 대각선의 3과 1은 P의 첫째·둘째 열에 대응하는 고유값입니다. 새 좌표에서 첫 성분은 3배, 둘째 성분은 그대로입니다.</p><p>P의 열 순서를 바꾸면 D의 고유값 순서도 함께 바꿔야 합니다.</p>',
+inverse:'<strong>P⁻¹: P를 되돌리는 역행렬(Inverse Matrix)</strong><p>원래 좌표를 고유벡터 좌표로 바꿉니다. P⁻¹을 P와 어느 쪽 순서로 곱해도 항등행렬(Identity Matrix) I가 됩니다.</p><p>이 예에서는 P⁻¹ = ½P입니다. 일반적으로 역행렬이 전치행렬과 같은 것은 아닙니다. 아래 회전 실험의 직교행렬 Q는 Q⁻¹ = Qᵀ를 만족합니다.</p>'};
+const products={"pd": "<p><strong>① 먼저 P와 D를 곱합니다</strong></p><div class=\"factor-product\"><span class=\"math-array\" role=\"math\" aria-label=\"1, 1; 1, −1\"><span class=\"math-cells\" aria-hidden=\"true\"><span class=\"math-row\"><span>1</span><span>1</span></span><span class=\"math-row\"><span>1</span><span>−1</span></span></span></span> × <span class=\"math-array\" role=\"math\" aria-label=\"3, 0; 0, 1\"><span class=\"math-cells\" aria-hidden=\"true\"><span class=\"math-row\"><span>3</span><span>0</span></span><span class=\"math-row\"><span>0</span><span>1</span></span></span></span> = <span class=\"math-array\" role=\"math\" aria-label=\"3, 1; 3, −1\"><span class=\"math-cells\" aria-hidden=\"true\"><span class=\"math-row\"><span>3</span><span>1</span></span><span class=\"math-row\"><span>3</span><span>−1</span></span></span></span></div><p>D를 오른쪽에서 곱하면 P의 첫째 열은 3배, 둘째 열은 1배가 됩니다.</p>", "restore": "<p><strong>② 나머지 역행렬을 곱합니다</strong></p><div class=\"factor-product\"><span class=\"math-array\" role=\"math\" aria-label=\"3, 1; 3, −1\"><span class=\"math-cells\" aria-hidden=\"true\"><span class=\"math-row\"><span>3</span><span>1</span></span><span class=\"math-row\"><span>3</span><span>−1</span></span></span></span> × <span class=\"math-array\" role=\"math\" aria-label=\"½, ½; ½, −½\"><span class=\"math-cells\" aria-hidden=\"true\"><span class=\"math-row\"><span>½</span><span>½</span></span><span class=\"math-row\"><span>½</span><span>−½</span></span></span></span> = <span class=\"math-array\" role=\"math\" aria-label=\"2, 1; 1, 2\"><span class=\"math-cells\" aria-hidden=\"true\"><span class=\"math-row\"><span>2</span><span>1</span></span><span class=\"math-row\"><span>1</span><span>2</span></span></span></span></div><p>왼쪽 위 성분은 3×½ + 1×½ = 2, 오른쪽 위 성분은 3×½ + 1×(−½) = 1입니다. 아래 행도 같은 방식으로 계산하면 A가 복원됩니다.</p>", "identity": "<p><strong>③ P의 역행렬인지 확인합니다</strong></p><div class=\"factor-product\"><span class=\"math-array\" role=\"math\" aria-label=\"1, 1; 1, −1\"><span class=\"math-cells\" aria-hidden=\"true\"><span class=\"math-row\"><span>1</span><span>1</span></span><span class=\"math-row\"><span>1</span><span>−1</span></span></span></span> × <span class=\"math-array\" role=\"math\" aria-label=\"½, ½; ½, −½\"><span class=\"math-cells\" aria-hidden=\"true\"><span class=\"math-row\"><span>½</span><span>½</span></span><span class=\"math-row\"><span>½</span><span>−½</span></span></span></span> = <span class=\"math-array\" role=\"math\" aria-label=\"1, 0; 0, 1\"><span class=\"math-cells\" aria-hidden=\"true\"><span class=\"math-row\"><span>1</span><span>0</span></span><span class=\"math-row\"><span>0</span><span>1</span></span></span></span></div><p>반대 순서로 곱해도 I입니다. I는 어떤 벡터도 바꾸지 않는 항등행렬입니다.</p>"};
+function select(key){document.getElementById('factor-description').innerHTML=descriptions[key];document.querySelectorAll('[data-factor]').forEach(button=>button.setAttribute('aria-pressed',String(button.getAttribute('data-factor')===key)))}
+function step(key){document.getElementById('factor-multiplication').innerHTML=products[key];document.querySelectorAll('[data-factor-step]').forEach(button=>button.setAttribute('aria-pressed',String(button.getAttribute('data-factor-step')===key)))}
+document.querySelectorAll('[data-factor]').forEach(button=>button.addEventListener('click',()=>select(button.getAttribute('data-factor'))));document.querySelectorAll('[data-factor-step]').forEach(button=>button.addEventListener('click',()=>step(button.getAttribute('data-factor-step'))));select('p');step('pd');
+})();
+
+ addReset(root,context.signal);
+ return scope.lifecycle;
+ } catch(error) {scope.lifecycle.destroy();throw error;}
+}

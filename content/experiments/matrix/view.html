@@ -1,0 +1,5 @@
+<figure class="matrix-lab"><div aria-label="입력 예시 선택" class="matrix-presets" role="group"><button data-matrix-x="1" data-matrix-y="0" type="button">① 오른쪽 한 칸</button><button data-matrix-x="0" data-matrix-y="1" type="button">② 위로 한 칸</button><button data-matrix-x="1" data-matrix-y="1" type="button">③ 두 방향 더하기</button><button data-matrix-x="1" data-matrix-y="-1" type="button">④ 한 방향 빼기</button></div><div class="matrix-inputs"><label for="input-x">첫째 열의 배수 x <input id="input-x" max="2" min="-2" step="0.25" type="range" value="1"/><output for="input-x" id="matrix-x-value"></output></label><label for="input-y">둘째 열의 배수 y <input id="input-y" max="2" min="-2" step="0.25" type="range" value="1"/><output for="input-y" id="matrix-y-value"></output></label></div>
+<div aria-live="polite" class="matrix-equation" id="matrix-equation"></div>
+<svg aria-label="동일한 눈금으로 비교하는 입력 벡터와 변환 결과" id="transform-fig" role="img"></svg>
+<p aria-live="polite" class="matrix-explanation" id="transform-result"></p>
+<figcaption>설명용 행렬. 왼쪽은 입력, 오른쪽은 변환 결과입니다. 파랑·연한 파랑 화살표는 각 방향의 기여, 회색 화살표는 합계입니다. 양쪽 그림은 같은 눈금이며, 음의 배수는 방향을 뒤집습니다.</figcaption></figure>

@@ -1,0 +1,2 @@
+{{- $link := partial "resolve.html" (dict "page" .Page "destination" .Destination) -}}
+<img src="{{ $link.url }}" alt="{{ .PlainText }}" loading="lazy"{{ with .Title }} title="{{ . }}"{{ end }}{{ with $link.resource }}{{ if eq .ResourceType "image" }}{{ if ne .MediaType.SubType "svg" }} width="{{ .Width }}" height="{{ .Height }}"{{ end }}{{ end }}{{ end }}>

@@ -1,0 +1,11 @@
+import { createScope, loadJSON, addReset } from 'experiment-shared.js';
+
+export async function mount(root, context) {
+ const scope=createScope(root,context);
+ const {document,window,ResizeObserver,MutationObserver,requestAnimationFrame,cancelAnimationFrame}=scope;
+ try {
+(function(){const $=id=>document.getElementById('vs-'+id);if(!$('theta'))return;let seed=20260717,run=0,last;const mq=window.matchMedia('(max-width:600px)');function random(){seed=(Math.imul(1664525,seed)+1013904223)>>>0;return seed/4294967296}function put(id,v,d=6){$(id).textContent=v.toFixed(d);$(id).dataset.value=String(v)}function draw(){if(!last)return;const w=mq.matches?288:620,left=24,bw=w-32,n=last.n,svg=$('fig');svg.setAttribute('viewBox','0 0 '+w+' 110');svg.innerHTML=[['X',last.x],['Z',last.z]].map((r,i)=>{const y=15+50*i,a=bw*r[1]/n;return '<text x="2" y="'+(y+17)+'">'+r[0]+'</text><rect x="'+left+'" y="'+y+'" width="'+a+'" height="25" fill="var(--n)"/><rect x="'+(left+a)+'" y="'+y+'" width="'+(bw-a)+'" height="25" fill="var(--alpha)"/>'}).join('')}function sample(){const d=Number($('theta').value),t=d*Math.PI/180,n=Number($('shots').value),x=Math.sin(t),z=Math.cos(t);let xp=0,zp=0;for(let i=0;i<n;i++){if(random()<(1+x)/2)xp++;if(random()<(1+z)/2)zp++}const estimate=1-.5*(2*xp/n-1)-.2*(2*zp/n-1),exact=1-.5*x-.2*z,ground=1-Math.hypot(.5,.2);put('angle',d,0);$('angle').textContent=d+'°';put('total',2*n,0);put('xplus',xp,0);put('xminus',n-xp,0);put('zplus',zp,0);put('zminus',n-zp,0);put('estimate',estimate);put('exact',exact);put('ground',ground);put('se',Math.sqrt((.25*(1-x*x)+.04*(1-z*z))/n));$('run').textContent='측정 묶음 '+(++run)+' · 각 항을 새로 측정했습니다.';$('run').dataset.value=String(run);$('status').textContent=estimate<ground?'이번 추정값은 정확한 바닥 에너지보다 낮습니다. 표본 오차이며 변분 원리를 위반하지 않습니다.':'정확한 기댓값과 추정값의 차이가 이번 측정의 표본 오차입니다.';last={n,x:xp,z:zp};draw()}$('theta').addEventListener('input',sample);$('shots').addEventListener('change',sample);$('resample').addEventListener('click',sample);$('reset').addEventListener('click',()=>{seed=20260717;run=0;$('theta').value='60';$('shots').value='100';sample()});mq.addEventListener('change',draw);sample()})();
+ addReset(root,context.signal);
+ return scope.lifecycle;
+ } catch(error) {scope.lifecycle.destroy();throw error;}
+}

@@ -1,0 +1,1 @@
+{{ define "main" }}<main id="main" class="listing-main" data-legacy-target="{{ .Params.target }}" data-legacy-file="{{ .Params.original }}"><p class="eyebrow">학습 노트</p><h1>노트가 새 주소로 이동했어요.</h1><p>기존에 읽던 주제로 연결합니다. 자동으로 이동하지 않으면 아래 링크를 사용해 주세요.</p><a class="primary-link" href="{{ .Params.target | relURL }}">새 노트에서 이어 읽기 <span>→</span></a></main>{{ end }}

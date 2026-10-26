@@ -1,0 +1,9 @@
+<!doctype html><html lang="ko"><head>{{ partial "head.html" . }}</head>
+<body data-base="{{ site.Home.RelPermalink }}" data-search="{{ site.Home.RelPermalink }}search.json">
+<a class="skip-link" href="#main">본문으로 건너뛰기</a>
+<header class="app-header"><a class="brand" href="{{ site.Home.RelPermalink }}"><svg width="21" height="23" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h15v18H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z M7 3v18 M11 8h5 M11 12h5"/></svg>학습 노트</a><nav aria-label="주 탐색"><a href="{{ `notes/` | relURL }}">모든 노트</a><a href="{{ `paths/` | relURL }}">학습 경로</a></nav><div class="header-tools"><button class="search-open" type="button" data-open-search aria-label="노트 검색"><span>검색</span><kbd>⌘ K</kbd></button><button class="theme-toggle" type="button" data-theme-toggle aria-label="화면 테마 변경">◐</button></div></header>
+{{ block "main" . }}{{ end }}
+<footer class="site-footer"><span>개념을 이해하고, 연결하고, 직접 확인하기.</span><a href="{{ site.Home.RelPermalink }}">학습 노트</a></footer>
+<dialog class="search-dialog" aria-label="노트 검색"><form method="dialog"><label for="search-input">노트 검색</label><button aria-label="검색 닫기">닫기 <kbd>Esc</kbd></button></form><input id="search-input" type="search" autocomplete="off" placeholder="개념이나 궁금한 내용을 입력하세요"><p class="search-status" role="status">제목, 설명, 본문에서 검색합니다.</p><ul class="search-results"></ul></dialog>
+{{ with resources.Get "site.js" | js.Build (dict "format" "esm" "minify" true) | fingerprint }}<script type="module" src="{{ .RelPermalink }}"></script>{{ end }}
+</body></html>

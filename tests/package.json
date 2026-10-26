@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "description": "CI browser checks only; not needed to author or build notes",
+  "type": "module",
+  "scripts": { "test": "node browser.mjs" },
+  "devDependencies": { "playwright": "1.62.1" }
+}

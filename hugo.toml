@@ -1,0 +1,50 @@
+baseURL = 'https://inojeon.github.io/note/'
+locale = 'ko-KR'
+defaultContentLanguage = 'ko'
+title = '학습 노트'
+contentDir = 'content'
+layoutDir = 'site/layouts'
+assetDir = 'site/assets'
+staticDir = 'site/static'
+dataDir = 'site/data'
+publishDir = 'public'
+disableKinds = ['taxonomy', 'term', 'RSS']
+enableRobotsTXT = true
+enableGitInfo = false
+
+[outputs]
+home = ['HTML', 'Search', 'Manifest', 'Legacy']
+[outputFormats.Search]
+mediaType = 'application/json'
+baseName = 'search'
+isPlainText = true
+[outputFormats.Manifest]
+mediaType = 'application/json'
+baseName = 'manifest'
+isPlainText = true
+[outputFormats.Legacy]
+mediaType = 'application/json'
+baseName = 'legacy-routes'
+isPlainText = true
+
+[markup.goldmark.renderer]
+unsafe = false
+[markup.goldmark.extensions.passthrough]
+enable = true
+[markup.goldmark.extensions.passthrough.delimiters]
+block = [['$$', '$$'], ['\[', '\]']]
+inline = [['\(', '\)']]
+[markup.tableOfContents]
+startLevel = 2
+endLevel = 3
+
+[security]
+allowContent = ['text/markdown', 'text/html']
+
+[params.topics]
+linear-algebra = '선형대수'
+quantum-chemistry = '양자화학'
+quantum-computing = '양자 컴퓨팅'
+vqe = 'VQE'
+sqd = 'SQD'
+sqd-workflow = 'SQD 실습'

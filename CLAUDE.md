@@ -1,44 +1,9 @@
-# note
+# 학습 노트
 
-SQD(Sample-based Quantum Diagonalization) 학습 문서 저장소. 본문 문서와 개념 노트의 작업 규칙은 `references/sqd-docs/CLAUDE.md`에 있다.
+이 저장소의 공통 작업 지침은 [AGENTS.md](AGENTS.md)다. 해당 문서를 먼저 읽고 작업한다.
 
-## Skill routing
-
-When the user's request matches an available skill, invoke it via the Skill tool. The
-skill has multi-step workflows, checklists, and quality gates that produce better
-results than an ad-hoc answer. When in doubt, invoke the skill. A false positive is
-cheaper than a false negative.
-
-Key routing rules:
-- Product ideas, "is this worth building", brainstorming → invoke /office-hours
-- Strategy, scope, "think bigger", "what should we build" → invoke /plan-ceo-review
-- Architecture, "does this design make sense" → invoke /plan-eng-review
-- Design system, brand, "how should this look" → invoke /design-consultation
-- Design review of a plan → invoke /plan-design-review
-- Developer experience of a plan → invoke /plan-devex-review
-- "Review everything", full review pipeline → invoke /autoplan
-- Bugs, errors, "why is this broken", "wtf", "this doesn't work" → invoke /investigate
-- Test the site, find bugs, "does this work" → invoke /qa (or /qa-only for report only)
-- Code review, check the diff, "look at my changes" → invoke /review
-- Visual polish, design audit, "this looks off" → invoke /design-review
-- Developer experience audit, try onboarding → invoke /devex-review
-- Ship, deploy, create a PR, "send it" → invoke /ship
-- Merge + deploy + verify → invoke /land-and-deploy
-- Configure deployment → invoke /setup-deploy
-- Post-deploy monitoring → invoke /canary
-- Update docs after shipping → invoke /document-release
-- Weekly retro, "how'd we do" → invoke /retro
-- Second opinion, codex review → invoke /codex
-- Safety mode, careful mode, lock it down → invoke /careful or /guard
-- Restrict edits to a directory → invoke /freeze or /unfreeze
-- Upgrade gstack → invoke /gstack-upgrade
-- Save progress, "save my work" → invoke /context-save
-- Resume, restore, "where was I" → invoke /context-restore
-- Security audit, OWASP, "is this secure" → invoke /cso
-- Make a PDF, document, publication → invoke /make-pdf
-- Launch real browser for QA → invoke /open-gstack-browser
-- Import cookies for authenticated testing → invoke /setup-browser-cookies
-- Performance regression, page speed, benchmarks → invoke /benchmark
-- Review what gstack has learned → invoke /learn
-- Tune question sensitivity → invoke /plan-tune
-- Code quality dashboard → invoke /health
+- 개념과 실험의 작성 원본은 `content/`, 공통 렌더러는 `site/`에 둔다.
+- 일반 미리보기와 빌드는 Hugo만 사용한다. 실행 방법은 [README.md](README.md)를 따른다.
+- [노트 작성](docs/note-authoring.md), [개념 미리보기](docs/concept-preview.md), [실험 작성](docs/experiment-authoring.md), [개발·검증](docs/development.md) 계약을 따른다.
+- `references/sqd-docs/`는 수정하지 않는 보존본이다. 그 안의 예전 빌드·배포·도구 라우팅 규칙을 새 사이트 작업에 적용하지 않는다.
+- `public/`는 생성 결과이며 직접 수정하거나 커밋하지 않는다.

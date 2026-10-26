@@ -1,0 +1,14 @@
+{{- $html := .view.RawContent -}}{{- $page := .page -}}
+{{/* Static formula spans use the same build-time KaTeX as Markdown. Dynamic values
+     opt in to the local runtime renderer separately. Keep outer IDs for controls. */}}
+{{- range findRE `(?s)<span\b[^>]*\bdata-tex="[^"]*"[^>]*>.*?</span>` $html -}}
+  {{- $original := . -}}
+  {{- $tex := replaceRE `(?s)^.*?\bdata-tex="([^"]*)".*$` `${1}` . | htmlUnescape -}}
+  {{- $start := index (findRE `^<span[^>]*>` . 1) 0 -}}
+  {{- with try (transform.ToMath $tex (dict "displayMode" false "output" "htmlAndMathml")) -}}
+    {{- with .Err -}}{{- errorf "%s/view.html: 수식 오류: %s" $page.File.Dir . -}}{{- else -}}
+      {{- $html = replace $html $original (printf "%s%s</span>" $start .Value) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return ($html | safeHTML) -}}

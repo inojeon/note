@@ -1,0 +1,11 @@
+import { createScope, loadJSON, addReset } from 'experiment-shared.js';
+
+export async function mount(root, context) {
+ const scope=createScope(root,context);
+ const {document,window,ResizeObserver,MutationObserver,requestAnimationFrame,cancelAnimationFrame}=scope;
+ try {
+(function(){const get=id=>document.getElementById(id),state=get('bn-state'),basis=get('bn-basis');if(!state)return;function draw(){const k=state.value,x=basis.value==='x';const vectors={zero:[1,0,0,0],plus:[.5,.5,.5,.5],bell:[Math.SQRT1_2,0,0,Math.SQRT1_2]};const h=[[.5,.5,.5,.5],[.5,-.5,.5,-.5],[.5,.5,-.5,-.5],[.5,-.5,-.5,.5]];let p;if(k==='mixture')p=x?[.25,.25,.25,.25]:[.5,0,0,.5];else{const v=vectors[k],w=x?h.map(row=>row.reduce((s,t,i)=>s+t*v[i],0)):v;p=w.map(t=>t*t);}const labels=x?['++','+−','−+','−−']:['00','01','10','11'];p.forEach((n,i)=>{get('bn-label'+i).textContent=labels[i];get('bn-p'+i).textContent=(n*100).toFixed(2)+'%';});const first=x?'+':'0',second=x?'−':'1';get('bn-ma').textContent=first+': '+((p[0]+p[1])*100).toFixed(2)+'% / '+second+': '+((p[2]+p[3])*100).toFixed(2)+'%';get('bn-mb').textContent=first+': '+((p[0]+p[2])*100).toFixed(2)+'% / '+second+': '+((p[1]+p[3])*100).toFixed(2)+'%';get('bn-description').textContent={bell:'00과 11의 확률 진폭을 중첩한 전체 순수상태입니다. 아래 좌표는 계산 기저 순서입니다.',zero:'A와 B를 각각 0 상태로 독립적으로 준비합니다.',plus:'A와 B를 각각 + 상태로 독립적으로 준비합니다. +는 0과 1의 같은 진폭 중첩입니다.',mixture:'매번 00 또는 11 중 하나를 같은 확률로 준비합니다. 이 혼합은 하나의 상태 벡터로 표현하지 않습니다.'}[k];const e=get('bn-vector');e.hidden=k==='mixture';if(k!=='mixture'){e.dataset.tex='\\begin{pmatrix}'+vectors[k].map(v=>v===Math.SQRT1_2?'1/\\sqrt{2}':String(v)).join('\\\\')+'\\end{pmatrix}';e.textContent=vectors[k].join('; ');}get('bn-status').textContent='두 결과가 같을 확률 '+((p[0]+p[3])*100).toFixed(2)+'% · '+(k==='bell'?'얽힌 상태입니다.':k==='mixture'?'고전적 상관관계가 있는 혼합입니다.':'얽힘이 없는 곱 상태입니다.');get('bn-lab').dataset.probabilities=JSON.stringify(p);get('bn-lab').dataset.marginals=JSON.stringify([p[0]+p[1],p[0]+p[2]]);}state.addEventListener('change',draw);basis.addEventListener('change',draw);draw();})();
+ addReset(root,context.signal);
+ return scope.lifecycle;
+ } catch(error) {scope.lifecycle.destroy();throw error;}
+}

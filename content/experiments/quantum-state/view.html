@@ -1,0 +1,9 @@
+<p class="lab-note">고정된 상태의 방향: <output id="qstate-alpha"></output>°</p>
+<section aria-labelledby="qstate-lab-title" class="box qc-lab"><h3 id="qstate-lab-title" style="margin-top:0">실험 · 상태는 고정하고 기준만 돌리기</h3><p class="qc-note">설명용 두 상태 모형입니다. 복소 상태공간 가운데 실수 좌표만 보이는 평면을 사용합니다. 회색 화살표는 고정하고 파랑·연한 파랑 기저만 돌려 보세요.</p>
+<div class="qc-controls"><label for="qstate-angle">기저 회전각 θ <output for="qstate-angle" id="qstate-angle-value"></output></label><input aria-describedby="qstate-status" id="qstate-angle" max="90" min="-90" step="1" type="range" value="0"/></div>
+<div aria-label="기저 각도 예시" class="qc-presets"><button id="qstate-original" type="button">원래 기저</button><button id="qstate-aligned" type="button">첫 기저를 상태에 맞추기</button><button id="qstate-quarter" type="button">기저를 90° 돌리기</button></div>
+<figure><svg aria-labelledby="qstate-fig-title qstate-fig-desc" id="qstate-fig" role="img"></svg><figcaption>추상적인 상태공간의 그림입니다. 화살표의 방향은 전자의 실제 공간 방향이나 궤적을 나타내지 않습니다. 점선은 새 기저 방향의 성분(Component)을 더해 같은 상태를 복원하는 과정입니다.</figcaption></figure>
+<div class="qc-readouts"><div><small>고정된 원래 기저의 좌표 c</small><div id="qstate-fixed"></div></div><div><small>회전한 기저의 좌표 c′</small><div id="qstate-rotated"></div></div></div>
+<div aria-live="polite" class="state-expansion" id="qstate-expansion"></div><p aria-live="polite" class="qc-status" id="qstate-status" role="status"></p>
+<p class="qc-equation" id="qstate-norm"></p>
+</section>

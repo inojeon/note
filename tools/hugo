@@ -1,0 +1,9 @@
+#!/bin/sh
+set -eu
+repo=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+version=$(cat "$repo/.hugo-version")
+if [ -x "$repo/.tools/hugo" ]; then binary="$repo/.tools/hugo"; else binary=$(command -v hugo || true); fi
+if [ -z "$binary" ]; then echo '먼저 sh tools/install-hugo.sh 를 실행하세요.' >&2; exit 1; fi
+if ! "$binary" version | grep -q "v${version}-"; then echo "Hugo ${version}이 필요합니다. sh tools/install-hugo.sh 로 준비하세요." >&2; exit 1; fi
+cd "$repo"
+exec "$binary" "$@"

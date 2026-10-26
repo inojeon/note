@@ -1,0 +1,790 @@
+{
+  "version": 1,
+  "files": {
+    "00-quickstart.html": "notes/00-quickstart/",
+    "01-pyscf.html": "notes/01-pyscf/",
+    "02-jordan-wigner.html": "notes/02-jordan-wigner/",
+    "03-ucj-inside.html": "notes/03-ucj-inside/",
+    "04-circuit.html": "notes/04-circuit/",
+    "05-sampling.html": "notes/05-sampling/",
+    "06-sqd-guide.html": "notes/06-sqd-guide/",
+    "background-atoms.html": "notes/background-atoms/",
+    "concept-active-space.html": "notes/active-space/",
+    "concept-ansatz.html": "notes/ansatz/",
+    "concept-basis-orbital-energies.html": "notes/basis-orbital-energies/",
+    "concept-basis-set.html": "notes/basis-set/",
+    "concept-basis.html": "notes/basis/",
+    "concept-born-oppenheimer.html": "notes/born-oppenheimer/",
+    "concept-born-rule.html": "notes/born-rule/",
+    "concept-classical-optimization.html": "notes/classical-optimization/",
+    "concept-computational-basis.html": "notes/computational-basis/",
+    "concept-configuration-interaction.html": "notes/configuration-interaction/",
+    "concept-diagonalization-coordinates.html": "notes/diagonalization-coordinates/",
+    "concept-diagonalization.html": "notes/diagonalization/",
+    "concept-eigen.html": "notes/eigen/",
+    "concept-electron-correlation.html": "notes/electron-correlation/",
+    "concept-electron-integrals.html": "notes/electron-integrals/",
+    "concept-electron-spin.html": "notes/electron-spin/",
+    "concept-electronic-configuration.html": "notes/electronic-configuration/",
+    "concept-energy-expectation.html": "notes/energy-expectation/",
+    "concept-energy-measurement.html": "notes/energy-measurement/",
+    "concept-entanglement.html": "notes/entanglement/",
+    "concept-excitation-state.html": "notes/excitation-state/",
+    "concept-fermion-qubit.html": "notes/fermion-qubit/",
+    "concept-h2-hamiltonian.html": "notes/h2-hamiltonian/",
+    "concept-h2-state-energy.html": "notes/h2-state-energy/",
+    "concept-hamiltonian-elements.html": "notes/hamiltonian-elements/",
+    "concept-hamiltonian-size.html": "notes/hamiltonian-size/",
+    "concept-hamiltonian.html": "notes/hamiltonian/",
+    "concept-hartree-fock.html": "notes/hartree-fock/",
+    "concept-hf-preparation.html": "notes/hf-preparation/",
+    "concept-inner-product.html": "notes/inner-product/",
+    "concept-krylov.html": "notes/krylov/",
+    "concept-large-hamiltonian.html": "notes/large-hamiltonian/",
+    "concept-learning-maps.html": "paths/",
+    "concept-matrix.html": "notes/matrix/",
+    "concept-measurement-basis.html": "notes/measurement-basis/",
+    "concept-measurement-shots.html": "notes/measurement-shots/",
+    "concept-molecular-orbital.html": "notes/molecular-orbital/",
+    "concept-observable.html": "notes/observable/",
+    "concept-occupation-bitstrings.html": "notes/occupation-bitstrings/",
+    "concept-orbital.html": "notes/orbital/",
+    "concept-parameterized-circuit.html": "notes/parameterized-circuit/",
+    "concept-pauli-decomposition.html": "notes/pauli-decomposition/",
+    "concept-pauli.html": "notes/pauli/",
+    "concept-potential-energy.html": "notes/potential-energy/",
+    "concept-power.html": "notes/power/",
+    "concept-quantum-chemistry.html": "paths/quantum-chemistry/",
+    "concept-quantum-computing.html": "paths/quantum-computing/",
+    "concept-quantum-gate.html": "notes/quantum-gate/",
+    "concept-quantum-state.html": "notes/quantum-state/",
+    "concept-qubit.html": "notes/qubit/",
+    "concept-relations.html": "paths/",
+    "concept-rotation-gate.html": "notes/rotation-gate/",
+    "concept-schrodinger.html": "notes/schrodinger/",
+    "concept-slater-determinant.html": "notes/slater-determinant/",
+    "concept-sqd-sampling.html": "notes/sqd-sampling/",
+    "concept-sqd-state-circuit.html": "notes/sqd-state-circuit/",
+    "concept-sqd-subspace.html": "notes/sqd-subspace/",
+    "concept-sqd.html": "paths/sqd/",
+    "concept-sto-3g.html": "notes/sto-3g/",
+    "concept-subspace.html": "notes/subspace/",
+    "concept-superposition.html": "notes/superposition/",
+    "concept-symmetric.html": "notes/symmetric/",
+    "concept-tensor-product.html": "notes/tensor-product/",
+    "concept-two-level-system.html": "notes/two-level-system/",
+    "concept-variational-principle.html": "notes/variational-principle/",
+    "concept-vector.html": "notes/vector/",
+    "concept-vqe-algorithm.html": "notes/vqe-algorithm/",
+    "concept-vqe-hydrogen.html": "notes/vqe-hydrogen/",
+    "concept-vqe.html": "paths/vqe/",
+    "concepts.html": "notes/",
+    "index-main.html": "",
+    "index.html": "",
+    "intro.html": "notes/intro/",
+    "learning-maps.html": "paths/",
+    "math.html": "notes/math/",
+    "prep-math.html": "notes/prep-math/",
+    "quantum-chemistry.html": "notes/",
+    "relations.html": "paths/"
+  },
+  "slugs": {
+    "sqd-state-circuit": "notes/sqd-state-circuit/",
+    "fermion-qubit": "notes/fermion-qubit/",
+    "rotation-gate": "notes/rotation-gate/",
+    "active-space": "notes/active-space/",
+    "krylov": "notes/krylov/",
+    "energy-measurement": "notes/energy-measurement/",
+    "vqe-hydrogen": "notes/vqe-hydrogen/",
+    "basis-orbital-energies": "notes/basis-orbital-energies/",
+    "h2-hamiltonian": "notes/h2-hamiltonian/",
+    "sqd-subspace": "notes/sqd-subspace/",
+    "sqd-sampling": "notes/sqd-sampling/",
+    "born-oppenheimer": "notes/born-oppenheimer/",
+    "basis-set": "notes/basis-set/",
+    "symmetric": "notes/symmetric/",
+    "orbital": "notes/orbital/",
+    "electron-spin": "notes/electron-spin/",
+    "superposition": "notes/superposition/",
+    "hamiltonian": "notes/hamiltonian/",
+    "pauli": "notes/pauli/",
+    "molecular-orbital": "notes/molecular-orbital/",
+    "two-level-system": "notes/two-level-system/",
+    "tensor-product": "notes/tensor-product/",
+    "measurement-shots": "notes/measurement-shots/",
+    "sto-3g": "notes/sto-3g/",
+    "born-rule": "notes/born-rule/",
+    "electron-integrals": "notes/electron-integrals/",
+    "hamiltonian-size": "notes/hamiltonian-size/",
+    "entanglement": "notes/entanglement/",
+    "classical-optimization": "notes/classical-optimization/",
+    "potential-energy": "notes/potential-energy/",
+    "electron-correlation": "notes/electron-correlation/",
+    "electronic-configuration": "notes/electronic-configuration/",
+    "parameterized-circuit": "notes/parameterized-circuit/",
+    "schrodinger": "notes/schrodinger/",
+    "eigen": "notes/eigen/",
+    "vqe-algorithm": "notes/vqe-algorithm/",
+    "large-hamiltonian": "notes/large-hamiltonian/",
+    "power": "notes/power/",
+    "diagonalization-coordinates": "notes/diagonalization-coordinates/",
+    "inner-product": "notes/inner-product/",
+    "quantum-state": "notes/quantum-state/",
+    "h2-state-energy": "notes/h2-state-energy/",
+    "basis": "notes/basis/",
+    "variational-principle": "notes/variational-principle/",
+    "qubit": "notes/qubit/",
+    "quantum-gate": "notes/quantum-gate/",
+    "energy-expectation": "notes/energy-expectation/",
+    "ansatz": "notes/ansatz/",
+    "hf-preparation": "notes/hf-preparation/",
+    "hartree-fock": "notes/hartree-fock/",
+    "measurement-basis": "notes/measurement-basis/",
+    "diagonalization": "notes/diagonalization/",
+    "excitation-state": "notes/excitation-state/",
+    "subspace": "notes/subspace/",
+    "hamiltonian-elements": "notes/hamiltonian-elements/",
+    "occupation-bitstrings": "notes/occupation-bitstrings/",
+    "computational-basis": "notes/computational-basis/",
+    "observable": "notes/observable/",
+    "matrix": "notes/matrix/",
+    "configuration-interaction": "notes/configuration-interaction/",
+    "vector": "notes/vector/",
+    "slater-determinant": "notes/slater-determinant/",
+    "pauli-decomposition": "notes/pauli-decomposition/",
+    "home": "paths/linear-algebra/",
+    "quantum-chemistry": "paths/quantum-chemistry/",
+    "quantum-computing": "paths/quantum-computing/",
+    "vqe": "paths/vqe/",
+    "sqd": "paths/sqd/",
+    "learning-maps": "paths/",
+    "relations": "paths/",
+    "sqd-linear-algebra": "notes/hamiltonian/",
+    "vqe-energy": "paths/vqe/",
+    "sqd-quantum": "paths/sqd/",
+    "define-hamiltonian": "paths/quantum-chemistry/"
+  },
+  "anchors": {
+    "background-atoms.html#why": "notes/background-atoms/#atom",
+    "background-atoms.html#atom": "notes/background-atoms/#atom",
+    "background-atoms.html#shell": "notes/background-atoms/#shell",
+    "background-atoms.html#table": "notes/background-atoms/#shell",
+    "background-atoms.html#spin": "notes/background-atoms/#spin",
+    "background-atoms.html#core": "notes/background-atoms/#mol",
+    "background-atoms.html#mol": "notes/background-atoms/#mol",
+    "background-atoms.html#map": "notes/background-atoms/#map",
+    "intro.html#q": "notes/intro/#q",
+    "intro.html#seat": "notes/intro/#seat",
+    "intro.html#table": "notes/intro/#table",
+    "intro.html#mix": "notes/intro/#mix",
+    "intro.html#eig": "notes/intro/#mix",
+    "intro.html#stretch": "notes/intro/#stretch",
+    "intro.html#boom": "notes/intro/#boom",
+    "intro.html#list": "notes/intro/#boom",
+    "intro.html#dice": "notes/intro/#loop",
+    "intro.html#fix": "notes/intro/#loop",
+    "intro.html#loop": "notes/intro/#loop",
+    "intro.html#next": "notes/intro/#loop",
+    "prep-math.html#s0": "notes/prep-math/#vectors",
+    "prep-math.html#s1": "notes/prep-math/#vectors",
+    "prep-math.html#s2": "notes/prep-math/#vectors",
+    "prep-math.html#s3": "notes/prep-math/#matrix",
+    "prep-math.html#s4": "notes/prep-math/#eigen",
+    "prep-math.html#s5": "notes/prep-math/#eigen",
+    "prep-math.html#s6": "notes/prep-math/#eigen",
+    "prep-math.html#s7": "notes/prep-math/#subspace",
+    "prep-math.html#s8": "notes/prep-math/#subspace",
+    "prep-math.html#s9": "notes/prep-math/#statistics",
+    "prep-math.html#s10": "notes/prep-math/#statistics",
+    "prep-math.html#s11": "notes/prep-math/#statistics",
+    "prep-math.html#s12": "notes/prep-math/#log",
+    "prep-math.html#s13": "notes/prep-math/#h2",
+    "prep-math.html#quiz": "notes/prep-math/#h2",
+    "math.html#intro": "notes/math/#rayleigh",
+    "math.html#a1": "notes/math/#rayleigh",
+    "math.html#a2": "notes/math/#rayleigh",
+    "math.html#a3": "notes/math/#rayleigh",
+    "math.html#a4": "notes/math/#rayleigh",
+    "math.html#a5": "notes/math/#krylov",
+    "math.html#a6": "notes/math/#krylov",
+    "math.html#a7": "notes/math/#subspace",
+    "math.html#b1": "notes/math/#born",
+    "math.html#b2": "notes/math/#born",
+    "math.html#b3": "notes/math/#born",
+    "math.html#b4": "notes/math/#coverage",
+    "math.html#b5": "notes/math/#noise",
+    "math.html#sum": "notes/math/#results",
+    "00-quickstart.html#overview": "notes/00-quickstart/#overview",
+    "00-quickstart.html#prep": "notes/00-quickstart/#prep",
+    "00-quickstart.html#sqd": "notes/00-quickstart/#prep",
+    "00-quickstart.html#full": "notes/00-quickstart/#prep",
+    "00-quickstart.html#samples": "notes/00-quickstart/#samples",
+    "00-quickstart.html#opts": "notes/00-quickstart/#opts",
+    "00-quickstart.html#lesson": "notes/00-quickstart/#next",
+    "00-quickstart.html#next": "notes/00-quickstart/#next",
+    "01-pyscf.html#overview": "notes/01-pyscf/#mol",
+    "01-pyscf.html#mol": "notes/01-pyscf/#mol",
+    "01-pyscf.html#basis": "notes/01-pyscf/#basis",
+    "01-pyscf.html#hf": "notes/01-pyscf/#basis",
+    "01-pyscf.html#cas": "notes/01-pyscf/#cas",
+    "01-pyscf.html#defs": "notes/01-pyscf/#cas",
+    "01-pyscf.html#full": "notes/01-pyscf/#cas",
+    "01-pyscf.html#ints": "notes/01-pyscf/#ints",
+    "01-pyscf.html#why": "notes/01-pyscf/#validation",
+    "01-pyscf.html#handoff": "notes/01-pyscf/#validation",
+    "01-pyscf.html#scope": "notes/01-pyscf/#validation",
+    "02-jordan-wigner.html#overview": "notes/02-jordan-wigner/#occ",
+    "02-jordan-wigner.html#occ": "notes/02-jordan-wigner/#occ",
+    "02-jordan-wigner.html#toy": "notes/02-jordan-wigner/#occ",
+    "02-jordan-wigner.html#ops": "notes/02-jordan-wigner/#sign",
+    "02-jordan-wigner.html#sign": "notes/02-jordan-wigner/#sign",
+    "02-jordan-wigner.html#full": "notes/02-jordan-wigner/#operator",
+    "02-jordan-wigner.html#ham": "notes/02-jordan-wigner/#ham",
+    "02-jordan-wigner.html#sqd": "notes/02-jordan-wigner/#sqd",
+    "02-jordan-wigner.html#scope": "notes/02-jordan-wigner/#sqd",
+    "03-ucj-inside.html#overview": "notes/03-ucj-inside/#overview",
+    "03-ucj-inside.html#rot": "notes/03-ucj-inside/#layers",
+    "03-ucj-inside.html#coul": "notes/03-ucj-inside/#layers",
+    "03-ucj-inside.html#t2": "notes/03-ucj-inside/#t2",
+    "03-ucj-inside.html#full": "notes/03-ucj-inside/#t2",
+    "03-ucj-inside.html#reps": "notes/03-ucj-inside/#reps",
+    "03-ucj-inside.html#opt": "notes/03-ucj-inside/#opt",
+    "03-ucj-inside.html#scope": "notes/03-ucj-inside/#opt",
+    "04-circuit.html#overview": "notes/04-circuit/#overview",
+    "04-circuit.html#jw": "notes/04-circuit/#overview",
+    "04-circuit.html#goal": "notes/04-circuit/#overview",
+    "04-circuit.html#ucj": "notes/04-circuit/#circuit",
+    "04-circuit.html#e2e": "notes/04-circuit/#circuit",
+    "04-circuit.html#full": "notes/04-circuit/#circuit",
+    "04-circuit.html#lucj": "notes/04-circuit/#cost",
+    "04-circuit.html#state": "notes/04-circuit/#state",
+    "04-circuit.html#scope": "notes/04-circuit/#conditions",
+    "05-sampling.html#overview": "notes/05-sampling/#born",
+    "05-sampling.html#born": "notes/05-sampling/#born",
+    "05-sampling.html#shots": "notes/05-sampling/#shots",
+    "05-sampling.html#read": "notes/05-sampling/#format",
+    "05-sampling.html#format": "notes/05-sampling/#format",
+    "05-sampling.html#full": "notes/05-sampling/#code",
+    "05-sampling.html#noise": "notes/05-sampling/#noise",
+    "05-sampling.html#post": "notes/05-sampling/#noise",
+    "05-sampling.html#handoff": "notes/05-sampling/#handoff",
+    "05-sampling.html#scope": "notes/05-sampling/#handoff",
+    "06-sqd-guide.html#why": "notes/06-sqd-guide/#why",
+    "06-sqd-guide.html#bits": "notes/06-sqd-guide/#input",
+    "06-sqd-guide.html#story": "notes/06-sqd-guide/#input",
+    "06-sqd-guide.html#map": "notes/06-sqd-guide/#map",
+    "06-sqd-guide.html#post": "notes/06-sqd-guide/#recover",
+    "06-sqd-guide.html#recover": "notes/06-sqd-guide/#recover",
+    "06-sqd-guide.html#subspace": "notes/06-sqd-guide/#subspace",
+    "06-sqd-guide.html#diag": "notes/06-sqd-guide/#diag",
+    "06-sqd-guide.html#code": "notes/06-sqd-guide/#diag",
+    "06-sqd-guide.html#policy": "notes/06-sqd-guide/#policy",
+    "06-sqd-guide.html#scope": "notes/06-sqd-guide/#scope"
+  },
+  "documents": [
+    {
+      "source": "references/sqd-docs/docs/concept-active-space.html",
+      "target": "content/notes/active-space/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-ansatz.html",
+      "target": "content/notes/ansatz/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-basis.html",
+      "target": "content/notes/basis/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-basis-orbital-energies.html",
+      "target": "content/notes/basis-orbital-energies/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-basis-set.html",
+      "target": "content/notes/basis-set/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-born-oppenheimer.html",
+      "target": "content/notes/born-oppenheimer/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-born-rule.html",
+      "target": "content/notes/born-rule/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-classical-optimization.html",
+      "target": "content/notes/classical-optimization/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-computational-basis.html",
+      "target": "content/notes/computational-basis/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-configuration-interaction.html",
+      "target": "content/notes/configuration-interaction/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-diagonalization.html",
+      "target": "content/notes/diagonalization/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-diagonalization-coordinates.html",
+      "target": "content/notes/diagonalization-coordinates/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-eigen.html",
+      "target": "content/notes/eigen/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-electron-correlation.html",
+      "target": "content/notes/electron-correlation/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-electron-integrals.html",
+      "target": "content/notes/electron-integrals/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-electron-spin.html",
+      "target": "content/notes/electron-spin/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-electronic-configuration.html",
+      "target": "content/notes/electronic-configuration/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-energy-expectation.html",
+      "target": "content/notes/energy-expectation/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-energy-measurement.html",
+      "target": "content/notes/energy-measurement/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-entanglement.html",
+      "target": "content/notes/entanglement/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-excitation-state.html",
+      "target": "content/notes/excitation-state/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-fermion-qubit.html",
+      "target": "content/notes/fermion-qubit/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-h2-hamiltonian.html",
+      "target": "content/notes/h2-hamiltonian/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-h2-state-energy.html",
+      "target": "content/notes/h2-state-energy/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-hamiltonian.html",
+      "target": "content/notes/hamiltonian/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-hamiltonian-elements.html",
+      "target": "content/notes/hamiltonian-elements/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-hamiltonian-size.html",
+      "target": "content/notes/hamiltonian-size/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-hartree-fock.html",
+      "target": "content/notes/hartree-fock/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-hf-preparation.html",
+      "target": "content/notes/hf-preparation/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-inner-product.html",
+      "target": "content/notes/inner-product/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-krylov.html",
+      "target": "content/notes/krylov/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-large-hamiltonian.html",
+      "target": "content/notes/large-hamiltonian/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-matrix.html",
+      "target": "content/notes/matrix/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-measurement-basis.html",
+      "target": "content/notes/measurement-basis/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-measurement-shots.html",
+      "target": "content/notes/measurement-shots/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-molecular-orbital.html",
+      "target": "content/notes/molecular-orbital/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-observable.html",
+      "target": "content/notes/observable/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-occupation-bitstrings.html",
+      "target": "content/notes/occupation-bitstrings/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-orbital.html",
+      "target": "content/notes/orbital/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-parameterized-circuit.html",
+      "target": "content/notes/parameterized-circuit/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-pauli.html",
+      "target": "content/notes/pauli/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-pauli-decomposition.html",
+      "target": "content/notes/pauli-decomposition/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-potential-energy.html",
+      "target": "content/notes/potential-energy/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-power.html",
+      "target": "content/notes/power/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-quantum-gate.html",
+      "target": "content/notes/quantum-gate/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-quantum-state.html",
+      "target": "content/notes/quantum-state/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-qubit.html",
+      "target": "content/notes/qubit/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-rotation-gate.html",
+      "target": "content/notes/rotation-gate/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-schrodinger.html",
+      "target": "content/notes/schrodinger/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-slater-determinant.html",
+      "target": "content/notes/slater-determinant/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-sqd-sampling.html",
+      "target": "content/notes/sqd-sampling/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-sqd-state-circuit.html",
+      "target": "content/notes/sqd-state-circuit/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-sqd-subspace.html",
+      "target": "content/notes/sqd-subspace/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-sto-3g.html",
+      "target": "content/notes/sto-3g/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-subspace.html",
+      "target": "content/notes/subspace/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-superposition.html",
+      "target": "content/notes/superposition/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-symmetric.html",
+      "target": "content/notes/symmetric/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-tensor-product.html",
+      "target": "content/notes/tensor-product/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-two-level-system.html",
+      "target": "content/notes/two-level-system/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-variational-principle.html",
+      "target": "content/notes/variational-principle/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-vector.html",
+      "target": "content/notes/vector/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-vqe-algorithm.html",
+      "target": "content/notes/vqe-algorithm/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-vqe-hydrogen.html",
+      "target": "content/notes/vqe-hydrogen/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/00-quickstart.html",
+      "target": "content/notes/00-quickstart/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/01-pyscf.html",
+      "target": "content/notes/01-pyscf/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/02-jordan-wigner.html",
+      "target": "content/notes/02-jordan-wigner/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/03-ucj-inside.html",
+      "target": "content/notes/03-ucj-inside/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/04-circuit.html",
+      "target": "content/notes/04-circuit/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/05-sampling.html",
+      "target": "content/notes/05-sampling/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/06-sqd-guide.html",
+      "target": "content/notes/06-sqd-guide/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/background-atoms.html",
+      "target": "content/notes/background-atoms/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/intro.html",
+      "target": "content/notes/intro/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/math.html",
+      "target": "content/notes/math/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/prep-math.html",
+      "target": "content/notes/prep-math/index.md",
+      "status": "rewritten"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-learning-maps.html",
+      "target": "paths/",
+      "status": "route",
+      "kind": "map-or-hub"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-quantum-chemistry.html",
+      "target": "paths/quantum-chemistry/",
+      "status": "route",
+      "kind": "map-or-hub"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-quantum-computing.html",
+      "target": "paths/quantum-computing/",
+      "status": "route",
+      "kind": "map-or-hub"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-relations.html",
+      "target": "paths/",
+      "status": "route",
+      "kind": "map-or-hub"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-sqd.html",
+      "target": "paths/sqd/",
+      "status": "route",
+      "kind": "map-or-hub"
+    },
+    {
+      "source": "references/sqd-docs/docs/concept-vqe.html",
+      "target": "paths/vqe/",
+      "status": "route",
+      "kind": "map-or-hub"
+    },
+    {
+      "source": "references/sqd-docs/docs/concepts.html",
+      "target": "notes/",
+      "status": "route",
+      "kind": "reader"
+    },
+    {
+      "source": "references/sqd-docs/docs/index-main.html",
+      "target": "",
+      "status": "route",
+      "kind": "map-or-hub"
+    },
+    {
+      "source": "references/sqd-docs/docs/index.html",
+      "target": "",
+      "status": "route",
+      "kind": "map-or-hub"
+    },
+    {
+      "source": "references/sqd-docs/docs/learning-maps.html",
+      "target": "paths/",
+      "status": "route",
+      "kind": "reader"
+    },
+    {
+      "source": "references/sqd-docs/docs/quantum-chemistry.html",
+      "target": "notes/",
+      "status": "route",
+      "kind": "reader"
+    },
+    {
+      "source": "references/sqd-docs/docs/relations.html",
+      "target": "paths/",
+      "status": "route",
+      "kind": "reader"
+    }
+  ],
+  "datasets": [
+    {
+      "source": "references/sqd-docs/data/00_quickstart.json",
+      "sha256": "4c9f3781bffa1eaffe57f3eb694c45eb5f025f98156b8bdc437cacd3b113c9f1"
+    },
+    {
+      "source": "references/sqd-docs/data/01_pyscf.json",
+      "sha256": "0280c6528b6d6c08948f79053c7e2b92bfb6da53924cb382774411f4bd9ff9d4"
+    },
+    {
+      "source": "references/sqd-docs/data/02_jw.json",
+      "sha256": "aa6a7f9fd0f85dc0ffca76c2335c1066335cd82e836f6da32fea8ee6d33cf8db"
+    },
+    {
+      "source": "references/sqd-docs/data/03_ucj.json",
+      "sha256": "ce2d1cb780d61e339c35d53b5fbdbc5a14fe4a16fb7e49d21b10f85d59084223"
+    },
+    {
+      "source": "references/sqd-docs/data/04_circuit.json",
+      "sha256": "ceee74b46077ef2e5f0a7cd42c43605a2f4336b43f9031103069f984984b6173"
+    },
+    {
+      "source": "references/sqd-docs/data/05_sampling.json",
+      "sha256": "b79cbd25211aa576239f48a351add01821a79da2d4995ebf363367ea7a631d2a"
+    },
+    {
+      "source": "references/sqd-docs/data/06_sqd.json",
+      "sha256": "c27a7c8eab9147138d5870283ae33ada60aff0eb6af91764e87bc5ee3715feb1"
+    },
+    {
+      "source": "references/sqd-docs/data/basis_orbital_levels.json",
+      "sha256": "6f4dcb6144ba52e9cb7dfc087547e0c046d4a908ff696edd8d34a44d701fd20b"
+    },
+    {
+      "source": "references/sqd-docs/data/basis_set_counts.json",
+      "sha256": "6eea46a1d76e9650cb52641cd62db36aadd6ea4de01e2da7ed59caa4cef67c86"
+    },
+    {
+      "source": "references/sqd-docs/data/bo_h2.json",
+      "sha256": "b079237cf261ccdb37488f4c11b1fe1b3c74de70ba65f11286d4c316f090c3a1"
+    },
+    {
+      "source": "references/sqd-docs/data/hamiltonian_comparison.json",
+      "sha256": "2515e81b268b2812c6958bf77dc5eec3eb148815adb7d99644ba0e11ca76c137"
+    },
+    {
+      "source": "references/sqd-docs/data/intro_h2.json",
+      "sha256": "685263652f9952ff5e4ff8dd91256f7dbeca632196f9c0c5c1f1b154e35046eb"
+    },
+    {
+      "source": "references/sqd-docs/data/math.json",
+      "sha256": "d78868f4fddff55fc0f5bb4c35e04c378731df7cfc600833f5b018af2d6b5db8"
+    },
+    {
+      "source": "references/sqd-docs/data/orb3d.json",
+      "sha256": "c9affd9694de8d31857b0988d3b82429bdc1ea700adefd72e64095a18612de29"
+    },
+    {
+      "source": "references/sqd-docs/data/vqe_h2.json",
+      "sha256": "aa764ec84f6cd269623c0d9d97095ba86110f6c18d6b34dd8bba53ac207b01ff"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+import { controls, fmt, chart, loadJSON } from 'experiment-shared.js';
+export async function mount(root,context){
+const $=s=>root.querySelector(s);
+const d=await loadJSON(context,'data.json');$('#subspace').innerHTML=d.subspace.map((x,i)=>`<option value="${i}">${x.k}개</option>`).join('');function render(){const rows=d[$('#method').value],input=$('#step');input.max=rows.length;input.value=Math.min(rows.length,Number(input.value));const k=Number(input.value)-1,r=d.subspace[Number($('#subspace').value)];$('[data-error]').textContent=(rows[k]*1000).toExponential(4)+' mEh';$('[data-reference]').textContent=fmt(d.E0,9)+' Eh';$('[data-missing]').textContent=fmt(r.missing*100,4)+'%';$('[data-suberror]').textContent=fmt(r.err_mHa,5)+' mEh';chart($('[data-plot]'),[{points:rows.map((x,i)=>[i+1,Math.log10(Math.max(x,1e-15))]),point:[k+1,Math.log10(Math.max(rows[k],1e-15))]}],{xmin:1,xmax:rows.length,xlabel:'반복 단계',title:'log₁₀(에너지 오차 / Eh), 10⁻¹⁵에서 표시 제한'});}controls(root,context.signal,render);
+}

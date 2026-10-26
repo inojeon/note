@@ -1,0 +1,1298 @@
+{
+  "concept_experiments": [
+    {
+      "legacy": "concept-matrix.html",
+      "selectors": [
+        "input-x",
+        "matrix-x-value",
+        "input-y",
+        "matrix-y-value",
+        "matrix-equation",
+        "transform-fig",
+        "transform-result"
+      ],
+      "experiment": "matrix",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-diagonalization.html",
+      "selectors": [
+        "factor-title",
+        "factor-description",
+        "factor-multiplication"
+      ],
+      "experiment": "diagonalization",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-diagonalization-coordinates.html",
+      "selectors": [
+        "diagonal-lab-title",
+        "diagonal-basis",
+        "diagonal-basis-value",
+        "diagonal-input",
+        "diagonal-input-value",
+        "diagonal-matrix-value",
+        "diagonal-status",
+        "diagonal-basis-fig",
+        "diagonal-calculation",
+        "diagonal-check"
+      ],
+      "experiment": "diagonalization-coordinates",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-power.html",
+      "selectors": [
+        "power-lab-title",
+        "power-angle",
+        "power-angle-value",
+        "power-iteration",
+        "power-iteration-value",
+        "power-back",
+        "power-next",
+        "power-reset",
+        "power-message",
+        "power-vector-value",
+        "power-eigenvalue",
+        "power-direction-fig",
+        "power-step-calculation",
+        "power-component-values"
+      ],
+      "experiment": "power",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-subspace.html",
+      "selectors": [
+        "subspace-lab-title",
+        "subspace-x",
+        "subspace-x-value",
+        "subspace-y",
+        "subspace-y-value",
+        "subspace-z",
+        "subspace-z-value",
+        "subspace-tilt",
+        "subspace-tilt-value",
+        "subspace-projection-fig",
+        "subspace-original",
+        "subspace-projected",
+        "subspace-residual",
+        "subspace-status",
+        "subspace-formula-values",
+        "subspace-nearest",
+        "subspace-offset",
+        "subspace-offset-value",
+        "subspace-distance-values"
+      ],
+      "experiment": "subspace",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-krylov.html",
+      "selectors": [
+        "krylov-lab-title",
+        "krylov-start-value",
+        "krylov-step",
+        "krylov-step-value",
+        "krylov-back",
+        "krylov-next",
+        "krylov-reset",
+        "krylov-message",
+        "krylov-space-fig",
+        "krylov-matrices",
+        "krylov-eigenvalue",
+        "krylov-recurrence",
+        "krylov-raw-values"
+      ],
+      "experiment": "krylov",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-hamiltonian.html",
+      "selectors": [
+        "hamiltonian-lab-title",
+        "hamiltonian-a",
+        "hamiltonian-a-value",
+        "hamiltonian-b",
+        "hamiltonian-b-value",
+        "hamiltonian-g",
+        "hamiltonian-g-value",
+        "hamiltonian-matrix",
+        "hamiltonian-chemical-values",
+        "hamiltonian-energy-fig",
+        "hamiltonian-status",
+        "hamiltonian-ground-vector",
+        "hamiltonian-probabilities",
+        "hamiltonian-calculation",
+        "hamiltonian-state",
+        "hamiltonian-state-value",
+        "hamiltonian-use-ground",
+        "hamiltonian-expectation"
+      ],
+      "experiment": "hamiltonian",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-quantum-state.html",
+      "selectors": [
+        "qstate-lab-title",
+        "qstate-angle-value",
+        "qstate-angle",
+        "qstate-original",
+        "qstate-aligned",
+        "qstate-quarter",
+        "qstate-fig",
+        "qstate-fixed",
+        "qstate-rotated",
+        "qstate-expansion",
+        "qstate-status",
+        "qstate-norm"
+      ],
+      "experiment": "quantum-state",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-born-rule.html",
+      "selectors": [
+        "born-lab-title",
+        "born-angle-value",
+        "born-angle",
+        "born-positive",
+        "born-negative",
+        "born-certain",
+        "born-vector",
+        "born-fig",
+        "born-result-zero",
+        "born-result-one",
+        "born-status",
+        "born-total"
+      ],
+      "experiment": "born-rule",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-superposition.html",
+      "selectors": [
+        "phase-lab-title",
+        "phase-angle",
+        "phase-angle-value",
+        "phase-angle-help",
+        "phase-original-coeff",
+        "phase-rotated-coeff",
+        "phase-probability-fig",
+        "phase-status"
+      ],
+      "experiment": "superposition",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-observable.html",
+      "selectors": [
+        "obs-lab-title",
+        "obs-p",
+        "obs-p-value",
+        "obs-p-help",
+        "obs-state",
+        "obs-mean",
+        "obs-variance",
+        "obs-distribution-fig",
+        "obs-status"
+      ],
+      "experiment": "observable",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-schrodinger.html",
+      "selectors": [
+        "sch-lab-title",
+        "sch-trial",
+        "sch-ground",
+        "sch-excited",
+        "sch-angle",
+        "sch-angle-value",
+        "sch-selected",
+        "sch-h",
+        "sch-c",
+        "sch-hc",
+        "sch-ec",
+        "sch-r",
+        "sch-energy",
+        "sch-residual",
+        "sch-vectors-fig",
+        "sch-status",
+        "sch-spectrum"
+      ],
+      "experiment": "schrodinger",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-born-oppenheimer.html",
+      "selectors": [
+        "boh2-lab",
+        "boh2-title",
+        "boh2-distance",
+        "boh2-distance-value",
+        "boh2-minimum",
+        "boh2-reset",
+        "boh2-status",
+        "boh2-viewer",
+        "boh2-density",
+        "boh2-render-status",
+        "boh2-slice-panel",
+        "boh2-slice-fig",
+        "boh2-isovalue",
+        "boh2-show-electronic",
+        "boh2-show-nuclear",
+        "boh2-curve-fig",
+        "boh2-electronic",
+        "boh2-nuclear",
+        "boh2-total"
+      ],
+      "experiment": "born-oppenheimer",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-orbital.html",
+      "selectors": [
+        "orb-n",
+        "orb-n-value",
+        "orb-edge",
+        "orb-edge-value",
+        "orb-density-fig",
+        "orb-probability",
+        "orb-nodes",
+        "orb-status"
+      ],
+      "experiment": "orbital",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-electron-spin.html",
+      "selectors": [
+        "spin-axis",
+        "spin-axis-value",
+        "spin-same",
+        "spin-perpendicular",
+        "spin-opposite",
+        "spin-axis-fig",
+        "spin-plus",
+        "spin-minus",
+        "spin-mean",
+        "spin-status"
+      ],
+      "experiment": "electron-spin",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-pauli.html",
+      "selectors": [
+        "pauli-add-aa",
+        "pauli-add-ab",
+        "pauli-add-ba",
+        "pauli-add-bb",
+        "pauli-reset",
+        "pauli-occupation-fig",
+        "pauli-a-count",
+        "pauli-b-count",
+        "pauli-total",
+        "pauli-status"
+      ],
+      "experiment": "pauli",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-slater-determinant.html",
+      "selectors": [
+        "sdet-lab-title",
+        "sdet-distinct",
+        "sdet-duplicate",
+        "sdet-exchange",
+        "sdet-matrix",
+        "sdet-amplitude",
+        "sdet-probability",
+        "sdet-norm",
+        "sdet-validity",
+        "sdet-amplitudes-fig",
+        "sdet-status"
+      ],
+      "experiment": "slater-determinant",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-electronic-configuration.html",
+      "selectors": [
+        "cfg-lab-title",
+        "cfg-choice",
+        "cfg-choice-value",
+        "cfg-occupancy-fig",
+        "cfg-spatial",
+        "cfg-count",
+        "cfg-determinant",
+        "cfg-ms",
+        "cfg-status"
+      ],
+      "experiment": "electronic-configuration",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-molecular-orbital.html",
+      "selectors": [
+        "mo-lab-title",
+        "mo-distance",
+        "mo-distance-value",
+        "mo-plus",
+        "mo-minus",
+        "mo-rephase",
+        "mo-combination-fig",
+        "mo-expansion",
+        "mo-overlap",
+        "mo-central-density",
+        "mo-norm",
+        "mo-status"
+      ],
+      "experiment": "molecular-orbital",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-basis-set.html",
+      "selectors": [
+        "bset-lab-title",
+        "bset-size",
+        "bset-size-value",
+        "bset-approximation-fig",
+        "bset-coefficients",
+        "bset-overlap",
+        "bset-error",
+        "bset-norm",
+        "bset-square-sum",
+        "bset-status"
+      ],
+      "experiment": "basis-set",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-sto-3g.html",
+      "selectors": [
+        "sto-lab-title",
+        "sto-per-atom",
+        "sto-total",
+        "sto-description"
+      ],
+      "experiment": "sto-3g",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-basis-orbital-energies.html",
+      "selectors": [
+        "sto-orbital-lab",
+        "sto-orbital-title",
+        "sto-levels-fig",
+        "sto-levels-summary",
+        "sto-level-rows"
+      ],
+      "experiment": "basis-orbital-energies",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-electron-integrals.html",
+      "selectors": [
+        "int-title",
+        "int-angle",
+        "int-angle-value",
+        "int-model",
+        "int-t",
+        "int-v",
+        "int-h",
+        "int-j",
+        "int-energy",
+        "int-density-fig",
+        "int-status"
+      ],
+      "experiment": "electron-integrals",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-hamiltonian-elements.html",
+      "selectors": [
+        "hme-title",
+        "hme-replacements",
+        "hme-count",
+        "hme-occupations-fig",
+        "hme-one",
+        "hme-two",
+        "hme-total",
+        "hme-status"
+      ],
+      "experiment": "hamiltonian-elements",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-variational-principle.html",
+      "selectors": [
+        "var-title",
+        "var-h",
+        "var-basis",
+        "var-best",
+        "var-angle",
+        "var-angle-value",
+        "var-scale",
+        "var-scale-value",
+        "var-norm",
+        "var-numerator",
+        "var-energy",
+        "var-gap",
+        "var-bound-fig",
+        "var-status"
+      ],
+      "experiment": "variational-principle",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-hartree-fock.html",
+      "selectors": [
+        "hf-title",
+        "hf-start",
+        "hf-start-value",
+        "hf-step",
+        "hf-converge",
+        "hf-reset",
+        "hf-iteration",
+        "hf-density",
+        "hf-fock",
+        "hf-current",
+        "hf-next",
+        "hf-energy",
+        "hf-epsilon",
+        "hf-residual",
+        "hf-angle",
+        "hf-cycle-fig",
+        "hf-status"
+      ],
+      "experiment": "hartree-fock",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-electron-correlation.html",
+      "selectors": [
+        "corr-lab-title",
+        "corr-u",
+        "corr-u-value",
+        "corr-hf",
+        "corr-exact",
+        "corr-difference",
+        "corr-energies-fig",
+        "corr-status"
+      ],
+      "experiment": "electron-correlation",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-configuration-interaction.html",
+      "selectors": [
+        "ci-lab-title",
+        "ci-angle",
+        "ci-angle-value",
+        "ci-reference",
+        "ci-optimum",
+        "ci-energy",
+        "ci-minimum",
+        "ci-lowering",
+        "ci-coefficients",
+        "ci-weights-fig",
+        "ci-status"
+      ],
+      "experiment": "configuration-interaction",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-active-space.html",
+      "selectors": [
+        "cas-lab-title",
+        "cas-orbitals",
+        "cas-orbitals-value",
+        "cas-electrons",
+        "cas-electrons-value",
+        "cas-label",
+        "cas-fixed",
+        "cas-all",
+        "cas-orbitals-fig",
+        "cas-status"
+      ],
+      "experiment": "active-space",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-potential-energy.html",
+      "selectors": [
+        "pec-lab-title",
+        "pec-r",
+        "pec-r-value",
+        "pec-equilibrium",
+        "pec-energy",
+        "pec-force",
+        "pec-curvature",
+        "pec-curve-fig",
+        "pec-status"
+      ],
+      "experiment": "potential-energy",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-two-level-system.html",
+      "selectors": [
+        "bt-pair",
+        "bt-omitted",
+        "bt-basis",
+        "bt-matrix",
+        "bt-summary"
+      ],
+      "experiment": "two-level-system",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-qubit.html",
+      "selectors": [
+        "bq-state",
+        "bq-vector",
+        "bq-p0",
+        "bq-bar0",
+        "bq-p1",
+        "bq-bar1",
+        "bq-explain"
+      ],
+      "experiment": "qubit",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-computational-basis.html",
+      "selectors": [
+        "bc-preset",
+        "bc-vector",
+        "bc-coeff",
+        "bc-norm",
+        "bc-verdict",
+        "bc-probs"
+      ],
+      "experiment": "computational-basis",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-quantum-gate.html",
+      "selectors": [
+        "bg-input",
+        "bg-gate",
+        "bg-in-vector",
+        "bg-gate-name",
+        "bg-matrix",
+        "bg-out-vector",
+        "bg-p0",
+        "bg-p1",
+        "bg-in-norm",
+        "bg-out-norm",
+        "bg-status"
+      ],
+      "experiment": "quantum-gate",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-rotation-gate.html",
+      "selectors": [
+        "br-angle",
+        "br-angle-value",
+        "br-zero",
+        "br-quarter",
+        "br-half",
+        "br-turn",
+        "br-vector",
+        "br-orbit-help",
+        "br-view-default",
+        "br-view-front",
+        "br-view-top",
+        "br-bloch-fig",
+        "br-view-status",
+        "br-p0",
+        "br-p1",
+        "br-half-angle",
+        "br-bloch",
+        "br-status"
+      ],
+      "experiment": "rotation-gate",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-measurement-basis.html",
+      "selectors": [
+        "bm-title",
+        "bm-state",
+        "bm-basis",
+        "bm-c0",
+        "bm-c1",
+        "bm-basis-description",
+        "bm-orbit-help",
+        "bm-view-reset",
+        "bm-bloch-fig",
+        "bm-plane-description",
+        "bm-projection-description",
+        "bm-probability-fig",
+        "bm-label-first",
+        "bm-p-first",
+        "bm-label-second",
+        "bm-p-second",
+        "bm-status"
+      ],
+      "experiment": "measurement-basis",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-energy-measurement.html",
+      "selectors": [
+        "be-title",
+        "be-live-controls",
+        "be-angle-value",
+        "be-angle",
+        "be-c0",
+        "be-c1",
+        "be-mean",
+        "be-live-hint",
+        "be-zero",
+        "be-plus",
+        "be-ground",
+        "be-excited",
+        "be-z-fig",
+        "be-p0",
+        "be-p1",
+        "be-energy-fig",
+        "be-low",
+        "be-plow",
+        "be-high",
+        "be-phigh",
+        "be-coeff-step",
+        "be-hc",
+        "be-inner-step",
+        "be-direct",
+        "be-weight-low",
+        "be-weight-high",
+        "be-weighted",
+        "be-status"
+      ],
+      "experiment": "energy-measurement",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-tensor-product.html",
+      "selectors": [
+        "bp-lab",
+        "bp-a",
+        "bp-a-value",
+        "bp-b",
+        "bp-b-value",
+        "bp-va",
+        "bp-vb",
+        "bp-vab",
+        "bp-bar-0",
+        "bp-p0",
+        "bp-bar-1",
+        "bp-p1",
+        "bp-bar-2",
+        "bp-p2",
+        "bp-bar-3",
+        "bp-p3",
+        "bp-status"
+      ],
+      "experiment": "tensor-product",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-entanglement.html",
+      "selectors": [
+        "bn-lab",
+        "bn-state",
+        "bn-basis",
+        "bn-description",
+        "bn-vector",
+        "bn-label0",
+        "bn-p0",
+        "bn-label1",
+        "bn-p1",
+        "bn-label2",
+        "bn-p2",
+        "bn-label3",
+        "bn-p3",
+        "bn-ma",
+        "bn-mb",
+        "bn-status"
+      ],
+      "experiment": "entanglement",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-fermion-qubit.html",
+      "selectors": [
+        "vm-title",
+        "vm-bu",
+        "vm-bg",
+        "vm-au",
+        "vm-ag",
+        "vm-preset-g",
+        "vm-preset-u",
+        "vm-preset-empty",
+        "vm-bits",
+        "vm-electrons",
+        "vm-alpha",
+        "vm-beta",
+        "vm-status",
+        "vm-sector",
+        "vm-dimension",
+        "vm-basis-list",
+        "vm-membership"
+      ],
+      "experiment": "fermion-qubit",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-energy-expectation.html",
+      "selectors": [
+        "ve-title",
+        "ve-angle",
+        "ve-angle-value",
+        "ve-zero",
+        "ve-ground",
+        "ve-excited",
+        "ve-input-state",
+        "ve-gate",
+        "ve-prepared",
+        "ve-hc",
+        "ve-dot",
+        "ve-probabilities-fig",
+        "ve-low",
+        "ve-p-low",
+        "ve-high",
+        "ve-p-high",
+        "ve-energy",
+        "ve-gap",
+        "ve-status"
+      ],
+      "experiment": "energy-expectation",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-ansatz.html",
+      "selectors": [
+        "va-title",
+        "va-mode",
+        "va-angle",
+        "va-angle-value",
+        "va-best",
+        "va-state",
+        "va-c0",
+        "va-c1",
+        "va-energy",
+        "va-minimum",
+        "va-exact",
+        "va-gap",
+        "va-landscape-fig",
+        "va-status"
+      ],
+      "experiment": "ansatz",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-parameterized-circuit.html",
+      "selectors": [
+        "vpc-title",
+        "vpc-angle",
+        "vpc-angle-value",
+        "vpc-zero",
+        "vpc-plus",
+        "vpc-one",
+        "vpc-circuit-fig",
+        "vpc-state",
+        "vpc-c0",
+        "vpc-c1",
+        "vpc-p0",
+        "vpc-p1",
+        "vpc-energy",
+        "vpc-status"
+      ],
+      "experiment": "parameterized-circuit",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-pauli-decomposition.html",
+      "selectors": [
+        "vp-title",
+        "vp-angle",
+        "vp-theta",
+        "vp-z-circuit-fig",
+        "vp-z-probabilities",
+        "vp-z",
+        "vp-x-circuit-fig",
+        "vp-x-probabilities",
+        "vp-x",
+        "vp-circuit-explanation",
+        "vp-fig",
+        "vp-energy"
+      ],
+      "experiment": "pauli-decomposition",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-measurement-shots.html",
+      "selectors": [
+        "vs-title",
+        "vs-angle",
+        "vs-theta",
+        "vs-shots",
+        "vs-total",
+        "vs-resample",
+        "vs-reset",
+        "vs-run",
+        "vs-xplus",
+        "vs-xminus",
+        "vs-zplus",
+        "vs-zminus",
+        "vs-fig",
+        "vs-estimate",
+        "vs-exact",
+        "vs-ground",
+        "vs-se",
+        "vs-status"
+      ],
+      "experiment": "measurement-shots",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-classical-optimization.html",
+      "selectors": [
+        "vo-title",
+        "vo-initial",
+        "vo-initial-value",
+        "vo-rate",
+        "vo-rate-value",
+        "vo-step",
+        "vo-run",
+        "vo-reset",
+        "vo-angle",
+        "vo-energy",
+        "vo-gap",
+        "vo-count",
+        "vo-curve-fig",
+        "vo-status"
+      ],
+      "experiment": "classical-optimization",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-vqe-algorithm.html",
+      "selectors": [
+        "vl-lab",
+        "vl-title",
+        "vl-initial",
+        "vl-initial-value",
+        "vl-next",
+        "vl-reset",
+        "vl-loop-fig",
+        "vl-stage",
+        "vl-angle",
+        "vl-x",
+        "vl-z",
+        "vl-energy",
+        "vl-count",
+        "vl-state",
+        "vl-history"
+      ],
+      "experiment": "vqe-algorithm",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-vqe-hydrogen.html",
+      "selectors": [
+        "vh-title",
+        "vh-distance",
+        "vh-angle-value",
+        "vh-angle",
+        "vh-step",
+        "vh-run",
+        "vh-reference",
+        "vh-reset",
+        "vh-status",
+        "vh-state",
+        "vh-hamiltonian",
+        "vh-energy-fig",
+        "vh-energy",
+        "vh-exact",
+        "vh-error",
+        "vh-hf"
+      ],
+      "experiment": "vqe-hydrogen",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-occupation-bitstrings.html",
+      "selectors": [
+        "sob-title",
+        "sob-state",
+        "sob-total",
+        "sob-alpha",
+        "sob-beta",
+        "sob-orbitals-fig",
+        "sob-status"
+      ],
+      "experiment": "occupation-bitstrings",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-hf-preparation.html",
+      "selectors": [
+        "shf-title",
+        "shf-state",
+        "shf-status",
+        "shf-circuit-fig",
+        "shf-total",
+        "shf-alpha",
+        "shf-beta",
+        "shf-occupation"
+      ],
+      "experiment": "hf-preparation",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-excitation-state.html",
+      "selectors": [
+        "sex-title",
+        "sex-angle",
+        "sex-theta",
+        "sex-state",
+        "sex-fig",
+        "sex-c",
+        "sex-p0",
+        "sex-s",
+        "sex-p1"
+      ],
+      "experiment": "excitation-state",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-sqd-state-circuit.html",
+      "selectors": [
+        "ssc-title",
+        "ssc-angle",
+        "ssc-theta",
+        "ssc-back",
+        "ssc-next",
+        "ssc-reset",
+        "ssc-finish",
+        "ssc-stage",
+        "ssc-circuit-scroll",
+        "ssc-fig",
+        "ssc-circuit-help",
+        "ssc-amplitudes",
+        "ssc-explanation"
+      ],
+      "experiment": "sqd-state-circuit",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-sqd-sampling.html",
+      "selectors": [
+        "ssa-angle",
+        "ssa-theta",
+        "ssa-state",
+        "ssa-theory",
+        "ssa-one",
+        "ssa-hundred",
+        "ssa-reset",
+        "ssa-last",
+        "ssa-hist-fig",
+        "ssa-counts"
+      ],
+      "experiment": "sqd-sampling",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-sqd-subspace.html",
+      "selectors": [
+        "ssu-counts",
+        "ssu-selected",
+        "ssu-matrix-fig",
+        "ssu-energy",
+        "ssu-state",
+        "ssu-explanation"
+      ],
+      "experiment": "sqd-subspace",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-h2-hamiltonian.html",
+      "selectors": [
+        "hcmp-title",
+        "hcmp-condition",
+        "hcmp-basis",
+        "hcmp-matrix",
+        "hcmp-cell",
+        "hcmp-selected-energy",
+        "hcmp-full-energy",
+        "hcmp-conclusion"
+      ],
+      "experiment": "h2-hamiltonian",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-h2-state-energy.html",
+      "selectors": [
+        "h2h-title",
+        "h2h-distances",
+        "h2h-distance",
+        "h2h-aa",
+        "h2h-ab",
+        "h2h-ba",
+        "h2h-bb",
+        "h2h-cell-explanation",
+        "h2h-angle",
+        "h2h-theta",
+        "h2h-state",
+        "h2h-probabilities",
+        "h2h-energy",
+        "h2h-ground",
+        "h2h-contributions-fig",
+        "h2h-reading",
+        "h2h-electronic",
+        "h2h-nuclear"
+      ],
+      "experiment": "h2-state-energy",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-hamiltonian-size.html",
+      "selectors": [
+        "lh-title",
+        "lh-selection",
+        "lh-one",
+        "lh-two",
+        "lh-configurations",
+        "lh-spin-configurations",
+        "lh-memory"
+      ],
+      "experiment": "hamiltonian-size",
+      "method": "isolated model and controls; source code, styles and data separated"
+    },
+    {
+      "legacy": "concept-vector.html",
+      "experiment": "vector-direction",
+      "method": "new independent model with numeric output and keyboard controls"
+    },
+    {
+      "legacy": "concept-basis.html",
+      "experiment": "basis",
+      "method": "new independent model with numeric output and keyboard controls"
+    },
+    {
+      "legacy": "concept-inner-product.html",
+      "experiment": "inner-product",
+      "method": "new independent model with numeric output and keyboard controls"
+    },
+    {
+      "legacy": "concept-symmetric.html",
+      "experiment": "symmetric",
+      "method": "new independent model with numeric output and keyboard controls"
+    },
+    {
+      "legacy": "concept-eigen.html",
+      "experiment": "eigen",
+      "method": "new independent model with numeric output and keyboard controls"
+    },
+    {
+      "legacy": "concept-large-hamiltonian.html",
+      "experiment": "large-hamiltonian",
+      "method": "new independent model with numeric output and keyboard controls"
+    }
+  ],
+  "main_document_experiments": [
+    {
+      "legacy": "intro.html",
+      "experiments": [
+        "orbital-volume",
+        "h2-hamiltonian",
+        "h2-state-energy",
+        "potential-energy",
+        "hamiltonian-size",
+        "sqd-subspace",
+        "sqd-sampling",
+        "configuration-recovery"
+      ]
+    },
+    {
+      "legacy": "background-atoms.html",
+      "experiments": [
+        "atomic-shells",
+        "electron-spin",
+        "pauli",
+        "electronic-configuration",
+        "active-space"
+      ]
+    },
+    {
+      "legacy": "prep-math.html",
+      "experiments": [
+        "vector-direction",
+        "inner-product",
+        "matrix",
+        "symmetric",
+        "eigen",
+        "diagonalization",
+        "power",
+        "subspace",
+        "energy-expectation",
+        "shot-statistics",
+        "discovery-probability",
+        "h2-state-energy"
+      ]
+    },
+    {
+      "legacy": "math.html",
+      "experiments": [
+        "matrix",
+        "eigen",
+        "diagonalization",
+        "power",
+        "krylov",
+        "subspace",
+        "born-rule",
+        "shot-statistics",
+        "discovery-probability",
+        "n2-convergence",
+        "sampling-noise"
+      ]
+    },
+    {
+      "legacy": "00-quickstart.html",
+      "experiments": [
+        "quickstart-results",
+        "configuration-recovery",
+        "sqd-subspace"
+      ]
+    },
+    {
+      "legacy": "01-pyscf.html",
+      "experiments": [
+        "n2-preparation",
+        "basis-orbital-energies",
+        "active-space",
+        "electron-integrals",
+        "hartree-fock"
+      ]
+    },
+    {
+      "legacy": "02-jordan-wigner.html",
+      "experiments": [
+        "jordan-wigner-parity",
+        "occupation-bitstrings",
+        "fermion-qubit",
+        "pauli-decomposition"
+      ]
+    },
+    {
+      "legacy": "03-ucj-inside.html",
+      "experiments": [
+        "ucj-layers",
+        "excitation-state",
+        "parameterized-circuit"
+      ]
+    },
+    {
+      "legacy": "04-circuit.html",
+      "experiments": [
+        "ucj-layers",
+        "sqd-state-circuit",
+        "sqd-sampling"
+      ]
+    },
+    {
+      "legacy": "05-sampling.html",
+      "experiments": [
+        "shot-statistics",
+        "discovery-probability",
+        "sampling-noise",
+        "sqd-sampling",
+        "occupation-bitstrings"
+      ]
+    },
+    {
+      "legacy": "06-sqd-guide.html",
+      "experiments": [
+        "configuration-recovery",
+        "sqd-subspace",
+        "sqd-iterations"
+      ]
+    }
+  ],
+  "computed_data": [
+    {
+      "legacy": "bo_h2.json",
+      "preservation": "research reproduction/source data retained; relevant experiments own the data they load"
+    },
+    {
+      "legacy": "math.json",
+      "preservation": "research reproduction/source data retained; relevant experiments own the data they load"
+    },
+    {
+      "legacy": "vqe_h2.json",
+      "preservation": "research reproduction/source data retained; relevant experiments own the data they load"
+    },
+    {
+      "legacy": "03_ucj.json",
+      "preservation": "research reproduction/source data retained; relevant experiments own the data they load"
+    },
+    {
+      "legacy": "00_quickstart.json",
+      "preservation": "research reproduction/source data retained; relevant experiments own the data they load"
+    },
+    {
+      "legacy": "basis_set_counts.json",
+      "preservation": "research reproduction/source data retained; relevant experiments own the data they load"
+    },
+    {
+      "legacy": "06_sqd.json",
+      "preservation": "research reproduction/source data retained; relevant experiments own the data they load"
+    },
+    {
+      "legacy": "intro_h2.json",
+      "preservation": "research reproduction/source data retained; relevant experiments own the data they load"
+    },
+    {
+      "legacy": "02_jw.json",
+      "preservation": "research reproduction/source data retained; relevant experiments own the data they load"
+    },
+    {
+      "legacy": "01_pyscf.json",
+      "preservation": "research reproduction/source data retained; relevant experiments own the data they load"
+    },
+    {
+      "legacy": "04_circuit.json",
+      "preservation": "research reproduction/source data retained; relevant experiments own the data they load"
+    },
+    {
+      "legacy": "hamiltonian_comparison.json",
+      "preservation": "research reproduction/source data retained; relevant experiments own the data they load"
+    },
+    {
+      "legacy": "orb3d.json",
+      "preservation": "research reproduction/source data retained; relevant experiments own the data they load"
+    },
+    {
+      "legacy": "05_sampling.json",
+      "preservation": "research reproduction/source data retained; relevant experiments own the data they load"
+    },
+    {
+      "legacy": "basis_orbital_levels.json",
+      "preservation": "research reproduction/source data retained; relevant experiments own the data they load"
+    }
+  ],
+  "totals": {
+    "concepts": 63,
+    "experiments": 75,
+    "main_documents": 11,
+    "computed_data": 15
+  }
+}

@@ -1,0 +1,3 @@
+{{- $catalog := partialCached "catalog.html" . "catalog" -}}{{- $items := slice -}}
+{{- range $catalog.notes -}}{{- $items = $items | append (dict "id" .File.ContentBaseName "title" .Title "summary" .Params.summary "terms" (.Params.search_terms | default slice) "topics" .Params.topics "text" .Plain "url" .RelPermalink) -}}{{- end -}}
+{{- $items | jsonify -}}

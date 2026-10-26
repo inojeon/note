@@ -1,0 +1,6 @@
+{{/* Compatibility pages are generated from the migration inventory, not copied HTML. */}}
+{{ range $filename, $target := hugo.Data.migration.files }}
+  {{ if ne $filename "index.html" }}
+    {{ $.AddPage (dict "path" (printf "legacy/%s" (strings.TrimSuffix ".html" $filename)) "url" (printf "/%s" $filename) "type" "legacy" "title" "노트가 새 주소로 이동했어요" "params" (dict "target" $target "original" $filename)) }}
+  {{ end }}
+{{ end }}

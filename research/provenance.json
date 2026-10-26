@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "status": "preserved calculation records; not recomputed during site migration",
+  "python": "3.12",
+  "requirements": "research/requirements.txt",
+  "data": [
+    {
+      "id": "00_quickstart",
+      "source": "references/sqd-docs/data/00_quickstart.json",
+      "sha256": "4c9f3781bffa1eaffe57f3eb694c45eb5f025f98156b8bdc437cacd3b113c9f1",
+      "bytes": 1225,
+      "generator": "references/sqd-docs/scripts/p00_quickstart.py",
+      "generator_sha256": "0236f682b2457c3ae0a5ec7462481b36b7b058975ced17b446b51edc6fc717b2",
+      "conditions": "N2, STO-3G, 1.09768 Angstrom, CAS(10e,8o), (5,5), uniform bitstrings; nuclear_repulsion_energy field is ecore including frozen core."
+    },
+    {
+      "id": "01_pyscf",
+      "source": "references/sqd-docs/data/01_pyscf.json",
+      "sha256": "0280c6528b6d6c08948f79053c7e2b92bfb6da53924cb382774411f4bd9ff9d4",
+      "bytes": 2770,
+      "generator": "references/sqd-docs/scripts/p01_pyscf_n2.py",
+      "generator_sha256": "0e01c6a3bdd889811dd26cccb5d54edf9f57a3c307cf632b7c119b3066f64468",
+      "conditions": "N2, cc-pVDZ, 1.098 Angstrom baseline, CAS(10e,8o), (5,5); includes basis/geometry comparisons; total energies include ecore."
+    },
+    {
+      "id": "02_jw",
+      "source": "references/sqd-docs/data/02_jw.json",
+      "sha256": "aa6a7f9fd0f85dc0ffca76c2335c1066335cd82e836f6da32fea8ee6d33cf8db",
+      "bytes": 690,
+      "generator": "references/sqd-docs/scripts/p02_jordan_wigner.py",
+      "generator_sha256": "2233ecbb7567d2b07bcaf67afca361babf27dfbe9d41ef5c3f7d9a95f74a0532",
+      "conditions": "N2 cc-pVDZ active-space JW term counts and H2 STO-3G 0.74 Angstrom electronic Pauli coefficients; constants excluded from mapping."
+    },
+    {
+      "id": "03_ucj",
+      "source": "references/sqd-docs/data/03_ucj.json",
+      "sha256": "ce2d1cb780d61e339c35d53b5fbdbc5a14fe4a16fb7e49d21b10f85d59084223",
+      "bytes": 788,
+      "generator": "references/sqd-docs/scripts/p03_ucj_inside.py",
+      "generator_sha256": "4d7b62332c011feadfa377c9f151c1e3a47e39cf0b77a5b543e72af8960f7f22",
+      "conditions": "N2 cc-pVDZ 1.098 Angstrom, CAS(10e,8o), CCSD-initialized UCJ/LUCJ; initial values, no optimization fields in preserved data."
+    },
+    {
+      "id": "04_circuit",
+      "source": "references/sqd-docs/data/04_circuit.json",
+      "sha256": "ceee74b46077ef2e5f0a7cd42c43605a2f4336b43f9031103069f984984b6173",
+      "bytes": 931,
+      "generator": "references/sqd-docs/scripts/p04_circuit.py",
+      "generator_sha256": "47a0aff966c49d9531c6f098b9f5b03ff3c9c4e17767280ed44c75ba69ea8630",
+      "conditions": "Same N2 active space; ideal statevector samples from CCSD-initialized one-layer UCJ/LUCJ, seed 1; total energies."
+    },
+    {
+      "id": "05_sampling",
+      "source": "references/sqd-docs/data/05_sampling.json",
+      "sha256": "b79cbd25211aa576239f48a351add01821a79da2d4995ebf363367ea7a631d2a",
+      "bytes": 1822,
+      "generator": "references/sqd-docs/scripts/p05_sampling.py",
+      "generator_sha256": "420c52fdbbbf09f6e69f60331ce5dfe1c4709bc21e393f459ffbd36c5e47cc78",
+      "conditions": "Same N2 active space; exact CASCI probabilities, seed 1, independent bit-flip model; not device measurements."
+    },
+    {
+      "id": "06_sqd",
+      "source": "references/sqd-docs/data/06_sqd.json",
+      "sha256": "c27a7c8eab9147138d5870283ae33ada60aff0eb6af91764e87bc5ee3715feb1",
+      "bytes": 2906,
+      "generator": "references/sqd-docs/scripts/p06_sqd_guide.py",
+      "generator_sha256": "e200be75375937676fcb3f06632d18174fa5c17d03adbd6d3aea8caa6ae31843",
+      "conditions": "Same N2 active space; 20000 exact-CASCI samples, independent 3% bit flips, seed 1; batch 50, three batches, eight iterations; total energies."
+    },
+    {
+      "id": "basis_orbital_levels",
+      "source": "references/sqd-docs/data/basis_orbital_levels.json",
+      "sha256": "6f4dcb6144ba52e9cb7dfc087547e0c046d4a908ff696edd8d34a44d701fd20b",
+      "bytes": 3253,
+      "generator": "references/sqd-docs/scripts/basis_orbital_levels.py",
+      "generator_sha256": "6e6fdb1cb6443a071213cae0ab0ffbb016b7623a4b4d7d53cb226716e489b30e",
+      "conditions": "H2 0.74 Angstrom RHF basis comparison; orbital eigenvalues are not molecular total energy."
+    },
+    {
+      "id": "basis_set_counts",
+      "source": "references/sqd-docs/data/basis_set_counts.json",
+      "sha256": "6eea46a1d76e9650cb52641cd62db36aadd6ea4de01e2da7ed59caa4cef67c86",
+      "bytes": 860,
+      "generator": "references/sqd-docs/scripts/basis_set_counts.py",
+      "generator_sha256": "ddc3205efe3281e2e6e596bd2ae05f1891cfdaaee62c14542b9e8b43f6c512ca",
+      "conditions": "Contracted spatial AO counts with spherical harmonics; H2, several basis sets; STO-3G primitive count is distinct."
+    },
+    {
+      "id": "bo_h2",
+      "source": "references/sqd-docs/data/bo_h2.json",
+      "sha256": "b079237cf261ccdb37488f4c11b1fe1b3c74de70ba65f11286d4c316f090c3a1",
+      "bytes": 34973,
+      "generator": "references/sqd-docs/scripts/bo_h2.py",
+      "generator_sha256": "9da0bbef78dd89f33ee56cb76ff376b5326f1b43c7ca3b00063f5e676bc6b8c1",
+      "conditions": "H2 STO-3G fixed nuclei FCI; separate electronic/nuclear/total energies; spin-summed FCI density; sampled minimum, no zero-point energy."
+    },
+    {
+      "id": "hamiltonian_comparison",
+      "source": "references/sqd-docs/data/hamiltonian_comparison.json",
+      "sha256": "2515e81b268b2812c6958bf77dc5eec3eb148815adb7d99644ba0e11ca76c137",
+      "bytes": 2501,
+      "generator": "references/sqd-docs/scripts/hamiltonian_comparison.py",
+      "generator_sha256": "20848927da8cd18c0fb4c22e2904bff760d29b9007ddbfde9ddde60492b5b360",
+      "conditions": "Inspect method and molecules metadata per row; active-space sizes and integral-derived model comparisons."
+    },
+    {
+      "id": "intro_h2",
+      "source": "references/sqd-docs/data/intro_h2.json",
+      "sha256": "685263652f9952ff5e4ff8dd91256f7dbeca632196f9c0c5c1f1b154e35046eb",
+      "bytes": 5361,
+      "generator": "references/sqd-docs/scripts/intro_h2.py",
+      "generator_sha256": "2f3b3b3a74dab3352274ab8f3417c0ed4625759ee11a2995f49cc1a3d0b1d6bc",
+      "conditions": "H2 STO-3G 0.74 Angstrom and stretch; alpha-beta fixed sector; four-by-four total-energy Hamiltonian includes nuclear repulsion."
+    },
+    {
+      "id": "math",
+      "source": "references/sqd-docs/data/math.json",
+      "sha256": "d78868f4fddff55fc0f5bb4c35e04c378731df7cfc600833f5b018af2d6b5db8",
+      "bytes": 26099,
+      "generator": "references/sqd-docs/scripts/math_n2_krylov.py",
+      "generator_sha256": "0ed3bac486c6bbd322a2920ec5e5b413133bf559510b2d1c5ba3b440376ed046",
+      "conditions": "N2 cc-pVDZ 1.098 Angstrom CAS(10e,8o); exact-CASCI selected coefficients, Krylov and partial-space comparisons; total energies."
+    },
+    {
+      "id": "orb3d",
+      "source": "references/sqd-docs/data/orb3d.json",
+      "sha256": "c9affd9694de8d31857b0988d3b82429bdc1ea700adefd72e64095a18612de29",
+      "bytes": 166873,
+      "generator": "references/sqd-docs/scripts/intro_h2.py",
+      "generator_sha256": "2f3b3b3a74dab3352274ab8f3417c0ed4625759ee11a2995f49cc1a3d0b1d6bc",
+      "conditions": "H2 STO-3G 0.74 Angstrom RHF molecular-orbital amplitude isosurfaces; signed orbital amplitude, not FCI electron density."
+    },
+    {
+      "id": "vqe_h2",
+      "source": "references/sqd-docs/data/vqe_h2.json",
+      "sha256": "aa764ec84f6cd269623c0d9d97095ba86110f6c18d6b34dd8bba53ac207b01ff",
+      "bytes": 6903,
+      "generator": "references/sqd-docs/scripts/vqe_h2.py",
+      "generator_sha256": "0b1f94ccbe09c02ece88f4210fb82ef8405de53481bafd64ec613abaa0b3caf8",
+      "conditions": "H2 STO-3G fixed nuclei even-inversion-parity two-determinant block; total energies, no zero-point energy; special logical-qubit reduction."
+    }
+  ]
+}

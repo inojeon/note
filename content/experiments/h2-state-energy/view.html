@@ -1,0 +1,14 @@
+<section aria-labelledby="h2h-title" class="qc-lab h2h-lab"><h3 id="h2h-title">실험 · 행렬의 네 칸을 읽고 배치를 섞기</h3>
+<p><strong>① 핵 사이 거리 선택</strong> · 행렬이 바뀌는 것을 확인하세요.</p><div class="qc-presets" id="h2h-distances"></div><p id="h2h-distance"></p>
+<p><strong>② 행렬의 칸을 누르세요.</strong> 단위는 하트리(Hartree)입니다. 기호는 Eₕ입니다. 핵 반발을 포함한 H의 네 원소입니다.</p>
+<div aria-label="행과 열이 A와 B인 해밀토니안 행렬" class="h2h-matrix" role="group"><span>H</span><span>열 A · g²</span><span>열 B · u²</span><span>행 A</span><button data-h2h-cell="0" type="button"><small>HAA</small><strong id="h2h-aa"></strong></button><button data-h2h-cell="1" type="button"><small>HAB</small><strong id="h2h-ab"></strong></button><span>행 B</span><button data-h2h-cell="2" type="button"><small>HBA</small><strong id="h2h-ba"></strong></button><button data-h2h-cell="3" type="button"><small>HBB</small><strong id="h2h-bb"></strong></button></div><p aria-live="polite" class="qc-status" id="h2h-cell-explanation"></p>
+<p><strong>③ 같은 H에서 상태만 바꾸기</strong></p>
+<div class="qc-presets"><button data-h2h-state="a" type="button">A만 준비</button><button data-h2h-state="b" type="button">B만 준비</button><button data-h2h-state="ground" type="button">최저 에너지</button><button data-h2h-state="flip" type="button">같은 확률·반대 상대 부호</button></div>
+<label for="h2h-theta">상태를 섞는 각도 θ · <output id="h2h-angle"></output><input id="h2h-theta" max="180" min="-180" step="0.001" type="range" value="0"/></label>
+<p aria-live="polite" id="h2h-state"></p><p id="h2h-probabilities"></p>
+<div class="h2h-readouts"><div>현재 상태의 평균 에너지<output id="h2h-energy"></output></div><div>이 기저의 바닥상태 에너지<output id="h2h-ground"></output></div></div>
+<svg aria-label="대각 두 항과 비대각 결합 항의 에너지 기여" id="h2h-contributions-fig" role="img"></svg>
+<p class="qc-status" id="h2h-reading"></p><p>표시한 확률은 배치 A·B를 계산 기저(Computational Basis)로 측정할 확률입니다. 에너지 고유값(Eigenvalue)을 측정할 확률과는 다릅니다. 화면의 에너지는 한 번의 측정 결과가 아니라 기댓값(Expectation Value)입니다.</p>
+<details><summary>핵 반발을 더했는지 확인하기</summary><p>현재 상태의 전자 에너지 <output id="h2h-electronic"></output> + 핵 반발 <output id="h2h-nuclear"></output> = 위의 평균 에너지입니다. 화면의 H에 핵 반발을 다시 더하면 중복 계산이 됩니다.</p></details>
+</section>
+<span id="h2h-data" hidden></span>

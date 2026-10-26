@@ -1,0 +1,16 @@
+{{- if or (not .Params.title) (not .Params.summary) (not .RawContent) -}}{{- errorf "%s: 실험 제목·요약·설명이 필요합니다" .File.Path -}}{{- end -}}
+{{- $view := .Resources.Get "view.html" -}}{{- $source := .Resources.Get "main.js" -}}
+{{- if or (not $view) (not $source) -}}{{- errorf "%s: view.html과 main.js가 필요합니다" .File.Path -}}{{- end -}}
+{{- if findRE `(?i)<\s*(html|head|body|script|style|base)(\s|>)|\son[a-z]+\s*=` $view.RawContent -}}{{- errorf "%s: view.html에는 화면 조각만 작성하세요 (문서 태그·스크립트·인라인 이벤트 금지)" .File.Path -}}{{- end -}}
+{{- $id := .File.ContentBaseName -}}
+{{- $script := $source | js.Build (dict "format" "esm" "minify" hugo.IsProduction "importContext" .Resources "targetPath" (printf "experiments/%s/module.js" $id)) | fingerprint -}}
+<!doctype html><html lang="ko"><head>{{ partial "head.html" . }}
+{{ with resources.Get "experiment-shared.css" | minify | fingerprint }}<link rel="stylesheet" href="{{ .RelPermalink }}">{{ end }}
+{{ with .Resources.Get "style.css" }}<link rel="stylesheet" href="{{ .RelPermalink }}">{{ end }}
+</head><body class="experiment-page" data-experiment-id="{{ $id }}" data-module="{{ $script.RelPermalink }}" data-asset-base="{{ .RelPermalink }}"{{ if .Params.dynamic_math }}{{ with resources.Get "experiment-math.js" | js.Build (dict "format" "esm" "minify" true) | fingerprint }} data-math-module="{{ .RelPermalink }}"{{ end }}{{ end }}>
+<main class="experiment-content" aria-label="{{ .Title }}">{{ partial "experiment-view.html" (dict "view" $view "page" .) }}</main><p class="experiment-local-status" role="status"></p><details class="standalone-guide"><summary>{{ .Title }} · 조작 안내</summary><div class="prose">{{ .Content }}</div></details>
+{{- range .Resources -}}{{- if and (ne .ResourceType "page") (ne .Name "main.js") -}}{{- $publish := .RelPermalink -}}{{- end -}}{{- end -}}
+{{ range .Params.scripts }}<script src="{{ . | relURL }}"></script>{{ end }}
+{{ if .Params.dynamic_math }}<script src="{{ `vendor/katex/katex.min.js` | relURL }}"></script>{{ end }}
+{{ with resources.Get "experiment-runner.js" | js.Build (dict "format" "esm" "minify" true) | fingerprint }}<script type="module" src="{{ .RelPermalink }}"></script>{{ end }}
+</body></html>

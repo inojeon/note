@@ -1,0 +1,1 @@
+{{- dict "slugs" hugo.Data.migration.slugs "anchors" hugo.Data.migration.anchors | jsonify -}}

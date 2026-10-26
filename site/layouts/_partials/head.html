@@ -1,0 +1,8 @@
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>{{ if not .IsHome }}{{ .Title }} · {{ end }}{{ site.Title }}</title>
+<meta name="description" content="{{ .Params.summary | default `개념을 연결하고 직접 조작하며 이해하는 개인 학습 공간` }}">
+<link rel="icon" href="{{ `favicon.svg` | relURL }}" type="image/svg+xml">
+<link rel="stylesheet" href="{{ `vendor/katex/katex.min.css` | relURL }}">
+{{ with resources.Get "site.css" | minify | fingerprint }}<link rel="stylesheet" href="{{ .RelPermalink }}">{{ end }}
+{{ with resources.Get "theme.js" | js.Build (dict "minify" true) | fingerprint }}<script src="{{ .RelPermalink }}"></script>{{ end }}

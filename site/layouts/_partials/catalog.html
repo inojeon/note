@@ -1,0 +1,26 @@
+{{- $notes := where site.RegularPages "Section" "notes" -}}
+{{- $backlinks := newScratch -}}
+{{- range $notes -}}
+  {{- if or (not .Params.title) (not .Params.summary) (not .Params.topics) -}}{{- errorf "%s: title, summary, params.topics가 필요합니다" .File.Path -}}{{- end -}}
+  {{- $source := . -}}{{- range .Params.topics -}}{{- if not (index site.Params.topics .) -}}{{- errorf "%s: 등록되지 않은 주제 %s" $source.File.Path . -}}{{- end -}}{{- end -}}
+  {{- $rendered := .Content -}}
+  {{- if findRE `<h1[ >]` $rendered -}}{{- errorf "%s: 본문은 ## 제목부터 작성하세요" .File.Path -}}{{- end -}}
+{{- end -}}
+{{- range $notes -}}
+  {{- $source := . -}}{{- $ids := slice -}}
+  {{- range $id, $unused := .Store.Get "linked-notes" -}}{{- $ids = $ids | append $id -}}{{- end -}}
+  {{- range slice .Params.prerequisites .Params.related -}}{{- range . -}}
+    {{- if or (not .id) (not .reason) -}}{{- errorf "%s: 개념 연결에는 id와 reason이 필요합니다" $source.File.Path -}}{{- end -}}
+    {{- $ids = $ids | append .id -}}
+  {{- end -}}{{- end -}}
+  {{- range $ids | uniq -}}
+    {{- if not (site.GetPage (printf "/notes/%s" .)) -}}{{- errorf "%s: 없는 개념 ID %s" $source.File.Path . -}}{{- end -}}
+    {{- if ne . $source.File.ContentBaseName -}}{{- $backlinks.Add . (slice $source) -}}{{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- range where site.RegularPages "Section" "paths" -}}
+  {{- $path := . -}}{{- if or (not .Params.title) (not .Params.summary) (not .Params.steps) -}}{{- errorf "%s: 학습 경로에는 title, summary, params.steps가 필요합니다" .File.Path -}}{{- end -}}
+  {{- if ne (len .Params.steps) (len (.Params.steps | uniq)) -}}{{- errorf "%s: 학습 경로에 중복 노트 ID가 있습니다" .File.Path -}}{{- end -}}
+  {{- range .Params.steps -}}{{- if not (site.GetPage (printf "/notes/%s" .)) -}}{{- errorf "%s: 없는 학습 경로 노트 %s" $path.File.Path . -}}{{- end -}}{{- end -}}
+{{- end -}}
+{{- return (dict "notes" $notes "backlinks" $backlinks.Values) -}}

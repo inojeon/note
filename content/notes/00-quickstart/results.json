@@ -1,0 +1,75 @@
+{
+ "E_HF": -107.49588783261831,
+ "E_exact": -107.65252108152251,
+ "nuclear_repulsion_energy": -76.40892147939151,
+ "unique": 9300,
+ "valid_unique": 458,
+ "valid_weight": 0.049700000000000015,
+ "random_baseline": 0.0478515625,
+ "history": [
+  {
+   "E": -106.91417421935333,
+   "dim": 784
+  },
+  {
+   "E": -107.5778759430834,
+   "dim": 1600
+  },
+  {
+   "E": -107.6467182803953,
+   "dim": 2209
+  },
+  {
+   "E": -107.65228202522596,
+   "dim": 2500
+  },
+  {
+   "E": -107.65230299808226,
+   "dim": 2601
+  },
+  {
+   "E": -107.6524154003397,
+   "dim": 2809
+  },
+  {
+   "E": -107.6524154003397,
+   "dim": 2809
+  }
+ ],
+ "final_occupancies": [
+  1.992,
+  1.987,
+  1.932,
+  1.932,
+  1.986,
+  0.077,
+  0.076,
+  0.019
+ ],
+ "variants": [
+  {
+   "samples_per_batch": 20,
+   "symmetrize_spin": true,
+   "iterations": 7,
+   "final_err": 0.00010568118280218641
+  },
+  {
+   "samples_per_batch": 20,
+   "symmetrize_spin": false,
+   "iterations": 10,
+   "final_err": 0.006044145937750045
+  },
+  {
+   "samples_per_batch": 100,
+   "symmetrize_spin": true,
+   "iterations": 3,
+   "final_err": 5.8548721426632255e-12
+  },
+  {
+   "samples_per_batch": 100,
+   "symmetrize_spin": false,
+   "iterations": 5,
+   "final_err": 1.0983109831386173e-05
+  }
+ ]
+}

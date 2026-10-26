@@ -1,0 +1,4 @@
+{{- $link := partial "resolve.html" (dict "page" .Page "destination" .Destination) -}}
+{{- $concept := false -}}
+{{- with $link.page -}}{{- if eq .Section "notes" -}}{{- $concept = true -}}{{- $.Page.Store.SetInMap "linked-notes" .File.ContentBaseName true -}}{{- end -}}{{- end -}}
+<a href="{{ $link.url }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $concept }} class="concept-link" data-concept="{{ $link.page.File.ContentBaseName }}"{{ end }}>{{ .Text | safeHTML }}</a>

@@ -1,0 +1,1 @@
+[data-volume]{height:380px;position:relative;border-radius:12px;background:var(--code);overflow:hidden;touch-action:none}[data-volume] canvas{display:block;width:100%;height:100%}@media(max-width:500px){[data-volume]{height:300px}}

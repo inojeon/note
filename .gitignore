@@ -1,2 +1,12 @@
 .gstack/
 .DS_Store
+/.tools/
+/public/
+/resources/
+/.hugo_build.lock
+/.cache/
+/tests/node_modules/
+/test-results/
+/research/results/
+/research/.venv/
+__pycache__/
